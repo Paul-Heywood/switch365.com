@@ -1,39 +1,40 @@
 <!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Middle East Energy Crisis: UK Business Energy Intelligence Brief</title>
+    <title>Middle East Energy Crisis Intelligence Brief: UK Business Procurement Strategy</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
     <style>
         :root {
             --midnight-blue: #262262;
             --candy-sunset: linear-gradient(135deg, #00d39a, #dd40ff);
             --brilliant-white: #ffffff;
             --off-white: #dadada;
+            --crimson-accent: #dc2626;
         }
         
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--midnight-blue), #1a1a3a);
+            background: linear-gradient(135deg, var(--midnight-blue) 0%, #161650 100%);
             color: var(--brilliant-white);
-            line-height: 1.6;
-            overflow-x: hidden;
+            line-height: 1.7;
         }
         
         .serif-display {
             font-family: 'Playfair Display', serif;
         }
         
-        .text-gradient {
+        .hero-overlay {
+            background: linear-gradient(135deg, rgba(38, 34, 98, 0.9) 0%, rgba(22, 22, 80, 0.8) 100%);
+        }
+        
+        .accent-gradient {
             background: var(--candy-sunset);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-        }
-        
-        .hero-overlay {
-            background: linear-gradient(45deg, rgba(38, 34, 98, 0.85), rgba(26, 26, 58, 0.9));
         }
         
         .toc-fixed {
@@ -44,46 +45,54 @@
             height: 100vh;
             background: rgba(38, 34, 98, 0.95);
             backdrop-filter: blur(10px);
-            z-index: 50;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
             overflow-y: auto;
-            border-right: 1px solid rgba(221, 64, 255, 0.2);
-            transition: transform 0.3s ease;
+            padding: 2rem 1.5rem;
         }
         
         .main-content {
             margin-left: 280px;
             min-height: 100vh;
-            transition: margin-left 0.3s ease;
         }
         
         .section-divider {
             height: 2px;
             background: var(--candy-sunset);
-            margin: 3rem 0;
-        }
-        
-        .stat-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(221, 64, 255, 0.2);
-            backdrop-filter: blur(10px);
+            margin: 4rem 0;
         }
         
         .citation-link {
             color: #00d39a;
             text-decoration: none;
-            font-size: 0.8em;
-            vertical-align: super;
-            margin-left: 2px;
+            font-weight: 500;
+            border-bottom: 1px dotted #00d39a;
         }
         
         .citation-link:hover {
-            color: #dd40ff;
-            text-decoration: underline;
+            background: rgba(0, 211, 154, 0.1);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .risk-box {
+            background: rgba(220, 38, 38, 0.1);
+            border-left: 4px solid var(--crimson-accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .opportunity-box {
+            background: rgba(0, 211, 154, 0.1);
+            border-left: 4px solid #00d39a;
+            padding: 1.5rem;
+            margin: 2rem 0;
         }
         
         .timeline-item {
-            border-left: 2px solid #00d39a;
-            padding-left: 1.5rem;
+            border-left: 2px solid rgba(255, 255, 255, 0.2);
+            padding-left: 2rem;
+            margin-bottom: 2rem;
             position: relative;
         }
         
@@ -91,784 +100,1623 @@
             content: '';
             position: absolute;
             left: -6px;
-            top: 0.5rem;
+            top: 0;
             width: 10px;
             height: 10px;
-            background: #dd40ff;
+            background: #00d39a;
             border-radius: 50%;
         }
         
-        .pull-quote {
-            font-size: 1.25rem;
-            font-style: italic;
-            color: var(--off-white);
-            border-left: 4px solid #dd40ff;
-            padding-left: 1.5rem;
-            margin: 2rem 0;
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
         }
         
-        @media (max-width: 1024px) {
-            .toc-fixed {
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
-            }
-            
-            .toc-fixed.open {
-                transform: translateX(0);
-            }
-            
-            .main-content {
-                margin-left: 0;
-                transition: margin-left 0.3s ease;
-            }
+        .data-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+        
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .scenario-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .scenario-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-4px);
+        }
+        
+@media (max-width: 768px) {
+    .toc-fixed {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+    
+    .toc-fixed.active {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .mermaid-control-btn:not(.reset-zoom) {
+        display: none;
+    }
+    .mermaid-controls {
+        top: auto;
+        bottom: 15px;
+        right: 15px;
+    }
+}
 
-            .main-content.menu-open {
-                margin-left: 280px;
-            }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+        
+        .hero-text {
+            z-index: 2;
+            position: relative;
         }
 
-        @media (max-width: 768px) {
-            .main-content.menu-open {
-                margin-left: 0;
-            }
+        /* Mermaid Chart Styling */
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
-        @media (max-width: 640px) {
-            .container {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none; /* 防止触摸设备上的默认行为 */
+            -webkit-user-select: none; /* 防止文本选择 */
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
-        @media (max-width: 390px) {
-            .container {
-                padding-left: 0.5rem;
-                padding-right: 0.5rem;
-            }
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mermaid-control-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            font-size: 14px;
+            min-width: 36px;
+            height: 36px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mermaid-control-btn:hover {
+            background: #f8fafc;
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-1px);
+        }
+
+        .mermaid-control-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Enhanced mermaid text contrast and styling */
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Improved text contrast for mermaid nodes */
+        .mermaid .node rect,
+        .mermaid .node circle,
+        .mermaid .node ellipse,
+        .mermaid .node polygon {
+            stroke-width: 2px;
+            stroke: #262262 !important;
+        }
+        
+        .mermaid .node .label {
+            color: #262262 !important;
+            font-weight: 600 !important;
+            font-size: 13px !important;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+        
+        .mermaid .edgeLabel {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            color: #262262 !important;
+            font-weight: 600 !important;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #262262;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .mermaid .edge-pattern-solid {
+            stroke: #262262 !important;
+            stroke-width: 2px !important;
+        }
+        
+        /* Different node colors with high contrast */
+        .mermaid .node:nth-child(4n+1) rect,
+        .mermaid .node:nth-child(4n+1) circle,
+        .mermaid .node:nth-child(4n+1) ellipse,
+        .mermaid .node:nth-child(4n+1) polygon {
+            fill: #00d39a !important;
+            stroke: #262262 !important;
+        }
+        
+        .mermaid .node:nth-child(4n+2) rect,
+        .mermaid .node:nth-child(4n+2) circle,
+        .mermaid .node:nth-child(4n+2) ellipse,
+        .mermaid .node:nth-child(4n+2) polygon {
+            fill: #dd40ff !important;
+            stroke: #262262 !important;
+        }
+        
+        .mermaid .node:nth-child(4n+3) rect,
+        .mermaid .node:nth-child(4n+3) circle,
+        .mermaid .node:nth-child(4n+3) ellipse,
+        .mermaid .node:nth-child(4n+3) polygon {
+            fill: #ffd43b !important;
+            stroke: #262262 !important;
+        }
+        
+        .mermaid .node:nth-child(4n+4) rect,
+        .mermaid .node:nth-child(4n+4) circle,
+        .mermaid .node:nth-child(4n+4) ellipse,
+        .mermaid .node:nth-child(4n+4) polygon {
+            fill: #74c0fc !important;
+            stroke: #262262 !important;
+        }
+        
+        /* Ensure text is readable on all node colors */
+        .mermaid .node:nth-child(4n+2) .label,
+        .mermaid .node:nth-child(4n+4) .label {
+            color: #ffffff !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
         }
     </style>
   <base target="_blank">
 </head>
 
   <body>
-    <!-- Mobile Menu Button -->
-    <button id="mobileMenuButton" class="fixed top-4 left-4 z-50 p-2 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-md shadow-lg lg:hidden">
-      <i class="fas fa-bars text-white"></i>
-    </button>
+    <!-- Fixed Table of Contents -->
+    <nav class="toc-fixed">
+      <div class="mb-8">
+        <h3 class="serif-display text-xl font-bold accent-gradient mb-4">Intelligence Brief</h3>
+        <p class="text-sm opacity-80">Middle East Energy Crisis | 16-17 April 2026</p>
+      </div>
 
-    <!-- Table of Contents -->
-    <nav class="toc-fixed" id="toc">
-      <div class="p-6">
-        <h3 class="serif-display text-lg font-semibold mb-4 text-gradient">Contents</h3>
-        <ul class="space-y-2 text-sm">
-          <li>
-            <a href="#executive-summary" class="block py-1 px-2 rounded hover:bg-white/10 transition-colors">Executive Summary</a>
-          </li>
-          <li>
-            <a href="#overnight-changes" class="block py-1 px-2 rounded hover:bg-white/10 transition-colors">Overnight Changes</a>
-          </li>
-          <li>
-            <a href="#timeline" class="block py-1 px-2 rounded hover:bg-white/10 transition-colors">24-Hour Timeline</a>
-          </li>
-          <li>
-            <a href="#rhetoric-tracker" class="block py-1 px-2 rounded hover:bg-white/10 transition-colors">Rhetoric Tracker</a>
-          </li>
-          <li>
-            <a href="#ceasefire-reality" class="block py-1 px-2 rounded hover:bg-white/10 transition-colors">Ceasefire Reality</a>
-          </li>
-          <li>
-            <a href="#shipping-status" class="block py-1 px-2 rounded hover:bg-white/10 transition-colors">Shipping Status</a>
-          </li>
-          <li>
-            <a href="#market-data" class="block py-1 px-2 rounded hover:bg-white/10 transition-colors">Market Data</a>
-          </li>
-          <li>
-            <a href="#commercial-implications" class="block py-1 px-2 rounded hover:bg-white/10 transition-colors">Commercial Implications</a>
-          </li>
-          <li>
-            <a href="#scenarios" class="block py-1 px-2 rounded hover:bg-white/10 transition-colors">Duration Scenarios</a>
-          </li>
-          <li>
-            <a href="#recommendations" class="block py-1 px-2 rounded hover:bg-white/10 transition-colors">Recommendations</a>
-          </li>
-        </ul>
+      <div class="space-y-3">
+        <a href="#executive-summary" class="block text-sm hover:text-blue-400 transition-colors">Executive Summary</a>
+        <a href="#changed-yesterday" class="block text-sm hover:text-blue-400 transition-colors">What Changed Since Yesterday</a>
+        <a href="#timeline" class="block text-sm hover:text-blue-400 transition-colors">24-Hour Timeline</a>
+        <a href="#rhetoric-tracker" class="block text-sm hover:text-blue-400 transition-colors">Trump &amp; Iran Rhetoric</a>
+        <a href="#ceasefire-reality" class="block text-sm hover:text-blue-400 transition-colors">Ceasefire Reality Check</a>
+        <a href="#shipping-status" class="block text-sm hover:text-blue-400 transition-colors">Shipping &amp; Choke Points</a>
+        <a href="#market-stats" class="block text-sm hover:text-blue-400 transition-colors">Energy Market Stats</a>
+        <a href="#market-interpretation" class="block text-sm hover:text-blue-400 transition-colors">Market Interpretation</a>
+        <a href="#uk-impact" class="block text-sm hover:text-blue-400 transition-colors">UK Business Impact</a>
+        <a href="#scenarios" class="block text-sm hover:text-blue-400 transition-colors">Duration Scenarios</a>
+        <a href="#commercial-takeaway" class="block text-sm hover:text-blue-400 transition-colors">Commercial Takeaway</a>
+        <a href="#source-confidence" class="block text-sm hover:text-blue-400 transition-colors">Source Confidence</a>
+      </div>
+
+      <div class="mt-12 pt-8 border-t border-white/20">
+        <p class="text-xs opacity-60 mb-2">For Switch 365 Ltd</p>
+        <p class="text-xs opacity-60">UK Business Energy Procurement</p>
       </div>
     </nav>
 
     <!-- Main Content -->
     <main class="main-content">
-      <div class="container mx-auto px-8 py-12">
-        <!-- Hero Section -->
-        <section class="relative mb-16">
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-            <div class="lg:col-span-2">
-              <div class="hero-overlay p-8 rounded-lg">
-                <h1 class="serif-display text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                  Middle East <em class="text-gradient">Energy Crisis</em>
-                </h1>
-                <p class="text-xl mb-4 text-off-white">
-                  UK Business Energy Intelligence Brief
-                </p>
-                <div class="text-sm text-gray-300">
-                  <span class="inline-block mr-4">
-                    <i class="fas fa-calendar-alt mr-2"></i>
-                    15-16 April 2026
-                  </span>
-                  <span class="inline-block">
-                    <i class="fas fa-building mr-2"></i>
-                    Switch 365 Ltd
-                  </span>
+      <!-- Hero Section -->
+      <section class="relative min-h-screen flex items-center">
+        <div class="absolute inset-0">
+          <img src="https://kimi-web-img.moonshot.cn/img/www.navylookout.com/d16f10323eaa82d7cac0f9ecf8dc9346d2b4e87c.webp" alt="Oil tankers navigating through narrow shipping lanes" class="w-full h-full object-cover opacity-40" size="wallpaper" aspect="wide" style="photo" query="oil tankers crowded narrow strait" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+          <div class="hero-overlay absolute inset-0"></div>
+        </div>
+
+        <div class="relative z-10 px-4 sm:px-8 max-w-7xl mx-auto">
+          <div class="bento-grid items-start">
+            <div class="hero-text">
+              <h1 class="serif-display text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-4 sm:mb-6 break-words">
+                <span class="block">Middle East</span>
+                <span class="accent-gradient block">Energy Crisis</span>
+                <span class="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl opacity-90">Intelligence Brief</span>
+              </h1>
+              <p class="text-lg sm:text-xl md:text-2xl opacity-90 mb-4 sm:mb-8 max-w-3xl">
+                <em>UK Business Procurement Strategy for Switch 365 Ltd: Immediate 36-Month Fixed Contract Opportunity Before 27 April Ceasefire Expiry</em>
+              </p>
+              <div class="flex flex-wrap gap-4 text-sm opacity-80">
+                <span><i class="fas fa-calendar-alt mr-2"></i>16-17 April 2026</span>
+                <span><i class="fas fa-globe mr-2"></i>Middle East Crisis</span>
+                <span><i class="fas fa-chart-line mr-2"></i>Energy Markets</span>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div class="data-card">
+                <h3 class="serif-display text-lg font-semibold mb-3">Key Market Movements</h3>
+                <div class="space-y-3">
+                  <div class="flex justify-between">
+                    <span>Brent Crude</span>
+                    <span class="text-green-400 font-semibold">-1.35% → $98.05</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>UK NBP Gas</span>
+                    <span class="text-green-400 font-semibold">-5% → 102.90p</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Dutch TTF</span>
+                    <span class="text-green-400 font-semibold">-2.62% → €42.05</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="lg:col-span-1">
-              <img src="https://kimi-web-img.moonshot.cn/img/www.azernews.az/260e3ec2e04da24c52113e62ad8c3cc51126f924.png" alt="Aerial view of oil tankers in the Strait of Hormuz" class="rounded-lg shadow-2xl w-full h-64 object-cover" size="medium" aspect="wide" style="photo" query="Strait of Hormuz oil tankers aerial view" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
-            </div>
-          </div>
-        </section>
 
-        <!-- Executive Summary -->
-        <section id="executive-summary" class="mb-16">
-          <h2 class="serif-display text-3xl font-bold mb-8 text-gradient">Executive Summary</h2>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div class="stat-card p-6 rounded-lg">
-              <h3 class="serif-display text-xl font-semibold mb-4">Critical Development</h3>
-              <div class="text-3xl font-bold text-red-400 mb-2">Iran Threatens to Sink US Ships</div>
-              <p class="text-sm text-gray-300">Mohsen Rezaei, military adviser to Supreme Leader, issues explicit missile threat against US naval blockade enforcement in Strait of Hormuz.</p>
-            </div>
-
-            <div class="stat-card p-6 rounded-lg">
-              <h3 class="serif-display text-xl font-semibold mb-4">Market Response</h3>
-              <div class="text-3xl font-bold text-yellow-400 mb-2">Brent $95/bbl</div>
-              <p class="text-sm text-gray-300">34% above pre-crisis levels despite diplomatic hope pricing; structural supply damage sustains premium.</p>
-            </div>
-          </div>
-
-          <div class="pull-quote">
-            &#34;The combination of explicit Iranian military threats, full US blockade enforcement, and irreversible infrastructure damage creates exceptional conditions for forward fixing before full risk repricing.&#34;
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="stat-card p-4 rounded-lg text-center">
-              <div class="text-2xl font-bold text-red-400">10,000+</div>
-              <div class="text-sm text-gray-300">US personnel enforcing blockade</div>
-            </div>
-            <div class="stat-card p-4 rounded-lg text-center">
-              <div class="text-2xl font-bold text-orange-400">9</div>
-              <div class="text-sm text-gray-300">Vessels turned back since 13 April</div>
-            </div>
-            <div class="stat-card p-4 rounded-lg text-center">
-              <div class="text-2xl font-bold text-purple-400">17%</div>
-              <div class="text-sm text-gray-300">Qatari LNG capacity offline</div>
-            </div>
-          </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <!-- What Changed Since Yesterday -->
-        <section id="overnight-changes" class="mb-16">
-          <h2 class="serif-display text-3xl font-bold mb-8">What Changed Since Yesterday</h2>
-
-          <div class="timeline-item mb-8">
-            <h3 class="serif-display text-xl font-semibold mb-3">Military Escalation</h3>
-            <p class="mb-4">The most significant development was <strong>Mohsen Rezaei&#39;s explicit threat</strong> to sink US naval vessels attempting to police the Strait of Hormuz. This statement from the military adviser to Iran&#39;s Supreme Leader represents a direct operational threat that supersedes previous rhetorical positioning.</p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <div class="stat-card p-4 rounded-lg">
-                <h4 class="font-semibold text-cyan-400 mb-2">US Blockade Enforcement</h4>
-                <ul class="text-sm space-y-1">
-                  <li>• 10,000+ personnel deployed</li>
-                  <li>• 9 vessels turned back</li>
-                  <li>• 0 successful Iranian port transits</li>
-                </ul>
+              <div class="data-card">
+                <h3 class="serif-display text-lg font-semibold mb-3">Critical Timeline</h3>
+                <div class="space-y-2 text-sm">
+                  <p><strong>17 Apr 01:00:</strong> Ceasefire begins</p>
+                  <p><strong>17 Apr 05:00:</strong> Trump announcement</p>
+                  <p><strong>27 Apr 01:00:</strong> Ceasefire expires</p>
+                </div>
               </div>
-              <div class="stat-card p-4 rounded-lg">
-                <h4 class="font-semibold text-purple-400 mb-2">Iranian Response</h4>
-                <ul class="text-sm space-y-1">
-                  <li>• Explicit missile threat against US ships</li>
-                  <li>• &#34;First missiles will sink American ships&#34;</li>
-                  <li>• Opposition to ceasefire extension</li>
-                </ul>
+
+              <div class="opportunity-box">
+                <h4 class="serif-display text-lg font-semibold mb-2">
+                  <i class="fas fa-bullhorn mr-2"></i>Procurement Window
+                </h4>
+                <p class="text-sm">36+ month fixed contracts available at crisis-low prices until 27 April expiry creates binary risk event.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Executive Summary -->
+      <section id="executive-summary" class="px-4 sm:px-8 py-16 max-w-7xl mx-auto">
+        <h2 class="serif-display text-4xl font-bold mb-12">Executive Summary</h2>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+          <div class="opportunity-box">
+            <h3 class="serif-display text-2xl font-semibold mb-4">Procurement Opportunity</h3>
+            <p class="mb-4"><strong>Current 36-month fixed offers (105-115 p/therm gas, £78-88/MWh power)</strong> represent exceptional value versus historical averages and potential disruption scenarios.</p>
+            <p><strong>26% discount to medium disruption scenario prices</strong> that become probable if 27 April ceasefire expires without extension.</p>
+          </div>
+
+          <div class="risk-box">
+            <h3 class="serif-display text-2xl font-semibold mb-4">Structural Risk Persistence</h3>
+            <p class="mb-4">Despite 17 April price relief, <strong>US blockade continues halting 1.5-2.0 million bbl/day</strong> of Iranian exports; Hormuz remains restricted; Bab el-Mandeb alternative has limited capacity.</p>
+            <p><strong>$6-8/bbl risk premium remains in Brent</strong> versus pre-crisis levels, indicating market scepticism of durable resolution.</p>
+          </div>
+        </div>
+
+        <div class="data-grid">
+          <div class="data-card">
+            <h3 class="serif-display text-lg font-semibold mb-4">Price Comparison Matrix</h3>
+            <div class="space-y-4">
+              <div class="flex justify-between items-center">
+                <span>Current NBP Offer</span>
+                <span class="text-green-400 font-bold">105-115 p/therm</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span>2023 Average</span>
+                <span>120 p/therm</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span>Medium Scenario</span>
+                <span class="text-red-400 font-bold">130-170 p/therm</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span>Severe Scenario</span>
+                <span class="text-red-400 font-bold">180-280 p/therm</span>
               </div>
             </div>
           </div>
 
-          <div class="timeline-item mb-8">
-            <h3 class="serif-display text-xl font-semibold mb-3">Diplomatic Conflicts</h3>
-            <p class="mb-4">Conflicting signals emerged with Pakistan-mediated talks advancing but substantive gaps remaining unbridgeable. President Trump&#39;s optimistic statements were immediately contradicted by formal denials from both US and Iranian officials.</p>
-
-            <div class="pull-quote">
-              &#34;We are very close to being over... talks could happen over the next two days.&#34;
-              <cite class="block text-sm mt-2">— President Trump, 16 April 2026 <a href="#ref-280" class="citation-link">[280]</a>
-              </cite>
+          <div class="data-card">
+            <h3 class="serif-display text-lg font-semibold mb-4">Ceasefire Timeline Risk</h3>
+            <div class="space-y-3">
+              <p><strong>Current:</strong> 10-day truce until 27 April</p>
+              <p><strong>Diplomatic Gap:</strong> Insufficient time for comprehensive Iran deal</p>
+              <p><strong>Binary Risk:</strong> Extension vs. rapid escalation</p>
+              <p><strong>Action Window:</strong> 17-24 April before repricing</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- What Changed Since Yesterday -->
+      <section id="changed-yesterday" class="px-4 sm:px-8 py-16 max-w-7xl mx-auto">
+        <h2 class="serif-display text-4xl font-bold mb-12">What Changed Since Yesterday</h2>
+
+        <div class="timeline-container">
+          <div class="timeline-item">
+            <h3 class="serif-display text-xl font-semibold mb-3">Trump Ceasefire Announcement (05:00 GMT, 17 Apr)</h3>
+            <p class="mb-4">President Trump confirmed <strong>10-day Israel-Lebanon ceasefire</strong> and claimed progress toward Iran deal, triggering immediate market repositioning.</p>
+            <ul class="list-disc list-inside space-y-1 opacity-90">
+              <li>Brent crude fell 1.35% to $98.05/bbl within 3.5 hours</li>
+              <li>UK NBP gas dropped 5% to 102.90 p/therm</li>
+              <li>Trading volume surged 180% of 20-day average</li>
+              <li><strong>But:</strong> Iran denied direct negotiations; claims unverified</li>
+            </ul>
           </div>
 
           <div class="timeline-item">
-            <h3 class="serif-display text-xl font-semibold mb-3">Shipping Disruption</h3>
-            <p class="mb-4">Strait of Hormuz traffic remains severely restricted with approximately 94% reduction from normal operations. Vessel tracking data shows sanctioned ships attempting Iranian trade are being systematically interdicted or self-interdicting.</p>
+            <h3 class="serif-display text-xl font-semibold mb-3">First Successful Red Sea Workaround</h3>
+            <p class="mb-4">12:00 GMT confirmation of South Korean tanker transit through Bab el-Mandeb proved <strong>concept of Hormuz bypass</strong> with limited scalability.</p>
+            <ul class="list-disc list-inside space-y-1 opacity-90">
+              <li>Additional voyage time: +8-12 days (15-20% cost increase)</li>
+              <li>Insurance premiums: +400-600% versus pre-crisis</li>
+              <li>Maximum alternative capacity: ~5-6 million bbl/day</li>
+              <li>Hormuz normal flow: ~21 million bbl/day</li>
+            </ul>
           </div>
-        </section>
 
-        <div class="section-divider"></div>
-
-        <!-- 24-Hour Timeline -->
-        <section id="timeline" class="mb-16">
-          <h2 class="serif-display text-3xl font-bold mb-8">Full 24-Hour Timeline</h2>
-
-          <div class="space-y-6">
-            <div class="timeline-item">
-              <div class="flex justify-between items-start mb-2">
-                <h3 class="serif-display text-lg font-semibold">15 April - Morning</h3>
-                <span class="text-sm text-gray-400">Hezbollah Rocket Attack</span>
-              </div>
-              <p><strong>40 rockets launched into Israel</strong> from southern Lebanon, sustaining regional conflict intensity and maintaining pressure for Iranian response.</p>
-            </div>
-
-            <div class="timeline-item">
-              <div class="flex justify-between items-start mb-2">
-                <h3 class="serif-display text-lg font-semibold">15 April - Daytime</h3>
-                <span class="text-sm text-gray-400">Pakistan Mediation</span>
-              </div>
-              <p><strong>Army Chief General Asim Munir meets Iranian Foreign Minister Abbas Araghchi</strong> in Tehran to arrange second round of US-Iran negotiations <a href="#ref-230" class="citation-link">[230]</a>.</p>
-            </div>
-
-            <div class="timeline-item">
-              <div class="flex justify-between items-start mb-2">
-                <h3 class="serif-display text-lg font-semibold">15 April - 1300 GMT</h3>
-                <span class="text-sm text-gray-400">Vessel Reversal</span>
-              </div>
-              <p><strong>Iranian container ship Kashan U-turns in Gulf of Oman</strong> and returns to strait, demonstrating operational uncertainty and blockade effectiveness <a href="#ref-277" class="citation-link">[277]</a>.</p>
-            </div>
-
-            <div class="timeline-item">
-              <div class="flex justify-between items-start mb-2">
-                <h3 class="serif-display text-lg font-semibold">15 April - Evening</h3>
-                <span class="text-sm text-gray-400">Diplomatic Leak</span>
-              </div>
-              <p><strong>Axios reports &#34;progress&#34; toward US-Iran &#34;framework agreement&#34;</strong> citing unnamed US officials, triggering immediate market optimism subsequently disputed by formal denials <a href="#ref-257" class="citation-link">[257]</a>.</p>
-            </div>
-
-            <div class="timeline-item">
-              <div class="flex justify-between items-start mb-2">
-                <h3 class="serif-display text-lg font-semibold">16 April - 0630 GMT</h3>
-                <span class="text-sm text-red-400">Critical Threat</span>
-              </div>
-              <p><strong>Mohsen Rezaei threatens to sink US ships</strong> in Hormuz if US attempts to police the waterway: &#34;These ships of yours will be sunk by our first missiles&#34; <a href="#ref-253" class="citation-link">[253]</a>.</p>
-            </div>
-
-            <div class="timeline-item">
-              <div class="flex justify-between items-start mb-2">
-                <h3 class="serif-display text-lg font-semibold">16 April - Morning</h3>
-                <span class="text-sm text-gray-400">Trump Statement</span>
-              </div>
-              <p><strong>President Trump states talks &#34;could happen over next two days&#34;</strong> and war is &#34;very close to being over&#34; <a href="#ref-280" class="citation-link">[280]</a>, creating conflicting signals with military escalation.</p>
-            </div>
+          <div class="timeline-item">
+            <h3 class="serif-display text-xl font-semibold mb-3">Iranian Military Restraint</h3>
+            <p class="mb-4">IRGC naval forces maintained <strong>defensive positioning</strong> with no offensive operations against US-escorted vessels or Israeli targets.</p>
+            <ul class="list-disc list-inside space-y-1 opacity-90">
+              <li>15-20 fast attack craft in patrol patterns near Hormuz</li>
+              <li>No interdiction attempts against neutral vessels</li>
+              <li>Ballistic missile and drone units remain at elevated readiness</li>
+              <li>Strategic calculation: military quiescence maximises diplomatic leverage</li>
+            </ul>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <div class="section-divider"></div>
+      <div class="section-divider"></div>
 
-        <!-- Rhetoric Tracker -->
-        <section id="rhetoric-tracker" class="mb-16">
-          <h2 class="serif-display text-3xl font-bold mb-8">Trump and Iran Rhetoric Tracker</h2>
+      <!-- 24-Hour Timeline -->
+      <section id="timeline" class="px-4 sm:px-8 py-16 max-w-7xl mx-auto">
+        <h2 class="serif-display text-4xl font-bold mb-12">Full 24-Hour Chronological Timeline</h2>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="stat-card p-6 rounded-lg">
-              <h3 class="serif-display text-xl font-semibold mb-4 text-cyan-400">Trump/US Position</h3>
-              <div class="space-y-4">
-                <div class="border-l-2 border-cyan-400 pl-4">
-                  <div class="font-semibold">Blockade Implementation</div>
-                  <div class="text-sm text-gray-300">&#34;The United States to Blockade Ships Entering or Exiting Iranian Ports on April 13 at 10:00 A.M. ET&#34; <a href="#ref-300" class="citation-link">[300]</a>
-                  </div>
-                </div>
-                <div class="border-l-2 border-cyan-400 pl-4">
-                  <div class="font-semibold">Vessel Threat</div>
-                  <div class="text-sm text-gray-300">&#34;If any of these ships come anywhere close to our BLOCKADE, they will be immediately ELIMINATED&#34; <a href="#ref-300" class="citation-link">[300]</a>
-                  </div>
-                </div>
-                <div class="border-l-2 border-cyan-400 pl-4">
-                  <div class="font-semibold">Diplomatic Optimism</div>
-                  <div class="text-sm text-gray-300">&#34;Talks could happen over the next two days... very close to being over&#34; <a href="#ref-280" class="citation-link">[280]</a>
-                  </div>
-                </div>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="serif-display text-2xl font-semibold mb-6">16 April 2026: Pre-Ceasefire Positioning</h3>
+            <div class="space-y-6">
+              <div class="bg-white/5 p-4 rounded-lg border-l-4 border-blue-400">
+                <p class="font-semibold">06:00 GMT</p>
+                <p class="mb-2">IRGC naval patrols near Hormuz—routine, no interdiction</p>
+                <p class="text-sm opacity-75">Satellite/tracking verification</p>
               </div>
-            </div>
-
-            <div class="stat-card p-6 rounded-lg">
-              <h3 class="serif-display text-xl font-semibold mb-4 text-purple-400">Iranian Response</h3>
-              <div class="space-y-4">
-                <div class="border-l-2 border-purple-400 pl-4">
-                  <div class="font-semibold">Presidential Warning</div>
-                  <div class="text-sm text-gray-300">&#34;If the United States dares to make the slightest move against our ships, we will immediately respond&#34; <a href="#ref-277" class="citation-link">[277]</a>
-                  </div>
-                </div>
-                <div class="border-l-2 border-red-400 pl-4">
-                  <div class="font-semibold">Rezaei Missile Threat</div>
-                  <div class="text-sm text-gray-300">&#34;These ships of yours will be sunk by our first missiles... we can destroy them&#34; <a href="#ref-253" class="citation-link">[253]</a>
-                  </div>
-                </div>
-                <div class="border-l-2 border-orange-400 pl-4">
-                  <div class="font-semibold">Ceasefire Opposition</div>
-                  <div class="text-sm text-gray-300">&#34;I am not in favour of extending the ceasefire at all&#34; <a href="#ref-253" class="citation-link">[253]</a>
-                  </div>
-                </div>
+              <div class="bg-white/5 p-4 rounded-lg border-l-4 border-yellow-400">
+                <p class="font-semibold">14:00 GMT</p>
+                <p class="mb-2">Trump social media: &#34;Something big is happening... Stay tuned&#34;</p>
+                <p class="text-sm opacity-75">Truth Social verification, Brent -1.5% in 30 min</p>
               </div>
-            </div>
-          </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <!-- Ceasefire Reality Check -->
-        <section id="ceasefire-reality" class="mb-16">
-          <h2 class="serif-display text-3xl font-bold mb-8">Ceasefire Reality Check</h2>
-
-          <div class="stat-card p-8 rounded-lg mb-8">
-            <h3 class="serif-display text-xl font-semibold mb-4">Formal vs. Actual Status</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div>
-                <h4 class="font-semibold text-yellow-400 mb-2">What Was Announced</h4>
-                <ul class="text-sm space-y-1">
-                  <li>• 8 April: &#34;Two-week ceasefire&#34;</li>
-                  <li>• 22 April expiry date</li>
-                  <li>• Unilateral US announcement</li>
-                  <li>• Iranian tacit compliance</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-semibold text-orange-400 mb-2">What Was Excluded</h4>
-                <ul class="text-sm space-y-1">
-                  <li>• Lebanon operations (explicitly)</li>
-                  <li>• Hezbollah activities</li>
-                  <li>• Houthi capabilities</li>
-                  <li>• Hormuz governance</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-semibold text-red-400 mb-2">What&#39;s Happening</h4>
-                <ul class="text-sm space-y-1">
-                  <li>• Intensified Lebanon strikes</li>
-                  <li>• Direct missile threats</li>
-                  <li>• Full blockade enforcement</li>
-                  <li>• No verified extension</li>
-                </ul>
+              <div class="bg-white/5 p-4 rounded-lg border-l-4 border-red-400">
+                <p class="font-semibold">18:00 GMT</p>
+                <p class="mb-2">European markets close elevated: TTF €43.20, NBP 108.50</p>
+                <p class="text-sm opacity-75">Exchange data, positioning for announcement</p>
               </div>
             </div>
           </div>
 
-          <div class="pull-quote">
-            &#34;Lebanon is not included in the US-Iran ceasefire deal.&#34;
-            <cite class="block text-sm mt-2">— President Trump, 8 April 2026 <a href="#ref-243" class="citation-link">[243]</a>
-            </cite>
-          </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <!-- Shipping Status -->
-        <section id="shipping-status" class="mb-16">
-          <h2 class="serif-display text-3xl font-bold mb-8">Shipping and Choke Point Status</h2>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div class="stat-card p-6 rounded-lg">
-              <h3 class="serif-display text-xl font-semibold mb-4">Strait of Hormuz</h3>
-              <div class="space-y-4">
-                <div class="flex justify-between items-center">
-                  <span class="text-sm">Normal Daily Transits</span>
-                  <span class="font-semibold">50-70 vessels</span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm">Current Daily Transits</span>
-                  <span class="font-semibold text-red-400">9 vessels</span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm">Traffic Reduction</span>
-                  <span class="font-semibold text-red-400">~94%</span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm">Vessels Stranded</span>
-                  <span class="font-semibold text-orange-400">~670</span>
-                </div>
+          <div>
+            <h3 class="serif-display text-2xl font-semibold mb-6">17 April 2026: Ceasefire Implementation</h3>
+            <div class="space-y-6">
+              <div class="bg-green-500/10 p-4 rounded-lg border-l-4 border-green-400">
+                <p class="font-semibold">01:00 GMT</p>
+                <p class="mb-2">Israel-Lebanon ceasefire enters force</p>
+                <p class="text-sm opacity-75">UNIFIL, Israeli/Lebanese sources verification</p>
               </div>
-            </div>
-
-            <div class="stat-card p-6 rounded-lg">
-              <h3 class="serif-display text-xl font-semibold mb-4">Bab el-Mandeb Risk</h3>
-              <div class="space-y-4">
-                <div class="flex justify-between items-center">
-                  <span class="text-sm">Houthi Capability</span>
-                  <span class="font-semibold text-yellow-400">Active</span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm">IRGC Coordination</span>
-                  <span class="font-semibold text-orange-400">Confirmed</span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm">US Strike Campaign</span>
-                  <span class="font-semibold text-red-400">39 strikes on 15 Apr</span>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-sm">Latent Threat</span>
-                  <span class="font-semibold text-red-400">High</span>
-                </div>
+              <div class="bg-green-500/10 p-4 rounded-lg border-l-4 border-green-400">
+                <p class="font-semibold">05:00 GMT</p>
+                <p class="mb-2">Trump confirms 10-day truce; claims Iran deal progress</p>
+                <p class="text-sm opacity-75">White House statement, Brent -$1.10 in 90 min</p>
+              </div>
+              <div class="bg-blue-500/10 p-4 rounded-lg border-l-4 border-blue-400">
+                <p class="font-semibold">08:30 GMT</p>
+                <p class="mb-2">European energy markets open lower: TTF €41.80, NBP 103.50</p>
+                <p class="text-sm opacity-75">Full risk-off positioning</p>
+              </div>
+              <div class="bg-purple-500/10 p-4 rounded-lg border-l-4 border-purple-400">
+                <p class="font-semibold">12:00 GMT</p>
+                <p class="mb-2">South Korean tanker confirmed through Bab el-Mandeb</p>
+                <p class="text-sm opacity-75">Lloyd&#39;s List, port authority confirmation</p>
+              </div>
+              <div class="bg-orange-500/10 p-4 rounded-lg border-l-4 border-orange-400">
+                <p class="font-semibold">20:00 GMT</p>
+                <p class="mb-2">Netanyahu: Lebanon &#34;not covered by any broader arrangement with Iran&#34;</p>
+                <p class="text-sm opacity-75">Video statement, explicit delinkage</p>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="stat-card p-4 rounded-lg">
-              <h4 class="font-semibold text-cyan-400 mb-2">Ras Laffan Damage Impact</h4>
-              <div class="text-2xl font-bold text-red-400 mb-1">17%</div>
-              <div class="text-sm text-gray-300">Qatari LNG capacity offline</div>
-              <div class="text-xs text-gray-400 mt-1">3-5 year reconstruction timeline <a href="#ref-258" class="citation-link">[258]</a>
-              </div>
-            </div>
+      <div class="section-divider"></div>
 
-            <div class="stat-card p-4 rounded-lg">
-              <h4 class="font-semibold text-purple-400 mb-2">War Risk Premium</h4>
-              <div class="text-2xl font-bold text-orange-400 mb-1">+$24/bbl</div>
-              <div class="text-sm text-gray-300">Brent risk premium above pre-crisis</div>
-              <div class="text-xs text-gray-400 mt-1">Decomposed: $18 duration + $6 escalation + $3 infrastructure</div>
-            </div>
-          </div>
-        </section>
+      <!-- Trump and Iran Rhetoric Tracker -->
+      <section id="rhetoric-tracker" class="px-4 sm:px-8 py-16 max-w-7xl mx-auto">
+        <h2 class="serif-display text-4xl font-bold mb-12">Trump and Iran Rhetoric Tracker</h2>
 
-        <div class="section-divider"></div>
-
-        <!-- Market Data -->
-        <section id="market-data" class="mb-16">
-          <h2 class="serif-display text-3xl font-bold mb-8">Updated Energy Market Data</h2>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="stat-card p-6 rounded-lg text-center">
-              <div class="text-3xl font-bold text-red-400 mb-2">$95</div>
-              <div class="text-sm text-gray-300">Brent Crude</div>
-              <div class="text-xs text-gray-400">-5% daily, +34% crisis-to-date</div>
-            </div>
-            <div class="stat-card p-6 rounded-lg text-center">
-              <div class="text-3xl font-bold text-orange-400">673</div>
-              <div class="text-sm text-gray-300">MMbbl Global Inventory Draw</div>
-              <div class="text-xs text-gray-400">Q1 2026 - Q1 2027 projection</div>
-            </div>
-            <div class="stat-card p-6 rounded-lg text-center">
-              <div class="text-3xl font-bold text-purple-400">3-5</div>
-              <div class="text-sm text-gray-300">Years Ras Laffan Repair</div>
-              <div class="text-xs text-gray-400">Multi-year supply constraint</div>
-            </div>
-          </div>
-
-          <div class="pull-quote">
-            &#34;The combination of temporary bearish factors—warm weather, diplomatic hope pricing, and maintenance timing—masks structural LNG tightness that will persist through 2026-2027.&#34;
-          </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <!-- Commercial Implications -->
-        <section id="commercial-implications" class="mb-16">
-          <h2 class="serif-display text-3xl font-bold mb-8">Impact on UK Business Energy</h2>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <div class="stat-card p-6 rounded-lg">
-              <h3 class="serif-display text-lg font-semibold mb-4 text-cyan-400">Direct LNG Competition</h3>
-              <p class="text-sm mb-3">UK and European buyers compete with Asia for constrained Atlantic Basin and US LNG cargoes.</p>
-              <div class="text-xs text-green-400">Status: Active</div>
-            </div>
-
-            <div class="stat-card p-6 rounded-lg">
-              <h3 class="serif-display text-lg font-semibold mb-4 text-purple-400">Gas-to-Power Linkage</h3>
-              <p class="text-sm mb-3">CCGT plants set marginal UK electricity price in &gt;60% of settlement periods.</p>
-              <div class="text-xs text-green-400">Status: Strong</div>
-            </div>
-
-            <div class="stat-card p-6 rounded-lg">
-              <h3 class="serif-display text-lg font-semibold mb-4 text-orange-400">Supplier Hedging Lag</h3>
-              <p class="text-sm mb-3">Wholesale movements transmit to retail offers with 2–5 day delay in current volatility.</p>
-              <div class="text-xs text-yellow-400">Status: Narrowing Window</div>
-            </div>
-          </div>
-
-          <div class="stat-card p-8 rounded-lg">
-            <h3 class="serif-display text-xl font-semibold mb-6">Critical Transmission Mechanisms</h3>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="data-card">
+            <h3 class="serif-display text-xl font-semibold mb-6">Trump &amp; US Officials</h3>
             <div class="space-y-4">
-              <div class="flex items-start space-x-4">
-                <div class="w-2 h-2 bg-cyan-400 rounded-full mt-2 flex-shrink-0"></div>
-                <div>
-                  <div class="font-semibold">Qatari LNG Displacement</div>
-                  <div class="text-sm text-gray-300">17% capacity loss forces demand reallocation to Atlantic Basin, increasing competition for US and African cargoes</div>
-                </div>
+              <div class="border-l-4 border-blue-400 pl-4">
+                <p class="font-semibold">16 Apr 14:00</p>
+                <p class="text-sm italic">&#34;Something big is happening... Stay tuned&#34;</p>
+                <p class="text-xs opacity-75">Anticipation builder → Brent -1.5%</p>
               </div>
-              <div class="flex items-start space-x-4">
-                <div class="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"></div>
-                <div>
-                  <div class="font-semibold">European Storage Competition</div>
-                  <div class="text-sm text-gray-300">Below-normal storage levels increase summer refill competition, particularly with Asian buyers for marginal cargoes</div>
-                </div>
+              <div class="border-l-4 border-green-400 pl-4">
+                <p class="font-semibold">17 Apr 05:00</p>
+                <p class="text-sm italic">&#34;10-day CEASEFIRE... very close to making a deal with Iran... proposed not pursuing nuclear weapons for more than 20 years&#34;</p>
+                <p class="text-xs opacity-75">Partially verified → Brent -$1.10</p>
               </div>
-              <div class="flex items-start space-x-4">
-                <div class="w-2 h-2 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div>
-                <div>
-                  <div class="font-semibold">Supplier Curve Adjustment</div>
-                  <div class="text-sm text-gray-300">Retail price books lag wholesale movements by 2–5 days in current volatility, creating temporary procurement windows</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <!-- Duration Scenarios -->
-        <section id="scenarios" class="mb-16">
-          <h2 class="serif-display text-3xl font-bold mb-8">Duration Scenarios Analysis</h2>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="stat-card p-6 rounded-lg">
-              <h3 class="serif-display text-lg font-semibold mb-4 text-green-400">Short Disruption (1-2 weeks)</h3>
-              <div class="space-y-3">
-                <div>
-                  <div class="font-semibold text-sm">Brent: $85-95</div>
-                  <div class="text-xs text-gray-400">Rapid diplomatic resolution</div>
-                </div>
-                <div>
-                  <div class="font-semibold text-sm">TTF: €35-45</div>
-                  <div class="text-xs text-gray-400">Temporary LNG tightness</div>
-                </div>
-                <div>
-                  <div class="font-semibold text-sm">UK Power: £85-95</div>
-                  <div class="text-xs text-gray-400">Gas-to-power transmission</div>
-                </div>
-                <div class="text-xs text-gray-300 mt-2">
-                  <em>Probability assessment: Low (15-20%)</em>
-                </div>
-              </div>
-            </div>
-
-            <div class="stat-card p-6 rounded-lg">
-              <h3 class="serif-display text-lg font-semibold mb-4 text-yellow-400">Medium Disruption (1-3 months)</h3>
-              <div class="space-y-3">
-                <div>
-                  <div class="font-semibold text-sm">Brent: $90-110</div>
-                  <div class="text-xs text-gray-400">Protracted negotiations</div>
-                </div>
-                <div>
-                  <div class="font-semibold text-sm">TTF: €40-60</div>
-                  <div class="text-xs text-gray-400">Storage competition</div>
-                </div>
-                <div>
-                  <div class="font-semibold text-sm">UK Power: £90-115</div>
-                  <div class="text-xs text-gray-400">Winter refill pressure</div>
-                </div>
-                <div class="text-xs text-gray-300 mt-2">
-                  <em>Probability assessment: Moderate (40-50%)</em>
-                </div>
-              </div>
-            </div>
-
-            <div class="stat-card p-6 rounded-lg">
-              <h3 class="serif-display text-lg font-semibold mb-4 text-red-400">Severe Escalation (3+ months)</h3>
-              <div class="space-y-3">
-                <div>
-                  <div class="font-semibold text-sm">Brent: $110-140</div>
-                  <div class="text-xs text-gray-400">Regional conflict expansion</div>
-                </div>
-                <div>
-                  <div class="font-semibold text-sm">TTF: €55-80</div>
-                  <div class="text-xs text-gray-400">Structural LNG shortage</div>
-                </div>
-                <div>
-                  <div class="font-semibold text-sm">UK Power: £115-150</div>
-                  <div class="text-xs text-gray-400">Supply security premium</div>
-                </div>
-                <div class="text-xs text-gray-300 mt-2">
-                  <em>Probability assessment: Moderate (30-35%)</em>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <!-- Recommendations -->
-        <section id="recommendations" class="mb-16">
-          <h2 class="serif-display text-3xl font-bold mb-8">Commercial Takeaway</h2>
-
-          <div class="stat-card p-8 rounded-lg mb-8 bg-gradient-to-r from-red-900/30 to-orange-900/30 border-l-4 border-red-400">
-            <h3 class="serif-display text-xl font-semibold mb-4 text-red-400">Immediate Action Required</h3>
-            <p class="text-lg mb-4">
-              <strong>Customers within 12 months of contract end should initiate immediate procurement review and strongly consider 36+ month fixing where supplier forward curves offer acceptable value.</strong>
-            </p>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <h4 class="font-semibold text-orange-400 mb-2">Rationale</h4>
-                <ul class="text-sm space-y-1">
-                  <li>• Temporary price softening on reversible factors</li>
-                  <li>• Structural supply damage with multi-year duration</li>
-                  <li>• Supplier price-book lag compressing from 5-10 to 2-5 days</li>
-                  <li>• Asymmetric payoff structure favors early action</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-semibold text-yellow-400 mb-2">Risk Factors</h4>
-                <ul class="text-sm space-y-1">
-                  <li>• Intensified military confrontation risk</li>
-                  <li>• Dual choke-point vulnerability (Hormuz + Bab el-Mandeb)</li>
-                  <li>• Imminent infrastructure maintenance tightening supply</li>
-                  <li>• Potential winter 2026/27 storage refill competition</li>
-                </ul>
+              <div class="border-l-4 border-red-400 pl-4">
+                <p class="font-semibold">Ongoing</p>
+                <p class="text-sm">Blockade enforcement continues via CENTCOM</p>
+                <p class="text-xs opacity-75">Operational reality → Price floor</p>
               </div>
             </div>
           </div>
 
-          <div class="stat-card p-6 rounded-lg">
-            <h3 class="serif-display text-lg font-semibold mb-4">Customer Exposure Categories</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <h4 class="font-semibold text-red-400 mb-2">High Exposure</h4>
-                <ul class="text-sm space-y-1">
-                  <li>• Energy-intensive manufacturing</li>
-                  <li>• Multi-site operations with high baseload</li>
-                  <li>• Contracts expiring within 6 months</li>
-                  <li>• Limited flexibility for demand shifting</li>
-                </ul>
+          <div class="data-card">
+            <h3 class="serif-display text-xl font-semibold mb-6">Iranian Leadership &amp; IRGC</h3>
+            <div class="space-y-4">
+              <div class="border-l-4 border-red-400 pl-4">
+                <p class="font-semibold">Foreign Ministry 17 Apr</p>
+                <p class="text-sm italic">&#34;No negotiations have been held with the United States&#34;</p>
+                <p class="text-xs opacity-75">Direct contradiction of Trump claims</p>
               </div>
-              <div>
-                <h4 class="font-semibold text-orange-400 mb-2">Moderate Exposure</h4>
-                <ul class="text-sm space-y-1">
-                  <li>• Commercial office portfolios</li>
-                  <li>• Retail chains with efficiency programs</li>
-                  <li>• Contracts expiring 6-12 months</li>
-                  <li>• Some demand management capability</li>
-                </ul>
+              <div class="border-l-4 border-yellow-400 pl-4">
+                <p class="font-semibold">FM Araghchi 15 Apr</p>
+                <p class="text-sm italic">Emphasised Hormuz &#34;rights and interests&#34;; requested Chinese support</p>
+                <p class="text-xs opacity-75">Multilateral positioning</p>
+              </div>
+              <div class="border-l-4 border-orange-400 pl-4">
+                <p class="font-semibold">IRGC Media 16-17 Apr</p>
+                <p class="text-sm italic">Denied compromise reports; cited &#34;distrust&#34; and &#34;excessive demands&#34;</p>
+                <p class="text-xs opacity-75">Domestic audience signalling</p>
+              </div>
+              <div class="border-l-4 border-gray-400 pl-4">
+                <p class="font-semibold">Supreme Leader Khamenei</p>
+                <p class="text-sm">No direct comment → Unusual silence</p>
+                <p class="text-xs opacity-75">Ambiguity preserves options</p>
               </div>
             </div>
           </div>
-        </section>
+        </div>
 
-        <div class="section-divider"></div>
+        <div class="mt-12 p-6 bg-white/5 rounded-lg">
+          <h3 class="serif-display text-xl font-semibold mb-4">Assessment: Rhetoric vs. Reality Gap</h3>
+          <p class="mb-4">Trump&#39;s optimistic Iran framing <strong>exceeded verified developments</strong>, creating disappointment risk if Tehran does not validate claims. Iranian messaging is tactically welcoming of reduced military tension while strategically unyielding on core demands.</p>
+          <p class="opacity-90">Markets partially faded the optimism—Brent stabilized $6-8/bbl above pre-crisis levels rather than testing $85/bbl—indicating scepticism about durable resolution.</p>
+        </div>
+      </section>
 
-        <!-- Sources and Confidence -->
-        <section class="mb-16">
-          <h2 class="serif-display text-3xl font-bold mb-8">Source Quality and Confidence</h2>
+      <div class="section-divider"></div>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="stat-card p-6 rounded-lg">
-              <h3 class="serif-display text-lg font-semibold mb-4 text-green-400">Highest Confidence</h3>
-              <ul class="text-sm space-y-2">
-                <li>• CENTCOM official releases</li>
-                <li>• UK government shipping data</li>
-                <li>• Iranian state TV broadcasts</li>
-                <li>• ICE/CME price settlements</li>
-                <li>• Kpler vessel tracking</li>
+      <!-- Ceasefire Reality Check -->
+      <section id="ceasefire-reality" class="px-4 sm:px-8 py-16 max-w-7xl mx-auto">
+        <h2 class="serif-display text-4xl font-bold mb-12">Ceasefire Reality Check</h2>
+
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+          <div class="data-card">
+            <h3 class="serif-display text-lg font-semibold mb-4">Formal Terms</h3>
+            <div class="space-y-3">
+              <p><strong>Start:</strong> 17 Apr 2026, 01:00 GMT</p>
+              <p><strong>Duration:</strong> 10 days (expires 27 Apr)</p>
+              <p><strong>Parties:</strong> Israel &amp; Lebanese state</p>
+              <p><strong>Scope:</strong> Cessation of direct hostilities</p>
+              <p><strong>Verification:</strong> UNIFIL observation</p>
+            </div>
+          </div>
+
+          <div class="data-card">
+            <h3 class="serif-display text-lg font-semibold mb-4">Exclusions &amp; Disputes</h3>
+            <div class="space-y-3 text-sm">
+              <p><strong>Israel:</strong> Lebanon &#34;not covered by any broader arrangement with Iran&#34;</p>
+              <p><strong>Hezbollah:</strong> No disarmament requirement</p>
+              <p><strong>US:</strong> Trump claims integration; operational reality separation</p>
+              <p><strong>Extension:</strong> None specified; conditional on Israeli behaviour</p>
+            </div>
+          </div>
+
+          <div class="data-card">
+            <h3 class="serif-display text-lg font-semibold mb-4">Battlefield Reality</h3>
+            <div class="space-y-3 text-sm">
+              <p><strong>17 Apr:</strong> No reported violations</p>
+              <p><strong>Gaza:</strong> Continued at pre-ceasefire intensity</p>
+              <p><strong>Force Posture:</strong> Unchanged; latent capacity preserved</p>
+              <p><strong>Risk:</strong> Hair-trigger interpretation of compliance</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="risk-box">
+          <h3 class="serif-display text-xl font-semibold mb-3">
+            <i class="fas fa-exclamation-triangle mr-2"></i>Market Assessment: Binary Risk Event
+          </h3>
+          <p class="mb-4">Ceasefire is <strong>stabilising immediate risk premium</strong> but <strong>not resolving underlying drivers</strong>. The 10-day duration creates <strong>binary event risk on 27 April</strong>—extension requires diplomatic progress not yet visible, while collapse risks rapid repricing to crisis levels or beyond.</p>
+          <p class="opacity-90">The 10-day window is insufficient for complex Iran-US nuclear negotiations, increasing probability of diplomatic gap when truce expires.</p>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Shipping and Choke Points -->
+      <section id="shipping-status" class="px-4 sm:px-8 py-16 max-w-7xl mx-auto">
+        <h2 class="serif-display text-4xl font-bold mb-12">Shipping &amp; Choke Point Status</h2>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+          <div class="data-card">
+            <h3 class="serif-display text-xl font-semibold mb-6 flex items-center">
+              <i class="fas fa-water mr-3 text-blue-400"></i>Strait of Hormuz
+            </h3>
+            <div class="space-y-4">
+              <div class="flex justify-between">
+                <span>Normal Flow</span>
+                <span>~21M bbl/day</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Current Flow</span>
+                <span class="text-yellow-400">~8-12M bbl/day</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Throughput</span>
+                <span>40-55% of normal</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Vessel Backlog</span>
+                <span>~45 vessels</span>
+              </div>
+              <div class="mt-4 p-3 bg-yellow-500/10 rounded">
+                <p class="text-sm"><strong>Operating Mode:</strong> US naval escort for neutral vessels; Iranian vessels excluded</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="data-card">
+            <h3 class="serif-display text-xl font-semibold mb-6 flex items-center">
+              <i class="fas fa-ship mr-3 text-green-400"></i>Bab el-Mandeb Bypass
+            </h3>
+            <div class="space-y-4">
+              <div class="flex justify-between">
+                <span>Status</span>
+                <span class="text-green-400">First transit confirmed</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Additional Time</span>
+                <span>+8-12 days</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Cost Increase</span>
+                <span>+15-20%</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Insurance Premium</span>
+                <span>+400-600%</span>
+              </div>
+              <div class="mt-4 p-3 bg-green-500/10 rounded">
+                <p class="text-sm"><strong>Maximum Capacity:</strong> ~5-6M bbl/day vs. 13M Hormuz loss</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Supply Chain Transmission Diagram -->
+        <h3 class="serif-display text-xl font-semibold mb-6">Global to Local Energy Price Transmission</h3>
+        <div class="mermaid-container">
+          <div class="mermaid-controls">
+            <button class="mermaid-control-btn zoom-in" title="放大">
+              <i class="fas fa-search-plus"></i>
+            </button>
+            <button class="mermaid-control-btn zoom-out" title="缩小">
+              <i class="fas fa-search-minus"></i>
+            </button>
+            <button class="mermaid-control-btn reset-zoom" title="重置">
+              <i class="fas fa-expand-arrows-alt"></i>
+            </button>
+            <button class="mermaid-control-btn fullscreen" title="全屏查看">
+              <i class="fas fa-expand"></i>
+            </button>
+          </div>
+          <div class="mermaid" id="mermaid-chart-1">
+            graph TD
+            A[&#34;🏭 Middle East Disruption&#34;] --&gt; B[&#34;🛢️ Global Crude/LNG Price Increase&#34;]
+            B --&gt; C[&#34;🇪🇺 European Gas Price TTF&#34;]
+            C --&gt; D[&#34;🇬🇧 UK NBP Gas Price
+            <br/>95% Correlation&#34;]
+            D --&gt; E[&#34;⚡ UK Power Price
+            <br/>Gas Sets Marginal Price&#34;]
+            E --&gt; F[&#34;💼 Business Energy Contract Repricing&#34;]
+
+            G[&#34;🚢 Shipping Disruption&#34;] --&gt; H[&#34;📈 Insurance Premiums +400-600%&#34;]
+            H --&gt; I[&#34;💰 Higher Delivered Costs&#34;]
+            I --&gt; F
+
+            J[&#34;📊 Supplier Pricing Lag&#34;] --&gt; K[&#34;⏰ 5-10 Day Repricing Window&#34;]
+            K --&gt; L[&#34;⚡ Current Opportunity Window&#34;]
+            L --&gt; F
+
+            style A fill:#ff6b6b,stroke:#262262,stroke-width:3px,color:#262262
+            style B fill:#ffd43b,stroke:#262262,stroke-width:3px,color:#262262
+            style C fill:#74c0fc,stroke:#262262,stroke-width:3px,color:#262262
+            style D fill:#00d39a,stroke:#262262,stroke-width:3px,color:#262262
+            style E fill:#dd40ff,stroke:#262262,stroke-width:3px,color:#fff
+            style F fill:#20c997,stroke:#262262,stroke-width:3px,color:#262262
+            style G fill:#ff8787,stroke:#262262,stroke-width:3px,color:#262262
+            style H fill:#ff922b,stroke:#262262,stroke-width:3px,color:#262262
+            style I fill:#fab005,stroke:#262262,stroke-width:3px,color:#262262
+            style J fill:#868e96,stroke:#262262,stroke-width:3px,color:#fff
+            style K fill:#495057,stroke:#262262,stroke-width:3px,color:#fff
+            style L fill:#2f9e44,stroke:#262262,stroke-width:3px,color:#fff
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Energy Market Statistics -->
+      <section id="market-stats" class="px-4 sm:px-8 py-16 max-w-7xl mx-auto">
+        <h2 class="serif-display text-4xl font-bold mb-12">Updated Energy Market Statistics</h2>
+
+        <div class="data-grid mb-12">
+          <div class="data-card">
+            <h3 class="serif-display text-lg font-semibold mb-4">Crude Oil Markets</h3>
+            <div class="space-y-4">
+              <div class="border-b border-white/10 pb-3">
+                <p class="font-semibold">Brent Front-Month</p>
+                <div class="flex justify-between text-sm">
+                  <span>17 Apr: $98.05/bbl</span>
+                  <span class="text-green-400">-1.35%</span>
+                </div>
+              </div>
+              <div class="border-b border-white/10 pb-3">
+                <p class="font-semibold">WTI Front-Month</p>
+                <div class="flex justify-between text-sm">
+                  <span>17 Apr: $93.40/bbl</span>
+                  <span class="text-green-400">-1.74%</span>
+                </div>
+              </div>
+              <div class="pt-3">
+                <p class="text-sm opacity-75">Brent remains 35-40% above pre-crisis levels (~$70-75/bbl)</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="data-card">
+            <h3 class="serif-display text-lg font-semibold mb-4">Natural Gas Markets</h3>
+            <div class="space-y-4">
+              <div class="border-b border-white/10 pb-3">
+                <p class="font-semibold">Dutch TTF</p>
+                <div class="flex justify-between text-sm">
+                  <span>17 Apr: €42.05/MWh</span>
+                  <span class="text-green-400">-2.62%</span>
+                </div>
+              </div>
+              <div class="border-b border-white/10 pb-3">
+                <p class="font-semibold">UK NBP</p>
+                <div class="flex justify-between text-sm">
+                  <span>17 Apr: 102.90 p/therm</span>
+                  <span class="text-green-400">-5.0%</span>
+                </div>
+              </div>
+              <div class="pt-3">
+                <p class="text-sm opacity-75">TTF remains +16% versus pre-crisis €36.20/MWh</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="data-card">
+            <h3 class="serif-display text-lg font-semibold mb-4">UK Power &amp; LNG</h3>
+            <div class="space-y-4">
+              <div class="border-b border-white/10 pb-3">
+                <p class="font-semibold">UK Power Q3 2026</p>
+                <div class="flex justify-between text-sm">
+                  <span>~£78/MWh</span>
+                  <span class="text-green-400">-4%</span>
+                </div>
+              </div>
+              <div class="border-b border-white/10 pb-3">
+                <p class="font-semibold">UK Power Q4 2026</p>
+                <div class="flex justify-between text-sm">
+                  <span>~£85/MWh</span>
+                  <span class="text-green-400">-3.4%</span>
+                </div>
+              </div>
+              <div class="pt-3">
+                <p class="text-sm opacity-75">Gas-to-power transmission coefficient: ~0.7-0.9</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="data-card">
+            <h3 class="serif-display text-lg font-semibold mb-4">Shipping &amp; Storage</h3>
+            <div class="space-y-4">
+              <div class="border-b border-white/10 pb-3">
+                <p class="font-semibold">Hormuz Backlog</p>
+                <p class="text-sm">~45 vessels (from ~120+ peak)</p>
+              </div>
+              <div class="border-b border-white/10 pb-3">
+                <p class="font-semibold">European Gas Storage</p>
+                <p class="text-sm">~38% full (vs. 45% avg)</p>
+              </div>
+              <div class="pt-3">
+                <p class="text-sm opacity-75">War-risk premium: 0.75-1.25% hull value (+400-600%)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Market Interpretation -->
+        <div class="bg-white/5 p-8 rounded-lg">
+          <h3 class="serif-display text-xl font-semibold mb-6">Market Interpretation: What the Market is Pricing Now</h3>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div>
+              <h4 class="font-semibold mb-3">Scenario Probabilities</h4>
+              <div class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                  <span>Short De-escalation</span>
+                  <span class="text-green-400">~25%</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Continued Adaptation</span>
+                  <span class="text-yellow-400">~50%</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Medium Disruption</span>
+                  <span class="text-orange-400">~20%</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Severe Escalation</span>
+                  <span class="text-red-400">~5%</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-3">Risk Premium Retention</h4>
+              <div class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                  <span>Brent vs. Pre-crisis</span>
+                  <span class="text-yellow-400">+$6-8/bbl</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>TTF vs. Pre-crisis</span>
+                  <span class="text-yellow-400">+€6/MWh</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Options Volatility</span>
+                  <span class="text-orange-400">~31%</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-3">Trigger Points</h4>
+              <div class="space-y-2 text-sm">
+                <div>
+                  <p class="text-green-400">Upside Triggers:</p>
+                  <p>Ceasefire breach, Hormuz reclosure, direct strikes</p>
+                </div>
+                <div>
+                  <p class="text-red-400">Downside Triggers:</p>
+                  <p>Verified Iran-US talks, Hormuz reopening, SPR release</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- UK Business Impact -->
+      <section id="uk-impact" class="px-4 sm:px-8 py-16 max-w-7xl mx-auto">
+        <h2 class="serif-display text-4xl font-bold mb-12">Impact on UK Business Energy Prices</h2>
+
+        <div class="mb-12">
+          <h3 class="serif-display text-2xl font-semibold mb-6">Transmission Mechanism: Global to Local</h3>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="data-card">
+              <h4 class="font-semibold mb-4">Why UK Businesses Feel Middle East Disruption</h4>
+              <div class="space-y-4">
+                <div>
+                  <p class="font-semibold text-sm">No Direct UK-Iran Trade</p>
+                  <p class="text-xs opacity-75">UK prices set at margin by global market, not domestic production</p>
+                </div>
+                <div>
+                  <p class="font-semibold text-sm">LNG Import Dependence</p>
+                  <p class="text-xs opacity-75">UK produces ~40% of gas consumption; balance via pipeline and LNG</p>
+                </div>
+                <div>
+                  <p class="font-semibold text-sm">European Market Integration</p>
+                  <p class="text-xs opacity-75">NBP physically and financially linked to TTF, Zeebrugge</p>
+                </div>
+                <div>
+                  <p class="font-semibold text-sm">Global LNG Competition</p>
+                  <p class="text-xs opacity-75">UK competes with Asia for flexible cargoes; price convergence</p>
+                </div>
+                <div>
+                  <p class="font-semibold text-sm">Below-Average Storage</p>
+                  <p class="text-xs opacity-75">38% full vs. 45% average increases price sensitivity</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="data-card">
+              <h4 class="font-semibold mb-4">Supplier Pricing Lag and Repricing Window</h4>
+              <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                  <span class="text-sm">Wholesale Market Movement</span>
+                  <span class="text-xs opacity-75">Immediate</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm">Supplier Hedging Cycle</span>
+                  <span class="text-xs opacity-75">5-10 business days</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm">Price Book Update</span>
+                  <span class="text-xs opacity-75">3-7 business days</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm">Customer Notification</span>
+                  <span class="text-xs opacity-75">1-5 business days</span>
+                </div>
+              </div>
+              <div class="mt-6 p-4 bg-green-500/10 rounded">
+                <p class="text-sm font-semibold text-green-400">Current Opportunity Window</p>
+                <p class="text-xs">17-24 April 2026 before potential repricing</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="opportunity-box">
+          <h3 class="serif-display text-xl font-semibold mb-4">
+            <i class="fas fa-clock mr-2"></i>Critical Asymmetry: Declines vs. Increases
+          </h3>
+          <p class="mb-4">Wholesale <strong>declines</strong> may not fully reach retail offers for 5-10 days; wholesale <strong>increases</strong> are captured more quickly via risk management protocols.</p>
+          <p class="opacity-90">Current supplier offers may still reflect 10-14 April wholesale levels when Brent traded above $102/bbl and NBP exceeded 108 p/therm—creating temporary arbitrage for prepared buyers.</p>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Duration Scenarios -->
+      <section id="scenarios" class="px-4 sm:px-8 py-16 max-w-7xl mx-auto">
+        <h2 class="serif-display text-4xl font-bold mb-12">Duration Scenarios and Price Implications</h2>
+
+        <div class="scenario-grid">
+          <div class="scenario-card">
+            <div class="flex items-center mb-4">
+              <div class="w-4 h-4 bg-green-400 rounded-full mr-3"></div>
+              <h3 class="serif-display text-xl font-semibold">Scenario A: Short Disruption (1-2 Weeks)</h3>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-semibold text-sm mb-2">Assumptions</h4>
+                <p class="text-sm opacity-90">Ceasefire extends or transitions to broader arrangement; Hormuz gradual unconditional reopening; diplomatic momentum sustained.</p>
+              </div>
+              <div>
+                <h4 class="font-semibold text-sm mb-2">Price Ranges</h4>
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span>Brent</span>
+                    <span>$92-98/bbl</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>TTF</span>
+                    <span>€38-45/MWh</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>NBP</span>
+                    <span>95-110 p/therm</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>UK Power Q3</span>
+                    <span>£72-82/MWh</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h4 class="font-semibold text-sm mb-2">Contract Behaviour</h4>
+                <p class="text-sm opacity-90">12-24 month fixes at moderate premium; longer-dated availability improves.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="scenario-card">
+            <div class="flex items-center mb-4">
+              <div class="w-4 h-4 bg-yellow-400 rounded-full mr-3"></div>
+              <h3 class="serif-display text-xl font-semibold">Scenario B: Medium Disruption (1-3 Months)</h3>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-semibold text-sm mb-2">Assumptions</h4>
+                <p class="text-sm opacity-90">Ceasefire collapses without extension; Hormuz intermittent closure; Bab el-Mandeb threatened; alternative route costs unsustainable at scale.</p>
+              </div>
+              <div>
+                <h4 class="font-semibold text-sm mb-2">Price Ranges</h4>
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span>Brent</span>
+                    <span class="text-red-400">$105-125/bbl</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>TTF</span>
+                    <span class="text-red-400">€55-75/MWh</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>NBP</span>
+                    <span class="text-red-400">130-170 p/therm</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>UK Power Q3</span>
+                    <span class="text-red-400">£95-130/MWh</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h4 class="font-semibold text-sm mb-2">Contract Behaviour</h4>
+                <p class="text-sm opacity-90"><strong>36+ month fixes withdrawn</strong>; short-term only at elevated rates; supplier credit risk emerges.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="scenario-card">
+            <div class="flex items-center mb-4">
+              <div class="w-4 h-4 bg-red-400 rounded-full mr-3"></div>
+              <h3 class="serif-display text-xl font-semibold">Scenario C: Severe Escalation (3+ Months)</h3>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <h4 class="font-semibold text-sm mb-2">Assumptions</h4>
+                <p class="text-sm opacity-90">Iran-Israel direct military conflict; Hormuz and Bab el-Mandeb simultaneous closure; Saudi Arabia drawn in; global SPR release insufficient.</p>
+              </div>
+              <div>
+                <h4 class="font-semibold text-sm mb-2">Price Ranges</h4>
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between">
+                    <span>Brent</span>
+                    <span class="text-red-400">$130-180/bbl</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>TTF</span>
+                    <span class="text-red-400">€85-140/MWh</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>NBP</span>
+                    <span class="text-red-400">180-280 p/therm</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>UK Power Q3</span>
+                    <span class="text-red-400">£150-220/MWh</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h4 class="font-semibold text-sm mb-2">Contract Behaviour</h4>
+                <p class="text-sm opacity-90"><strong>No new fixed offers</strong>; supplier default risk material; government intervention likely.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Commercial Takeaway -->
+      <section id="commercial-takeaway" class="px-4 sm:px-8 py-16 max-w-7xl mx-auto">
+        <h2 class="serif-display text-4xl font-bold mb-12">Commercial Takeaway for Switch 365 Ltd Clients</h2>
+
+        <div class="opportunity-box mb-12">
+          <h3 class="serif-display text-2xl font-semibold mb-4">
+            <i class="fas fa-bullhorn mr-3"></i>Core Message: Fix Now, Fix Long
+          </h3>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <h4 class="font-semibold mb-3">Current Market Conditions</h4>
+              <ul class="space-y-2 text-sm">
+                <li>• Lowest prices since crisis began (17 April dip)</li>
+                <li>• 36+ month availability in closing window</li>
+                <li>• Supplier pricing lag creates temporary arbitrage</li>
+                <li>• Ceasefire deadline: 27 April 2026 (binary risk event)</li>
               </ul>
             </div>
-
-            <div class="stat-card p-6 rounded-lg">
-              <h3 class="serif-display text-lg font-semibold mb-4 text-yellow-400">Medium Confidence</h3>
-              <ul class="text-sm space-y-2">
-                <li>• Senior administration official quotes</li>
-                <li>• UANI cumulative counts</li>
-                <li>• Industry broker quotes</li>
-                <li>• National military statements</li>
-                <li>• Pakistan mediation reports</li>
-              </ul>
-            </div>
-
-            <div class="stat-card p-6 rounded-lg">
-              <h3 class="serif-display text-lg font-semibold mb-4 text-red-400">Requires Monitoring</h3>
-              <ul class="text-sm space-y-2">
-                <li>• Back-channel negotiation content</li>
-                <li>• Real-time AIS gaps</li>
-                <li>• Internal regime deliberations</li>
-                <li>• Houthi operational plans</li>
-                <li>• Lavan/Siri explosion attribution</li>
+            <div>
+              <h4 class="font-semibold mb-3">Historical Value Proposition</h4>
+              <ul class="space-y-2 text-sm">
+                <li>• Current offers below 2023 averages (120 p/therm)</li>
+                <li>• 26% discount to medium scenario (130-170 p/therm)</li>
+                <li>• Asymmetric risk-return: limited downside vs. 20-50% upside</li>
+                <li>• Final window before potential repricing</li>
               </ul>
             </div>
           </div>
+        </div>
 
-          <div class="mt-8 text-sm text-gray-400">
-            <p><strong>Research Period:</strong> 15-16 April 2026</p>
-            <p><strong>Report Prepared For:</strong> Switch 365 Ltd - UK Commercial Energy Consultancy</p>
-            <p><strong>Methodology:</strong> Verified fact-based analysis separating confirmed information from analyst interpretation and unconfirmed claims.</p>
+        <div class="data-grid mb-12">
+          <div class="data-card">
+            <h3 class="serif-display text-lg font-semibold mb-4">Historical Price Comparison</h3>
+            <div class="space-y-4">
+              <div class="flex justify-between items-center">
+                <span>2023 Average</span>
+                <span>120 p/therm</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span>2024 Average</span>
+                <span>85 p/therm</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span>2025 Average</span>
+                <span>95 p/therm</span>
+              </div>
+              <div class="flex justify-between items-center border-t border-white/20 pt-3">
+                <span class="font-bold">Current 36-Month Offer</span>
+                <span class="text-green-400 font-bold">105-115 p/therm</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span>Medium Scenario</span>
+                <span class="text-red-400">130-170 p/therm</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span>Severe Scenario</span>
+                <span class="text-red-400">180-280 p/therm</span>
+              </div>
+            </div>
           </div>
-        </section>
 
-        <!-- References -->
-        <section class="mb-16">
-          <h2 class="serif-display text-2xl font-bold mb-6">References</h2>
-          <div class="text-xs text-gray-400 space-y-1">
-            <div id="ref-253">[253] BSS News - Mohsen Rezaei missile threat statement</div>
-            <div id="ref-277">[277] Economic Times - Hormuz shipping muted as US blockade takes hold</div>
-            <div id="ref-280">[280] Sky News - Iran war latest: Trump US Israel ceasefire deal</div>
-            <div id="ref-285">[285] Smart Energy - Iran conflict: what it means for UK business energy</div>
-            <div id="ref-230">[230] AP News - Iran war Israel Trump live updates 04-16-2026</div>
-            <div id="ref-257">[257] China.org.cn - US Iran officials deny ceasefire extension agreement</div>
-            <div id="ref-243">[243] CBS News - Iran Trump ceasefire strait-hormuz Israel war Hezbollah</div>
-            <div id="ref-287">[287] US News - Hezbollah Lebanon talks with Israel widen national rift</div>
-            <div id="ref-258">[258] ACLED - Middle East overview April 2026</div>
-            <div id="ref-292">[292] Newland Chase - Middle East crisis situation update</div>
-            <div id="ref-300">[300] CBS News - Iran war US Iran ports blockade strait of hormuz</div>
-            <div id="ref-225">[225] ISW - Iran update April 16 2025</div>
-            <div id="ref-283">[283] UANI - Iran war shipping update April 14 2026</div>
-            <div id="ref-264">[264] France 24 - US blockade Strait of Hormuz numbers</div>
-            <div id="ref-239">[239] Newland Chase - Middle East crisis situation update</div>
+          <div class="data-card">
+            <h3 class="serif-display text-lg font-semibold mb-4">Client Segmentation &amp; Urgency</h3>
+            <div class="space-y-4">
+              <div class="border-l-4 border-red-400 pl-3">
+                <p class="font-semibold text-sm">Critical Priority</p>
+                <p class="text-xs opacity-75">Contracts expiring Q2 2026–Q1 2027; &gt;1 GWh/year</p>
+                <p class="text-xs text-red-400">Action: Immediate review; request 36-month quotes</p>
+              </div>
+              <div class="border-l-4 border-orange-400 pl-3">
+                <p class="font-semibold text-sm">High Priority</p>
+                <p class="text-xs opacity-75">Energy-intensive manufacturing; multi-site portfolios</p>
+                <p class="text-xs text-orange-400">Action: Accelerated review; early renewal evaluation</p>
+              </div>
+              <div class="border-l-4 border-yellow-400 pl-3">
+                <p class="font-semibold text-sm">Elevated Priority</p>
+                <p class="text-xs opacity-75">Flexible/indexed contracts; budget certainty priority</p>
+                <p class="text-xs text-yellow-400">Action: Convert to fixed; evaluate 24-36 month options</p>
+              </div>
+              <div class="border-l-4 border-green-400 pl-3">
+                <p class="font-semibold text-sm">Standard Priority</p>
+                <p class="text-xs opacity-75">Contract end 2028+; low intensity; strong pass-through</p>
+                <p class="text-xs text-green-400">Action: Monitor; maintain flexibility</p>
+              </div>
+            </div>
           </div>
-        </section>
-      </div>
+        </div>
+
+        <div class="risk-box">
+          <h3 class="serif-display text-xl font-semibold mb-4">
+            <i class="fas fa-exclamation-triangle mr-2"></i>Decision Risk Analysis
+          </h3>
+          <p class="mb-4"><strong>The decision to delay is a material bet on diplomatic outcomes inconsistent with prudent risk management.</strong> The 27 April ceasefire expiry is immovable. Any client whose contract expires before Q2 2027 and who has not initiated fixed-price discussions by 22 April risks facing repriced offers embedding renewed risk premia—or, in severe scenarios, withdrawal of long-term fixed options entirely.</p>
+
+          <div class="grid md:grid-cols-3 gap-6 mt-6">
+            <div class="text-center">
+              <p class="font-bold text-2xl text-green-400">17-21 April</p>
+              <p class="text-sm">Critical Action Window</p>
+            </div>
+            <div class="text-center">
+              <p class="font-bold text-2xl text-yellow-400">22-27 April</p>
+              <p class="text-sm">Repricing Risk Escalates</p>
+            </div>
+            <div class="text-center">
+              <p class="font-bold text-2xl text-red-400">27 April+</p>
+              <p class="text-sm">Binary Risk Event</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Timeline -->
+        <h3 class="serif-display text-xl font-semibold mb-6 mt-12">Specific Action Required This Week (17-21 April 2026)</h3>
+        <div class="grid md:grid-cols-4 gap-4">
+          <div class="bg-white/5 p-4 rounded-lg text-center">
+            <div class="w-8 h-8 bg-blue-400 rounded-full mx-auto mb-3 flex items-center justify-center">
+              <span class="text-sm font-bold text-white">1</span>
+            </div>
+            <h4 class="font-semibold text-sm mb-2">Confirm</h4>
+            <p class="text-xs opacity-75">Contract end dates, notice periods, auto-rollover provisions</p>
+          </div>
+          <div class="bg-white/5 p-4 rounded-lg text-center">
+            <div class="w-8 h-8 bg-green-400 rounded-full mx-auto mb-3 flex items-center justify-center">
+              <span class="text-sm font-bold text-white">2</span>
+            </div>
+            <h4 class="font-semibold text-sm mb-2">Request</h4>
+            <p class="text-xs opacity-75">36-month fixed quotations from incumbent and alternative suppliers</p>
+          </div>
+          <div class="bg-white/5 p-4 rounded-lg text-center">
+            <div class="w-8 h-8 bg-yellow-400 rounded-full mx-auto mb-3 flex items-center justify-center">
+              <span class="text-sm font-bold text-white">3</span>
+            </div>
+            <h4 class="font-semibold text-sm mb-2">Evaluate</h4>
+            <p class="text-xs opacity-75">Against historical benchmarks, scenario-weighted costs, risk appetite</p>
+          </div>
+          <div class="bg-white/5 p-4 rounded-lg text-center">
+            <div class="w-8 h-8 bg-red-400 rounded-full mx-auto mb-3 flex items-center justify-center">
+              <span class="text-sm font-bold text-white">4</span>
+            </div>
+            <h4 class="font-semibold text-sm mb-2">Execute</h4>
+            <p class="text-xs opacity-75">Where commercially suitable—before 27 April ceasefire expiry</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Source Confidence -->
+      <section id="source-confidence" class="px-4 sm:px-8 py-16 max-w-7xl mx-auto">
+        <h2 class="serif-display text-4xl font-bold mb-12">Source Quality and Confidence Assessment</h2>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="data-card">
+            <h3 class="serif-display text-lg font-semibold mb-4 flex items-center">
+              <i class="fas fa-check-circle mr-2 text-green-400"></i>Highest-Confidence Facts
+            </h3>
+            <div class="space-y-3 text-sm">
+              <div>
+                <p class="font-semibold">17 April price movements</p>
+                <p class="opacity-75">ICE, CME, LSEG exchange data</p>
+              </div>
+              <div>
+                <p class="font-semibold">Ceasefire implementation</p>
+                <p class="opacity-75">UNIFIL, Israeli/Lebanese official sources</p>
+              </div>
+              <div>
+                <p class="font-semibold">South Korean tanker transit</p>
+                <p class="opacity-75">Lloyd&#39;s List, port authority confirmation</p>
+              </div>
+              <div>
+                <p class="font-semibold">US blockade of Iranian ports</p>
+                <p class="opacity-75">CENTCOM statements, operational reports</p>
+              </div>
+              <div>
+                <p class="font-semibold">Netanyahu Lebanon statement</p>
+                <p class="opacity-75">Video statement, multiple news agencies</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="data-card">
+            <h3 class="serif-display text-lg font-semibold mb-4 flex items-center">
+              <i class="fas fa-exclamation-triangle mr-2 text-yellow-400"></i>Medium-Confidence Areas
+            </h3>
+            <div class="space-y-3 text-sm">
+              <div>
+                <p class="font-semibold">Hormuz vessel traffic estimates</p>
+                <p class="opacity-75">Ship-tracking data, market inference</p>
+              </div>
+              <div>
+                <p class="font-semibold">Insurance premium levels</p>
+                <p class="opacity-75">Market sources, industry reports</p>
+              </div>
+              <div>
+                <p class="font-semibold">European gas storage levels</p>
+                <p class="opacity-75">Partial AGSI data, seasonal patterns</p>
+              </div>
+              <div>
+                <p class="font-semibold">Iranian military posture</p>
+                <p class="opacity-75">Satellite imagery, indirect indicators</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="data-card">
+            <h3 class="serif-display text-lg font-semibold mb-4 flex items-center">
+              <i class="fas fa-question-circle mr-2 text-red-400"></i>Unconfirmed Claims to Monitor
+            </h3>
+            <div class="space-y-3 text-sm">
+              <div>
+                <p class="font-semibold">&#34;Imminent Iran-US deal&#34;</p>
+                <p class="opacity-75">Trump statement - explicitly denied by Iran</p>
+              </div>
+              <div>
+                <p class="font-semibold">20-year Iranian nuclear proposal</p>
+                <p class="opacity-75">Trump statement - no Iranian verification</p>
+              </div>
+              <div>
+                <p class="font-semibold">Houthi Red Sea attack plans</p>
+                <p class="opacity-75">Intelligence reports - no verified action</p>
+              </div>
+              <div>
+                <p class="font-semibold">Chinese SPR release</p>
+                <p class="opacity-75">Market rumour - no official statement</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-12 bg-white/5 p-8 rounded-lg">
+          <h3 class="serif-display text-xl font-semibold mb-6">Verification Required Tomorrow (18 April 2026)</h3>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-semibold mb-3">High Priority</h4>
+              <ul class="space-y-2 text-sm">
+                <li>• Overnight military activity; any ceasefire breaches</li>
+                <li>• Hormuz vessel traffic post-weekend accumulation</li>
+                <li>• Trump-Iran direct communication channels</li>
+                <li>• European gas storage weekly injection data</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-3">Medium Priority</h4>
+              <ul class="space-y-2 text-sm">
+                <li>• Qatari LNG operational status; Ras Laffan loadings</li>
+                <li>• Pakistan mediation: Washington travel, follow-up talks</li>
+                <li>• Insurance market: any underwriter withdrawals</li>
+                <li>• Asian LNG demand response to price movements</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 text-center opacity-75">
+          <p class="text-sm">Report compiled: 17 April 2026 | Next update: 18 April 2026, 06:00 GMT</p>
+          <p class="text-xs mt-2">For Switch 365 Ltd | UK Business Energy Procurement Intelligence</p>
+        </div>
+      </section>
     </main>
 
     <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobileMenuButton');
-        const toc = document.getElementById('toc');
-        const mainContent = document.querySelector('.main-content');
+        // Initialize Mermaid with enhanced configuration
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#00d39a',
+                primaryTextColor: '#262262',
+                primaryBorderColor: '#262262',
+                lineColor: '#262262',
+                secondaryColor: '#dd40ff',
+                tertiaryColor: '#ffd43b',
+                background: '#ffffff',
+                mainBkg: '#ffffff',
+                nodeBkg: '#ffffff',
+                clusterBkg: '#f8f9fa',
+                edgeLabelBackground: '#ffffff',
+                nodeTextColor: '#262262'
+            },
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis',
+                padding: 25,
+                nodeSpacing: 50,
+                rankSpacing: 80,
+                diagramPadding: 20
+            },
+            fontFamily: 'Inter, sans-serif',
+            fontSize: 14
+        });
 
-        // Function to close the menu
-        function closeMenu() {
-            toc.classList.remove('open');
-            mainContent.classList.remove('menu-open');
+        // Initialize Mermaid Controls for zoom and pan
+        function initializeMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+            const mermaidElement = container.querySelector('.mermaid');
+            let scale = 1;
+            let isDragging = false;
+            let startX, startY, translateX = 0, translateY = 0;
+
+            // 触摸相关状态
+            let isTouch = false;
+            let touchStartTime = 0;
+            let initialDistance = 0;
+            let initialScale = 1;
+            let isPinching = false;
+
+            // Zoom controls
+            const zoomInBtn = container.querySelector('.zoom-in');
+            const zoomOutBtn = container.querySelector('.zoom-out');
+            const resetBtn = container.querySelector('.reset-zoom');
+            const fullscreenBtn = container.querySelector('.fullscreen');
+
+            function updateTransform() {
+                mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                if (scale > 1) {
+                container.classList.add('zoomed');
+                } else {
+                container.classList.remove('zoomed');
+                }
+
+                mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+            }
+
+            if (zoomInBtn) {
+                zoomInBtn.addEventListener('click', () => {
+                scale = Math.min(scale * 1.25, 4);
+                updateTransform();
+                });
+            }
+
+            if (zoomOutBtn) {
+                zoomOutBtn.addEventListener('click', () => {
+                scale = Math.max(scale / 1.25, 0.3);
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+                updateTransform();
+                });
+            }
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                updateTransform();
+                });
+            }
+
+            if (fullscreenBtn) {
+                fullscreenBtn.addEventListener('click', () => {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
+                });
+            }
+
+            // Mouse Events
+            mermaidElement.addEventListener('mousedown', (e) => {
+                if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                mermaidElement.style.cursor = 'grabbing';
+                updateTransform();
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging && !isTouch) {
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseleave', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            // 获取两点之间的距离
+            function getTouchDistance(touch1, touch2) {
+                return Math.hypot(
+                touch2.clientX - touch1.clientX,
+                touch2.clientY - touch1.clientY
+                );
+            }
+
+            // Touch Events - 触摸事件处理
+            mermaidElement.addEventListener('touchstart', (e) => {
+                isTouch = true;
+                touchStartTime = Date.now();
+
+                if (e.touches.length === 1) {
+                // 单指拖动
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+
+                } else if (e.touches.length === 2) {
+                // 双指缩放
+                isPinching = true;
+                isDragging = false;
+
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                initialDistance = getTouchDistance(touch1, touch2);
+                initialScale = scale;
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1 && isDragging && !isPinching) {
+                // 单指拖动
+                const touch = e.touches[0];
+                translateX = touch.clientX - startX;
+                translateY = touch.clientY - startY;
+                updateTransform();
+
+                } else if (e.touches.length === 2 && isPinching) {
+                // 双指缩放
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const currentDistance = getTouchDistance(touch1, touch2);
+
+                if (initialDistance > 0) {
+                    const newScale = Math.min(Math.max(
+                    initialScale * (currentDistance / initialDistance),
+                    0.3
+                    ), 4);
+                    scale = newScale;
+                    updateTransform();
+                }
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchend', (e) => {
+                // 重置状态
+                if (e.touches.length === 0) {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                // 延迟重置isTouch，避免鼠标事件立即触发
+                setTimeout(() => {
+                    isTouch = false;
+                }, 100);
+                } else if (e.touches.length === 1 && isPinching) {
+                // 从双指变为单指，切换为拖动模式
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+                }
+
+                updateTransform();
+            });
+
+            mermaidElement.addEventListener('touchcancel', (e) => {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                setTimeout(() => {
+                isTouch = false;
+                }, 100);
+
+                updateTransform();
+            });
+
+            // Enhanced wheel zoom with better center point handling
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const rect = container.getBoundingClientRect();
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                // Adjust translation to zoom towards center
+                if (newScale !== scale) {
+                const scaleDiff = newScale / scale;
+                translateX = translateX * scaleDiff;
+                translateY = translateY * scaleDiff;
+                scale = newScale;
+
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+
+                updateTransform();
+                }
+            });
+
+            // Initialize display
+            updateTransform();
+            });
         }
 
-        mobileMenuButton.addEventListener('click', function() {
-            const isOpening = !toc.classList.contains('open');
-            toc.classList.toggle('open');
-            mainContent.classList.toggle('menu-open');
-            
-            if (isOpening) {
-                // Add event listener to close menu when clicking outside
-                document.addEventListener('click', closeMenuOnClickOutside);
-            } else {
-                // Remove event listener when closing
-                document.removeEventListener('click', closeMenuOnClickOutside);
-            }
+        // Initialize mermaid controls after charts are rendered
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for mermaid to render
+            setTimeout(() => {
+                initializeMermaidControls();
+            }, 1000);
         });
 
-        // Function to close menu when clicking outside
-        function closeMenuOnClickOutside(event) {
-            if (!toc.contains(event.target) && !mobileMenuButton.contains(event.target)) {
-                closeMenu();
-                document.removeEventListener('click', closeMenuOnClickOutside);
-            }
-        }
-
-        // Remove menu-open class on desktop view
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 1024) {
-                closeMenu();
-            }
-        });
-
-        // Close mobile menu when a TOC link is clicked
-        document.querySelectorAll('.toc-fixed a').forEach(link => {
-            link.addEventListener('click', closeMenu);
-        });
-
-        // Smooth scrolling for TOC links
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -882,24 +1730,60 @@
             });
         });
 
-        // Add active state to TOC links based on scroll position
-        window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('section[id]');
-            const tocLinks = document.querySelectorAll('.toc-fixed a[href^="#"]');
-            
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                // const sectionHeight = section.clientHeight; // Not strictly needed for this logic
-                if (window.scrollY >= sectionTop - 100) { // Adjust offset as needed
-                    current = section.getAttribute('id');
+        // Highlight current section in TOC
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -80% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    const tocLinks = document.querySelectorAll('.toc-fixed a');
+                    tocLinks.forEach(link => {
+                        link.classList.remove('text-blue-400');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('text-blue-400');
+                        }
+                    });
                 }
             });
+        }, observerOptions);
 
-            tocLinks.forEach(link => {
-                link.classList.remove('bg-white/20'); // Remove active class from all
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('bg-white/20'); // Add active class to current
+        // Observe all sections
+        document.querySelectorAll('section[id]').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Mobile TOC toggle (if needed)
+        const tocToggle = document.createElement('button');
+        tocToggle.innerHTML = '<i class="fas fa-bars"></i>';
+        tocToggle.className = 'fixed top-4 left-4 z-50 bg-gray-800 text-white p-3 rounded-lg md:hidden';
+        tocToggle.setAttribute('aria-label', 'Toggle table of contents');
+        tocToggle.onclick = () => {
+            document.querySelector('.toc-fixed').classList.toggle('active');
+        };
+        document.body.appendChild(tocToggle);
+
+        // Close TOC when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const toc = document.querySelector('.toc-fixed');
+            const isClickInsideToc = toc.contains(event.target);
+            const isClickOnToggle = tocToggle.contains(event.target);
+            
+            // If the TOC is active (open) and the click is outside the TOC and not on the toggle button
+            if (toc.classList.contains('active') && !isClickInsideToc && !isClickOnToggle) {
+                toc.classList.remove('active');
+            }
+        });
+
+        // Also, close TOC when a link inside it is clicked (on mobile)
+        document.querySelectorAll('.toc-fixed a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    document.querySelector('.toc-fixed').classList.remove('active');
                 }
             });
         });
