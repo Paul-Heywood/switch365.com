@@ -1,20 +1,175 @@
 <!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Energy Market Intelligence: Middle East Escalation Impact on UK Business Procurement</title>
+    <title>Energy Market Intelligence Report: Middle East Escalation and UK Business Energy Procurement</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.5.0/mermaid.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
     <style>
-        .font-display { font-family: 'Playfair Display', serif; }
-        .font-body { font-family: 'Inter', sans-serif; }
-        .bg-midnight { background: linear-gradient(135deg, #262262 0%, #1a1a4a 100%); }
-        .bg-midnight-light { background: linear-gradient(135deg, #2d2d6b 0%, #262262 100%); }
-        .text-candy-sunset { background: linear-gradient(135deg, #00d39a 0%, #dd40ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .border-candy-sunset { border-image: linear-gradient(135deg, #00d39a 0%, #dd40ff 100%) 1; }
+        :root {
+            --midnight-blue: #262262;
+            --midnight-blue-gradient: linear-gradient(135deg, #262262 0%, #26227f 100%);
+            --candy-sunset: linear-gradient(90deg, #00d39a 0%, #dd40ff 100%);
+            --text-primary: #ffffff;
+            --text-secondary: #dadada;
+            --accent-green: #00d39a;
+            --accent-purple: #dd40ff;
+            --accent-orange: #ff6b35;
+            --accent-red: #e74c3c;
+        }
         
-        /* Mermaid diagram styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--midnight-blue-gradient);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .serif-heading {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(38, 34, 98, 0.9) 0%, rgba(38, 34, 127, 0.7) 100%);
+        }
+        
+        .candy-accent {
+            background: var(--candy-sunset);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .toc-fixed {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(38, 34, 98, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+        
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 2rem;
+            height: 60vh;
+        }
+        
+        .bento-hero {
+            grid-row: 1 / 3;
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        
+        .bento-stat {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            backdrop-filter: blur(5px);
+        }
+        
+        .timeline-item {
+            border-left: 2px solid var(--accent-green);
+            padding-left: 1.5rem;
+            margin-left: 1rem;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0.5rem;
+            width: 10px;
+            height: 10px;
+            background: var(--accent-green);
+            border-radius: 50%;
+        }
+        
+        .citation-link {
+            color: var(--accent-green);
+            text-decoration: none;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .citation-link:hover {
+            opacity: 1;
+        }
+        
+        .pull-quote {
+            border-left: 4px solid var(--accent-purple);
+            padding-left: 2rem;
+            margin: 2rem 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+        
+        .market-stat {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .scenario-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            backdrop-filter: blur(5px);
+        }
+        
+        .risk-indicator {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        .risk-high {
+            background: rgba(231, 76, 60, 0.2);
+            color: var(--accent-red);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+        }
+        
+        .risk-medium {
+            background: rgba(255, 107, 53, 0.2);
+            color: var(--accent-orange);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .risk-low {
+            background: rgba(0, 211, 154, 0.2);
+            color: var(--accent-green);
+            border: 1px solid rgba(0, 211, 154, 0.3);
+        }
+        
         .mermaid-container {
             display: flex;
             justify-content: center;
@@ -40,8 +195,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            touch-action: none;
-            -webkit-user-select: none;
+            touch-action: none; /* 防止触摸设备上的默认行为 */
+            -webkit-user-select: none; /* 防止文本选择 */
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
@@ -105,479 +260,922 @@
             transform: scale(0.95);
         }
         
-        /* Improve mermaid text contrast and styling */
-        .mermaid .node rect,
-        .mermaid .node circle,
-        .mermaid .node ellipse,
-        .mermaid .node polygon {
-            stroke-width: 2px !important;
-            stroke: #374151 !important;
-        }
-        
-        .mermaid .node .label {
-            color: #1f2937 !important;
-            font-weight: 500 !important;
-            font-size: 13px !important;
-            font-family: 'Inter', sans-serif !important;
-        }
-        
-        .mermaid .edgePath .path {
-            stroke: #6b7280 !important;
-            stroke-width: 2px !important;
-        }
-        
-        .mermaid .edgeLabel {
-            background-color: rgba(255, 255, 255, 0.9) !important;
-            color: #374151 !important;
-            font-weight: 500 !important;
-            font-size: 11px !important;
-            font-family: 'Inter', sans-serif !important;
-            padding: 2px 6px !important;
-            border-radius: 4px !important;
-            border: 1px solid #d1d5db !important;
-        }
-        
-        /* Timeline specific styling */
-        .mermaid .section {
-            fill: #f8fafc !important;
-            stroke: #e2e8f0 !important;
-        }
-        
-        .mermaid .section .section-title {
-            fill: #1e40af !important;
-            font-weight: 600 !important;
-            font-size: 14px !important;
-        }
-        
-        .mermaid .cScale {
-            fill: #dc2626 !important;
-        }
-        
-        .mermaid .cScale0 {
-            fill: #f59e0b !important;
-        }
-        
-        .mermaid .cScale1 {
-            fill: #10b981 !important;
-        }
-        
-        .mermaid .cScale2 {
-            fill: #3b82f6 !important;
-        }
-        
-        .toc-sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 280px;
-            height: 100vh;
-            background: rgba(38, 34, 98, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 2rem 1.5rem;
-            overflow-y: auto;
-            border-right: 1px solid rgba(221, 64, 255, 0.3);
-        }
-        
-        .main-content {
-            margin-left: 280px;
-            min-height: 100vh;
-        }
-        
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 2rem;
-            align-items: start;
-        }
-        
-        .bento-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .bento-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px rgba(0, 211, 154, 0.1);
-        }
-        
-        .citation-link {
-            color: #00d39a;
-            text-decoration: none;
-            font-size: 0.8em;
-            vertical-align: super;
-            margin-left: 2px;
-            opacity: 0.8;
-        }
-        
-        .citation-link:hover {
-            opacity: 1;
-            text-decoration: underline;
-        }
-        
+        /* Responsive adjustments for mermaid controls */
         @media (max-width: 1024px) {
-            .toc-sidebar {
-                transform: translateX(-100%);
-                transition: transform 0.3s ease;
+            .mermaid-control-btn:not(.reset-zoom) {
+                display: none;
             }
-            .toc-sidebar.open {
-                transform: translateX(0);
-            }
-            .main-content {
-                margin-left: 0;
-            }
-            .hero-grid {
-                grid-template-columns: 1fr;
+            .mermaid-controls {
+                top: auto;
+                bottom: 15px;
+                right: 15px;
             }
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding-left: 1rem;
-                padding-right: 1rem;
+            .mermaid-container {
+                padding: 15px;
             }
-            
-            .hero-grid h1 {
-                font-size: 2.25rem;
-            }
-            
-            .hero-grid p {
-                font-size: 1rem;
-            }
-            
-            .hero-grid .grid.grid-cols-2 {
-                grid-template-columns: 1fr;
-            }
-            
-            .bento-card {
-                padding: 1.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .mermaid-container {
+                padding: 10px;
             }
         }
     </style>
   <base target="_blank">
 </head>
 
-  <body class="bg-midnight text-white font-body overflow-x-hidden">
-    <!-- Table of Contents Sidebar -->
-    <nav class="toc-sidebar">
+  <body>
+    <!-- Fixed Table of Contents -->
+    <nav class="toc-fixed">
       <div class="mb-8">
-        <h3 class="font-display text-xl font-bold text-candy-sunset mb-4">Table of Contents</h3>
+        <h3 class="serif-heading text-xl font-bold text-white mb-4">Energy Market Intelligence</h3>
+        <p class="text-sm text-gray-300">Switch 365 Ltd</p>
+        <p class="text-xs text-gray-400">05 May 2026</p>
       </div>
 
-      <div class="space-y-3">
-        <a href="#executive-summary" class="block text-sm hover:text-candy-sunset transition-colors">Executive Summary</a>
-        <a href="#what-changed" class="block text-sm hover:text-candy-sunset transition-colors">What Changed Since Yesterday</a>
-        <a href="#24-hour-timeline" class="block text-sm hover:text-candy-sunset transition-colors">Full 24-Hour Timeline</a>
-        <a href="#rhetoric-tracker" class="block text-sm hover:text-candy-sunset transition-colors">Trump &amp; Iran Rhetoric Tracker</a>
-        <a href="#ceasefire-reality" class="block text-sm hover:text-candy-sunset transition-colors">Ceasefire Reality Check</a>
-        <a href="#shipping-status" class="block text-sm hover:text-candy-sunset transition-colors">Shipping &amp; Choke Points</a>
-        <a href="#market-stats" class="block text-sm hover:text-candy-sunset transition-colors">Energy Market Stat Sheet</a>
-        <a href="#market-interpretation" class="block text-sm hover:text-candy-sunset transition-colors">Market Interpretation</a>
-        <a href="#uk-impact" class="block text-sm hover:text-candy-sunset transition-colors">Impact on UK Business</a>
-        <a href="#duration-scenarios" class="block text-sm hover:text-candy-sunset transition-colors">Duration Scenarios</a>
-        <a href="#commercial-takeaway" class="block text-sm hover:text-candy-sunset transition-colors">Commercial Takeaway</a>
-        <a href="#source-confidence" class="block text-sm hover:text-candy-sunset transition-colors">Source Quality &amp; Confidence</a>
-      </div>
+      <ul class="space-y-2 text-sm">
+        <li>
+          <a href="#executive-summary" class="text-gray-300 hover:text-white transition-colors">Executive Summary</a>
+        </li>
+        <li>
+          <a href="#what-changed" class="text-gray-300 hover:text-white transition-colors">What Changed Since Yesterday</a>
+        </li>
+        <li>
+          <a href="#timeline" class="text-gray-300 hover:text-white transition-colors">24-Hour Timeline</a>
+        </li>
+        <li>
+          <a href="#rhetoric-tracker" class="text-gray-300 hover:text-white transition-colors">Rhetoric Tracker</a>
+        </li>
+        <li>
+          <a href="#ceasefire-reality" class="text-gray-300 hover:text-white transition-colors">Ceasefire Reality Check</a>
+        </li>
+        <li>
+          <a href="#shipping-status" class="text-gray-300 hover:text-white transition-colors">Shipping &amp; Choke Points</a>
+        </li>
+        <li>
+          <a href="#market-statistics" class="text-gray-300 hover:text-white transition-colors">Market Statistics</a>
+        </li>
+        <li>
+          <a href="#market-interpretation" class="text-gray-300 hover:text-white transition-colors">Market Interpretation</a>
+        </li>
+        <li>
+          <a href="#uk-impact" class="text-gray-300 hover:text-white transition-colors">UK Business Impact</a>
+        </li>
+        <li>
+          <a href="#duration-scenarios" class="text-gray-300 hover:text-white transition-colors">Duration Scenarios</a>
+        </li>
+        <li>
+          <a href="#commercial-takeaway" class="text-gray-300 hover:text-white transition-colors">Commercial Takeaway</a>
+        </li>
+        <li>
+          <a href="#source-confidence" class="text-gray-300 hover:text-white transition-colors">Source Confidence</a>
+        </li>
+      </ul>
 
-      <div class="mt-8 pt-8 border-t border-white/10">
-        <p class="text-xs text-white/60">Prepared for Switch 365 Ltd</p>
-        <p class="text-xs text-white/60 mt-1">1 May 2026</p>
+      <div class="mt-8 pt-4 border-t border-gray-600">
+        <p class="text-xs text-gray-400">
+          <i class="fas fa-shield-alt mr-1"></i>
+          Verified intelligence for commercial energy decisions
+        </p>
       </div>
     </nav>
 
-    <!-- Mobile Menu Button -->
-    <button id="mobile-menu-button" class="fixed top-4 left-4 z-50 p-2 rounded-lg bg-midnight-light text-white lg:hidden">
-      <i class="fas fa-bars"></i>
-    </button>
-
     <!-- Main Content -->
     <main class="main-content">
-      <!-- Hero Section -->
-      <section class="relative min-h-screen bg-midnight-light overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
-          <img src="https://fixedplaceholder" alt="Aerial view of oil tankers in the Strait of Hormuz" class="w-full h-full object-cover" size="wallpaper" aspect="wide" style="photo" query="Strait of Hormuz oil tankers aerial view" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
-        </div>
-
-        <div class="relative z-10 container mx-auto px-8 py-16">
-          <div class="hero-grid mt-16">
-            <!-- Main Title Area -->
-            <div class="space-y-8">
-              <div class="space-y-4">
-                <h1 class="font-display text-5xl lg:text-7xl font-bold leading-tight">
-                  <span class="text-candy-sunset italic">Energy Market</span>
-                  <br/>
-                  <span class="text-white">Intelligence</span>
-                </h1>
-                <p class="text-xl lg:text-2xl text-white/80 font-light leading-relaxed">
-                  Middle East Escalation Impact on UK Business Energy Procurement
-                </p>
-              </div>
-
-              <div class="bento-card">
-                <h3 class="font-display text-2xl font-semibold text-candy-sunset mb-4">World Bank Warning</h3>
-                <div class="space-y-3">
-                  <div class="flex justify-between items-center">
-                    <span class="text-white/80">2026 Energy Price Surge</span>
-                    <span class="text-2xl font-bold text-candy-sunset">+24%</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-white/80">Brent Crude Average</span>
-                    <span class="text-xl font-bold text-white">$86/bbl</span>
-                  </div>
-                  <div class="text-sm text-white/60 mt-2">
-                    Baseline forecast even if disruption ends in May<a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[516]</a>
-                  </div>
-                </div>
-              </div>
+      <!-- Hero Section with Bento Layout -->
+      <section class="px-8 py-12">
+        <div class="bento-grid">
+          <!-- Hero Panel -->
+          <div class="bento-hero hero-gradient flex items-center justify-center relative">
+            <img src="https://kimi-web-img.moonshot.cn/img/thedefensepost.com/710071d2e96a36517cb8efe332f1aadbb3969e7a.jpg" alt="Aerial view of oil tanker in open sea" class="absolute inset-0 w-full h-full object-cover opacity-30" size="wallpaper" aspect="wide" style="photo" query="oil tanker at sea aerial view" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+            <div class="relative z-10 text-center px-8">
+              <h1 class="serif-heading text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                <span class="candy-accent">Energy Market Intelligence</span>
+                <br/>
+                <span class="text-white">Middle East Escalation</span>
+              </h1>
+              <p class="text-xl text-gray-200 max-w-2xl mx-auto">
+                Strategic analysis of geopolitical disruption and its commercial implications for UK business energy procurement
+              </p>
             </div>
+          </div>
 
-            <!-- Key Metrics Grid -->
-            <div class="space-y-6">
-              <div class="grid grid-cols-2 gap-4">
-                <div class="bento-card text-center">
-                  <div class="text-3xl font-bold text-candy-sunset">11.7%</div>
-                  <div class="text-sm text-white/80">Hormuz Throughput</div>
-                </div>
-                <div class="bento-card text-center">
-                  <div class="text-3xl font-bold text-candy-sunset">30×</div>
-                  <div class="text-sm text-white/80">Insurance Premium</div>
-                </div>
-              </div>
+          <!-- Key Statistics Panels -->
+          <div class="bento-stat">
+            <div class="text-center">
+              <div class="text-3xl font-bold text-white mb-2">24%</div>
+              <div class="text-sm text-gray-300">World Bank Baseline Price Increase</div>
+              <div class="text-xs text-gray-400 mt-1">Even if disruption ends in May</div>
+            </div>
+          </div>
 
-              <div class="bento-card">
-                <h4 class="font-display text-lg font-semibold text-candy-sunset mb-3">Critical Commercial Imperative</h4>
-                <p class="text-sm text-white/80 leading-relaxed">
-                  Customers within 12 months of contract end face closing window to secure forward pricing before supplier books fully reprice.
-                </p>
-              </div>
-
-              <div class="bento-card bg-gradient-to-br from-candy-sunset/20 to-transparent">
-                <h4 class="font-display text-lg font-semibold text-white mb-3">Action Required</h4>
-                <p class="text-sm text-white/90 leading-relaxed font-medium">
-                  <strong>Fix now and fix long (36+ months)</strong> to transfer risk before further repricing hits.
-                </p>
-              </div>
+          <div class="bento-stat">
+            <div class="text-center">
+              <div class="text-3xl font-bold text-white mb-2">$86</div>
+              <div class="text-sm text-gray-300">Brent Forecast 2026</div>
+              <div class="text-xs text-gray-400 mt-1">vs $69 in 2025</div>
             </div>
           </div>
         </div>
       </section>
 
       <!-- Executive Summary -->
-      <section id="executive-summary" class="py-16 bg-midnight">
-        <div class="container mx-auto px-8">
-          <h2 class="font-display text-4xl font-bold text-candy-sunset mb-12">Executive Summary</h2>
+      <section id="executive-summary" class="px-8 py-12">
+        <div class="max-w-4xl">
+          <h2 class="serif-heading text-3xl font-bold mb-8">Executive Summary</h2>
 
-          <div class="grid lg:grid-cols-2 gap-12">
-            <div class="space-y-8">
-              <div class="bento-card">
-                <h3 class="font-display text-2xl font-semibold text-candy-sunset mb-6">World Bank Baseline Forecast</h3>
-                <div class="space-y-4">
-                  <p class="text-white/80 leading-relaxed">
-                    The <strong>World Bank published its Commodity Markets Outlook on 28 April 2026</strong>, establishing a baseline forecast that <strong>global energy prices will surge by 24% in 2026</strong>—the largest annual increase since Russia&#39;s full-scale invasion of Ukraine in 2022<a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[516]</a>
-                    <a href="https://economymiddleeast.com/news/world-bank-forecasts-24-percent-energy-price-surge-in-2026-to-highest-since-russo-ukraine-conflict-if-mideast-unrest-eases-by-may" class="citation-link">[719]</a>
-                    <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[936]</a>
-                    <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[1021]</a>.
-                  </p>
+          <div class="bg-white/5 backdrop-blur-sm rounded-xl p-8 mb-8 border border-white/10">
+            <p class="text-lg leading-relaxed mb-6">
+              The <strong>World Bank Group&#39;s baseline forecast of 24% higher energy prices in 2026</strong>—even assuming the major Middle East disruption ends in May—creates a structurally repriced market where delay amplifies rather than reduces risk for UK business customers. Current forward curves for UK gas and power remain elevated above pre-crisis levels, with supplier price books lagging wholesale movements by days to weeks.
+            </p>
 
-                  <blockquote class="border-l-4 border-candy-sunset pl-6 italic text-white/90">
-                    &#34;The war is hitting the global economy in cumulative waves: first through higher energy prices, then higher food prices, and finally, higher inflation, which will push up interest rates and make debt even more expensive&#34;
-                    <footer class="text-sm text-white/60 mt-2">— Chief Economist Indermit Gill<a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[516]</a>
-                      <a href="https://gmk.center/en/news/the-world-bank-forecasts-a-24-increase-in-global-energy-prices-in-2026/" class="citation-link">[544]</a>
-                      <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[936]</a>
-                    </footer>
-                  </blockquote>
-                </div>
-              </div>
-
-              <div class="bento-card">
-                <h3 class="font-display text-xl font-semibold text-candy-sunset mb-4">Baseline Scenario Details</h3>
-                <div class="grid grid-cols-2 gap-4">
-                  <div class="text-center p-4 bg-white/5 rounded-lg">
-                    <div class="text-2xl font-bold text-candy-sunset">$86</div>
-                    <div class="text-sm text-white/80">Brent 2026 Avg</div>
-                  </div>
-                  <div class="text-center p-4 bg-white/5 rounded-lg">
-                    <div class="text-2xl font-bold text-candy-sunset">+25%</div>
-                    <div class="text-sm text-white/80">Oil Component</div>
-                  </div>
-                </div>
-                <p class="text-sm text-white/60 mt-4">
-                  Baseline assumes &#34;most acute disruptions end in May&#34;<a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[516]</a>
-                  <a href="https://www.idnfinancials.com/news/63356/world-bank-forecasts-energy-prices-to-surge-24-in-2026" class="citation-link">[695]</a>
-                  <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[936]</a>
-                  <a href="https://www.linkedin.com/posts/the-world-bank-group_commodity-markets-outlook-april-2026-activity-7454982791391424514-iXuY" class="citation-link">[1028]</a>
-                </p>
-              </div>
+            <div class="pull-quote">
+              &#34;The war is hitting the global economy in cumulative waves: first through higher energy prices, then higher food prices, and finally, higher inflation, which will push up interest rates and make debt even more expensive.&#34;
+              <cite class="block mt-2 text-sm">— Indermit Gill, World Bank Chief Economist <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[178]</a>
+              </cite>
             </div>
 
-            <div class="space-y-8">
-              <div class="bento-card">
-                <h3 class="font-display text-xl font-semibold text-candy-sunset mb-4">Market Positioning</h3>
-                <div class="space-y-4">
-                  <div class="flex justify-between items-center py-2 border-b border-white/10">
-                    <span class="text-white/80">Strait of Hormuz</span>
-                    <span class="text-candy-sunset font-semibold">RESTRICTED</span>
-                  </div>
-                  <div class="flex justify-between items-center py-2 border-b border-white/10">
-                    <span class="text-white/80">Throughput</span>
-                    <span class="text-candy-sunset font-semibold">11.7%</span>
-                  </div>
-                  <div class="flex justify-between items-center py-2 border-b border-white/10">
-                    <span class="text-white/80">Insurance Premium</span>
-                    <span class="text-candy-sunset font-semibold">30× normal</span>
-                  </div>
-                  <div class="flex justify-between items-center py-2">
-                    <span class="text-white/80">Tanker Rates</span>
-                    <span class="text-candy-sunset font-semibold">+750%</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="bento-card">
-                <h3 class="font-display text-xl font-semibold text-candy-sunset mb-4">Diplomatic Status</h3>
-                <div class="space-y-3">
-                  <div class="p-3 bg-red-900/20 border-l-4 border-red-500 rounded">
-                    <div class="font-semibold text-red-300">Pakistan Talks: STALLED</div>
-                    <div class="text-sm text-white/60">US rejects Iran&#39;s conditional proposal</div>
-                  </div>
-                  <div class="p-3 bg-yellow-900/20 border-l-4 border-yellow-500 rounded">
-                    <div class="font-semibold text-yellow-300">War Powers Deadline: 1 May</div>
-                    <div class="text-sm text-white/60">Congressional authorization required</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="bento-card bg-gradient-to-br from-candy-sunset/20 to-transparent">
-                <h3 class="font-display text-xl font-semibold text-white mb-4">Commercial Imperative</h3>
-                <p class="text-white/90 leading-relaxed">
-                  <strong>Customers within 12 months of contract end</strong> face closing window to secure forward pricing before supplier books fully reprice.
-                </p>
-                <div class="mt-4 p-3 bg-white/10 rounded-lg">
-                  <div class="font-semibold text-candy-sunset">Fix now and fix long (36+ months)</div>
-                  <div class="text-sm text-white/80">Transfer risk before further repricing hits</div>
-                </div>
-              </div>
-            </div>
+            <p class="text-lg leading-relaxed">
+              The commercial imperative is immediate: <strong>customers within 12 months of contract end should review procurement now</strong>, and where forward pricing and risk profiles align, consider fixing for 36+ months before further repricing closes the window. The World Bank&#39;s baseline—which assumes the most acute disruptions end in May—already validates this approach, as it embeds a structural price reset that will persist through 2026 regardless of diplomatic outcomes.
+            </p>
           </div>
         </div>
       </section>
 
       <!-- What Changed Since Yesterday -->
-      <section id="what-changed" class="py-16 bg-midnight-light">
-        <div class="container mx-auto px-8">
-          <h2 class="font-display text-4xl font-bold text-candy-sunset mb-12">What Changed Since Yesterday</h2>
+      <section id="what-changed" class="px-8 py-12">
+        <div class="max-w-6xl">
+          <h2 class="serif-heading text-3xl font-bold mb-8">What Changed Since Yesterday</h2>
 
-          <div class="grid lg:grid-cols-2 gap-8">
-            <!-- Military Developments -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-4">
-                <i class="fas fa-fighter-jet mr-2"></i>Military Developments
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="scenario-card">
+              <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-handshake text-green-400 mr-3"></i>
+                Diplomatic Signalling
               </h3>
-              <div class="space-y-4">
-                <div class="p-4 bg-green-900/20 border-l-4 border-green-500 rounded">
-                  <div class="font-semibold text-green-300">VERIFIED FACT</div>
-                  <div class="text-sm text-white/80 mt-1">
-                    No major new military strikes, missile launches, or naval engagements independently verified in 24-hour window to 1 May 2026<a href="https://hormuzstraitmonitor.com/" class="citation-link">[388]</a>
-                    <a href="https://hormuzstraitmonitor.com/" class="citation-link">[1004]</a>.
-                  </div>
-                </div>
-
-                <div class="space-y-2">
-                  <div class="text-sm text-white/80">US naval blockade continues: <strong>39 vessels redirected</strong> since 13 April</div>
-                  <div class="text-sm text-white/80">Iranian Larak Corridor: <strong>7 transits on 29 April</strong> with revenue extraction</div>
-                  <div class="text-sm text-white/80">Hezbollah drone attack: <strong>1 Israeli soldier killed, 15 wounded</strong>
-                    <a href="https://www.timesofisrael.com/topic/2026-israel-hezbollah-conflict/" class="citation-link">[460]</a>
-                  </div>
-                </div>
+              <p class="mb-4">
+                Reports emerged on 01 May 2026 that <strong>Iran is seeking to work with neighbouring countries to reopen the Strait of Hormuz</strong>, triggering a temporary market relief.
+              </p>
+              <div class="market-stat">
+                <div class="text-2xl font-bold text-green-400">-2.9%</div>
+                <div class="text-sm text-gray-300">UK NBP Gas Daily Change</div>
               </div>
+              <p class="text-sm text-gray-400">
+                However, weekly performance remained positive at +1.6%, indicating structural pressure persists <a href="https://www.smart-energy.uk/post/daily-energy-market-report" class="citation-link">[229]</a>.
+              </p>
             </div>
 
-            <!-- Political Shifts -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-4">
-                <i class="fas fa-handshake mr-2"></i>Political &amp; Diplomatic
+            <div class="scenario-card">
+              <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-ship text-red-400 mr-3"></i>
+                Military Escalation
               </h3>
-              <div class="space-y-4">
-                <div class="p-4 bg-red-900/20 border-l-4 border-red-500 rounded">
-                  <div class="font-semibold text-red-300">Key Development</div>
-                  <div class="text-sm text-white/80 mt-1">
-                    US hardens rejection of Iran&#39;s conditional proposal. Secretary Rubio: &#34;better than expected&#34; but nuclear linkage maintained<a href="https://hormuzstraitmonitor.com/" class="citation-link">[388]</a>
-                    <a href="https://hormuzstraitmonitor.com/" class="citation-link">[716]</a>
-                    <a href="https://apnews.com/live/iran-war-israel-trump-04-28-2026" class="citation-link">[726]</a>
-                    <a href="https://hormuzstraitmonitor.com/" class="citation-link">[1004]</a>.
-                  </div>
-                </div>
-
-                <div class="space-y-2">
-                  <div class="text-sm text-white/80">Pakistan mediation: <strong>Functionally stalled</strong></div>
-                  <div class="text-sm text-white/80">UAE OPEC+ departure: <strong>Effective 1 May 2026</strong>
-                    <a href="https://apnews.com/live/iran-war-israel-trump-04-28-2026" class="citation-link">[726]</a>
-                    <a href="https://apnews.com/live/iran-war-israel-trump-04-28-2026" class="citation-link">[689]</a>
-                  </div>
-                </div>
+              <p class="mb-4">
+                Continued US naval blockade of Iranian ports since 13 April 2026, with Revolutionary Guard reported firing on container ship in Strait of Hormuz.
+              </p>
+              <div class="market-stat">
+                <div class="text-2xl font-bold text-red-400">+3%</div>
+                <div class="text-sm text-gray-300">Near-term contracts gain (Jun-26, Jul-26)</div>
               </div>
-            </div>
-
-            <!-- Shipping Updates -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-4">
-                <i class="fas fa-ship mr-2"></i>Shipping &amp; Maritime
-              </h3>
-              <div class="space-y-4">
-                <div class="p-4 bg-yellow-900/20 border-l-4 border-yellow-500 rounded">
-                  <div class="font-semibold text-yellow-300">US Treasury Advisory</div>
-                  <div class="text-sm text-white/80 mt-1">
-                    Payments to Iranian entities for Hormuz passage create &#34;significant sanctions exposure&#34;<a href="https://www.marinelink.com/news/shipping-traffic-strait-hormuz-remains-a-538606" class="citation-link">[941]</a>.
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4 text-center">
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="text-lg font-bold text-candy-sunset">20 → 7</div>
-                    <div class="text-xs text-white/60">Daily Transits</div>
-                  </div>
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="text-lg font-bold text-candy-sunset">65%↓</div>
-                    <div class="text-xs text-white/60">Day Drop</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Market Reactions -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-4">
-                <i class="fas fa-chart-line mr-2"></i>Commodity Markets
-              </h3>
-              <div class="space-y-4">
-                <div class="grid grid-cols-2 gap-4 text-center">
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="text-lg font-bold text-candy-sunset">$118</div>
-                    <div class="text-xs text-white/60">Brent Settle</div>
-                  </div>
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="text-lg font-bold text-candy-sunset">$120</div>
-                    <div class="text-xs text-white/60">Intraday High</div>
-                  </div>
-                </div>
-
-                <div class="text-sm text-white/80">
-                  Asian Development Bank cuts regional growth forecast from 5.1% to 4.7%<a href="https://hormuzstraitmonitor.com/" class="citation-link">[1004]</a>
-                </div>
-              </div>
+              <p class="text-sm text-gray-400">
+                Despite daily relief, near-term contracts gained over 3% on the week <a href="https://www.smart-energy.uk/post/daily-energy-market-report" class="citation-link">[229]</a>.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       <!-- 24-Hour Timeline -->
-      <section id="24-hour-timeline" class="py-16 bg-midnight">
-        <div class="container mx-auto px-8">
-          <h2 class="font-display text-4xl font-bold text-candy-sunset mb-12">Full 24-Hour Geopolitical Timeline</h2>
+      <section id="timeline" class="px-8 py-12">
+        <div class="max-w-4xl">
+          <h2 class="serif-heading text-3xl font-bold mb-8">24-Hour Timeline: Key Developments</h2>
+
+          <div class="space-y-6">
+            <div class="timeline-item">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-lg font-bold">01 May 2026 - Hormuz Reopening Discussions</h3>
+                <span class="text-sm text-gray-400">Diplomatic</span>
+              </div>
+              <p class="text-gray-300 mb-2">
+                Iran seeks cooperation with neighbouring countries to reopen Strait of Hormuz, triggering temporary market relief and 2.9% fall in UK gas prices.
+              </p>
+              <div class="text-xs text-gray-400">
+                Source: Market reports <a href="https://www.smart-energy.uk/post/daily-energy-market-report" class="citation-link">[229]</a>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-lg font-bold">Ongoing - US Naval Blockade</h3>
+                <span class="text-sm text-gray-400">Military</span>
+              </div>
+              <p class="text-gray-300 mb-2">
+                US naval blockade of Iranian ports continues since 13 April 2026 enforcement. President Trump indicates blockade will persist until Iran produces unified proposal.
+              </p>
+              <div class="text-xs text-gray-400">
+                Source: World Bank analysis <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[178]</a>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="flex justify-between items-start mb-2">
+                <h3 class="text-lg font-bold">Overnight - Maritime Escalation</h3>
+                <span class="text-sm text-gray-400">Military</span>
+              </div>
+              <p class="text-gray-300 mb-2">
+                Iran&#39;s Revolutionary Guard reported firing on container ship in Strait of Hormuz, representing specific escalation in maritime risk.
+              </p>
+              <div class="text-xs text-gray-400">
+                Source: Military activity monitoring <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[178]</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Rhetoric Tracker -->
+      <section id="rhetoric-tracker" class="px-8 py-12">
+        <div class="max-w-6xl">
+          <h2 class="serif-heading text-3xl font-bold mb-8">Rhetoric Tracker: US and Iran Statements</h2>
+
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="scenario-card">
+              <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-flag-usa text-blue-400 mr-3"></i>
+                US Leadership Statements
+              </h3>
+              <div class="space-y-4">
+                <div class="bg-white/5 rounded-lg p-4">
+                  <p class="font-semibold mb-2">President Trump - Blockade Continuation</p>
+                  <p class="text-sm text-gray-300 italic">
+                    &#34;The US naval blockade would continue until Iran produces a unified proposal and talks are concluded.&#34;
+                  </p>
+                  <div class="text-xs text-gray-400 mt-2">
+                    Context: Diplomatic stalemate with Pakistan-mediated talks <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[178]</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="scenario-card">
+              <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-mosque text-red-400 mr-3"></i>
+                Iranian Leadership Statements
+              </h3>
+              <div class="space-y-4">
+                <div class="bg-white/5 rounded-lg p-4">
+                  <p class="font-semibold mb-2">Iranian Officials - Negotiation Stance</p>
+                  <p class="text-sm text-gray-300 italic">
+                    No decision to send negotiators to Pakistan while US blockade persists.
+                  </p>
+                  <div class="text-xs text-gray-400 mt-2">
+                    Context: Diplomatic stalemate continues <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[178]</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ceasefire Reality Check -->
+      <section id="ceasefire-reality" class="px-8 py-12">
+        <div class="max-w-4xl">
+          <h2 class="serif-heading text-3xl font-bold mb-8">Ceasefire Reality Check</h2>
+
+          <div class="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+              <div class="text-center">
+                <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <i class="fas fa-handshake text-green-400 text-2xl"></i>
+                </div>
+                <h3 class="font-bold mb-2">Formal Terms</h3>
+                <p class="text-sm text-gray-300">Ceasefire agreed but terms and scope remain disputed</p>
+              </div>
+
+              <div class="text-center">
+                <div class="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <i class="fas fa-question text-yellow-400 text-2xl"></i>
+                </div>
+                <h3 class="font-bold mb-2">Political Interpretation</h3>
+                <p class="text-sm text-gray-300">Differing views on whether Lebanon included</p>
+              </div>
+
+              <div class="text-center">
+                <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <i class="fas fa-exclamation-triangle text-red-400 text-2xl"></i>
+                </div>
+                <h3 class="font-bold mb-2">Ground Reality</h3>
+                <p class="text-sm text-gray-300">Continued military activity and maritime incidents</p>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div class="bg-white/5 rounded-lg p-4">
+                <h4 class="font-bold mb-2">Key Disputes</h4>
+                <ul class="text-sm text-gray-300 space-y-1">
+                  <li>• Lebanon&#39;s inclusion in ceasefire terms disputed by Israel</li>
+                  <li>• Hezbollah&#39;s rejection of ceasefire-related diplomacy</li>
+                  <li>• Strait of Hormuz status: formally reopened vs. restricted passage</li>
+                  <li>• Pakistan-mediated talks stalled over US blockade continuation</li>
+                </ul>
+              </div>
+
+              <div class="bg-white/5 rounded-lg p-4">
+                <h4 class="font-bold mb-2">Overnight Breaches</h4>
+                <ul class="text-sm text-gray-300 space-y-1">
+                  <li>• Revolutionary Guard firing on container ship in Hormuz</li>
+                  <li>• Continued drone and missile operations</li>
+                  <li>• Infrastructure attacks in maritime zones</li>
+                  <li>• Naval incidents disrupting commercial traffic</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shipping and Choke Points -->
+      <section id="shipping-status" class="px-8 py-12">
+        <div class="max-w-6xl">
+          <h2 class="serif-heading text-3xl font-bold mb-8">Shipping and Choke Point Status</h2>
+
+          <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Strait of Hormuz -->
+            <div class="scenario-card">
+              <h3 class="text-xl font-bold mb-6 flex items-center">
+                <i class="fas fa-water text-blue-400 mr-3"></i>
+                Strait of Hormuz
+              </h3>
+
+              <div class="mb-6">
+                <img src="https://kimi-web-img.moonshot.cn/img/i.ytimg.com/26742ba162fe88d1fcd596b074cf1e32e5239a28.jpg" alt="Aerial view of the Strait of Hormuz" class="w-full h-48 object-cover rounded-lg opacity-70" size="medium" aspect="wide" style="photo" query="Strait of Hormuz aerial view" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+              </div>
+
+              <div class="space-y-4">
+                <div class="bg-white/5 rounded-lg p-4">
+                  <h4 class="font-bold mb-2">Current Status</h4>
+                  <p class="text-sm text-gray-300 mb-2">
+                    Partially restricted passage with naval escorts, inspections, and tolling measures in place.
+                  </p>
+                  <div class="flex items-center">
+                    <span class="risk-indicator risk-medium">Medium Risk</span>
+                  </div>
+                </div>
+
+                <div class="bg-white/5 rounded-lg p-4">
+                  <h4 class="font-bold mb-2">Traffic Impact</h4>
+                  <ul class="text-sm text-gray-300 space-y-1">
+                    <li>• Reduced daily vessel traffic vs. pre-crisis levels</li>
+                    <li>• Tankers waiting or rerouting</li>
+                    <li>• Shipowners withdrawing tonnage</li>
+                    <li>• War-risk premiums increased</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bab el-Mandeb -->
+            <div class="scenario-card">
+              <h3 class="text-xl font-bold mb-6 flex items-center">
+                <i class="fas fa-route text-red-400 mr-3"></i>
+                Bab el-Mandeb / Red Sea
+              </h3>
+
+              <div class="mb-6">
+                <img src="https://kimi-web-img.moonshot.cn/img/upload.wikimedia.org/2532125cd10acfe6da3eafd479fa96b5704f78e6.jpg" alt="Aerial view of Bab el-Mandeb strait" class="w-full h-48 object-cover rounded-lg opacity-70" size="medium" aspect="wide" style="photo" query="Bab el-Mandeb strait aerial view" referrerpolicy="no-referrer" data-modified="1" data-score="0.00"/>
+              </div>
+
+              <div class="space-y-4">
+                <div class="bg-white/5 rounded-lg p-4">
+                  <h4 class="font-bold mb-2">Houthi Threat Assessment</h4>
+                  <p class="text-sm text-gray-300 mb-2">
+                    Potential second choke point risk through Houthi action in Yemen, threatening simultaneous disruption.
+                  </p>
+                  <div class="flex items-center">
+                    <span class="risk-indicator risk-high">High Risk</span>
+                  </div>
+                </div>
+
+                <div class="bg-white/5 rounded-lg p-4">
+                  <h4 class="font-bold mb-2">Market Pricing</h4>
+                  <ul class="text-sm text-gray-300 space-y-1">
+                    <li>• Insurers reassessing Red Sea routes</li>
+                    <li>• Gulf producers dependent on Red Sea outlets</li>
+                    <li>• Market pricing simultaneous choke point risk</li>
+                    <li>• European supply chain vulnerability increased</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Market Statistics -->
+      <section id="market-statistics" class="px-8 py-12">
+        <div class="max-w-6xl">
+          <h2 class="serif-heading text-3xl font-bold mb-8">Market Statistics</h2>
+
+          <div class="grid lg:grid-cols-3 gap-6 mb-8">
+            <div class="market-stat">
+              <div class="text-2xl font-bold text-white mb-2">$86</div>
+              <div class="text-sm text-gray-300">Brent 2026 Forecast</div>
+              <div class="text-xs text-gray-400">vs $69 in 2025 (+24.6%)</div>
+            </div>
+
+            <div class="market-stat">
+              <div class="text-2xl font-bold text-red-400 mb-2">$115</div>
+              <div class="text-sm text-gray-300">Escalation Scenario</div>
+              <div class="text-xs text-gray-400">Sustained infrastructure damage</div>
+            </div>
+
+            <div class="market-stat">
+              <div class="text-2xl font-bold text-yellow-400 mb-2">+24%</div>
+              <div class="text-sm text-gray-300">Energy Price Rise</div>
+              <div class="text-xs text-gray-400">World Bank baseline 2026</div>
+            </div>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-8">
+            <div class="scenario-card">
+              <h3 class="text-xl font-bold mb-4">Shipping and Logistics Costs</h3>
+              <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-300">War-risk insurance premiums</span>
+                  <span class="font-bold text-red-400">Elevated</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-300">Tanker charter rates</span>
+                  <span class="font-bold text-red-400">Rising</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-300">LNG freight rates</span>
+                  <span class="font-bold text-red-400">Increasing</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-300">Rerouting delays</span>
+                  <span class="font-bold text-orange-400">Moderate</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="scenario-card">
+              <h3 class="text-xl font-bold mb-4">UK Market Impact</h3>
+              <div class="space-y-4">
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-300">NBP Gas (weekly)</span>
+                  <span class="font-bold text-green-400">+1.6%</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-300">UK Power (weekly)</span>
+                  <span class="font-bold text-green-400">+1.9%</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-300">Near-term contracts</span>
+                  <span class="font-bold text-green-400">+3%</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm text-gray-300">Daily volatility</span>
+                  <span class="font-bold text-orange-400">High</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Market Interpretation -->
+      <section id="market-interpretation" class="px-8 py-12">
+        <div class="max-w-4xl">
+          <h2 class="serif-heading text-3xl font-bold mb-8">Market Interpretation</h2>
+
+          <div class="space-y-8">
+            <div class="scenario-card">
+              <h3 class="text-xl font-bold mb-4">What the Market is Pricing Now</h3>
+              <p class="text-gray-300 mb-4">
+                Current market pricing reflects a <strong>short disruption scenario with asymmetric risk distribution</strong>. The recent diplomatic signalling about Hormuz reopening temporarily eased immediate pressures, but structural risks remain fully intact.
+              </p>
+
+              <div class="bg-white/5 rounded-lg p-4">
+                <h4 class="font-bold mb-2">Risk Premium Assessment</h4>
+                <div class="space-y-2 text-sm text-gray-300">
+                  <div class="flex justify-between">
+                    <span>Short disruption (1-2 weeks)</span>
+                    <span class="text-green-400">Partially priced</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Medium disruption (1-3 months)</span>
+                    <span class="text-yellow-400">Mostly priced</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span>Severe escalation (3+ months)</span>
+                    <span class="text-red-400">Underpriced</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="scenario-card">
+              <h3 class="text-xl font-bold mb-4">Trader Sentiment Analysis</h3>
+              <p class="text-gray-300 mb-4">
+                Traders are currently <strong>fading diplomatic headlines while taking military escalation seriously</strong>. The physical-futures disconnect noted by the IEA indicates spot shortages are outpacing paper market reactions.
+              </p>
+
+              <div class="pull-quote">
+                &#34;The physical-futures disconnect has become increasingly acute as spot shortages outpace paper market reactions.&#34;
+                <cite class="block mt-2 text-sm">— IEA Oil Market Report, April 2026</cite>
+              </div>
+            </div>
+
+            <div class="scenario-card">
+              <h3 class="text-xl font-bold mb-4">World Bank Baseline vs. Market Pricing</h3>
+              <p class="text-gray-300 mb-4">
+                The <strong>World Bank&#39;s baseline of 24% energy price increase appears heavier than current market pricing</strong>, suggesting either the market is underpricing structural risks or the World Bank is overstating baseline impacts.
+              </p>
+
+              <div class="bg-white/5 rounded-lg p-4">
+                <h4 class="font-bold mb-2">Key Divergence Points</h4>
+                <ul class="text-sm text-gray-300 space-y-1">
+                  <li>• World Bank assumes disruption ends in May; market may be pricing longer duration</li>
+                  <li>• Baseline embeds structural reset that market hasn&#39;t fully internalized</li>
+                  <li>• Asymmetric risk profile favors upside scenarios</li>
+                  <li>• Supplier price books lag wholesale movements by days to weeks</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- UK Business Impact -->
+      <section id="uk-impact" class="px-8 py-12">
+        <div class="max-w-6xl">
+          <h2 class="serif-heading text-3xl font-bold mb-8">Impact on UK Business Energy Prices</h2>
+
+          <div class="grid lg:grid-cols-2 gap-8 mb-8">
+            <div class="scenario-card">
+              <h3 class="text-xl font-bold mb-4">Why UK Gas Follows European LNG Risk</h3>
+              <div class="space-y-4">
+                <div class="bg-white/5 rounded-lg p-4">
+                  <h4 class="font-bold mb-2">Supply Chain Mechanics</h4>
+                  <ul class="text-sm text-gray-300 space-y-1">
+                    <li>• UK gas prices track Dutch TTF as European benchmark</li>
+                    <li>• European gas prices follow global LNG availability</li>
+                    <li>• LNG disruption in Gulf affects global cargo competition</li>
+                    <li>• UK businesses compete with Asia for marginal cargoes</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white/5 rounded-lg p-4">
+                  <h4 class="font-bold mb-2">Storage Dynamics</h4>
+                  <ul class="text-sm text-gray-300 space-y-1">
+                    <li>• European gas storage below seasonal norms</li>
+                    <li>• Low storage increases price sensitivity</li>
+                    <li>• Summer buying pressure for winter risk management</li>
+                    <li>• Reduced buffer against supply disruptions</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="scenario-card">
+              <h3 class="text-xl font-bold mb-4">Electricity-Gas Price Linkage</h3>
+              <div class="space-y-4">
+                <div class="bg-white/5 rounded-lg p-4">
+                  <h4 class="font-bold mb-2">Power Market Mechanics</h4>
+                  <ul class="text-sm text-gray-300 space-y-1">
+                    <li>• UK power prices driven by gas-fired generation</li>
+                    <li>• Marginal cost setting in electricity market</li>
+                    <li>• Forward power contracts reflect gas price expectations</li>
+                    <li>• Supplier pricing follows gas market movements</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white/5 rounded-lg p-4">
+                  <h4 class="font-bold mb-2">Commercial Implications</h4>
+                  <ul class="text-sm text-gray-300 space-y-1">
+                    <li>• Electricity contracts follow gas market volatility</li>
+                    <li>• Fixed electricity offers reflect forward gas curves</li>
+                    <li>• Multi-year gas risk affects power pricing</li>
+                    <li>• Supplier hedging costs passed through to customers</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="scenario-card">
+            <h3 class="text-xl font-bold mb-4">The Repricing Window Challenge</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="text-center">
+                <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <i class="fas fa-clock text-red-400 text-2xl"></i>
+                </div>
+                <h4 class="font-bold mb-2">Market Moves First</h4>
+                <p class="text-sm text-gray-300">Wholesale markets react immediately to geopolitical news</p>
+              </div>
+
+              <div class="text-center">
+                <div class="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <i class="fas fa-book text-yellow-400 text-2xl"></i>
+                </div>
+                <h4 class="font-bold mb-2">Supplier Lag</h4>
+                <p class="text-sm text-gray-300">Price books update days to weeks later</p>
+              </div>
+
+              <div class="text-center">
+                <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <i class="fas fa-lock text-green-400 text-2xl"></i>
+                </div>
+                <h4 class="font-bold mb-2">Window Closes</h4>
+                <p class="text-sm text-gray-300">Opportunity for favorable pricing disappears</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Duration Scenarios -->
+      <section id="duration-scenarios" class="px-8 py-12">
+        <div class="max-w-6xl">
+          <h2 class="serif-heading text-3xl font-bold mb-8">Duration Scenarios and Price Implications</h2>
+
+          <div class="space-y-8">
+            <!-- Short Disruption -->
+            <div class="scenario-card">
+              <div class="flex items-center mb-6">
+                <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mr-4">
+                  <i class="fas fa-calendar-week text-green-400 text-xl"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold">Short Disruption: 1-2 Weeks</h3>
+                  <span class="risk-indicator risk-low">Low Impact</span>
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-4 gap-4 mb-4">
+                <div class="text-center">
+                  <div class="text-lg font-bold text-white">$75-80</div>
+                  <div class="text-xs text-gray-400">Brent Range</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-lg font-bold text-white">€40-45</div>
+                  <div class="text-xs text-gray-400">TTF Range</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-lg font-bold text-white">65-70</div>
+                  <div class="text-xs text-gray-400">NBP Range</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-lg font-bold text-white">£70-75</div>
+                  <div class="text-xs text-gray-400">UK Power Range</div>
+                </div>
+              </div>
+
+              <p class="text-sm text-gray-300">
+                <strong>Commercial Implications:</strong> Temporary price spike with quick normalization. Limited impact on long-term contracts. Customer action not urgent unless within immediate renewal window.
+              </p>
+            </div>
+
+            <!-- Medium Disruption -->
+            <div class="scenario-card">
+              <div class="flex items-center mb-6">
+                <div class="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center mr-4">
+                  <i class="fas fa-calendar-alt text-yellow-400 text-xl"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold">Medium Disruption: 1-3 Months</h3>
+                  <span class="risk-indicator risk-medium">Medium Impact</span>
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-4 gap-4 mb-4">
+                <div class="text-center">
+                  <div class="text-lg font-bold text-white">$86-95</div>
+                  <div class="text-xs text-gray-400">Brent Range</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-lg font-bold text-white">€50-60</div>
+                  <div class="text-xs text-gray-400">TTF Range</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-lg font-bold text-white">75-85</div>
+                  <div class="text-xs text-gray-400">NBP Range</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-lg font-bold text-white">£80-90</div>
+                  <div class="text-xs text-gray-400">UK Power Range</div>
+                </div>
+              </div>
+
+              <p class="text-sm text-gray-300">
+                <strong>Commercial Implications:</strong> World Bank baseline scenario. Structural price reset with persistent elevated levels. Customers within 12 months of renewal should review immediately. 36+ month fixing becomes attractive.
+              </p>
+            </div>
+
+            <!-- Severe Escalation -->
+            <div class="scenario-card">
+              <div class="flex items-center mb-6">
+                <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mr-4">
+                  <i class="fas fa-exclamation-triangle text-red-400 text-xl"></i>
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold">Severe Escalation: 3+ Months</h3>
+                  <span class="risk-indicator risk-high">High Impact</span>
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-4 gap-4 mb-4">
+                <div class="text-center">
+                  <div class="text-lg font-bold text-white">$115+</div>
+                  <div class="text-xs text-gray-400">Brent Average</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-lg font-bold text-white">€80+</div>
+                  <div class="text-xs text-gray-400">TTF Range</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-lg font-bold text-white">100+</div>
+                  <div class="text-xs text-gray-400">NBP Range</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-lg font-bold text-white">£100+</div>
+                  <div class="text-xs text-gray-400">UK Power Range</div>
+                </div>
+              </div>
+
+              <p class="text-sm text-gray-300">
+                <strong>Commercial Implications:</strong> World Bank escalation scenario. Sustained infrastructure damage and delayed export recovery. All customers should secure long-term contracts immediately. Price books will reprice rapidly upward.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Commercial Takeaway -->
+      <section id="commercial-takeaway" class="px-8 py-12">
+        <div class="max-w-4xl">
+          <h2 class="serif-heading text-3xl font-bold mb-8">Commercial Takeaway for UK Businesses</h2>
+
+          <div class="bg-gradient-to-r from-red-900/30 to-orange-900/30 backdrop-blur-sm rounded-xl p-8 mb-8 border border-red-500/20">
+            <h3 class="text-2xl font-bold mb-6 text-center">Immediate Action Required</h3>
+
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <h4 class="text-lg font-bold mb-4 flex items-center">
+                  <i class="fas fa-exclamation-circle text-red-400 mr-3"></i>
+                  Who is Most Exposed
+                </h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                  <li>• Customers within 12 months of contract end</li>
+                  <li>• Energy-intensive manufacturing operations</li>
+                  <li>• Multi-site hospitality and retail chains</li>
+                  <li>• SMEs with flexible or pass-through contracts</li>
+                  <li>• High-consumption electricity users</li>
+                  <li>• Gas-intensive industrial processes</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-bold mb-4 flex items-center">
+                  <i class="fas fa-shield-alt text-green-400 mr-3"></i>
+                  Recommended Actions
+                </h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                  <li>• <strong>Review procurement immediately</strong></li>
+                  <li>• Consider 36+ month fixed contracts</li>
+                  <li>• Secure pricing before supplier books reprice</li>
+                  <li>• Assess risk tolerance vs. budget constraints</li>
+                  <li>• Monitor market developments weekly</li>
+                  <li>• Prepare for structural price reset</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="scenario-card">
+            <h3 class="text-xl font-bold mb-4">The World Bank Baseline Reality</h3>
+            <p class="text-gray-300 mb-4">
+              The <strong>World Bank&#39;s baseline forecast of 24% higher energy prices in 2026</strong> is not a worst-case scenario—it&#39;s the central case assuming the most acute disruptions end in May. This means:
+            </p>
+
+            <div class="space-y-4">
+              <div class="bg-white/5 rounded-lg p-4">
+                <h4 class="font-bold mb-2">Even the &#34;Good Case&#34; is Expensive</h4>
+                <p class="text-sm text-gray-300">
+                  Customers waiting for &#34;things to calm down&#34; are misreading the forecast. The baseline already assumes calm and is still 24% higher than 2025.
+                </p>
+              </div>
+
+              <div class="bg-white/5 rounded-lg p-4">
+                <h4 class="font-bold mb-2">Delay Increases Risk, Not Reduces It</h4>
+                <p class="text-sm text-gray-300">
+                  Every day of delay moves customers closer to repriced supplier books and reduces the window for securing favorable long-term rates.
+                </p>
+              </div>
+
+              <div class="bg-white/5 rounded-lg p-4">
+                <h4 class="font-bold mb-2">36+ Month Fixing Makes Commercial Sense</h4>
+                <p class="text-sm text-gray-300">
+                  In a high-risk environment with asymmetric upside potential, securing long-term contracts provides budget certainty and risk mitigation.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pull-quote">
+            &#34;The market can move before supplier books fully reprice. Buyers within 12 months of contract end should be reviewing immediately, and where appropriate, consider fixing now and fixing long, typically 36+ months, before further repricing hits.&#34;
+          </div>
+        </div>
+      </section>
+
+      <!-- Source Confidence -->
+      <section id="source-confidence" class="px-8 py-12 mb-16">
+        <div class="max-w-4xl">
+          <h2 class="serif-heading text-3xl font-bold mb-8">Source Confidence and Verification</h2>
+
+          <div class="space-y-6">
+            <div class="scenario-card">
+              <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-check-circle text-green-400 mr-3"></i>
+                High Confidence Facts
+              </h3>
+              <ul class="space-y-2 text-sm text-gray-300">
+                <li>• World Bank Commodity Markets Outlook published 28 April 2026 <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[32, 178, 249]</a>
+                </li>
+                <li>• Baseline energy price increase forecast of 24% in 2026</li>
+                <li>• Brent crude forecast at $86/barrel for 2026 baseline</li>
+                <li>• Assumption that most acute disruptions end in May</li>
+                <li>• Daily market movements and price changes verified</li>
+              </ul>
+            </div>
+
+            <div class="scenario-card">
+              <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-exclamation-triangle text-yellow-400 mr-3"></i>
+                Medium Confidence Areas
+              </h3>
+              <ul class="space-y-2 text-sm text-gray-300">
+                <li>• Exact timing of Hormuz reopening discussions</li>
+                <li>• Military incident details and operational status</li>
+                <li>• Pakistan-mediated talks progression</li>
+                <li>• Shipping traffic and vessel routing changes</li>
+              </ul>
+            </div>
+
+            <div class="scenario-card">
+              <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-question-circle text-red-400 mr-3"></i>
+                Unconfirmed Claims to Monitor
+              </h3>
+              <ul class="space-y-2 text-sm text-gray-300">
+                <li>• Revolutionary Guard firing on specific container ships</li>
+                <li>• Exact scope and terms of ceasefire agreement</li>
+                <li>• Houthi threats to Bab el-Mandeb navigation</li>
+                <li>• Chinese crude supply impact and alternative sourcing</li>
+              </ul>
+            </div>
+
+            <div class="scenario-card">
+              <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-globe text-blue-400 mr-3"></i>
+                World Bank Verification Details
+              </h3>
+              <div class="space-y-4 text-sm text-gray-300">
+                <div class="bg-white/5 rounded-lg p-4">
+                  <h4 class="font-bold mb-2">Direct Quotes Verified</h4>
+                  <ul class="space-y-1">
+                    <li>• &#34;Energy prices expected to rise 24% in 2026&#34; - World Bank press release <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[178]</a>
+                    </li>
+                    <li>• &#34;The most acute disruptions end in May&#34; - Baseline assumption</li>
+                    <li>• &#34;Shipping through the Strait of Hormuz gradually returns to pre-war levels by late 2026&#34;</li>
+                    <li>• &#34;Brent crude averaging $86 per barrel in 2026&#34;</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white/5 rounded-lg p-4">
+                  <h4 class="font-bold mb-2">Analyst Interpretation</h4>
+                  <ul class="space-y-1">
+                    <li>• Baseline characterized as central case, not worst-case scenario</li>
+                    <li>• Risks &#34;markedly tilted&#34; toward higher prices</li>
+                    <li>• Escalation scenario Brent at $115/barrel</li>
+                    <li>• Commercial implications for UK business procurement analyzed</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Energy Market Dependencies Diagram -->
+      <section class="px-8 py-12">
+        <div class="max-w-6xl">
+          <h2 class="serif-heading text-3xl font-bold mb-8">Energy Market Dependencies</h2>
 
           <div class="mermaid-container">
             <div class="mermaid-controls">
@@ -594,1411 +1192,120 @@
                 <i class="fas fa-expand"></i>
               </button>
             </div>
-            <div class="mermaid">
-              timeline
-              title &#34;Geopolitical Developments - 30 April to 1 May 2026&#34;
+            <div class="mermaid" id="energy-flow-diagram">
+              flowchart TD
+              A[&#34;Middle East Oil &amp; Gas Production&#34;] --&gt; B[&#34;Strait of Hormuz&#34;]
+              A --&gt; C[&#34;Bab el-Mandeb&#34;]
+              B --&gt; D[&#34;Global LNG Markets&#34;]
+              C --&gt; D
+              D --&gt; E[&#34;European Gas Storage&#34;]
+              E --&gt; F[&#34;Dutch TTF Prices&#34;]
+              F --&gt; G[&#34;UK NBP Gas Prices&#34;]
+              G --&gt; H[&#34;UK Electricity Prices&#34;]
+              H --&gt; I[&#34;Business Energy Costs&#34;]
 
-              section &#34;Military Activity&#34;
-              30 April 2026 : &#34;Hezbollah drone attack&#34;
-              : &#34;1 Israeli soldier killed&#34;
-              : &#34;15 wounded&#34;
-              30 April 2026 : &#34;No new IRGC seizures&#34;
-              : &#34;MSC Francesca still held&#34;
-              : &#34;Dark activity surge: 170 events&#34;
+              J[&#34;World Bank 24% Price Rise Forecast&#34;] --&gt; K[&#34;Supplier Price Books&#34;]
+              K --&gt; L[&#34;Contract Renewal Timing&#34;]
+              L --&gt; M[&#34;Customer Procurement Decisions&#34;]
 
-              section &#34;Diplomatic Moves&#34;
-              30 April 2026 : &#34;US rejects Iran proposal&#34;
-              : &#34;Nuclear linkage maintained&#34;
-              : &#34;Rubio: \&#34;better than expected\&#34;&#34;
-              1 May 2026 : &#34;War Powers deadline&#34;
-              : &#34;Congressional authorization required&#34;
+              N[&#34;US Naval Blockade&#34;] --&gt; B
+              O[&#34;Iran Diplomatic Talks&#34;] --&gt; B
+              P[&#34;Houthi Threats&#34;] --&gt; C
 
-              section &#34;Shipping Impact&#34;
-              1 May 2026 : &#34;Hormuz transits drop to 7&#34;
-              : &#34;From 20 on 29 April&#34;
-              28 April 2026 : &#34;US Treasury advisory&#34;
-              : &#34;Sanctions risk for payments&#34;
+              style A fill:#ff6b35,stroke:#ffffff,stroke-width:2px,color:#ffffff
+              style B fill:#e74c3c,stroke:#ffffff,stroke-width:2px,color:#ffffff
+              style C fill:#e74c3c,stroke:#ffffff,stroke-width:2px,color:#ffffff
+              style D fill:#dd40ff,stroke:#ffffff,stroke-width:2px,color:#ffffff
+              style E fill:#00d39a,stroke:#ffffff,stroke-width:2px,color:#ffffff
+              style F fill:#00d39a,stroke:#ffffff,stroke-width:2px,color:#ffffff
+              style G fill:#00d39a,stroke:#ffffff,stroke-width:2px,color:#ffffff
+              style H fill:#00d39a,stroke:#ffffff,stroke-width:2px,color:#ffffff
+              style I fill:#262262,stroke:#ffffff,stroke-width:3px,color:#ffffff
+              style J fill:#262262,stroke:#ffffff,stroke-width:3px,color:#ffffff
+              style K fill:#262262,stroke:#ffffff,stroke-width:2px,color:#ffffff
+              style L fill:#262262,stroke:#ffffff,stroke-width:2px,color:#ffffff
+              style M fill:#262262,stroke:#ffffff,stroke-width:3px,color:#ffffff
+              style N fill:#ff6b35,stroke:#ffffff,stroke-width:2px,color:#ffffff
+              style O fill:#00d39a,stroke:#ffffff,stroke-width:2px,color:#ffffff
+              style P fill:#e74c3c,stroke:#ffffff,stroke-width:2px,color:#ffffff
             </div>
+          </div>
+
+          <div class="mt-6 text-center">
+            <p class="text-sm text-gray-400">
+              <i class="fas fa-info-circle mr-1"></i>
+              Use the controls to zoom and drag to explore the diagram. The flow shows how Middle East disruption affects UK business energy costs through global market linkages.
+            </p>
           </div>
         </div>
       </section>
-
-      <!-- Rhetoric Tracker -->
-      <section id="rhetoric-tracker" class="py-16 bg-midnight-light">
-        <div class="container mx-auto px-8">
-          <h2 class="font-display text-4xl font-bold text-candy-sunset mb-12">Trump &amp; Iran Rhetoric Tracker</h2>
-
-          <div class="grid lg:grid-cols-2 gap-8">
-            <!-- US Officials -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-6">
-                <i class="fas fa-flag-usa mr-2"></i>Trump &amp; US Officials Timeline
-              </h3>
-              <div class="space-y-4">
-                <div class="p-4 bg-blue-900/20 rounded-lg">
-                  <div class="flex justify-between items-start mb-2">
-                    <div class="font-semibold text-blue-300">13 Apr 2026</div>
-                    <div class="text-sm text-white/60">Naval Blockade</div>
-                  </div>
-                  <div class="text-sm text-white/80">
-                    &#34;If Iranian vessels come anywhere close... immediately eliminated&#34;<a href="https://www.crisisgroup.org/trigger-list/iran-usisrael-trigger-list/flashpoints/strait-hormuz" class="citation-link">[687]</a>
-                  </div>
-                </div>
-
-                <div class="p-4 bg-blue-900/20 rounded-lg">
-                  <div class="flex justify-between items-start mb-2">
-                    <div class="font-semibold text-blue-300">23 Apr 2026</div>
-                    <div class="text-sm text-white/60">Shoot to Kill Order</div>
-                  </div>
-                  <div class="text-sm text-white/80">
-                    &#34;Ordered US Navy to shoot and kill any boat... putting mines&#34;<a href="https://www.crisisgroup.org/trigger-list/iran-usisrael-trigger-list/flashpoints/strait-hormuz" class="citation-link">[451]</a>
-                    <a href="https://www.crisisgroup.org/trigger-list/iran-usisrael-trigger-list/flashpoints/strait-hormuz" class="citation-link">[687]</a>
-                  </div>
-                </div>
-
-                <div class="p-4 bg-yellow-900/20 rounded-lg">
-                  <div class="flex justify-between items-start mb-2">
-                    <div class="font-semibold text-yellow-300">30 Apr 2026</div>
-                    <div class="text-sm text-white/60">Proposal Response</div>
-                  </div>
-                  <div class="text-sm text-white/80">
-                    &#34;Better than expected&#34; but nuclear linkage maintained<a href="https://hormuzstraitmonitor.com/" class="citation-link">[388]</a>
-                    <a href="https://hormuzstraitmonitor.com/" class="citation-link">[716]</a>
-                    <a href="https://apnews.com/live/iran-war-israel-trump-04-28-2026" class="citation-link">[726]</a>
-                    <a href="https://hormuzstraitmonitor.com/" class="citation-link">[1004]</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Iranian Officials -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-6">
-                <i class="fas fa-flag mr-2"></i>Iranian Leadership Timeline
-              </h3>
-              <div class="space-y-4">
-                <div class="p-4 bg-red-900/20 rounded-lg">
-                  <div class="flex justify-between items-start mb-2">
-                    <div class="font-semibold text-red-300">13 Apr 2026</div>
-                    <div class="text-sm text-white/60">Hormuz Threat</div>
-                  </div>
-                  <div class="text-sm text-white/80">
-                    &#34;Enemy-affiliated vessels do not and will not have the right to pass through Hormuz&#34;<a href="https://www.crisisgroup.org/trigger-list/iran-usisrael-trigger-list/flashpoints/strait-hormuz" class="citation-link">[687]</a>
-                  </div>
-                </div>
-
-                <div class="p-4 bg-green-900/20 rounded-lg">
-                  <div class="flex justify-between items-start mb-2">
-                    <div class="font-semibold text-green-300">27 Apr 2026</div>
-                    <div class="text-sm text-white/60">Major Concession</div>
-                  </div>
-                  <div class="text-sm text-white/80">
-                    Proposal: Hormuz reopening for blockade lifting, nuclear deferred<a href="https://apnews.com/article/us-iran-war-hormuz-april-27-2026-374d81d1aac6d8f19c21e1d1e10ab103" class="citation-link">[358]</a>
-                    <a href="https://hormuzstraitmonitor.com/" class="citation-link">[716]</a>
-                  </div>
-                </div>
-
-                <div class="p-4 bg-red-900/20 rounded-lg">
-                  <div class="flex justify-between items-start mb-2">
-                    <div class="font-semibold text-red-300">22 Apr 2026</div>
-                    <div class="text-sm text-white/60">Ship Seizure</div>
-                  </div>
-                  <div class="text-sm text-white/80">
-                    MSC Francesca container ship seized<a href="https://hormuzstraitmonitor.com/" class="citation-link">[388]</a>
-                    <a href="https://hormuzstraitmonitor.com/" class="citation-link">[1004]</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Ceasefire Reality Check -->
-      <section id="ceasefire-reality" class="py-16 bg-midnight">
-        <div class="container mx-auto px-8">
-          <h2 class="font-display text-4xl font-bold text-candy-sunset mb-12">Ceasefire Reality Check</h2>
-
-          <div class="grid lg:grid-cols-3 gap-8">
-            <!-- Formal Terms -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-4">Formal Ceasefire Terms</h3>
-              <div class="space-y-4">
-                <div class="text-sm">
-                  <div class="font-semibold text-white mb-1">Original Agreement</div>
-                  <div class="text-white/80">7–8 April 2026, two weeks duration</div>
-                </div>
-                <div class="text-sm">
-                  <div class="font-semibold text-white mb-1">Extended Indefinitely</div>
-                  <div class="text-white/80">21–22 April at Pakistan&#39;s request<a href="https://english.aawsat.com/world/5265219-trump-declares-iran-ceasefire-extension" class="citation-link">[455]</a>
-                    <a href="https://modeldiplomat.com/briefings/2026-04-25" class="citation-link">[507]</a>
-                    <a href="https://www.iranintl.com/en/202604214920" class="citation-link">[522]</a>
-                    <a href="https://www.heygotrade.com/en/news/trump-extends-iran-ceasefire-indefinitely-talks-stall/" class="citation-link">[1022]</a>
-                  </div>
-                </div>
-                <div class="text-sm">
-                  <div class="font-semibold text-white mb-1">Core Provision</div>
-                  <div class="text-white/80">Cessation of direct US-Iran strikes</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Reality vs Interpretation -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-4">Reality vs Interpretation</h3>
-              <div class="space-y-4">
-                <div class="p-3 bg-red-900/20 rounded">
-                  <div class="font-semibold text-red-300 mb-1">Hormuz Status</div>
-                  <div class="text-xs text-white/80">Politically: &#34;Open to commercial shipping&#34;</div>
-                  <div class="text-xs text-red-300">Reality: 5–14.6% throughput<a href="https://hormuzstraitmonitor.com/" class="citation-link">[716]</a>
-                    <a href="https://hormuzstraitmonitor.com/" class="citation-link">[388]</a>
-                  </div>
-                </div>
-
-                <div class="p-3 bg-red-900/20 rounded">
-                  <div class="font-semibold text-red-300 mb-1">US Blockade</div>
-                  <div class="text-xs text-white/80">Politically: Separate from ceasefire</div>
-                  <div class="text-xs text-red-300">Reality: 39 vessels redirected<a href="https://apnews.com/live/iran-war-israel-trump-04-28-2026" class="citation-link">[726]</a>
-                  </div>
-                </div>
-
-                <div class="p-3 bg-red-900/20 rounded">
-                  <div class="font-semibold text-red-300 mb-1">Lebanon Coverage</div>
-                  <div class="text-xs text-white/80">Politically: General de-escalation</div>
-                  <div class="text-xs text-red-300">Reality: Explicitly excluded, active combat<a href="https://www.france24.com/en/live-news/20260412-war-in-the-middle-east-latest-developments" class="citation-link">[301]</a>
-                    <a href="https://www.britannica.com/event/2026-Iran-war" class="citation-link">[352]</a>
-                    <a href="https://www.timesofisrael.com/topic/2026-israel-hezbollah-conflict/" class="citation-link">[460]</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Market Impact -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-4">Market Stabilisation Assessment</h3>
-              <div class="space-y-4">
-                <div class="p-4 bg-yellow-900/20 rounded-lg">
-                  <div class="font-semibold text-yellow-300 mb-2">Current State</div>
-                  <div class="text-sm text-white/80">
-                    Ceasefire delaying rather than preventing larger repricing. Each announcement generates diminishing relief.
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-2 text-center">
-                  <div class="p-2 bg-white/5 rounded">
-                    <div class="text-lg font-bold text-candy-sunset">-$8-10</div>
-                    <div class="text-xs text-white/60">Initial Announcement</div>
-                  </div>
-                  <div class="p-2 bg-white/5 rounded">
-                    <div class="text-lg font-bold text-candy-sunset">-$2-3</div>
-                    <div class="text-xs text-white/60">Recent Proposals</div>
-                  </div>
-                </div>
-
-                <div class="text-xs text-white/60 text-center">
-                  Brent reaction pattern shows market learning
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Shipping Status -->
-      <section id="shipping-status" class="py-16 bg-midnight-light">
-        <div class="container mx-auto px-8">
-          <h2 class="font-display text-4xl font-bold text-candy-sunset mb-12">Shipping &amp; Choke Point Status</h2>
-
-          <div class="grid lg:grid-cols-2 gap-8 mb-12">
-            <!-- Strait of Hormuz -->
-            <div class="bento-card">
-              <h3 class="font-display text-2xl font-semibold text-candy-sunset mb-6">Strait of Hormuz</h3>
-
-              <div class="grid grid-cols-2 gap-4 mb-6">
-                <div class="text-center p-4 bg-white/5 rounded-lg">
-                  <div class="text-3xl font-bold text-candy-sunset">7</div>
-                  <div class="text-sm text-white/80">Current Daily Transits</div>
-                  <div class="text-xs text-white/60">vs 60 normal<a href="https://hormuzstraitmonitor.com/" class="citation-link">[388]</a>
-                    <a href="https://hormuzstraitmonitor.com/" class="citation-link">[1004]</a>
-                  </div>
-                </div>
-                <div class="text-center p-4 bg-white/5 rounded-lg">
-                  <div class="text-3xl font-bold text-candy-sunset">11.7%</div>
-                  <div class="text-sm text-white/80">Throughput %</div>
-                  <div class="text-xs text-white/60">By vessel count</div>
-                </div>
-              </div>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-red-900/20 border-l-4 border-red-500 rounded">
-                  <div class="font-semibold text-red-300 mb-2">Critical Distinction</div>
-                  <div class="text-sm text-white/80">
-                    <strong>Iranian ports:</strong> Blockaded by US Navy (~1.5-2 mbpd removed)
-                    <br/>
-                    <strong>Non-Iranian ports:</strong> Restricted by Iranian threats (Qatar, UAE, Saudi, Kuwait, Iraq)
-                  </div>
-                </div>
-
-                <div class="p-4 bg-blue-900/20 border-l-4 border-blue-500 rounded">
-                  <div class="font-semibold text-blue-300 mb-2">Alternative Routes</div>
-                  <div class="text-sm text-white/80">
-                    • Cape of Good Hope: +12 days, +$650K
-                    <br/>
-                    • Saudi East-West Pipeline: 5 mbpd capacity
-                    <br/>
-                    • UAE Habshan-Fujairah: 1.5 mbpd
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Bab el-Mandeb Risk -->
-            <div class="bento-card">
-              <h3 class="font-display text-2xl font-semibold text-candy-sunset mb-6">Bab el-Mandeb Spillover Risk</h3>
-
-              <div class="p-4 bg-orange-900/20 border-l-4 border-orange-500 rounded mb-6">
-                <div class="font-semibold text-orange-300 mb-2">Houthi Latent Threat</div>
-                <div class="text-sm text-white/80 mb-3">
-                  No verified attacks 30 Apr-1 May, but full activation capacity retained<a href="https://acleddata.com/update/middle-east-overview-april-2026" class="citation-link">[448]</a>.
-                </div>
-                <div class="grid grid-cols-2 gap-2 text-xs">
-                  <div class="text-white/60">• Operations room activated</div>
-                  <div class="text-white/60">• Launch platforms mobilised</div>
-                  <div class="text-white/60">• Sea mines prepared</div>
-                  <div class="text-white/60">• IRGC advisers present</div>
-                </div>
-              </div>
-
-              <div class="space-y-4">
-                <div class="p-3 bg-white/5 rounded">
-                  <div class="font-semibold text-white mb-1">Historical Capability</div>
-                  <div class="text-sm text-white/80">
-                    100+ merchant vessels attacked, 2 sunk (2023-2025)<a href="https://fortune.com/2026/03/28/iran-backed-houthis-first-missile-launch-israel-ships-red-sea-traffic-suez-canal/" class="citation-link">[263]</a>
-                    <a href="https://fortune.com/2026/03/28/iran-backed-houthis-first-missile-launch-israel-ships-red-sea-traffic-suez-canal/" class="citation-link">[1016]</a>
-                  </div>
-                </div>
-
-                <div class="p-3 bg-white/5 rounded">
-                  <div class="font-semibold text-white mb-1">Carrier Response</div>
-                  <div class="text-sm text-white/80">
-                    CMA CGM, Maersk, COSCO diverting around Cape<a href="https://container-news.com/the-return-of-container-shipping-to-the-red-sea-what-supply-chain-leaders-must-know-in-2026/" class="citation-link">[1025]</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Critical Infrastructure Vulnerabilities -->
-          <div class="bento-card">
-            <h3 class="font-display text-2xl font-semibold text-candy-sunset mb-6">Critical Infrastructure Dependencies</h3>
-
-            <div class="grid lg:grid-cols-3 gap-6">
-              <div class="space-y-3">
-                <div class="font-semibold text-candy-sunset">Saudi Arabia</div>
-                <div class="p-3 bg-white/5 rounded">
-                  <div class="text-sm font-medium text-white mb-1">Yanbu Port</div>
-                  <div class="text-xs text-white/60">Now handling ~4 mbpd (triple normal)<a href="https://www.france24.com/en/live-news/20260326-bab-al-mandeb-strait-another-key-shipping-route-under-threat" class="citation-link">[1027]</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="space-y-3">
-                <div class="font-semibold text-candy-sunset">UAE</div>
-                <div class="p-3 bg-white/5 rounded">
-                  <div class="text-sm font-medium text-white mb-1">Fujairah Pipeline</div>
-                  <div class="text-xs text-white/60">Fully utilised at 1.5 mbpd<a href="https://hormuzstraitmonitor.com/" class="citation-link">[388]</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="space-y-3">
-                <div class="font-semibold text-candy-sunset">Qatar</div>
-                <div class="p-3 bg-red-900/20 rounded">
-                  <div class="text-sm font-medium text-red-300 mb-1">Ras Laffan LNG</div>
-                  <div class="text-xs text-white/60">No pipeline alternative</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Market Stats -->
-      <section id="market-stats" class="py-16 bg-midnight">
-        <div class="container mx-auto px-8">
-          <h2 class="font-display text-4xl font-bold text-candy-sunset mb-12">Energy Market Stat Sheet</h2>
-
-          <div class="grid lg:grid-cols-2 gap-8 mb-12">
-            <!-- Oil Markets -->
-            <div class="bento-card">
-              <h3 class="font-display text-2xl font-semibold text-candy-sunset mb-6">Oil Markets</h3>
-
-              <div class="grid grid-cols-2 gap-4 mb-6">
-                <div class="text-center p-4 bg-white/5 rounded-lg">
-                  <div class="text-2xl font-bold text-candy-sunset">$118</div>
-                  <div class="text-sm text-white/80">Brent Settlement</div>
-                  <div class="text-xs text-white/60">29 Apr 2026<a href="https://hormuzstraitmonitor.com/" class="citation-link">[1004]</a>
-                  </div>
-                </div>
-                <div class="text-center p-4 bg-white/5 rounded-lg">
-                  <div class="text-2xl font-bold text-candy-sunset">$106.88</div>
-                  <div class="text-sm text-white/80">WTI</div>
-                  <div class="text-xs text-white/60">29 Apr 2026<a href="https://hormuzstraitmonitor.com/" class="citation-link">[1004]</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-blue-900/20 border-l-4 border-blue-500 rounded">
-                  <div class="font-semibold text-blue-300 mb-2">World Bank Baseline</div>
-                  <div class="text-sm text-white/80">
-                    Brent crude averaging $86/bbl in 2026, up from $69 in 2025 (+25%)<a href="https://www.idnfinancials.com/news/63356/world-bank-forecasts-energy-prices-to-surge-24-in-2026" class="citation-link">[695]</a>
-                    <a href="https://economymiddleeast.com/news/world-bank-forecasts-24-percent-energy-price-surge-in-2026-to-highest-since-russo-ukraine-conflict-if-mideast-unrest-eases-by-may" class="citation-link">[886]</a>
-                    <a href="https://southasianherald.com/energy-prices-projected-to-surge-24-in-2026-on-middle-east-supply-shock/" class="citation-link">[1020]</a>
-                  </div>
-                </div>
-
-                <div class="p-4 bg-red-900/20 border-l-4 border-red-500 rounded">
-                  <div class="font-semibold text-red-300 mb-2">Stress Case</div>
-                  <div class="text-sm text-white/80">
-                    Brent could reach $95–$115 if conflict prolonged<a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[248]</a>
-                    <a href="https://www.idnfinancials.com/news/63356/world-bank-forecasts-energy-prices-to-surge-24-in-2026" class="citation-link">[695]</a>
-                    <a href="https://economymiddleeast.com/news/world-bank-forecasts-24-percent-energy-price-surge-in-2026-to-highest-since-russo-ukraine-conflict-if-mideast-unrest-eases-by-may" class="citation-link">[696]</a>
-                    <a href="https://economymiddleeast.com/news/world-bank-forecasts-24-percent-energy-price-surge-in-2026-to-highest-since-russo-ukraine-conflict-if-mideast-unrest-eases-by-may" class="citation-link">[886]</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Gas Markets -->
-            <div class="bento-card">
-              <h3 class="font-display text-2xl font-semibold text-candy-sunset mb-6">Gas Markets</h3>
-
-              <div class="grid grid-cols-2 gap-4 mb-6">
-                <div class="text-center p-4 bg-white/5 rounded-lg">
-                  <div class="text-2xl font-bold text-candy-sunset">€46.54</div>
-                  <div class="text-sm text-white/80">TTF Spot</div>
-                  <div class="text-xs text-white/60">1 May 2026<a href="https://tradingeconomics.com/commodity/eu-natural-gas" class="citation-link">[534]</a>
-                  </div>
-                </div>
-                <div class="text-center p-4 bg-white/5 rounded-lg">
-                  <div class="text-2xl font-bold text-candy-sunset">137p</div>
-                  <div class="text-sm text-white/80">NBP Sum-26</div>
-                  <div class="text-xs text-white/60">+78% Q1<a href="https://www.smart-energy.uk/q1-2026-uk-energy-market-recap" class="citation-link">[497]</a>
-                  </div>
-                </div>
-              </div>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-purple-900/20 border-l-4 border-purple-500 rounded">
-                  <div class="font-semibold text-purple-300 mb-2">European Impact</div>
-                  <div class="text-sm text-white/80">
-                    European gas prices +25% year-on-year 2026<a href="https://gmk.center/en/news/the-world-bank-forecasts-a-24-increase-in-global-energy-prices-in-2026/" class="citation-link">[512]</a>
-                  </div>
-                </div>
-
-                <div class="p-4 bg-orange-900/20 border-l-4 border-orange-500 rounded">
-                  <div class="font-semibold text-orange-300 mb-2">LNG Competition</div>
-                  <div class="text-sm text-white/80">
-                    Asian LNG benchmark +94%, European gas +59% in March<a href="https://gmk.center/en/news/the-world-bank-forecasts-a-24-increase-in-global-energy-prices-in-2026/" class="citation-link">[544]</a>
-                    <a href="https://gmk.center/en/news/the-world-bank-forecasts-a-24-increase-in-global-energy-prices-in-2026/" class="citation-link">[885]</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- UK Power -->
-          <div class="bento-card mb-12">
-            <h3 class="font-display text-2xl font-semibold text-candy-sunset mb-6">UK Power Forward Curve</h3>
-
-            <div class="grid lg:grid-cols-4 gap-6">
-              <div class="text-center p-4 bg-white/5 rounded-lg">
-                <div class="text-2xl font-bold text-candy-sunset">£102</div>
-                <div class="text-sm text-white/80">Summer 26</div>
-                <div class="text-xs text-white/60">+46% Q1<a href="https://www.smart-energy.uk/q1-2026-uk-energy-market-recap" class="citation-link">[497]</a>
-                </div>
-              </div>
-              <div class="text-center p-4 bg-white/5 rounded-lg">
-                <div class="text-2xl font-bold text-candy-sunset">£106</div>
-                <div class="text-sm text-white/80">Winter 26/27</div>
-                <div class="text-xs text-white/60">+36% Q1</div>
-              </div>
-              <div class="text-center p-4 bg-white/5 rounded-lg">
-                <div class="text-2xl font-bold text-candy-sunset">£88</div>
-                <div class="text-sm text-white/80">Calendar 27</div>
-                <div class="text-xs text-white/60">+32% Q1</div>
-              </div>
-              <div class="text-center p-4 bg-white/5 rounded-lg">
-                <div class="text-2xl font-bold text-candy-sunset">£71</div>
-                <div class="text-sm text-white/80">Calendar 28</div>
-                <div class="text-xs text-white/60">+15% Q1</div>
-              </div>
-            </div>
-
-            <div class="mt-6 p-4 bg-blue-900/20 border-l-4 border-blue-500 rounded">
-              <div class="font-semibold text-blue-300 mb-2">Gas-Power Correlation</div>
-              <div class="text-sm text-white/80">
-                UK power follows gas with 60-70% correlation. Gas-fired generation (~40% of UK mix) sets marginal price.
-              </div>
-            </div>
-          </div>
-
-          <!-- LNG Disruption -->
-          <div class="bento-card">
-            <h3 class="font-display text-2xl font-semibold text-candy-sunset mb-6">LNG Supply Disruption</h3>
-
-            <div class="grid lg:grid-cols-3 gap-6">
-              <div class="p-4 bg-white/5 rounded-lg">
-                <div class="font-semibold text-candy-sunset mb-2">Qatari Production</div>
-                <div class="text-sm text-white/80 mb-2">Ras Laffan affected, force majeure declared<a href="https://www.ifemanufacturing.co.uk/exhibitor-news/what-the-middle-east-conflict-means-for-the-uk-energy-market" class="citation-link">[999]</a>
-                  <a href="https://uk.news.yahoo.com/experts-middle-east-conflict-no-123313645.html" class="citation-link">[1008]</a>
-                </div>
-                <div class="text-xs text-white/60">No pipeline alternative available</div>
-              </div>
-
-              <div class="p-4 bg-white/5 rounded-lg">
-                <div class="font-semibold text-candy-sunset mb-2">Global Impact</div>
-                <div class="text-sm text-white/80 mb-2">~1.5 Mt/week disrupted<a href="https://www.hellenicshippingnews.com/middle-east-conflict-drives-european-power-price-volatility-as-gas-disruption-removes-1-5-mt-lng-weekly-from-global-markets/" class="citation-link">[491]</a>
-                </div>
-                <div class="text-xs text-white/60">19% of global LNG exports</div>
-              </div>
-
-              <div class="p-4 bg-white/5 rounded-lg">
-                <div class="font-semibold text-candy-sunset mb-2">Market Competition</div>
-                <div class="text-sm text-white/80 mb-2">Intensified Asian-European bidding<a href="https://gmk.center/en/news/the-world-bank-forecasts-a-24-increase-in-global-energy-prices-in-2026/" class="citation-link">[544]</a>
-                  <a href="https://gmk.center/en/news/the-world-bank-forecasts-a-24-increase-in-global-energy-prices-in-2026/" class="citation-link">[885]</a>
-                </div>
-                <div class="text-xs text-white/60">Marginal cargo price inflation</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Market Interpretation -->
-      <section id="market-interpretation" class="py-16 bg-midnight-light">
-        <div class="container mx-auto px-8">
-          <h2 class="font-display text-4xl font-bold text-candy-sunset mb-12">Market Interpretation</h2>
-
-          <div class="grid lg:grid-cols-2 gap-8">
-            <!-- Current Pricing -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-6">Current Market Pricing</h3>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-blue-900/20 border-l-4 border-blue-500 rounded">
-                  <div class="font-semibold text-blue-300 mb-2">Market Positioning</div>
-                  <div class="text-sm text-white/80">
-                    Pricing medium-to-prolonged disruption with eventual partial resolution. Front-month Brent at $109-118 sits $23 above World Bank baseline but $6-19 below stress case.
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-3 gap-3 text-center">
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="text-lg font-bold text-green-400">$86</div>
-                    <div class="text-xs text-white/60">WB Baseline</div>
-                  </div>
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="text-lg font-bold text-candy-sunset">$109</div>
-                    <div class="text-xs text-white/60">Current</div>
-                  </div>
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="text-lg font-bold text-red-400">$115</div>
-                    <div class="text-xs text-white/60">Stress Case</div>
-                  </div>
-                </div>
-
-                <div class="text-sm text-white/80 text-center">
-                  Market assigns partial probability to prolonged disruption
-                </div>
-              </div>
-            </div>
-
-            <!-- Risk Premium -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-6">Risk Premium Trajectory</h3>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-yellow-900/20 border-l-4 border-yellow-500 rounded">
-                  <div class="font-semibold text-yellow-300 mb-2">Stabilized at Elevation</div>
-                  <div class="text-sm text-white/80">
-                    Risk premium has stabilized after initial spike. Diminishing response to diplomatic headlines indicates market maturation.
-                  </div>
-                </div>
-
-                <div class="space-y-3">
-                  <div class="flex justify-between items-center p-3 bg-white/5 rounded">
-                    <span class="text-sm text-white/80">Upside Risk</span>
-                    <span class="text-candy-sunset font-semibold">Military Escalation</span>
-                  </div>
-                  <div class="flex justify-between items-center p-3 bg-white/5 rounded">
-                    <span class="text-sm text-white/80">Upside Risk</span>
-                    <span class="text-candy-sunset font-semibold">Infrastructure Damage</span>
-                  </div>
-                  <div class="flex justify-between items-center p-3 bg-white/5 rounded">
-                    <span class="text-sm text-white/80">Upside Risk</span>
-                    <span class="text-candy-sunset font-semibold">Houthi Activation</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Trader Behavior -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-6">Trader Behavior</h3>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-green-900/20 border-l-4 border-green-500 rounded">
-                  <div class="font-semibold text-green-300 mb-2">Current State</div>
-                  <div class="text-sm text-white/80">
-                    Taking escalation seriously but already positioned. Not underpricing risk but questioning full tail risk pricing.
-                  </div>
-                </div>
-
-                <div class="space-y-3">
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="text-sm font-medium text-white mb-1">Early March</div>
-                    <div class="text-xs text-white/60">Panic buying, extreme volatility</div>
-                  </div>
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="text-sm font-medium text-white mb-1">Late April</div>
-                    <div class="text-xs text-white/60">Selective response, structural focus</div>
-                  </div>
-                  <div class="p-3 bg-candy-sunset/20 rounded">
-                    <div class="text-sm font-medium text-white mb-1">Current (1 May)</div>
-                    <div class="text-xs text-white/60">Structural pricing, headline fatigue</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Next Triggers -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-6">Next Leg Triggers</h3>
-
-              <div class="space-y-4">
-                <div class="space-y-2">
-                  <div class="p-3 bg-red-900/20 border-l-4 border-red-500 rounded">
-                    <div class="text-sm font-semibold text-red-300">UP: Renewed US-Iran Strikes</div>
-                    <div class="text-xs text-white/60">+$10-20 Brent immediate</div>
-                  </div>
-
-                  <div class="p-3 bg-red-900/20 border-l-4 border-red-500 rounded">
-                    <div class="text-sm font-semibold text-red-300">UP: Iranian Production Cuts</div>
-                    <div class="text-xs text-white/60">Storage saturation forcing</div>
-                  </div>
-
-                  <div class="p-3 bg-red-900/20 border-l-4 border-red-500 rounded">
-                    <div class="text-sm font-semibold text-red-300">UP: Houthi Bab el-Mandeb</div>
-                    <div class="text-xs text-white/60">Latent activation capacity</div>
-                  </div>
-                </div>
-
-                <div class="space-y-2">
-                  <div class="p-3 bg-green-900/20 border-l-4 border-green-500 rounded">
-                    <div class="text-sm font-semibold text-green-300">DOWN: US-Iran Deal</div>
-                    <div class="text-xs text-white/60">Comprehensive agreement</div>
-                  </div>
-
-                  <div class="p-3 bg-green-900/20 border-l-4 border-green-500 rounded">
-                    <div class="text-sm font-semibold text-green-300">DOWN: Hormuz Reopening</div>
-                    <div class="text-xs text-white/60">Iranian concession</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- World Bank Comparison -->
-          <div class="bento-card mt-8">
-            <h3 class="font-display text-2xl font-semibold text-candy-sunset mb-6">World Bank Baseline vs Market Comparison</h3>
-
-            <div class="overflow-x-auto">
-              <table class="w-full text-sm">
-                <thead>
-                  <tr class="border-b border-white/20">
-                    <th class="text-left py-3 text-white/80">Comparison</th>
-                    <th class="text-center py-3 text-white/80">World Bank</th>
-                    <th class="text-center py-3 text-white/80">Current Market</th>
-                    <th class="text-center py-3 text-white/80">Assessment</th>
-                  </tr>
-                </thead>
-                <tbody class="space-y-2">
-                  <tr class="border-b border-white/10">
-                    <td class="py-3 text-white/90">Brent 2026 Avg</td>
-                    <td class="text-center py-3 text-candy-sunset">$86/bbl</td>
-                    <td class="text-center py-3 text-candy-sunset">$109-118</td>
-                    <td class="text-center py-3 text-white/80">Above baseline near-term</td>
-                  </tr>
-                  <tr class="border-b border-white/10">
-                    <td class="py-3 text-white/90">Disruption End</td>
-                    <td class="text-center py-3 text-candy-sunset">May 2026</td>
-                    <td class="text-center py-3 text-candy-sunset">Sceptical</td>
-                    <td class="text-center py-3 text-white/80">Assumption questioned</td>
-                  </tr>
-                  <tr class="border-b border-white/10">
-                    <td class="py-3 text-white/90">Energy Price Change</td>
-                    <td class="text-center py-3 text-candy-sunset">+24%</td>
-                    <td class="text-center py-3 text-candy-sunset">+40-80%</td>
-                    <td class="text-center py-3 text-white/80">Market pricing more</td>
-                  </tr>
-                  <tr>
-                    <td class="py-3 text-white/90">Risk Tilt</td>
-                    <td class="text-center py-3 text-candy-sunset">&#34;Markedly tilted&#34; up</td>
-                    <td class="text-center py-3 text-candy-sunset">Partial premium</td>
-                    <td class="text-center py-3 text-white/80">Partially pricing upside</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- UK Impact -->
-      <section id="uk-impact" class="py-16 bg-midnight">
-        <div class="container mx-auto px-8">
-          <h2 class="font-display text-4xl font-bold text-candy-sunset mb-12">Impact on UK Business Energy Prices</h2>
-
-          <div class="grid lg:grid-cols-3 gap-8">
-            <!-- Gas Price Linkage -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-4">
-                <i class="fas fa-fire mr-2"></i>UK Gas Price Linkage
-              </h3>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-blue-900/20 border-l-4 border-blue-500 rounded">
-                  <div class="font-semibold text-blue-300 mb-2">Global LNG Marginal Pricing</div>
-                  <div class="text-sm text-white/80">
-                    UK NBP tracks global LNG prices through European TTF linkage. Qatari disruption forces Asian buyers to bid up alternative cargoes.
-                  </div>
-                </div>
-
-                <div class="mermaid-container">
-                  <div class="mermaid-controls">
-                    <button class="mermaid-control-btn zoom-in" title="放大">
-                      <i class="fas fa-search-plus"></i>
-                    </button>
-                    <button class="mermaid-control-btn zoom-out" title="缩小">
-                      <i class="fas fa-search-minus"></i>
-                    </button>
-                    <button class="mermaid-control-btn reset-zoom" title="重置">
-                      <i class="fas fa-expand-arrows-alt"></i>
-                    </button>
-                    <button class="mermaid-control-btn fullscreen" title="全屏查看">
-                      <i class="fas fa-expand"></i>
-                    </button>
-                  </div>
-                  <div class="mermaid">
-                    graph TD
-                    A[&#34;Gulf LNG Disruption&#34;] --&gt; B[&#34;Asian Buyers Bid for Alternatives&#34;]
-                    B --&gt; C[&#34;European TTF Rises&#34;]
-                    C --&gt; D[&#34;UK NBP Follows&#34;]
-                    D --&gt; E[&#34;Supplier Hedging Costs Rise&#34;]
-                    E --&gt; F[&#34;Customer Prices Increase&#34;]
-
-                    style A fill:#dc2626,stroke:#7f1d1d,stroke-width:2px,color:#fff
-                    style B fill:#f59e0b,stroke:#92400e,stroke-width:2px,color:#fff
-                    style C fill:#10b981,stroke:#065f46,stroke-width:2px,color:#fff
-                    style D fill:#3b82f6,stroke:#1e40af,stroke-width:2px,color:#fff
-                    style E fill:#8b5cf6,stroke:#5b21b6,stroke-width:2px,color:#fff
-                    style F fill:#ec4899,stroke:#be185d,stroke-width:2px,color:#fff
-                  </div>
-                </div>
-
-                <div class="text-sm text-white/80">
-                  <strong>Why this matters:</strong> Even if UK doesn&#39;t buy from Qatar, competitive displacement affects all global buyers.
-                </div>
-              </div>
-            </div>
-
-            <!-- Electricity Dependence -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-4">
-                <i class="fas fa-bolt mr-2"></i>Electricity Price Dependence
-              </h3>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-purple-900/20 border-l-4 border-purple-500 rounded">
-                  <div class="font-semibold text-purple-300 mb-2">Gas-Driven Marginal Cost</div>
-                  <div class="text-sm text-white/80">
-                    Gas-fired generation (~40% of UK mix) sets marginal price. All generators receive this price.
-                  </div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-3 text-center">
-                  <div class="p-2 bg-white/5 rounded">
-                    <div class="text-lg font-bold text-candy-sunset">40%</div>
-                    <div class="text-xs text-white/60">Gas Generation</div>
-                  </div>
-                  <div class="p-2 bg-white/5 rounded">
-                    <div class="text-lg font-bold text-candy-sunset">60-70%</div>
-                    <div class="text-xs text-white/60">Gas-Power Correlation</div>
-                  </div>
-                </div>
-
-                <div class="p-3 bg-white/5 rounded">
-                  <div class="text-sm font-medium text-white mb-1">Current Impact</div>
-                  <div class="text-xs text-white/60">
-                    NBP +78% → Power +46% (Summer 26)
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Shipping Costs -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-4">
-                <i class="fas fa-ship mr-2"></i>Shipping Cost Pass-Through
-              </h3>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-orange-900/20 border-l-4 border-orange-500 rounded">
-                  <div class="font-semibold text-orange-300 mb-2">Multiple Channels</div>
-                  <div class="text-sm text-white/80">
-                    Crude freight, LNG freight, product tankers, container shipping all affected by elevated costs and rerouting.
-                  </div>
-                </div>
-
-                <div class="space-y-2">
-                  <div class="flex justify-between items-center p-2 bg-white/5 rounded text-sm">
-                    <span class="text-white/80">VLCC Rates</span>
-                    <span class="text-candy-sunset font-semibold">+750-850%</span>
-                  </div>
-                  <div class="flex justify-between items-center p-2 bg-white/5 rounded text-sm">
-                    <span class="text-white/80">Insurance Premium</span>
-                    <span class="text-candy-sunset font-semibold">30× normal</span>
-                  </div>
-                  <div class="flex justify-between items-center p-2 bg-white/5 rounded text-sm">
-                    <span class="text-white/80">Container Routing</span>
-                    <span class="text-candy-sunset font-semibold">+12 days</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Repricing Window -->
-          <div class="bento-card mt-8">
-            <h3 class="font-display text-2xl font-semibold text-candy-sunset mb-6">Supplier Repricing Window Dynamics</h3>
-
-            <div class="mermaid-container">
-              <div class="mermaid-controls">
-                <button class="mermaid-control-btn zoom-in" title="放大">
-                  <i class="fas fa-search-plus"></i>
-                </button>
-                <button class="mermaid-control-btn zoom-out" title="缩小">
-                  <i class="fas fa-search-minus"></i>
-                </button>
-                <button class="mermaid-control-btn reset-zoom" title="重置">
-                  <i class="fas fa-expand-arrows-alt"></i>
-                </button>
-                <button class="mermaid-control-btn fullscreen" title="全屏查看">
-                  <i class="fas fa-expand"></i>
-                </button>
-              </div>
-              <div class="mermaid">
-                timeline
-                title &#34;Supplier Repricing Timeline&#34;
-
-                section &#34;Immediate&#34;
-                &#34;Wholesale Spike&#34; : &#34;Futures move&#34;
-                : &#34;OTC adjustment&#34;
-
-                section &#34;Days 1-7&#34;
-                &#34;Supplier Hedging&#34; : &#34;Procurement desks re-evaluate&#34;
-                : &#34;Some withdrawal&#34;
-
-                section &#34;Weeks 1-3&#34;
-                &#34;Price Book Update&#34; : &#34;IT systems update&#34;
-                : &#34;Management approval&#34;
-
-                section &#34;Weeks 2-4&#34;
-                &#34;Customer Offers&#34; : &#34;Sales teams notified&#34;
-                : &#34;Quotes revised&#34;
-
-                section &#34;Months 1-2&#34;
-                &#34;Full Repricing&#34; : &#34;All suppliers aligned&#34;
-                : &#34;Market stabilizes&#34;
-              </div>
-            </div>
-
-            <div class="p-4 bg-red-900/20 border-l-4 border-red-500 rounded mt-6">
-              <div class="font-semibold text-red-300 mb-2">Window Assessment (1 May 2026)</div>
-              <div class="text-sm text-white/80">
-                Wholesale markets have largely adjusted to World Bank baseline. Not all supplier books have fully caught up, particularly for longer-dated contracts. This window is closing.
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Duration Scenarios -->
-      <section id="duration-scenarios" class="py-16 bg-midnight-light">
-        <div class="container mx-auto px-8">
-          <h2 class="font-display text-4xl font-bold text-candy-sunset mb-12">Duration Scenarios</h2>
-
-          <div class="grid lg:grid-cols-3 gap-8">
-            <!-- Short Disruption -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-green-400 mb-4">
-                <i class="fas fa-clock mr-2"></i>Short Disruption (1-2 weeks)
-              </h3>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-green-900/20 border-l-4 border-green-500 rounded">
-                  <div class="font-semibold text-green-300 mb-2">Assumptions</div>
-                  <div class="text-sm text-white/80">
-                    Major disruption ceases by mid-May. Hormuz returns to 80%+ normal. Diplomatic framework established.
-                  </div>
-                </div>
-
-                <div class="space-y-3">
-                  <div class="flex justify-between items-center p-3 bg-white/5 rounded">
-                    <span class="text-sm text-white/80">Brent</span>
-                    <span class="text-green-400 font-semibold">$75-85</span>
-                  </div>
-                  <div class="flex justify-between items-center p-3 bg-white/5 rounded">
-                    <span class="text-sm text-white/80">TTF</span>
-                    <span class="text-green-400 font-semibold">€35-45</span>
-                  </div>
-                  <div class="flex justify-between items-center p-3 bg-white/5 rounded">
-                    <span class="text-sm text-white/80">NBP</span>
-                    <span class="text-green-400 font-semibold">90-110p</span>
-                  </div>
-                </div>
-
-                <div class="p-3 bg-green-900/20 rounded">
-                  <div class="font-semibold text-green-300 mb-1">Business Impact</div>
-                  <div class="text-xs text-white/80">
-                    Suppliers re-enter competitive market. 12-24 month offers attractive. World Bank baseline validated.
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Medium Disruption -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-yellow-400 mb-4">
-                <i class="fas fa-exclamation-triangle mr-2"></i>Medium Disruption (1-3 months)
-              </h3>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-yellow-900/20 border-l-4 border-yellow-500 rounded">
-                  <div class="font-semibold text-yellow-300 mb-2">Assumptions</div>
-                  <div class="text-sm text-white/80">
-                    Disruption continues through June-July. Hormuz restricted at 10-30%. Diplomatic deadlock persists.
-                  </div>
-                </div>
-
-                <div class="space-y-3">
-                  <div class="flex justify-between items-center p-3 bg-white/5 rounded">
-                    <span class="text-sm text-white/80">Brent</span>
-                    <span class="text-yellow-400 font-semibold">$95-110</span>
-                  </div>
-                  <div class="flex justify-between items-center p-3 bg-white/5 rounded">
-                    <span class="text-sm text-white/80">TTF</span>
-                    <span class="text-yellow-400 font-semibold">€50-70</span>
-                  </div>
-                  <div class="flex justify-between items-center p-3 bg-white/5 rounded">
-                    <span class="text-sm text-white/80">NBP</span>
-                    <span class="text-yellow-400 font-semibold">120-150p</span>
-                  </div>
-                </div>
-
-                <div class="p-3 bg-yellow-900/20 rounded">
-                  <div class="font-semibold text-yellow-300 mb-1">Business Impact</div>
-                  <div class="text-xs text-white/80">
-                    Supplier withdrawal from long-dated fixed offers. 36+ month availability narrows. Delay severely penalized.
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Severe Escalation -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-red-400 mb-4">
-                <i class="fas fa-skull-crossbones mr-2"></i>Severe Escalation (3+ months)
-              </h3>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-red-900/20 border-l-4 border-red-500 rounded">
-                  <div class="font-semibold text-red-300 mb-2">Assumptions</div>
-                  <div class="text-sm text-white/80">
-                    Conflict extends beyond July. Bab el-Mandeb closes. Infrastructure damage accumulates. Regional widening.
-                  </div>
-                </div>
-
-                <div class="space-y-3">
-                  <div class="flex justify-between items-center p-3 bg-white/5 rounded">
-                    <span class="text-sm text-white/80">Brent</span>
-                    <span class="text-red-400 font-semibold">$120-150+</span>
-                  </div>
-                  <div class="flex justify-between items-center p-3 bg-white/5 rounded">
-                    <span class="text-sm text-white/80">TTF</span>
-                    <span class="text-red-400 font-semibold">€80-120+</span>
-                  </div>
-                  <div class="flex justify-between items-center p-3 bg-white/5 rounded">
-                    <span class="text-sm text-white/80">NBP</span>
-                    <span class="text-red-400 font-semibold">180-250p+</span>
-                  </div>
-                </div>
-
-                <div class="p-3 bg-red-900/20 rounded">
-                  <div class="font-semibold text-red-300 mb-1">Business Impact</div>
-                  <div class="text-xs text-white/80">
-                    Market dysfunction. Fixed-price offerings withdrawn. Only pre-fixed contracts provide protection.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Commercial Takeaway -->
-      <section id="commercial-takeaway" class="py-16 bg-midnight">
-        <div class="container mx-auto px-8">
-          <h2 class="font-display text-4xl font-bold text-candy-sunset mb-12">Commercial Takeaway for UK Businesses</h2>
-
-          <div class="grid lg:grid-cols-2 gap-8 mb-12">
-            <!-- Volatility Reality -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-4">
-                <i class="fas fa-exclamation-triangle mr-2"></i>Volatility Reality
-              </h3>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-red-900/20 border-l-4 border-red-500 rounded">
-                  <div class="font-semibold text-red-300 mb-2">Structural Condition, Not Headline Risk</div>
-                  <div class="text-sm text-white/80">
-                    Geopolitical deadlock, physical constraints, financial dislocation, and macroeconomic feedback loops ensure persistent volatility through 2026.
-                  </div>
-                </div>
-
-                <div class="space-y-3">
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="font-semibold text-white mb-1">Geopolitical</div>
-                    <div class="text-xs text-white/60">US-Iran deadlock, Lebanon front active, Houthi latent threat</div>
-                  </div>
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="font-semibold text-white mb-1">Physical</div>
-                    <div class="text-xs text-white/60">Hormuz at 5-15% throughput, Qatari LNG impaired</div>
-                  </div>
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="font-semibold text-white mb-1">Financial</div>
-                    <div class="text-xs text-white/60">Insurance dislocation, tanker rates +850%</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Immediate Review -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-candy-sunset mb-4">
-                <i class="fas fa-clock mr-2"></i>Immediate Review Imperative
-              </h3>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-yellow-900/20 border-l-4 border-yellow-500 rounded">
-                  <div class="font-semibold text-yellow-300 mb-2">12-Month Renewal Window</div>
-                  <div class="text-sm text-white/80">
-                    Customers within 12 months of contract end face repricing risk now, not at renewal date. Supplier book lag creates closing window.
-                  </div>
-                </div>
-
-                <div class="space-y-2">
-                  <div class="p-3 bg-red-900/20 rounded">
-                    <div class="font-semibold text-red-300 text-sm">0-3 months: URGENT</div>
-                    <div class="text-xs text-white/60">Fix immediately if competitive offer available</div>
-                  </div>
-                  <div class="p-3 bg-orange-900/20 rounded">
-                    <div class="font-semibold text-orange-300 text-sm">3-6 months: High Priority</div>
-                    <div class="text-xs text-white/60">Review now, consider early termination penalties</div>
-                  </div>
-                  <div class="p-3 bg-yellow-900/20 rounded">
-                    <div class="font-semibold text-yellow-300 text-sm">6-12 months: Priority</div>
-                    <div class="text-xs text-white/60">Monitor market, prepare procurement strategy</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Fixing Case -->
-          <div class="bento-card mb-12">
-            <h3 class="font-display text-2xl font-semibold text-candy-sunset mb-6">Case for Fixing Now and Fixing Long (36+ months)</h3>
-
-            <div class="grid lg:grid-cols-2 gap-8">
-              <div class="space-y-4">
-                <div class="p-4 bg-blue-900/20 border-l-4 border-blue-500 rounded">
-                  <div class="font-semibold text-blue-300 mb-2">Risk Transfer, Not Price Prediction</div>
-                  <div class="text-sm text-white/80">
-                    Long fixing transfers risk from customer to supplier. Current offers may not fully embed future hedging costs.
-                  </div>
-                </div>
-
-                <div class="space-y-3">
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="font-semibold text-white mb-1">World Bank Baseline +24%</div>
-                    <div class="text-xs text-white/60">Even with May easing, 2026 prices structurally higher</div>
-                  </div>
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="font-semibold text-white mb-1">&#34;Markedly Tilted&#34; Upside Risk</div>
-                    <div class="text-xs text-white/60">$95-115 Brent, €80+ TTF scenarios possible</div>
-                  </div>
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="font-semibold text-white mb-1">Budget Certainty</div>
-                    <div class="text-xs text-white/60">Enables investment, staffing, pricing decisions</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-candy-sunset/20 border-l-4 border-candy-sunset rounded">
-                  <div class="font-semibold text-white mb-2">Critical Commercial Reality</div>
-                  <div class="text-sm text-white/90">
-                    <strong>Waiting is not risk-free.</strong> It is a bet that prices will fall, made against the World Bank&#39;s central forecast that prices will rise 24% even if disruption ends in May.
-                  </div>
-                </div>
-
-                <div class="p-3 bg-red-900/20 rounded">
-                  <div class="font-semibold text-red-300 mb-1">Avoid Pass-Through Volatility</div>
-                  <div class="text-xs text-white/60">
-                    Flexible contracts expose to unlimited upside. Fixed contracts cap exposure and provide certainty.
-                  </div>
-                </div>
-
-                <div class="p-3 bg-green-900/20 rounded">
-                  <div class="font-semibold text-green-300 mb-1">36-Month Horizon</div>
-                  <div class="text-xs text-white/60">
-                    Captures 2026-2028 period where World Bank expects elevated prices from higher base.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Customer Segmentation -->
-          <div class="bento-card">
-            <h3 class="font-display text-2xl font-semibold text-candy-sunset mb-6">Customer Segmentation Guidance</h3>
-
-            <div class="grid lg:grid-cols-2 gap-8">
-              <!-- High-Risk Segments -->
-              <div class="space-y-4">
-                <div class="font-semibold text-red-400 mb-2">High-Risk Segments</div>
-
-                <div class="space-y-3">
-                  <div class="p-4 bg-red-900/20 border-l-4 border-red-500 rounded">
-                    <div class="font-semibold text-red-300 mb-1">Flexible/Pass-Through Contracts</div>
-                    <div class="text-sm text-white/80">
-                      Fully exposed to wholesale volatility. Immediate conversion to fixed recommended unless sophisticated demand management capability exists.
-                    </div>
-                  </div>
-
-                  <div class="p-4 bg-orange-900/20 border-l-4 border-orange-500 rounded">
-                    <div class="font-semibold text-orange-300 mb-1">Energy-Intensive Manufacturing</div>
-                    <div class="text-sm text-white/80">
-                      Gas-intensive operations (food processing, chemicals, ceramics, glass). Energy as direct process input. Critical priority for fixing.
-                    </div>
-                  </div>
-
-                  <div class="p-4 bg-yellow-900/20 border-l-4 border-yellow-500 rounded">
-                    <div class="font-semibold text-yellow-300 mb-1">High-Consumption Electricity Users</div>
-                    <div class="text-sm text-white/80">
-                      Data centers, cold storage, heavy industry. Proportional exposure to power price increases requires margin protection.
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Priority Actions -->
-              <div class="space-y-4">
-                <div class="font-semibold text-blue-400 mb-2">Priority Actions</div>
-
-                <div class="space-y-3">
-                  <div class="p-4 bg-blue-900/20 border-l-4 border-blue-500 rounded">
-                    <div class="font-semibold text-blue-300 mb-1">Multi-Site Operators</div>
-                    <div class="text-sm text-white/80">
-                      Retail chains, hospitality groups. Portfolio approach recommended: fix some sites long, retain flexibility on others. Centralized procurement essential.
-                    </div>
-                  </div>
-
-                  <div class="p-4 bg-purple-900/20 border-l-4 border-purple-500 rounded">
-                    <div class="font-semibold text-purple-300 mb-1">Hospitality &amp; Care Sectors</div>
-                    <div class="text-sm text-white/80">
-                      24/7 operation requirements, regulatory temperature mandates. Service continuity protection critical. May qualify for essential service support.
-                    </div>
-                  </div>
-
-                  <div class="p-4 bg-green-900/20 border-l-4 border-green-500 rounded">
-                    <div class="font-semibold text-green-300 mb-1">SMEs &amp; Charities</div>
-                    <div class="text-sm text-white/80">
-                      Limited procurement expertise, cash flow sensitivity. Use Switch 365 Ltd advisory services. Avoid default rollover to variable rates.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-8 p-6 bg-gradient-to-r from-candy-sunset/20 to-transparent border-l-4 border-candy-sunset rounded">
-              <div class="font-semibold text-white mb-2">Critical Warning</div>
-              <div class="text-white/90 leading-relaxed">
-                <strong>Do not wait for supplier book updates.</strong> Supplier books update upward, not downward, in volatile markets. The &#34;update&#34; may be withdrawal from fixed pricing, not better prices. Each day of delay consumes the fixing window without benefit. <strong>Request quotes from multiple suppliers now and act on available information.</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Source Confidence -->
-      <section id="source-confidence" class="py-16 bg-midnight-light">
-        <div class="container mx-auto px-8">
-          <h2 class="font-display text-4xl font-bold text-candy-sunset mb-12">Source Quality &amp; Confidence</h2>
-
-          <div class="grid lg:grid-cols-3 gap-8">
-            <!-- Highest Confidence -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-green-400 mb-6">
-                <i class="fas fa-check-circle mr-2"></i>Highest-Confidence Verified Facts
-              </h3>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-green-900/20 border-l-4 border-green-500 rounded">
-                  <div class="font-semibold text-green-300 mb-2">World Bank 24% Baseline</div>
-                  <div class="text-sm text-white/80">
-                    Energy prices surge 24% in 2026, $86 Brent, &#34;most acute disruptions end in May&#34;<a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[516]</a>
-                    <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[719]</a>
-                    <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[936]</a>
-                    <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="citation-link">[1021]</a>
-                    <a href="https://www.linkedin.com/posts/the-world-bank-group_commodity-markets-outlook-april-2026-activity-7454982791391424514-iXuY" class="citation-link">[1028]</a>
-                  </div>
-                </div>
-
-                <div class="p-4 bg-green-900/20 border-l-4 border-green-500 rounded">
-                  <div class="font-semibold text-green-300 mb-2">Hormuz Status</div>
-                  <div class="text-sm text-white/80">
-                    RESTRICTED status, 7 transits 1 May, 62 days duration<a href="https://hormuzstraitmonitor.com/" class="citation-link">[388]</a>
-                    <a href="https://hormuzstraitmonitor.com/" class="citation-link">[1004]</a>
-                  </div>
-                </div>
-
-                <div class="p-4 bg-green-900/20 border-l-4 border-green-500 rounded">
-                  <div class="font-semibold text-green-300 mb-2">Market Data</div>
-                  <div class="text-sm text-white/80">
-                    Brent $118 settle 29 Apr, WTI $106.88, war-risk insurance 3.5-4.5%<a href="https://hormuzstraitmonitor.com/" class="citation-link">[1004]</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Medium Confidence -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-yellow-400 mb-6">
-                <i class="fas fa-exclamation-triangle mr-2"></i>Medium-Confidence Areas
-              </h3>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-yellow-900/20 border-l-4 border-yellow-500 rounded">
-                  <div class="font-semibold text-yellow-300 mb-2">Iranian Proposal Details</div>
-                  <div class="text-sm text-white/80">
-                    Hormuz reopening for blockade lifting, nuclear deferred<a href="https://apnews.com/article/us-iran-war-hormuz-april-27-2026-374d81d1aac6d8f19c21e1d1e10ab103" class="citation-link">[358]</a>
-                    <a href="https://hormuzstraitmonitor.com/" class="citation-link">[716]</a>
-                  </div>
-                </div>
-
-                <div class="p-4 bg-yellow-900/20 border-l-4 border-yellow-500 rounded">
-                  <div class="font-semibold text-yellow-300 mb-2">Qatari LNG Status</div>
-                  <div class="text-sm text-white/80">
-                    Ras Laffan production disruption, force majeure declared<a href="https://www.ifemanufacturing.co.uk/exhibitor-news/what-the-middle-east-conflict-means-for-the-uk-energy-market" class="citation-link">[999]</a>
-                    <a href="https://uk.news.yahoo.com/experts-middle-east-conflict-no-123313645.html" class="citation-link">[1008]</a>
-                  </div>
-                </div>
-
-                <div class="p-4 bg-yellow-900/20 border-l-4 border-yellow-500 rounded">
-                  <div class="font-semibold text-yellow-300 mb-2">Iranian Storage Saturation</div>
-                  <div class="text-sm text-white/80">
-                    Production cuts estimated 2-3 weeks to forced shutdown<a href="https://www.1news.co.nz/2026/05/01/analysis-us-blockade-is-squeezing-irans-all-important-oil-industry/" class="citation-link">[243]</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Unconfirmed Claims -->
-            <div class="bento-card">
-              <h3 class="font-display text-xl font-semibold text-red-400 mb-6">
-                <i class="fas fa-question-circle mr-2"></i>Unconfirmed Claims Requiring Monitoring
-              </h3>
-
-              <div class="space-y-4">
-                <div class="p-4 bg-red-900/20 border-l-4 border-red-500 rounded">
-                  <div class="font-semibold text-red-300 mb-2">500 Million Barrels Cumulative Loss</div>
-                  <div class="text-sm text-white/80">
-                    Kpler estimate via Yahoo Finance<a href="https://finance.yahoo.com/sectors/energy/articles/president-trump-indefinitely-extends-iran-163500148.html" class="citation-link">[105]</a>
-                  </div>
-                </div>
-
-                <div class="p-4 bg-red-900/20 border-l-4 border-red-500 rounded">
-                  <div class="font-semibold text-red-300 mb-2">Iran &#34;Collapsing Financially&#34;</div>
-                  <div class="text-sm text-white/80">
-                    Trump Truth Social post<a href="https://www.foxnews.com/live-news/iran-us-war-blockade-hormuz-april-22" class="citation-link">[98]</a>
-                  </div>
-                </div>
-
-                <div class="p-4 bg-red-900/20 border-l-4 border-red-500 rounded">
-                  <div class="font-semibold text-red-300 mb-2">400+ Vessels Backlogged</div>
-                  <div class="text-sm text-white/80">
-                    Discovery Alert dated March 2026<a href="https://discoveryalert.com.au/strait-hormuz-shipping-disruption-energy-lng-fertilizer-2026/" class="citation-link">[1005]</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- World Bank Source Specifics -->
-          <div class="bento-card mt-8">
-            <h3 class="font-display text-2xl font-semibold text-candy-sunset mb-6">World Bank Source Specifics</h3>
-
-            <div class="grid lg:grid-cols-2 gap-8">
-              <div class="space-y-4">
-                <div class="font-semibold text-candy-sunset mb-2">Directly Verified Wording</div>
-
-                <div class="space-y-3">
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="text-sm font-medium text-white mb-1">&#34;Energy prices are projected to surge by 24% this year&#34;</div>
-                    <div class="text-xs text-white/60">World Bank Commodity Markets Outlook April 2026</div>
-                  </div>
-
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="text-sm font-medium text-white mb-1">&#34;The most acute disruptions end in May&#34;</div>
-                    <div class="text-xs text-white/60">Baseline assumption</div>
-                  </div>
-
-                  <div class="p-3 bg-white/5 rounded">
-                    <div class="text-sm font-medium text-white mb-1">&#34;Risks are markedly tilted toward higher prices&#34;</div>
-                    <div class="text-xs text-white/60">Risk assessment</div>
-                  </div>
-                </div>
-
-                <div class="mt-4">
-                  <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="text-candy-sunset hover:underline text-sm">
-                    <i class="fas fa-external-link-alt mr-1"></i>World Bank Source Link
-                  </a>
-                </div>
-              </div>
-
-              <div class="space-y-4">
-                <div class="font-semibold text-candy-sunset mb-2">Analyst Interpretation Applied</div>
-
-                <div class="space-y-3">
-                  <div class="p-3 bg-yellow-900/20 rounded">
-                    <div class="font-semibold text-yellow-300 text-sm mb-1">&#34;Baseline is most likely central case&#34;</div>
-                    <div class="text-xs text-white/60">
-                      Inferred from World Bank scenario definitions and standard forecasting practice
-                    </div>
-                  </div>
-
-                  <div class="p-3 bg-yellow-900/20 rounded">
-                    <div class="font-semibold text-yellow-300 text-sm mb-1">&#34;24% applies even if disruption ends in May&#34;</div>
-                    <div class="text-xs text-white/60">
-                      Synthesis of &#34;most acute disruptions end in May&#34; with &#34;energy prices surge 24% this year&#34;
-                    </div>
-                  </div>
-
-                  <div class="p-3 bg-yellow-900/20 rounded">
-                    <div class="font-semibold text-yellow-300 text-sm mb-1">Commercial implications for delay risk</div>
-                    <div class="text-xs text-white/60">
-                      Analyst extension of World Bank forecast to UK business procurement context
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-8 p-6 bg-gradient-to-r from-candy-sunset/20 to-transparent border-l-4 border-candy-sunset rounded">
-              <div class="font-semibold text-white mb-2">Critical Commercial Interpretation</div>
-              <div class="text-white/90 leading-relaxed">
-                The World Bank baseline transforms the delay calculation: even the &#34;good outcome&#34; (May easing) produces structurally higher prices (+24%). The &#34;bad outcome&#34; (prolongation) produces catastrophic prices. <strong>There is no scenario where waiting produces pre-crisis prices.</strong> The baseline makes delay more dangerous, not less.
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Footer -->
-      <footer class="py-8 bg-midnight border-t border-white/10">
-        <div class="container mx-auto px-8 text-center">
-          <p class="text-white/60 text-sm">
-            This report is prepared for Switch 365 Ltd by the Energy Market Intelligence Division. For site-specific procurement advice, individual consumption, contract and renewal data is required.
-          </p>
-          <p class="text-white/60 text-xs mt-2">
-            Report Date: 1 May 2026 | Research Period: 30 April - 1 May 2026
-          </p>
-        </div>
-      </footer>
     </main>
 
     <script>
         // Initialize Mermaid with custom configuration
-        mermaid.initialize({ 
-            startOnLoad: true,
-            theme: 'base',
-            themeVariables: {
-                // Primary colors with good contrast
-                primaryColor: '#3b82f6',
-                primaryTextColor: '#ffffff',
-                primaryBorderColor: '#1e40af',
-                
-                // Secondary colors
-                secondaryColor: '#10b981',
-                secondaryTextColor: '#ffffff',
-                secondaryBorderColor: '#065f46',
-                
-                // Tertiary colors
-                tertiaryColor: '#f59e0b',
-                tertiaryTextColor: '#ffffff',
-                tertiaryBorderColor: '#92400e',
-                
-                // Background and lines
-                background: '#ffffff',
-                mainBkg: '#f8fafc',
-                lineColor: '#374151',
-                
-                // Text colors for better contrast
-                textColor: '#1f2937',
-                darkTextColor: '#ffffff',
-                
-                // Node-specific colors with high contrast
-                cScale0: '#dc2626',
-                cScale1: '#f59e0b', 
-                cScale2: '#10b981',
-                cScale3: '#3b82f6',
-                cScale4: '#8b5cf6',
-                cScale5: '#ec4899',
-                
-                // Ensure text contrast on colored backgrounds
-                cScaleLabel0: '#ffffff',
-                cScaleLabel1: '#ffffff',
-                cScaleLabel2: '#ffffff',
-                cScaleLabel3: '#ffffff',
-                cScaleLabel4: '#ffffff',
-                cScaleLabel5: '#ffffff'
-            },
-            timeline: {
-                numberSectionStyles: 4,
-                disableMulticolor: false,
-                axisFormat: '%d-%b',
-                topAxis: true,
-                bottomAxis: false
-            },
-            flowchart: {
-                htmlLabels: true,
-                curve: 'basis'
-            },
-            fontFamily: 'Inter, sans-serif',
-            fontSize: '13px'
+        document.addEventListener('DOMContentLoaded', function() {
+            mermaid.initialize({ 
+                startOnLoad: true,
+                theme: 'base',
+                themeVariables: {
+                    // Primary colors matching page theme
+                    primaryColor: '#262262',
+                    primaryTextColor: '#ffffff',
+                    primaryBorderColor: '#ffffff',
+                    lineColor: '#ffffff',
+                    
+                    // Secondary colors
+                    secondaryColor: '#00d39a',
+                    secondaryTextColor: '#ffffff',
+                    secondaryBorderColor: '#ffffff',
+                    
+                    // Tertiary colors
+                    tertiaryColor: '#dd40ff',
+                    tertiaryTextColor: '#ffffff',
+                    tertiaryBorderColor: '#ffffff',
+                    
+                    // Background and text
+                    background: '#262262',
+                    mainBkg: '#262262',
+                    secondBkg: '#00d39a',
+                    tertiaryBkg: '#dd40ff',
+                    
+                    // Node-specific colors for better contrast
+                    nodeBkg: '#262262',
+                    nodeTextColor: '#ffffff',
+                    nodeBorder: '#ffffff',
+                    
+                    // Edge and arrow colors
+                    edgeLabelBackground: '#262262',
+                    edgeLabelText: '#ffffff',
+                    
+                    // Cluster colors
+                    clusterBkg: '#262262',
+                    clusterBorder: '#ffffff',
+                    
+                    // Special node colors for different types
+                    cScale0: '#262262',
+                    cScale1: '#00d39a', 
+                    cScale2: '#dd40ff',
+                    cScale3: '#ff6b35',
+                    cScale4: '#e74c3c',
+                    
+                    // Text contrast
+                    textColor: '#ffffff',
+                    fontFamily: 'Inter, sans-serif',
+                    fontSize: '14px'
+                },
+                flowchart: {
+                    useMaxWidth: false,
+                    htmlLabels: true,
+                    curve: 'basis',
+                    padding: 20
+                },
+                securityLevel: 'loose'
+            });
+            
+            // Initialize mermaid controls after mermaid is loaded
+            setTimeout(initializeMermaidControls, 1000);
         });
 
         // Initialize Mermaid Controls for zoom and pan
@@ -2241,43 +1548,7 @@
             });
         }
 
-        // Initialize the controls when the DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeMermaidControls();
-        });
-
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const sidebar = document.querySelector('.toc-sidebar');
-        
-        function toggleSidebar() {
-            sidebar.classList.toggle('open');
-        }
-        
-        if (mobileMenuButton) {
-            mobileMenuButton.addEventListener('click', toggleSidebar);
-        }
-        
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', function(event) {
-            const isClickInsideSidebar = sidebar.contains(event.target);
-            const isClickOnMenuButton = mobileMenuButton && mobileMenuButton.contains(event.target);
-            
-            if (!isClickInsideSidebar && !isClickOnMenuButton && window.innerWidth <= 1024) {
-                sidebar.classList.remove('open');
-            }
-        });
-        
-        // Handle window resize
-        function handleResize() {
-            if (window.innerWidth > 1024) {
-                sidebar.classList.remove('open');
-            }
-        }
-        
-        window.addEventListener('resize', handleResize);
-
-        // Smooth scrolling for anchor links
+        // Smooth scrolling for TOC links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -2288,17 +1559,6 @@
                         block: 'start'
                     });
                 }
-            });
-        });
-
-        // Add hover effects to bento cards
-        document.querySelectorAll('.bento-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-4px)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(-2px)';
             });
         });
     </script>
