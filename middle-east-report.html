@@ -36,10 +36,139 @@ a{color:var(--c-accent-start);text-decoration:none;transition:all 0.3s ease}
 a:hover{color:var(--c-accent-end);text-decoration:underline}
 .container{max-width:1280px;margin:0 auto;padding:0 24px}
 
+/* NAVBAR */
+.navbar{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:1000;
+  background:rgba(18,16,48,0.85);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--c-glass-border);
+  transition:all 0.3s ease;
+}
+.navbar.hidden{transform:translateY(-100%)}
+.navbar-scrolled{box-shadow:0 4px 30px rgba(0,0,0,0.3)}
+.nav-inner{
+  max-width:1280px;
+  margin:0 auto;
+  padding:0 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:56px;
+}
+.nav-logo{
+  font-size:0.95rem;
+  font-weight:800;
+  background:linear-gradient(90deg,var(--c-accent-start),var(--c-accent-end));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:4px;
+  list-style:none;
+  overflow-x:auto;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+  padding-right:8px;
+}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links li{flex-shrink:0}
+.nav-links a{
+  display:block;
+  padding:6px 12px;
+  border-radius:8px;
+  font-size:0.72rem;
+  font-weight:600;
+  color:var(--c-offwhite);
+  text-decoration:none;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+  transition:all 0.2s ease;
+  white-space:nowrap;
+}
+.nav-links a:hover{
+  color:#fff;
+  background:rgba(255,255,255,0.06);
+}
+.nav-links a.active{
+  color:#fff;
+  background:linear-gradient(135deg,rgba(0,211,154,0.15),rgba(221,64,255,0.15));
+  border:1px solid rgba(0,211,154,0.2);
+}
+.nav-toggle{
+  display:none;
+  flex-direction:column;
+  gap:4px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  padding:4px;
+}
+.nav-toggle span{
+  display:block;
+  width:22px;
+  height:2px;
+  background:#fff;
+  border-radius:2px;
+  transition:all 0.3s ease;
+}
+.nav-toggle.open span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.nav-toggle.open span:nth-child(2){opacity:0}
+.nav-toggle.open span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+
+/* Scroll offset for fixed nav */
+html{scroll-padding-top:72px}
+
+@media(max-width:768px){
+  .nav-links{
+    position:fixed;
+    top:56px;left:0;right:0;
+    flex-direction:column;
+    gap:0;
+    background:rgba(18,16,48,0.97);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--c-glass-border);
+    padding:12px 24px;
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    transition:all 0.35s ease;
+  }
+  .nav-links.open{
+    max-height:70vh;
+    overflow-y:auto;
+    opacity:1;
+    padding:12px 24px 20px;
+  }
+  .nav-links li{width:100%}
+  .nav-links a{
+    padding:10px 0;
+    font-size:0.8rem;
+    border-radius:0;
+    border-bottom:1px solid var(--c-glass-border);
+  }
+  .nav-links a.active{
+    background:none;
+    border: none;
+    border-bottom:1px solid var(--c-glass-border);
+    color:var(--c-accent-start);
+  }
+  .nav-links a:hover{background:none}
+  .nav-toggle{display:flex}
+}
+
 /* HERO */
 .hero{
   position:relative;
-  padding:80px 0 60px;
+  padding:140px 0 60px;
   overflow:hidden;
 }
 .hero::before{
@@ -515,6 +644,37 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </head>
 <body>
 
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">SWITCH 365</div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#exec-summary">Summary</a></li>
+      <li><a href="#warning-signs">Warnings</a></li>
+      <li><a href="#what-changed">Changes</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#rhetoric">Rhetoric</a></li>
+      <li><a href="#ceasefire">Ceasefire</a></li>
+      <li><a href="#shipping">Shipping</a></li>
+      <li><a href="#market-stats">Market</a></li>
+      <li><a href="#institutional">WB vs EIA</a></li>
+      <li><a href="#procurement">Procurement</a></li>
+      <li><a href="#market">Interpretation</a></li>
+      <li><a href="#impact">UK Impact</a></li>
+      <li><a href="#scenarios">Scenarios</a></li>
+      <li><a href="#change-view">Change View</a></li>
+      <li><a href="#commercial">Takeaway</a></li>
+      <li><a href="#outputs">Outputs</a></li>
+      <li><a href="#sources">Sources</a></li>
+    </ul>
+  </div>
+</nav>
+
 <!-- HERO -->
 <section class="hero">
   <div class="container hero-content">
@@ -533,7 +693,7 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </section>
 
 <!-- EXECUTIVE SUMMARY -->
-<section class="section">
+<section class="section" id="exec-summary">
   <div class="container">
     <div class="section-title"><div class="accent-line"></div>Executive Summary</div>
     <p class="section-subtitle">What changed and why it matters for UK business energy buyers</p>
@@ -550,7 +710,7 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </section>
 
 <!-- TOP FIVE WARNING SIGNS -->
-<section class="section">
+<section class="section" id="warning-signs">
   <div class="container">
     <div class="section-title"><div class="accent-line"></div>Top Five Warning Signs</div>
     <p class="section-subtitle">Ranked by commercial impact on UK business energy procurement</p>
@@ -590,7 +750,7 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </section>
 
 <!-- WHAT CHANGED -->
-<section class="section">
+<section class="section" id="what-changed">
   <div class="container">
     <div class="section-title"><div class="accent-line"></div>What Changed Since the Last Report</div>
     <p class="section-subtitle">Material new developments in the primary research window (18&ndash;19 May 2026)</p>
@@ -623,7 +783,7 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </section>
 
 <!-- FULL TIMELINE -->
-<section class="section">
+<section class="section" id="timeline">
   <div class="container">
     <div class="section-title"><div class="accent-line"></div>Full Timeline &mdash; Primary Research Window</div>
     <p class="section-subtitle">Chronological record of verified developments, 18&ndash;19 May 2026</p>
@@ -677,7 +837,7 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </section>
 
 <!-- RHETORIC TRACKER -->
-<section class="section">
+<section class="section" id="rhetoric">
   <div class="container">
     <div class="section-title"><div class="accent-line"></div>Rhetoric Tracker</div>
     <p class="section-subtitle">What was said, by whom, and whether it is operationally meaningful</p>
@@ -747,7 +907,7 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </section>
 
 <!-- CEASEFIRE REALITY CHECK -->
-<section class="section">
+<section class="section" id="ceasefire">
   <div class="container">
     <div class="section-title"><div class="accent-line"></div>Ceasefire Reality Check</div>
     <p class="section-subtitle">What the ceasefire says versus what is actually happening on the ground</p>
@@ -781,7 +941,7 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </section>
 
 <!-- SHIPPING AND CHOKE POINT STATUS -->
-<section class="section">
+<section class="section" id="shipping">
   <div class="container">
     <div class="section-title"><div class="accent-line"></div>Shipping and Choke Point Status</div>
     <p class="section-subtitle">Hormuz and Bab el-Mandeb: the two choke points that matter for UK energy</p>
@@ -835,7 +995,7 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </section>
 
 <!-- ENERGY MARKET STAT SHEET -->
-<section class="section">
+<section class="section" id="market-stats">
   <div class="container">
     <div class="section-title"><div class="accent-line"></div>Energy Market Stat Sheet</div>
     <p class="section-subtitle">Key market indicators as of 19 May 2026</p>
@@ -959,7 +1119,7 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </section>
 
 <!-- WORLD BANK VS EIA -->
-<section class="section">
+<section class="section" id="institutional">
   <div class="container">
     <div class="section-title"><div class="accent-line"></div>World Bank vs EIA: Institutional Baseline Comparison</div>
     <p class="section-subtitle">How the two major institutions frame energy price risk &mdash; and what that means commercially</p>
@@ -1019,7 +1179,7 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </section>
 
 <!-- SUPPLIER PRICE-BOOK LAG -->
-<section class="section">
+<section class="section" id="procurement">
   <div class="container">
     <div class="section-title"><div class="accent-line"></div>Supplier Price-Book Lag and Procurement Window</div>
     <p class="section-subtitle">Why wholesale market movement may not yet be fully reflected in supplier pricing</p>
@@ -1055,7 +1215,7 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </section>
 
 <!-- MARKET INTERPRETATION -->
-<section class="section">
+<section class="section" id="market">
   <div class="container">
     <div class="section-title"><div class="accent-line"></div>Market Interpretation</div>
     <p class="section-subtitle">What the market is pricing now and what would trigger the next move</p>
@@ -1098,7 +1258,7 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </section>
 
 <!-- IMPACT ON UK BUSINESS ENERGY PRICES -->
-<section class="section">
+<section class="section" id="impact">
   <div class="container">
     <div class="section-title"><div class="accent-line"></div>Impact on UK Business Energy Prices</div>
     <p class="section-subtitle">Why Middle East disruption flows through to UK business energy bills</p>
@@ -1147,7 +1307,7 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </section>
 
 <!-- DURATION SCENARIOS -->
-<section class="section">
+<section class="section" id="scenarios">
   <div class="container">
     <div class="section-title"><div class="accent-line"></div>Duration Scenarios</div>
     <p class="section-subtitle">Three disruption timelines and their implications for UK business energy procurement</p>
@@ -1206,7 +1366,7 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </section>
 
 <!-- WHAT WOULD CHANGE THIS VIEW -->
-<section class="section">
+<section class="section" id="change-view">
   <div class="container">
     <div class="section-title"><div class="accent-line"></div>What Would Change This View?</div>
     <p class="section-subtitle">Evidence that would reduce risk or confirm real de-escalation</p>
@@ -1245,7 +1405,7 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </section>
 
 <!-- COMMERCIAL TAKEAWAY -->
-<section class="section">
+<section class="section" id="commercial">
   <div class="container">
     <div class="section-title"><div class="accent-line"></div>Commercial Takeaway</div>
     <p class="section-subtitle">Direct guidance for Switch 365 Ltd's UK business customers</p>
@@ -1275,7 +1435,7 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </section>
 
 <!-- CUSTOMER-FACING OUTPUTS -->
-<section class="section">
+<section class="section" id="outputs">
   <div class="container">
     <div class="section-title"><div class="accent-line"></div>Customer-Facing Outputs</div>
     <p class="section-subtitle">Ready-to-use materials for Switch 365 Ltd sales and customer engagement</p>
@@ -1317,7 +1477,7 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </section>
 
 <!-- SOURCE QUALITY AND CONFIDENCE -->
-<section class="section">
+<section class="section" id="sources">
   <div class="container">
     <div class="section-title"><div class="accent-line"></div>Source Quality and Confidence</div>
     <p class="section-subtitle">What was verified, what was inferred, and what needs further confirmation</p>
@@ -1399,7 +1559,59 @@ a:hover{color:var(--c-accent-end);text-decoration:underline}
 </footer>
 
 <script>
-// Fade-in animation on scroll - FIXED: no flash
+// ===== NAVBAR =====
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+const navbar = document.getElementById('navbar');
+const navAnchors = document.querySelectorAll('.nav-links a');
+
+// Mobile toggle
+navToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  navToggle.classList.toggle('open');
+});
+
+// Close mobile menu on link click
+navAnchors.forEach(a => {
+  a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.classList.remove('open');
+  });
+});
+
+// Active section highlighting on scroll
+const sections = document.querySelectorAll('section[id]');
+let activeSet = false;
+
+function onScroll() {
+  // Navbar shadow on scroll
+  if (window.scrollY > 10) {
+    navbar.classList.add('navbar-scrolled');
+  } else {
+    navbar.classList.remove('navbar-scrolled');
+  }
+
+  // Active section detection
+  const scrollPos = window.scrollY + 80;
+  let current = '';
+  sections.forEach(section => {
+    if (section.offsetTop <= scrollPos) {
+      current = section.getAttribute('id');
+    }
+  });
+
+  navAnchors.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) {
+      a.classList.add('active');
+    }
+  });
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll(); // Run once on load
+
+// ===== Fade-in animation on scroll - FIXED: no flash =====
 const observerOptions = {threshold: 0.1, rootMargin: '0px 0px -50px 0px'};
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
