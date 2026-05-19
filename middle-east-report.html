@@ -3,1415 +3,838 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Switch 365 Ltd | Middle East Energy Market Intelligence | 19 May 2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<title>Middle East Energy Market Intelligence Report — 19 May 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-:root{
-  --c-midnight-start:#262262;
-  --c-midnight-end:#26227f;
-  --c-accent-start:#00d39a;
-  --c-accent-end:#dd40ff;
-  --c-white:#ffffff;
-  --c-offwhite:#dadada;
-  --c-glass:rgba(255,255,255,0.05);
-  --c-glass-border:rgba(255,255,255,0.1);
-  --c-risk-high:#ff4757;
-  --c-risk-medium:#ffa502;
-  --c-risk-limbo:#00d39a;
-  --c-card-bg:rgba(18,16,48,0.7);
-  --c-timeline-line:rgba(0,211,154,0.3);
-}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Montserrat',sans-serif}
-html{scroll-behavior:smooth}
-body{
-  background:linear-gradient(135deg,var(--c-midnight-start) 0%,var(--c-midnight-end) 100%);
-  color:var(--c-white);
-  min-height:100vh;
-  overflow-x:hidden;
-}
-a{color:var(--c-accent-start);text-decoration:none;transition:all 0.3s ease}
-a:hover{color:var(--c-accent-end);text-decoration:underline}
-.container{max-width:1280px;margin:0 auto;padding:0 24px}
+  :root {
+    --bg-start: #262262;
+    --bg-end: #26227f;
+    --accent-start: #00d39a;
+    --accent-end: #dd40ff;
+    --text-primary: #ffffff;
+    --text-secondary: #dadada;
+    --glass: rgba(255,255,255,0.06);
+    --border: rgba(255,255,255,0.10);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(180deg, var(--bg-start), var(--bg-end));
+    color: var(--text-primary);
+    line-height: 1.6;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
 
-/* HERO */
-.hero{
-  position:relative;
-  padding:80px 0 60px;
-  overflow:hidden;
-}
-.hero::before{
-  content:'';
-  position:absolute;
-  top:-50%;right:-20%;
-  width:600px;height:600px;
-  background:radial-gradient(circle,rgba(0,211,154,0.15) 0%,transparent 70%);
-  border-radius:50%;
-  animation:pulse 6s ease-in-out infinite;
-}
-.hero::after{
-  content:'';
-  position:absolute;
-  bottom:-30%;left:-10%;
-  width:500px;height:500px;
-  background:radial-gradient(circle,rgba(221,64,255,0.12) 0%,transparent 70%);
-  border-radius:50%;
-  animation:pulse 8s ease-in-out infinite reverse;
-}
-@keyframes pulse{
-  0%,100%{transform:scale(1);opacity:0.5}
-  50%{transform:scale(1.2);opacity:0.8}
-}
-.hero-content{position:relative;z-index:2}
-.hero-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  background:linear-gradient(90deg,var(--c-accent-start),var(--c-accent-end));
-  color:#fff;
-  padding:8px 20px;
-  border-radius:50px;
-  font-size:0.75rem;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  margin-bottom:24px;
-  box-shadow:0 4px 20px rgba(0,211,154,0.3);
-}
-.hero-badge.urgent{
-  background:linear-gradient(90deg,#ff4757,#ff6b81);
-  box-shadow:0 4px 20px rgba(255,71,87,0.3);
-  animation:urgentPulse 2s ease-in-out infinite;
-}
-@keyframes urgentPulse{
-  0%,100%{box-shadow:0 4px 20px rgba(255,71,87,0.3)}
-  50%{box-shadow:0 4px 30px rgba(255,71,87,0.6)}
-}
-.hero h1{
-  font-size:clamp(2rem,5vw,3.5rem);
-  font-weight:800;
-  line-height:1.1;
-  margin-bottom:16px;
-  background:linear-gradient(90deg,#fff,#dadada);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-.hero-subtitle{
-  font-size:clamp(1rem,2vw,1.3rem);
-  color:var(--c-offwhite);
-  font-weight:400;
-  max-width:700px;
-  margin-bottom:24px;
-  line-height:1.6;
-}
-.hero-meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:24px;
-  font-size:0.85rem;
-  color:var(--c-offwhite);
-}
-.hero-meta span{
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-.hero-meta strong{color:var(--c-white)}
+  /* Header */
+  .report-header {
+    text-align: center; padding: 40px 0 30px;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(90deg, var(--accent-start), var(--accent-end)) 1;
+    margin-bottom: 30px;
+  }
+  .report-header h1 {
+    font-size: 2.2rem; font-weight: 800; margin: 0 0 8px;
+    background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .report-header .subtitle { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 6px; }
+  .report-header .meta { font-size: 0.9rem; color: var(--text-secondary); font-weight: 600; }
 
-/* GLASS CARDS */
-.glass-card{
-  background:var(--c-card-bg);
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
-  border:1px solid var(--c-glass-border);
-  border-radius:16px;
-  padding:28px;
-  transition:all 0.3s ease;
-}
-.glass-card:hover{
-  border-color:rgba(255,255,255,0.2);
-  transform:translateY(-2px);
-  box-shadow:0 10px 40px rgba(0,0,0,0.2);
-}
-.section{
-  padding:40px 0;
-  position:relative;
-}
-.section-title{
-  font-size:clamp(1.3rem,3vw,1.8rem);
-  font-weight:700;
-  margin-bottom:8px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.section-title .accent-line{
-  width:4px;
-  height:28px;
-  background:linear-gradient(180deg,var(--c-accent-start),var(--c-accent-end));
-  border-radius:2px;
-}
-.section-subtitle{
-  color:var(--c-offwhite);
-  font-size:0.9rem;
-  margin-bottom:24px;
-  margin-left:16px;
-}
+  /* Section dividers */
+  h2 {
+    font-size: 1.4rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px;
+    margin-top: 50px; margin-bottom: 20px; padding-bottom: 12px;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(90deg, var(--accent-start), var(--accent-end)) 1;
+  }
+  h3 {
+    font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+    margin-top: 30px; margin-bottom: 12px;
+    color: var(--accent-start);
+  }
+  h4 { font-size: 1rem; font-weight: 700; margin-top: 20px; margin-bottom: 8px; color: var(--text-primary); }
 
-/* EXECUTIVE SUMMARY */
-.exec-summary{
-  background:linear-gradient(135deg,rgba(0,211,154,0.08),rgba(221,64,255,0.08));
-  border:1px solid rgba(0,211,154,0.2);
-}
-.exec-summary p{
-  line-height:1.8;
-  color:var(--c-offwhite);
-  margin-bottom:16px;
-  font-size:0.95rem;
-}
-.exec-summary p:last-child{margin-bottom:0}
-.exec-highlight{
-  background:rgba(255,71,87,0.1);
-  border-left:3px solid var(--c-risk-high);
-  padding:16px 20px;
-  border-radius:0 8px 8px 0;
-  margin:20px 0;
-}
-.exec-highlight p{margin-bottom:0;font-weight:500;color:#fff}
+  /* Stat boxes */
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 24px 0;
+  }
+  .stat-box {
+    background: var(--glass); border: 1px solid var(--border);
+    border-left: 5px solid var(--accent-start);
+    padding: 20px; border-radius: 6px; text-align: center;
+  }
+  .stat-box .value {
+    font-size: 1.8rem; font-weight: 800;
+    background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .stat-box .label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.6px; margin-top: 6px; }
 
-/* GRIDS */
-.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
-.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.grid-5{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+  /* Callout boxes */
+  .callout-box {
+    background: linear-gradient(135deg, rgba(0,211,154,0.08), rgba(221,64,255,0.08));
+    border-left: 5px solid;
+    border-image: linear-gradient(180deg, var(--accent-start), var(--accent-end)) 1;
+    padding: 20px 24px; margin: 20px 0; border-radius: 6px;
+  }
+  .callout-box h4 { margin-top: 0; color: var(--accent-start); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.8px; }
 
-/* STAT CARDS */
-.stat-card{
-  text-align:center;
-  padding:24px 16px;
-}
-.stat-value{
-  font-size:clamp(1.5rem,4vw,2.2rem);
-  font-weight:800;
-  background:linear-gradient(90deg,var(--c-accent-start),var(--c-accent-end));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  margin-bottom:4px;
-}
-.stat-label{
-  font-size:0.8rem;
-  color:var(--c-offwhite);
-  text-transform:uppercase;
-  letter-spacing:0.5px;
-}
-.stat-change{
-  font-size:0.75rem;
-  margin-top:4px;
-  font-weight:600;
-}
-.stat-change.up{color:#ff4757}
-.stat-change.down{color:#00d39a}
-.stat-source{
-  font-size:0.65rem;
-  color:rgba(255,255,255,0.4);
-  margin-top:8px;
-}
+  /* Timeline */
+  .timeline { position: relative; margin: 20px 0; padding-left: 24px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 3px;
+    background: linear-gradient(180deg, var(--accent-start), var(--accent-end));
+    border-radius: 3px;
+  }
+  .timeline-item { position: relative; margin-bottom: 20px; }
+  .timeline-item .dot {
+    position: absolute; left: -24px; top: 4px; width: 16px; height: 16px; border-radius: 50%;
+    background: var(--accent-end); border: 3px solid var(--text-primary); box-shadow: 0 0 0 2px var(--accent-start);
+  }
+  .timeline-item .time { font-weight: 700; font-size: 0.85rem; color: var(--accent-start); margin-bottom: 4px; }
+  .timeline-item .event { font-size: 0.95rem; color: var(--text-secondary); }
 
-/* WARNING CARDS */
-.warning-card{
-  border-left:4px solid var(--c-risk-high);
-  background:linear-gradient(90deg,rgba(255,71,87,0.08),transparent);
-}
-.warning-number{
-  width:32px;height:32px;
-  background:linear-gradient(135deg,var(--c-risk-high),#ff6b81);
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:700;
-  font-size:0.85rem;
-  margin-bottom:12px;
-}
-.warning-card h3{
-  font-size:1rem;
-  font-weight:700;
-  margin-bottom:8px;
-}
-.warning-card p{
-  font-size:0.85rem;
-  color:var(--c-offwhite);
-  line-height:1.6;
-}
-.warning-tag{
-  display:inline-block;
-  background:rgba(255,71,87,0.2);
-  color:#ff6b81;
-  padding:2px 10px;
-  border-radius:20px;
-  font-size:0.7rem;
-  font-weight:600;
-  margin-top:10px;
-  text-transform:uppercase;
-}
+  /* Tables */
+  .table-wrap { overflow-x: auto; margin: 20px 0; }
+  table {
+    width: 100%; border-collapse: collapse; font-size: 0.88rem; background: var(--glass);
+    border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+  }
+  th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th {
+    background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+    color: var(--text-primary); font-weight: 700; text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.6px;
+  }
+  tr:hover td { background: rgba(255,255,255,0.04); }
+  td { color: var(--text-secondary); }
+  td strong { color: var(--text-primary); }
 
-/* TIMELINE */
-.timeline{position:relative;padding-left:32px}
-.timeline::before{
-  content:'';
-  position:absolute;
-  left:8px;top:0;bottom:0;
-  width:2px;
-  background:linear-gradient(180deg,var(--c-accent-start),var(--c-accent-end));
-}
-.timeline-item{
-  position:relative;
-  margin-bottom:24px;
-  padding-bottom:24px;
-  border-bottom:1px solid var(--c-glass-border);
-}
-.timeline-item::before{
-  content:'';
-  position:absolute;
-  left:-28px;top:4px;
-  width:12px;height:12px;
-  background:var(--c-accent-start);
-  border-radius:50%;
-  border:2px solid var(--c-midnight-start);
-}
-.timeline-item.urgent::before{background:var(--c-risk-high)}
-.timeline-time{
-  font-size:0.75rem;
-  color:var(--c-accent-start);
-  font-weight:600;
-  margin-bottom:4px;
-  text-transform:uppercase;
-  letter-spacing:0.5px;
-}
-.timeline-item.urgent .timeline-time{color:var(--c-risk-high)}
-.timeline-title{font-size:0.95rem;font-weight:700;margin-bottom:6px}
-.timeline-desc{
-  font-size:0.85rem;
-  color:var(--c-offwhite);
-  line-height:1.6;
-}
-.timeline-source{
-  font-size:0.7rem;
-  color:rgba(255,255,255,0.4);
-  margin-top:6px;
-}
+  /* Charts */
+  .chart-container { position: relative; height: 320px; width: 100%; margin: 24px 0; background: var(--glass); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
 
-/* RHETORIC TRACKER */
-.rhetoric-card{padding:20px}
-.rhetoric-card h4{
-  font-size:0.85rem;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  margin-bottom:12px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.rhetoric-item{
-  padding:10px 0;
-  border-bottom:1px solid var(--c-glass-border);
-  font-size:0.82rem;
-}
-.rhetoric-item:last-child{border-bottom:none}
-.rhetoric-quote{
-  font-style:italic;
-  color:#fff;
-  margin-bottom:4px;
-}
-.rhetoric-source{
-  font-size:0.7rem;
-  color:var(--c-offwhite);
-}
-.rhetoric-risk{
-  display:inline-block;
-  padding:1px 8px;
-  border-radius:10px;
-  font-size:0.65rem;
-  font-weight:700;
-  margin-left:8px;
-  text-transform:uppercase;
-}
-.rhetoric-risk.high{background:rgba(255,71,87,0.2);color:#ff4757}
-.rhetoric-risk.medium{background:rgba(255,165,2,0.2);color:#ffa502}
-.rhetoric-risk.low{background:rgba(0,211,154,0.2);color:#00d39a}
+  /* Utilities */
+  .gradient-text {
+    background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .text-secondary { color: var(--text-secondary); }
+  .small { font-size: 0.85rem; }
+  .strong { font-weight: 700; color: var(--text-primary); }
 
-/* TABLES */
-.data-table{
-  width:100%;
-  border-collapse:collapse;
-  font-size:0.85rem;
-}
-.data-table th{
-  text-align:left;
-  padding:12px 16px;
-  background:rgba(0,211,154,0.1);
-  color:var(--c-accent-start);
-  font-weight:600;
-  text-transform:uppercase;
-  font-size:0.75rem;
-  letter-spacing:0.5px;
-}
-.data-table td{
-  padding:12px 16px;
-  border-bottom:1px solid var(--c-glass-border);
-  color:var(--c-offwhite);
-}
-.data-table tr:last-child td{border-bottom:none}
-.data-table tr:hover td{background:rgba(255,255,255,0.02)}
+  /* Footer */
+  .footer {
+    margin-top: 60px; padding: 30px 0; text-align: center; font-size: 0.8rem; color: var(--text-secondary);
+    border-top: 1px solid var(--border);
+  }
 
-/* SCENARIO CARDS */
-.scenario-card{border-top:4px solid var(--c-accent-start)}
-.scenario-card.medium{border-top-color:var(--c-risk-medium)}
-.scenario-card.severe{border-top-color:var(--c-risk-high)}
-.scenario-card h3{
-  font-size:1.1rem;
-  font-weight:700;
-  margin-bottom:12px;
-}
-.scenario-card ul{
-  list-style:none;
-  font-size:0.85rem;
-  color:var(--c-offwhite);
-}
-.scenario-card li{
-  padding:6px 0;
-  border-bottom:1px solid var(--c-glass-border);
-  display:flex;
-  justify-content:space-between;
-}
-.scenario-card li:last-child{border-bottom:none}
-.scenario-card .li-label{color:#fff;font-weight:500}
-
-/* CALLOUT */
-.callout{
-  background:linear-gradient(135deg,rgba(0,211,154,0.1),rgba(221,64,255,0.1));
-  border:1px solid rgba(0,211,154,0.3);
-  border-radius:12px;
-  padding:24px;
-  margin:24px 0;
-}
-.callout h3{
-  font-size:1rem;
-  font-weight:700;
-  margin-bottom:12px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.callout p{
-  font-size:0.9rem;
-  color:var(--c-offwhite);
-  line-height:1.7;
-}
-
-/* CUSTOMER OUTPUTS */
-.output-card{
-  border:1px solid var(--c-glass-border);
-  border-radius:12px;
-  padding:24px;
-  margin-bottom:16px;
-}
-.output-card h4{
-  font-size:0.85rem;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  margin-bottom:12px;
-  color:var(--c-accent-start);
-}
-.output-card .output-body{
-  background:rgba(0,0,0,0.2);
-  border-radius:8px;
-  padding:16px;
-  font-size:0.85rem;
-  line-height:1.7;
-  color:var(--c-offwhite);
-  font-family:'Montserrat',sans-serif;
-}
-
-/* SOURCE CHIPS */
-.source-chip{
-  display:inline-flex;
-  align-items:center;
-  gap:4px;
-  background:rgba(0,211,154,0.1);
-  border:1px solid rgba(0,211,154,0.2);
-  padding:4px 12px;
-  border-radius:20px;
-  font-size:0.7rem;
-  margin:4px 4px 4px 0;
-  transition:all 0.2s ease;
-}
-.source-chip:hover{
-  background:rgba(0,211,154,0.2);
-  transform:scale(1.05);
-}
-.source-chip a{color:var(--c-accent-start);text-decoration:none}
-
-/* CONFIDENCE BADGES */
-.conf-high{color:#00d39a;font-weight:600}
-.conf-medium{color:#ffa502;font-weight:600}
-.conf-low{color:#ff4757;font-weight:600}
-
-/* CHART CONTAINER */
-.chart-container{
-  position:relative;
-  height:300px;
-  margin:20px 0;
-}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .hero{padding:60px 0 40px}
-  .grid-2,.grid-3,.grid-4,.grid-5{grid-template-columns:1fr}
-  .timeline{padding-left:24px}
-  .section{padding:30px 0}
-}
-
-/* SCROLLBAR */
-::-webkit-scrollbar{width:8px}
-::-webkit-scrollbar-track{background:var(--c-midnight-start)}
-::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--c-accent-start),var(--c-accent-end));border-radius:4px}
-
-/* ANIMATIONS */
-.fade-in{animation:fadeIn 0.6s ease-out}
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-/* FOOTER */
-.footer{
-  padding:40px 0;
-  text-align:center;
-  border-top:1px solid var(--c-glass-border);
-  margin-top:40px;
-}
-.footer p{
-  font-size:0.8rem;
-  color:rgba(255,255,255,0.4);
-}
-.footer-logo{
-  font-size:1.2rem;
-  font-weight:800;
-  background:linear-gradient(90deg,var(--c-accent-start),var(--c-accent-end));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  margin-bottom:12px;
-}
+  /* Responsive */
+  @media (max-width: 768px) {
+    .report-header h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.15rem; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+    .chart-container { height: 260px; }
+  }
 </style>
-<base target="_blank">
 </head>
 <body>
+<div class="container">
 
-<!-- HERO -->
-<section class="hero">
-  <div class="container hero-content">
-    <div class="hero-badge urgent">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 2L2 22h20L12 2z"/><path d="M12 9v6"/><circle cx="12" cy="18" r="0.5"/></svg>
-      High Risk / Procurement Window
-    </div>
-    <h1>Middle East Escalation &amp; UK Business Energy Procurement</h1>
-    <p class="hero-subtitle">Trump pauses planned Iran strike after Gulf-state intervention. Diplomatic limbo creates short-term market softness, but Hormuz remains restricted, the EIA extends disruption assumptions, and the World Bank baseline already prices in materially higher 2026 energy costs.</p>
-    <div class="hero-meta">
-      <span><strong>Report Date:</strong> 19 May 2026</span>
-      <span><strong>Research Window:</strong> 18 May &ndash; 19 May 2026</span>
-      <span><strong>Extended Verification:</strong> 12 May &ndash; 19 May 2026</span>
-    </div>
+  <div class="report-header">
+    <h1>Middle East Energy Market Intelligence Report</h1>
+    <div class="subtitle">19 May 2026</div>
+    <div class="meta">Report prepared for Switch 365 Ltd</div>
   </div>
-</section>
 
-<!-- EXECUTIVE SUMMARY -->
-<section class="section">
-  <div class="container">
-    <div class="section-title"><div class="accent-line"></div>Executive Summary</div>
-    <p class="section-subtitle">What changed and why it matters for UK business energy buyers</p>
-    <div class="glass-card exec-summary">
-      <p><strong style="color:#fff">Trump has paused a planned attack on Iran at the request of Gulf leaders.</strong> On 18 May, President Trump announced on Truth Social that Qatar, Saudi Arabia and the UAE had asked him to hold off a "scheduled" military attack planned for 19 May, to allow serious negotiations to continue. He instructed the US military to remain ready for a "full, large scale assault" at a moment's notice if an acceptable deal is not reached. He later told reporters the pause could be for "two or three days" because Gulf partners think they are close to a deal. <span class="conf-medium">(Verified: CBS, NPR, Axios, WSJ, Politico &mdash; all citing Trump's Truth Social post and White House statements)</span></p>
-      <p><strong style="color:#fff">This is not de-escalation. It is limbo.</strong> The Strait of Hormuz remains effectively closed. The EIA's May STEO now assumes Hormuz stays shut through late May, with production shut-ins peaking at <strong>10.8 million barrels per day</strong> this month &mdash; worse than its April assumption of 9.1 mbd. The World Bank's baseline already forecasts energy prices surging <strong>24%</strong> in 2026, with Brent at <strong>$86/bbl</strong>, and that baseline assumes the most acute disruptions end in May. Current Brent is trading around <strong>$109&ndash;110/bbl</strong>, well above the World Bank baseline. <span class="conf-high">(Verified: EIA May STEO, World Bank Commodity Markets Outlook April 2026, Trading Economics)</span></p>
-      <p><strong style="color:#fff">The UAE's Barakah nuclear plant was struck by a drone on 17 May,</strong> an attack the UAE foreign ministry called a "treacherous terrorist attack" and a "dangerous escalation." Anwar Gargash, diplomatic adviser to the UAE president, stated the attack "whether carried out by the principal actor or through one of its proxies, represents a dangerous escalation." The IAEA confirmed normal radiation levels and emergency diesel generators powering Unit 3. <span class="conf-high">(Verified: The National UAE, NPR, IAEA statements)</span></p>
-      <p><strong style="color:#fff">Israeli bombing in Lebanon continues despite the nominal ceasefire.</strong> The UK government's 8 May security bulletin confirmed that Lebanon was not part of the US-Iran ceasefire announced 7 April, and Israel retains the right to self-defence. Israeli strikes on 8 April ("Black Wednesday") killed at least 357 people in what the IDF called "Operation Eternal Darkness." Hezbollah has continued attacks on Israeli forces in southern Lebanon. <span class="conf-high">(Verified: UK Gov, BBC, Reuters, ACLED, ISW-CTP)</span></p>
-      <div class="exec-highlight">
-        <p><strong style="color:#fff">Commercial bottom line:</strong> The Gulf-state intervention has created temporary market softness &mdash; Brent fell from ~$112 to ~$109 after Trump's announcement. But this softness is driven by diplomatic sentiment, not physical supply improvement. Hormuz remains restricted, Qatari LNG remains offline with force majeure declared, 20% of global LNG supply is cut off, and supplier price books may not have fully caught up with wholesale moves. For UK businesses within 12 months of contract end, this dip may represent a short procurement window before supplier repricing lands.</p>
-      </div>
-    </div>
+  <!-- EXECUTIVE SUMMARY -->
+  <h2>Executive Summary</h2>
+
+  <div class="stat-grid">
+    <div class="stat-box"><div class="value">$110.21</div><div class="label">Brent Crude / bbl</div></div>
+    <div class="stat-box"><div class="value">121.41p</div><div class="label">UK NBP Gas / therm</div></div>
+    <div class="stat-box"><div class="value">£76.27</div><div class="label">UK Power Sum-27 / MWh</div></div>
+    <div class="stat-box"><div class="value">36%</div><div class="label">EU Gas Storage Full</div></div>
   </div>
-</section>
 
-<!-- TOP FIVE WARNING SIGNS -->
-<section class="section">
-  <div class="container">
-    <div class="section-title"><div class="accent-line"></div>Top Five Warning Signs</div>
-    <p class="section-subtitle">Ranked by commercial impact on UK business energy procurement</p>
-    <div class="grid-5">
-      <div class="glass-card warning-card">
-        <div class="warning-number">1</div>
-        <h3>Hormuz Still Effectively Closed</h3>
-        <p>Selective passage for Chinese, Indian, Pakistani vessels only. Commercial fleet largely excluded. War-risk premiums remain elevated. Insurance constraints preventing normal traffic.</p>
-        <span class="warning-tag">Verified High</span>
-      </div>
-      <div class="glass-card warning-card">
-        <div class="warning-number">2</div>
-        <h3>EIA Extends Disruption Timeline</h3>
-        <p>EIA now assumes Hormuz closed through late May (was April). Production shut-ins peak at 10.8 mbd in May. Global inventories draw 2.6 mbd this year. Brent forecast $106 May&ndash;June.</p>
-        <span class="warning-tag">Verified High</span>
-      </div>
-      <div class="glass-card warning-card">
-        <div class="warning-number">3</div>
-        <h3>Qatar LNG Force Majeure</h3>
-        <p>QatarEnergy declared force majeure. Two Ras Laffan trains damaged, 12.8 Mtpa offline for 3&ndash;5 years. 20% of global LNG supply cut off. European and Asian markets competing for replacement cargoes.</p>
-        <span class="warning-tag">Verified High</span>
-      </div>
-      <div class="glass-card warning-card">
-        <div class="warning-number">4</div>
-        <h3>Paused Attack = Contingent Threat</h3>
-        <p>Trump ordered military to stay ready for "full, large scale assault" at a moment's notice. Pause is for "two or three days." If talks fail, military escalation returns immediately.</p>
-        <span class="warning-tag">Verified High</span>
-      </div>
-      <div class="glass-card warning-card">
-        <div class="warning-number">5</div>
-        <h3>Supplier Price-Book Lag</h3>
-        <p>Wholesale markets moved before supplier books fully reprice. UK NBP at ~121 GBp/thm, TTF at ~&euro;50/MWh. Temporary dip may close quickly once suppliers update pricing.</p>
-        <span class="warning-tag">Inferred Medium</span>
-      </div>
-    </div>
+  <div class="callout-box">
+    <h4>What Changed</h4>
+    <p>On 19 May 2026, President Trump called off a planned military strike on Iran after Gulf allies requested a pause for negotiations, while warning that the <span class="strong">"clock is ticking"</span> for Tehran. The Strait of Hormuz remains effectively closed to most commercial shipping, with 1,550+ vessels stranded and traffic at only ~5% of pre-war levels. Chinese vessels are receiving selective passage under Iranian management protocols, but this does not constitute a general reopening.</p>
   </div>
-</section>
 
-<!-- WHAT CHANGED -->
-<section class="section">
-  <div class="container">
-    <div class="section-title"><div class="accent-line"></div>What Changed Since the Last Report</div>
-    <p class="section-subtitle">Material new developments in the primary research window (18&ndash;19 May 2026)</p>
-    <div class="grid-2">
-      <div class="glass-card">
-        <h3 style="font-size:1rem;margin-bottom:12px;color:var(--c-accent-start)">Military &amp; Political</h3>
-        <ul style="list-style:none;font-size:0.85rem;color:var(--c-offwhite);line-height:1.8">
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">18 May:</strong> Trump announces pause of "scheduled" Iran attack planned for 19 May after requests from Qatar, Saudi Arabia and UAE.</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">18 May:</strong> Trump instructs US military to remain ready for "full, large scale assault" at a moment's notice if deal not reached.</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">18 May:</strong> Trump tells reporters pause could be "two or three days" because Gulf partners think they're close to a deal.</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">17 May:</strong> Trump warns on Truth Social: "For Iran, the Clock is Ticking... there won't be anything left of them."</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">17 May:</strong> Drone strike hits UAE's Barakah nuclear plant electrical generator; IAEA confirms normal radiation.</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">17 May:</strong> Trump convenes national security team at Virginia golf club to discuss Iran options.</li>
-          <li style="padding:6px 0"><strong style="color:#fff">16 May:</strong> Trump threatens Iran with renewed attacks; Putin holds calls with UAE, meets Iranian FM Araghchi.</li>
-        </ul>
-      </div>
-      <div class="glass-card">
-        <h3 style="font-size:1rem;margin-bottom:12px;color:var(--c-accent-start)">Market &amp; Shipping</h3>
-        <ul style="list-style:none;font-size:0.85rem;color:var(--c-offwhite);line-height:1.8">
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">18 May:</strong> Brent falls from $112 to $109 after Trump's pause announcement &mdash; headline-driven softness.</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">19 May:</strong> Brent trading at ~$109&ndash;110, still well above World Bank $86 baseline and EIA $96 average.</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">19 May:</strong> UK NBP at ~121 GBp/thm, TTF at ~&euro;50/MWh. Both up ~20% over past month.</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Extended:</strong> EIA May STEO now assumes Hormuz closed through late May (extended from April).</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Extended:</strong> Production shut-ins peak at 10.8 mbd in May vs 9.1 mbd in April STEO.</li>
-          <li style="padding:6px 0"><strong style="color:#fff">Extended:</strong> World Bank baseline: 24% energy price rise, Brent $86, assumes acute disruption ends in May.</li>
-        </ul>
-      </div>
-    </div>
+  <h3>1.1 Primary Research Window</h3>
+  <p class="text-secondary">The reporting period from 18–19 May 2026 has been dominated by a dramatic sequence of diplomatic and military developments that together have kept global energy markets in a state of acute uncertainty. The single most significant event was President Donald Trump's announcement on the evening of 18 May that he had called off a planned military strike on Iran scheduled for Tuesday 19 May, following direct requests from the leaders of Qatar, Saudi Arabia and the United Arab Emirates.</p>
+  <p class="text-secondary">The Gulf leaders asked for a pause of two to three days to allow what they described as "serious negotiations" to continue, expressing confidence that a deal could be reached that would be "very acceptable" to the United States and the broader Middle East. Trump, in a detailed Truth Social post, stated that he had instructed Defense Secretary Pete Hegseth, General Dan Caine (Chairman of the Joint Chiefs of Staff), and the U.S. military to stand down from the planned attack, but crucially added that the military had been ordered to remain ready to launch "a full, large scale assault of Iran, on a moment's notice" if negotiations fail to produce an acceptable agreement.</p>
+  <p class="text-secondary">The announcement triggered an immediate reaction in oil markets, with Brent crude futures falling more than $2 per barrel within minutes of Trump's post, from $108.83 to around $106, before partially recovering to settle at $107.25 on Monday. By Tuesday 19 May, Brent had settled at approximately $110.21 per barrel, still reflecting significant geopolitical risk premium but showing the market's sensitivity to any signals of potential de-escalation. However, the underlying physical conditions in the Strait of Hormuz remain virtually unchanged. The waterway continues to be effectively closed to normal commercial traffic, with approximately 1,550 vessels stranded and 22,500 mariners trapped, according to confirmation from General Dan Caine on 6 May. Traffic through Hormuz has been running at approximately 5% of pre-war average across April, per vessel transponder data published by Kpler.</p>
+
+  <div class="callout-box">
+    <h4>Hormuz Reality Check</h4>
+    <p>The only meaningful change on the water has been the commencement of selective passage for Chinese-linked vessels under Iranian management protocols, with Iranian state media reporting that more than 30 ships had been permitted to pass since 13 May, including a Chinese supertanker carrying approximately 2 million barrels of Iraqi crude that had been stranded in the Persian Gulf for over two months.</p>
   </div>
-</section>
 
-<!-- FULL TIMELINE -->
-<section class="section">
-  <div class="container">
-    <div class="section-title"><div class="accent-line"></div>Full Timeline &mdash; Primary Research Window</div>
-    <p class="section-subtitle">Chronological record of verified developments, 18&ndash;19 May 2026</p>
-    <div class="glass-card">
-      <div class="timeline">
-        <div class="timeline-item urgent">
-          <div class="timeline-time">18 May 2026 &mdash; Afternoon (US EDT)</div>
-          <div class="timeline-title">Trump Announces Pause of Planned Iran Attack</div>
-          <div class="timeline-desc">Trump posts on Truth Social that Qatar's Emir Tamim, Saudi Crown Prince Mohammed bin Salman, and UAE President Mohamed bin Zayed asked him to "hold off on our planned Military attack of the Islamic Republic of Iran, which was scheduled for tomorrow." He says "serious negotiations are now taking place" and that Gulf leaders believe "a Deal will be made." He instructs Secretary Hegseth, General Caine, and the US military to be "prepared to go forward with a full, large scale assault of Iran, on a moment's notice" if no acceptable deal is reached.</div>
-          <div class="timeline-source">Sources: <a href="https://www.cbsnews.com/news/trump-says-called-off-scheduled-iran-attack-gulf-partners/" target="_blank">CBS News</a>, <a href="https://www.npr.org/2026/05/19/g-s1-122762/trump-says-hes-called-off-iran-strike" target="_blank">NPR</a>, <a href="https://www.axios.com/2026/05/18/trump-iran-attack-suspend-nuclear-talks" target="_blank">Axios</a></div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-time">18 May 2026 &mdash; Evening (US EDT)</div>
-          <div class="timeline-title">Trump Speaks to Reporters at White House</div>
-          <div class="timeline-desc">Trump confirms "other countries have come to me... We were getting ready to do a very major attack tomorrow. I put it off for a little while, hopefully, maybe, forever. But possibly for a little while. Because we've had very big discussions with Iran." He says Gulf partners asked for "two or three days" because they think they're close to a deal. He calls it a "very positive development" but acknowledges past deals seemed close and fell through. "But this is a little bit different," he adds.</div>
-          <div class="timeline-source">Sources: <a href="https://www.npr.org/2026/05/19/g-s1-122762/trump-says-hes-called-off-iran-strike" target="_blank">NPR</a>, <a href="https://www.wsj.com/world/middle-east/trump-says-he-will-hold-off-on-iran-attack-as-serious-negotiations-are-under-way-7ff01a96" target="_blank">Wall Street Journal</a></div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-time">18 May 2026 &mdash; Evening</div>
-          <div class="timeline-title">Oil Prices React to Announcement</div>
-          <div class="timeline-desc">Minutes before Trump's post, Brent futures were trading at $108.83/bbl. His announcement almost instantly shaved more than $2 off the price. Brent ended Monday at $107.25/bbl. The dip is attributed to diplomatic optimism, not physical supply improvement. Iranian state TV called it a "retreat" based on "fear."</div>
-          <div class="timeline-source">Source: <a href="https://www.npr.org/2026/05/19/g-s1-122762/trump-says-hes-called-off-iran-strike" target="_blank">NPR</a></div>
-        </div>
-        <div class="timeline-item urgent">
-          <div class="timeline-time">17 May 2026</div>
-          <div class="timeline-title">Trump Warns "The Clock Is Ticking" for Iran</div>
-          <div class="timeline-desc">Trump posts on Truth Social: "For Iran, the Clock is Ticking, and they better get moving, FAST, or there won't be anything left of them." He tells Axios in a phone call that "the clock is ticking" and warns Iran will "get hit much harder" if they don't come with a better offer. He is expected to convene his national security team on 19 May to discuss military options.</div>
-          <div class="timeline-source">Source: <a href="https://www.axios.com/2026/05/17/trump-iran-warning-harder-strikes" target="_blank">Axios</a></div>
-        </div>
-        <div class="timeline-item urgent">
-          <div class="timeline-time">17 May 2026</div>
-          <div class="timeline-title">Drone Strikes UAE's Barakah Nuclear Plant</div>
-          <div class="timeline-desc">A drone strike sparks a fire on an electrical generator outside the inner perimeter of the UAE's Barakah nuclear power plant. Three drones entered from the western border; two were intercepted. No injuries, no radiological impact. UAE Foreign Minister Abdullah bin Zayed condemns the "treacherous terrorist attack." Anwar Gargash calls it "a dangerous escalation and a dark development that violates all international laws." Saudi Arabia condemns the attack and says it intercepted three drones from Iraqi airspace.</div>
-          <div class="timeline-source">Sources: <a href="https://www.thenationalnews.com/news/uae/2026/05/17/uae-launches-investigation-into-source-of-drone-strike-on-barakah-nuclear-plant/" target="_blank">The National UAE</a>, <a href="https://www.npr.org/2026/05/18/g-s1-122534/drone-strikes-uae-nuclear-plant" target="_blank">NPR</a>, <a href="https://www.nucnet.org/news/radiation-levels-after-barakah-nuclear-plant-drone-attack-says-iaea-5-1-2026" target="_blank">NucNet/IAEA</a></div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-time">17 May 2026</div>
-          <div class="timeline-title">Trump Meets National Security Team</div>
-          <div class="timeline-desc">Trump meets with VP JD Vance, envoy Steve Witkoff, Secretary of State Marco Rubio, and CIA Director John Ratcliffe at his Virginia golf club to discuss Iran. The meeting comes as Pakistan's interior minister visits Tehran for talks and Qatari PM speaks with Pakistani and Iranian counterparts.</div>
-          <div class="timeline-source">Source: <a href="https://www.axios.com/2026/05/17/trump-iran-warning-harder-strikes" target="_blank">Axios</a></div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-time">19 May 2026</div>
-          <div class="timeline-title">Iranian Defence Systems Activated on Qeshm Island</div>
-          <div class="timeline-desc">Iranian state TV reports defence systems were activated late on 18 May on Qeshm Island in the Strait of Hormuz. The situation is "under control" on the island, home to about 150,000 people and a water desalination plant. The activation underscores continued military readiness on both sides despite the diplomatic pause.</div>
-          <div class="timeline-source">Source: <a href="https://www.npr.org/2026/05/19/g-s1-122762/trump-says-hes-called-off-iran-strike" target="_blank">NPR</a></div>
-        </div>
-      </div>
-    </div>
+  <p class="text-secondary">On the diplomatic front, Iran submitted a revised 14-point peace proposal to Pakistani mediators on 18 May, according to the semi-official Tasnim news agency. The proposal reportedly focuses on negotiations to end the war and includes demands for U.S. "trust-building" measures, including the suspension of oil sanctions during the negotiation period. However, the proposal's status remains firmly in the "under review" category—neither accepted, agreed, nor implemented. Trump's own words on Monday evening captured the precariousness of the situation: <span class="strong">"It's a very positive development, but we'll see whether or not it amounts to anything. We've had periods of time where we had, we thought, pretty much getting close to making a deal, and didn't work out."</span></p>
+
+  <div class="callout-box">
+    <h4>Deal Closer, But Not Done</h4>
+    <p>This context is critical for UK business energy buyers: a pause in military action is not de-escalation unless physical flows, shipping access, insurance premiums, LNG availability, wholesale pricing and supplier price books also improve—and none of these conditions have materially changed.</p>
   </div>
-</section>
 
-<!-- RHETORIC TRACKER -->
-<section class="section">
-  <div class="container">
-    <div class="section-title"><div class="accent-line"></div>Rhetoric Tracker</div>
-    <p class="section-subtitle">What was said, by whom, and whether it is operationally meaningful</p>
-    <div class="grid-2">
-      <div class="glass-card rhetoric-card">
-        <h4><span style="color:var(--c-risk-high)">&#9679;</span> Trump &amp; US Officials</h4>
-        <div class="rhetoric-item">
-          <div class="rhetoric-quote">"I have instructed... the United States Military, that we will NOT be doing the scheduled attack of Iran tomorrow, but have further instructed them to be prepared to go forward with a full, large scale assault of Iran, on a moment's notice."</div>
-          <div class="rhetoric-source">Trump on Truth Social, 18 May <span class="rhetoric-risk high">Operationally meaningful</span></div>
-        </div>
-        <div class="rhetoric-item">
-          <div class="rhetoric-quote">"The clock is ticking. They better get moving fast or they are not gonna have anything left."</div>
-          <div class="rhetoric-source">Trump to Axios, 17 May <span class="rhetoric-risk high">Escalatory signal</span></div>
-        </div>
-        <div class="rhetoric-item">
-          <div class="rhetoric-quote">"I put it off for a little while, hopefully, maybe, forever. But possibly for a little while."</div>
-          <div class="rhetoric-source">Trump at White House, 18 May <span class="rhetoric-risk medium">Conditional &amp; vague</span></div>
-        </div>
-      </div>
-      <div class="glass-card rhetoric-card">
-        <h4><span style="color:var(--c-accent-start)">&#9679;</span> Gulf-State Leaders</h4>
-        <div class="rhetoric-item">
-          <div class="rhetoric-quote">"The targeting of the Barakah nuclear energy plant... represents a dangerous escalation and a dark development that violates all international laws and norms."</div>
-          <div class="rhetoric-source">Anwar Gargash, UAE presidential adviser, 17 May <span class="rhetoric-risk high">Signals retaliation risk</span></div>
-        </div>
-        <div class="rhetoric-item">
-          <div class="rhetoric-quote">Saudi Arabia, Qatar, UAE requested Trump delay attack for "two or three days" because they believe a deal is close.</div>
-          <div class="rhetoric-source">Trump relaying Gulf requests, 18 May <span class="rhetoric-risk medium">Diplomatic intervention</span></div>
-        </div>
-        <div class="rhetoric-item">
-          <div class="rhetoric-quote">Saudi Arabia intercepted three drones from Iraqi airspace and condemned the Barakah attack.</div>
-          <div class="rhetoric-source">Saudi official statements, 17&ndash;18 May <span class="rhetoric-risk medium">Defensive posture</span></div>
-        </div>
-      </div>
-      <div class="glass-card rhetoric-card">
-        <h4><span style="color:#ff4757">&#9679;</span> Iran &amp; Iranian Officials</h4>
-        <div class="rhetoric-item">
-          <div class="rhetoric-quote">"Our armed forces' fingers are on the trigger, while diplomacy is also continuing."</div>
-          <div class="rhetoric-source">Mohsen Rezaei, military adviser to Iran's supreme leader, 17 May <span class="rhetoric-risk high">Dual-track threat</span></div>
-        </div>
-        <div class="rhetoric-item">
-          <div class="rhetoric-quote">Iranian state TV called Trump's pause a "retreat" based on "fear."</div>
-          <div class="rhetoric-source">Iranian state TV/X account, 18 May <span class="rhetoric-risk low">Propaganda</span></div>
-        </div>
-        <div class="rhetoric-item">
-          <div class="rhetoric-quote">Iran relayed an amended set of terms for a possible deal through Pakistani mediators.</div>
-          <div class="rhetoric-source">Iranian sources via CBS, 18 May <span class="rhetoric-risk medium">Tactical move</span></div>
-        </div>
-      </div>
-      <div class="glass-card rhetoric-card">
-        <h4><span style="color:var(--c-offwhite)">&#9679;</span> Mediators &amp; International</h4>
-        <div class="rhetoric-item">
-          <div class="rhetoric-quote">"At present, there isn't a situation that poses a real threat [on nuclear]. But for this to continue, the parties must reach and conclude a nuclear negotiation."</div>
-          <div class="rhetoric-source">Hakan Fidan, Turkish FM, 18 May <span class="rhetoric-risk medium">Cautious assessment</span></div>
-        </div>
-        <div class="rhetoric-item">
-          <div class="rhetoric-quote">Pakistani interior minister visited Tehran 16&ndash;17 May for talks. Qatari PM spoke with Pakistani and Iranian counterparts 17 May.</div>
-          <div class="rhetoric-source">Axios, 17 May <span class="rhetoric-risk medium">Active mediation</span></div>
-        </div>
-        <div class="rhetoric-item">
-          <div class="rhetoric-quote">IAEA: "Military activity that threatened nuclear safety was unacceptable." Called for maximum restraint near nuclear plants.</div>
-          <div class="rhetoric-source">Rafael Grossi, IAEA DG, 17 May <span class="rhetoric-risk medium">Institutional warning</span></div>
-        </div>
-      </div>
-    </div>
+  <h3>1.2 Key Development Brief</h3>
+  <p class="text-secondary">The developments that have materially changed since the last reporting period can be summarised as follows. First, the disclosure of a planned U.S. military strike for 19 May and its subsequent postponement at Gulf-state request represents the most concrete near-escalation event since the April 8 ceasefire. The fact that Gulf leaders felt compelled to intervene directly suggests they assessed the risk of imminent military action as credible and immediate. Second, Trump's "clock is ticking" warning on 17–18 May, delivered via Truth Social after a phone call with Israeli Prime Minister Benjamin Netanyahu, has introduced a new time pressure element to the diplomatic equation. The warning—<span class="strong">"they better get moving, FAST, or there won't be anything left of them. TIME IS OF THE ESSENCE!"</span>—was accompanied by reports that Trump would meet his senior national security team on 19 May to discuss military options, according to Axios.</p>
+
+  <div class="callout-box">
+    <h4>Trump's Tehran Warning</h4>
+    <p>The "clock is ticking" warning is Trump's most explicit deadline threat since the April 8 ceasefire. It signals that the diplomatic window is measured in days, not weeks.</p>
   </div>
-</section>
 
-<!-- CEASEFIRE REALITY CHECK -->
-<section class="section">
-  <div class="container">
-    <div class="section-title"><div class="accent-line"></div>Ceasefire Reality Check</div>
-    <p class="section-subtitle">What the ceasefire says versus what is actually happening on the ground</p>
-    <div class="grid-2">
-      <div class="glass-card">
-        <h3 style="font-size:1rem;margin-bottom:16px;color:var(--c-accent-start)">What the Ceasefire Says</h3>
-        <ul style="list-style:none;font-size:0.85rem;color:var(--c-offwhite);line-height:1.8">
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">US-Iran ceasefire announced 7 April 2026, originally for two weeks.</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">Trump extended the ceasefire indefinitely on 18 May at Pakistan's request.</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">Ceasefire covers US-Iran hostilities, but <strong style="color:#fff">Lebanon is explicitly excluded.</strong></li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">Israel retains right to self-defence and continues operations in southern Lebanon.</li>
-          <li style="padding:6px 0">US naval blockade of Iranian ports continues until Iran produces a unified proposal.</li>
-        </ul>
-      </div>
-      <div class="glass-card">
-        <h3 style="font-size:1rem;margin-bottom:16px;color:var(--c-risk-high)">What Actually Happened</h3>
-        <ul style="list-style:none;font-size:0.85rem;color:var(--c-offwhite);line-height:1.8">
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Israeli bombing continued:</strong> "Black Wednesday" 8 April killed 357+ people in 100+ airstrikes. IDF dubbed it "Operation Eternal Darkness."</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Hezbollah attacks continued:</strong> Hezbollah claimed 49 attacks on Israeli forces in Lebanon on 9&ndash;10 April alone.</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Gulf infrastructure attacked:</strong> UAE's Barakah nuclear plant struck 17 May. Saudi Arabia intercepted drones.</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Hormuz remains restricted:</strong> Selective passage only. Commercial traffic near minimum levels.</li>
-          <li style="padding:6px 0"><strong style="color:#fff">Houthi threats to Bab el-Mandeb:</strong> Yemen-based Houthis warn they could close the second choke point if Gulf states join US-Israel war.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="callout" style="margin-top:24px">
-      <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c-risk-high)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Analyst Assessment</h3>
-      <p>The ceasefire is operationally hollow. Trump delaying a strike at Gulf-state request does not make the ceasefire more durable &mdash; it makes it politically extended. The underlying conditions remain unresolved: Hormuz is still restricted, Qatari LNG is still offline, the US blockade continues, Hezbollah and Israel are still fighting, and Iran has not accepted the US proposal. Gulf-state intervention reduces immediate military risk for a matter of days, but it also <strong style="color:#fff">prolongs uncertainty</strong> and keeps the market in limbo. The pause is conditional, time-limited, and reversible.</p>
-    </div>
+  <p class="text-secondary">Third, the drone attack on the UAE's Barakah nuclear power plant on 17 May represents a significant escalation in targeting, marking the first attack on nuclear infrastructure in the conflict and prompting an unusually strong response from the IAEA, which called for "maximum military restraint" near any nuclear facility. The UAE, while not directly blaming Iran, described the incident as an "unprovoked terrorist attack" and reserved its sovereign right to respond.</p>
+
+  <div class="callout-box">
+    <h4>Trump's Delayed Attack</h4>
+    <p>Trump's decision to call off the planned 19 May strike at Gulf-state request is the second time the U.S. has pulled back from the brink during the ceasefire period. The military remains on hair-trigger readiness, with the strike option reactivatable "on a moment's notice."</p>
   </div>
-</section>
 
-<!-- SHIPPING AND CHOKE POINT STATUS -->
-<section class="section">
-  <div class="container">
-    <div class="section-title"><div class="accent-line"></div>Shipping and Choke Point Status</div>
-    <p class="section-subtitle">Hormuz and Bab el-Mandeb: the two choke points that matter for UK energy</p>
-    <div class="grid-2">
-      <div class="glass-card">
-        <h3 style="font-size:1.1rem;margin-bottom:16px;display:flex;align-items:center;gap:8px">
-          <span style="color:var(--c-risk-high)">&#9679;</span> Strait of Hormuz
-        </h3>
-        <table class="data-table">
-          <tr><td style="width:50%"><strong style="color:#fff">Status</strong></td><td>Effectively closed to commercial traffic</td></tr>
-          <tr><td><strong style="color:#fff">Selective Passage</strong></td><td>Chinese, Indian, Pakistani vessels allowed</td></tr>
-          <tr><td><strong style="color:#fff">Daily Transits</strong></td><td>Near minimum levels (~4&ndash;10 vessels vs normal ~95)</td></tr>
-          <tr><td><strong style="color:#fff">War-Risk Premiums</strong></td><td>Elevated; insurance constraints persist</td></tr>
-          <tr><td><strong style="color:#fff">GPS/AIS Interference</strong></td><td>Intensified; electronic manipulation reported</td></tr>
-          <tr><td><strong style="color:#fff">US Blockade</strong></td><td>Continues; 85 commercial vessels redirected (CENTCOM)</td></tr>
-          <tr><td><strong style="color:#fff">Iranian Management</strong></td><td>IRGC controls passage protocols; tolls/permissions unverified</td></tr>
-          <tr><td><strong style="color:#fff">Backlog/Queue</strong></td><td>Significant; vessels waiting or rerouted via Cape of Good Hope</td></tr>
-        </table>
-        <div style="margin-top:16px">
-          <span class="source-chip"><a href="https://windward.ai/blog/march-8-maritime-intelligence-daily/" target="_blank">Windward Maritime</a></span>
-          <span class="source-chip"><a href="https://www.nytimes.com/2026/05/09/world/middleeast/strait-hormuz-ships-blockade-us-iran.html" target="_blank">New York Times</a></span>
-          <span class="source-chip"><a href="https://www.youtube.com/watch?v=7ftOkFsKmIo" target="_blank">Maritime Tracking</a></span>
-        </div>
-      </div>
-      <div class="glass-card">
-        <h3 style="font-size:1.1rem;margin-bottom:16px;display:flex;align-items:center;gap:8px">
-          <span style="color:var(--c-risk-medium)">&#9679;</span> Bab el-Mandeb (Red Sea)
-        </h3>
-        <table class="data-table">
-          <tr><td style="width:50%"><strong style="color:#fff">Status</strong></td><td>Open but under threat; traffic below normal</td></tr>
-          <tr><td><strong style="color:#fff">Houthi Threat</strong></td><td>Explicit warning to close strait if Gulf joins war</td></tr>
-          <tr><td><strong style="color:#fff">Daily Transits</strong></td><td>~50% of typical levels</td></tr>
-          <tr><td><strong style="color:#fff">Global Trade Share</strong></td><td>~12% of seaborne oil trade; $1tn goods annually</td></tr>
-          <tr><td><strong style="color:#fff">Shipping Reroutes</strong></td><td>Africa/Cape of Good Hope volumes at record highs</td></tr>
-          <tr><td><strong style="color:#fff">Insurance</strong></td><td>War-risk premiums elevated; some routes uninsurable</td></tr>
-          <tr><td><strong style="color:#fff">US Deterrence</strong></td><td>Operation Rough Rider continues; layered missile defence</td></tr>
-          <tr><td><strong style="color:#fff">Dual-Choke Risk</strong></td><td>Simultaneous closure would cripple Europe-Asia trade</td></tr>
-        </table>
-        <div style="margin-top:16px">
-          <span class="source-chip"><a href="https://www.foxnews.com/politics/second-choke-point-crisis-looms-houthis-threaten-key-red-sea-shipping-lane" target="_blank">Fox News</a></span>
-          <span class="source-chip"><a href="https://www.habtoorresearch.com/programmes/houthis-close-bab-el-mandeb/" target="_blank">Habtoor Research</a></span>
-          <span class="source-chip"><a href="https://www.maritime.dot.gov/msci/2026-006-red-sea-bab-el-mandeb-strait-gulf-aden-arabian-sea-and-somali-basin-houthi-attacks" target="_blank">US Maritime Advisory</a></span>
-        </div>
-      </div>
-    </div>
-    <div class="callout" style="margin-top:24px">
-      <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c-accent-start)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Dual Choke Point Assessment</h3>
-      <p>A simultaneous disruption of Hormuz and Bab el-Mandeb would be catastrophic for UK energy markets. Europe relies on Bab el-Mandeb for Gulf oil and LNG imports, including from Qatar &mdash; Europe's second-largest LNG supplier. Qatar has already suspended LNG tanker transits through Bab el-Mandeb. If the Houthis act on their threat, European buyers would be forced to draw strategic reserves and compete intensely for alternative LNG cargoes, driving TTF and NBP prices significantly higher. The Cape of Good Hope route adds 4,000&ndash;6,000 nautical miles and up to 20 days to journeys, tightening global vessel availability and freight rates.</p>
-    </div>
+  <p class="text-secondary">Fourth, the commencement of Chinese vessel transit under Iranian management protocols has introduced a new dimension of selective access to Hormuz that does not constitute general reopening but does create a two-tier shipping environment. This development, which followed direct discussions between Chinese Foreign Minister Wang Yi and Iranian officials, was not accompanied by any Chinese commitment to pressure Iran toward a comprehensive settlement. Fifth, the EIA's revised assumptions published on 12 May now project the Strait of Hormuz remaining effectively closed through end of May, with Middle Eastern production shut-ins rising to a peak of 10.8 million bpd in May—significantly higher than the agency's earlier forecast of 9.1 million bpd for April. This revision makes the World Bank's baseline assumption—that the most acute disruptions end in May and shipping gradually returns to pre-war levels by late 2026—increasingly look optimistic.</p>
+
+  <div class="callout-box">
+    <h4>China and Selective Passage</h4>
+    <p>Beijing has moved from "passive beneficiary of the crisis to active manager of its own corridor access." This is a meaningful step but not committed mediation. The selective Chinese transit arrangement creates a two-tier global energy market where Chinese-flagged vessels receive preferential access while European and other neutral vessels remain excluded.</p>
   </div>
-</section>
 
-<!-- ENERGY MARKET STAT SHEET -->
-<section class="section">
-  <div class="container">
-    <div class="section-title"><div class="accent-line"></div>Energy Market Stat Sheet</div>
-    <p class="section-subtitle">Key market indicators as of 19 May 2026</p>
-    <div class="grid-4">
-      <div class="glass-card stat-card">
-        <div class="stat-value">$109.69</div>
-        <div class="stat-label">Brent Crude ($/bbl)</div>
-        <div class="stat-change down">-2.15% today</div>
-        <div class="stat-source">Source: FT Markets / ICE</div>
-      </div>
-      <div class="glass-card stat-card">
-        <div class="stat-value">$95.56</div>
-        <div class="stat-label">WTI Crude ($/bbl)</div>
-        <div class="stat-change up">+0.50% today</div>
-        <div class="stat-source">Source: ICE/CME</div>
-      </div>
-      <div class="glass-card stat-card">
-        <div class="stat-value">&euro;49.77</div>
-        <div class="stat-label">TTF Gas (&euro;/MWh)</div>
-        <div class="stat-change down">-0.96% today</div>
-        <div class="stat-source">Source: Trading Economics</div>
-      </div>
-      <div class="glass-card stat-card">
-        <div class="stat-value">121.41</div>
-        <div class="stat-label">UK NBP (GBp/thm)</div>
-        <div class="stat-change down">-1.54% today</div>
-        <div class="stat-source">Source: Trading Economics / ICE</div>
-      </div>
-    </div>
-    <div style="margin-top:20px">
-      <div class="glass-card">
-        <h3 style="font-size:1rem;margin-bottom:16px">Comprehensive Market Data</h3>
-        <div style="overflow-x:auto">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Indicator</th>
-                <th>Current / Latest</th>
-                <th>Change (1 Month)</th>
-                <th>Change (YTD)</th>
-                <th>Source</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong style="color:#fff">Brent Crude</strong></td>
-                <td>$109.69/bbl</td>
-                <td style="color:#ff4757">+15.4%</td>
-                <td style="color:#ff4757">+~60%</td>
-                <td>FT Markets, ICE</td>
-              </tr>
-              <tr>
-                <td><strong style="color:#fff">WTI Crude</strong></td>
-                <td>$95.56/bbl</td>
-                <td style="color:#ff4757">+~14%</td>
-                <td style="color:#ff4757">+~50%</td>
-                <td>CME Group</td>
-              </tr>
-              <tr>
-                <td><strong style="color:#fff">TTF (Dutch Gas)</strong></td>
-                <td>&euro;49.77/MWh</td>
-                <td style="color:#ff4757">+23.5%</td>
-                <td style="color:#ff4757">+34.5%</td>
-                <td>Trading Economics</td>
-              </tr>
-              <tr>
-                <td><strong style="color:#fff">UK NBP</strong></td>
-                <td>121.41 GBp/thm</td>
-                <td style="color:#ff4757">+19.8%</td>
-                <td style="color:#ff4757">+36.2%</td>
-                <td>Trading Economics / ICE</td>
-              </tr>
-              <tr>
-                <td><strong style="color:#fff">UK Business Electricity</strong></td>
-                <td>~25.8 p/kWh (avg)</td>
-                <td style="color:#ff4757">+Elevated</td>
-                <td style="color:#ff4757">+Significant</td>
-                <td>WeSave / Market</td>
-              </tr>
-              <tr>
-                <td><strong style="color:#fff">UK Business Gas</strong></td>
-                <td>~8.5 p/kWh (avg)</td>
-                <td style="color:#00d39a">Easing from peak</td>
-                <td style="color:#ff4757">+Elevated</td>
-                <td>WeSave / Market</td>
-              </tr>
-              <tr>
-                <td><strong style="color:#fff">Hormuz Traffic</strong></td>
-                <td>~4&ndash;10 vessels/day</td>
-                <td style="color:#ff4757">~90% below normal</td>
-                <td style="color:#ff4757">~90% below normal</td>
-                <td>MarineTraffic / PortWatch</td>
-              </tr>
-              <tr>
-                <td><strong style="color:#fff">Qatar LNG Output</strong></td>
-                <td>Offline / Force Majeure</td>
-                <td style="color:#ff4757">20% global supply cut</td>
-                <td style="color:#ff4757">20% global supply cut</td>
-                <td>QatarEnergy / Oxford Energy</td>
-              </tr>
-              <tr>
-                <td><strong style="color:#fff">War-Risk Premium</strong></td>
-                <td>Elevated</td>
-                <td style="color:#ff4757">Sustained high</td>
-                <td style="color:#ff4757">Multi-year highs</td>
-                <td>Lloyd's List / Insurers</td>
-              </tr>
-              <tr>
-                <td><strong style="color:#fff">Production Shut-ins</strong></td>
-                <td>10.8 mbd (May peak)</td>
-                <td style="color:#ff4757">Worsening</td>
-                <td style="color:#ff4757">Record levels</td>
-                <td>EIA May STEO</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+  <h3>1.3 Direct Commercial Conclusion</h3>
+  <p class="text-secondary">For UK business energy customers, the message from this reporting period is unambiguous: <span class="strong gradient-text">waiting is not neutral.</span> The postponement of a planned U.S. strike has created a moment of temporary market softness, but it has not reduced the structural risks that have driven wholesale gas prices up 19.84% over the past 30 days and UK power prices up 5.2% over the same period. The World Bank's baseline already projects energy prices surging 24% in 2026 even if the major part of the disruption ends in May, and the EIA's revised assumptions suggest that disruption may last longer than the World Bank baseline assumes. With European gas storage at just 36% full—19 percentage points below the 5-year norm—and the winter refill season approaching, the market's sensitivity to any further supply shock is acute. Supplier price books in the UK typically lag wholesale market movements by days to weeks, meaning that current available fixed pricing may not yet fully reflect the recent upward pressure. For businesses within 12 months of contract end date, this creates a short procurement window during which testing available supplier pricing could secure terms before the next round of repricing lands. The commercially rational position, where current forward pricing and the customer's own risk profile support it, is to review immediately and consider fixing now for 36+ months.</p>
+
+  <div class="callout-box">
+    <h4>Fix Now Implications</h4>
+    <p>The commercially rational position, where current forward pricing and the customer's own risk profile support it, is to <span class="strong">review immediately and consider fixing now for 36+ months</span>.</p>
   </div>
-</section>
 
-<!-- WORLD BANK VS EIA -->
-<section class="section">
-  <div class="container">
-    <div class="section-title"><div class="accent-line"></div>World Bank vs EIA: Institutional Baseline Comparison</div>
-    <p class="section-subtitle">How the two major institutions frame energy price risk &mdash; and what that means commercially</p>
-    <div class="grid-2">
-      <div class="glass-card">
-        <h3 style="font-size:1.1rem;margin-bottom:16px;display:flex;align-items:center;gap:8px">
-          <span style="color:var(--c-accent-start)">&#9679;</span> World Bank Baseline (April 2026)
-        </h3>
-        <table class="data-table">
-          <tr><td style="width:55%"><strong style="color:#fff">Energy Price Forecast</strong></td><td><strong style="color:var(--c-accent-start)">+24%</strong> surge in 2026</td></tr>
-          <tr><td><strong style="color:#fff">Brent Baseline</strong></td><td><strong>$86/bbl</strong> average 2026</td></tr>
-          <tr><td><strong style="color:#fff">Brent 2025</strong></td><td>$69/bbl</td></tr>
-          <tr><td><strong style="color:#fff">Stress Case Brent</strong></td><td><strong style="color:var(--c-risk-high)">Up to $115/bbl</strong></td></tr>
-          <tr><td><strong style="color:#fff">Disruption Assumption</strong></td><td>Most acute disruptions end in <strong>May 2026</strong></td></tr>
-          <tr><td><strong style="color:#fff">Hormuz Recovery</strong></td><td>Shipping gradually returns to pre-war by <strong>late 2026</strong></td></tr>
-          <tr><td><strong style="color:#fff">Commodity Prices</strong></td><td>+16% overall in 2026</td></tr>
-          <tr><td><strong style="color:#fff">Fertilizer Prices</strong></td><td>+31% (urea +60%)</td></tr>
-          <tr><td><strong style="color:#fff">Developing Inflation</strong></td><td>5.1% (up 1pp from pre-war)</td></tr>
-        </table>
-        <div style="margin-top:16px;padding:12px;background:rgba(0,211,154,0.08);border-radius:8px;font-size:0.8rem;color:var(--c-offwhite)">
-          <strong style="color:#fff">Key commercial point:</strong> The World Bank baseline already prices in materially higher energy costs for 2026 <em>even assuming the worst ends in May</em>. Current Brent at ~$110 is already above the baseline. If disruption extends past May, prices will exceed the baseline further.
-        </div>
-        <div style="margin-top:12px">
-          <span class="source-chip"><a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" target="_blank">World Bank Press Release</a></span>
-          <span class="source-chip"><a href="https://openknowledge.worldbank.org/entities/publication/3ede6f8c-ba03-4176-867c-40e604698570" target="_blank">CMO Report</a></span>
-        </div>
-      </div>
-      <div class="glass-card">
-        <h3 style="font-size:1.1rem;margin-bottom:16px;display:flex;align-items:center;gap:8px">
-          <span style="color:var(--c-risk-medium)">&#9679;</span> EIA May STEO (Updated)
-        </h3>
-        <table class="data-table">
-          <tr><td style="width:55%"><strong style="color:#fff">Hormuz Closure</strong></td><td>Assumed through <strong>late May</strong></td></tr>
-          <tr><td><strong style="color:#fff">Was (April STEO)</strong></td><td>Through April only</td></tr>
-          <tr><td><strong style="color:#fff">Production Shut-ins (Apr)</strong></td><td><strong>10.5 mbd</strong></td></tr>
-          <tr><td><strong style="color:#fff">Production Shut-ins (May peak)</strong></td><td><strong style="color:var(--c-risk-high)">10.8 mbd</strong></td></tr>
-          <tr><td><strong style="color:#fff">Brent Forecast (May-Jun)</strong></td><td><strong>$106/bbl</strong></td></tr>
-          <tr><td><strong style="color:#fff">Brent Forecast (2026 avg)</strong></td><td>$96/bbl</td></tr>
-          <tr><td><strong style="color:#fff">Brent Forecast (2027)</strong></td><td>$79/bbl</td></tr>
-          <tr><td><strong style="color:#fff">Global Inventory Draw</strong></td><td>2.6 mbd (was 0.3 mbd)</td></tr>
-          <tr><td><strong style="color:#fff">June Extension Risk</strong></td><td>If Hormuz shut through June: <strong style="color:var(--c-risk-high)">+$20/bbl</strong></td></tr>
-        </table>
-        <div style="margin-top:16px;padding:12px;background:rgba(255,165,2,0.08);border-radius:8px;font-size:0.8rem;color:var(--c-offwhite)">
-          <strong style="color:#fff">Key commercial point:</strong> The EIA has extended its disruption assumption from April to late May and increased production shut-in estimates. This makes the World Bank baseline look increasingly optimistic. If Hormuz stays closed into June, the EIA warns of an additional $20/bbl upside.
-        </div>
-        <div style="margin-top:12px">
-          <span class="source-chip"><a href="https://www.eia.gov/outlooks/steo/" target="_blank">EIA STEO</a></span>
-          <span class="source-chip"><a href="https://www.straitstimes.com/world/middle-east/us-governments-energy-arm-assumes-strait-of-hormuz-will-stay-shut-through-late-may" target="_blank">Straits Times</a></span>
-        </div>
-      </div>
-    </div>
-    <div class="callout" style="margin-top:24px">
-      <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c-accent-start)" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Direct Comparison</h3>
-      <p>The World Bank baseline assumes the most acute disruptions end in May. The EIA now assumes Hormuz is closed through late May. Current market pricing (Brent ~$110) is already <strong style="color:#fff">above</strong> the World Bank baseline ($86) and the EIA annual average ($96). This suggests the market is pricing in either: (a) a longer disruption than both institutions assume, (b) a higher risk premium due to uncertainty, or (c) both. If the EIA's June extension scenario materialises (+$20/bbl), Brent could test $125&ndash;130 near-term. For UK businesses, this means the World Bank's "baseline" may already be the optimistic case.</p>
-    </div>
+  <!-- TOP FIVE WARNING SIGNS -->
+  <h2>Top Five Warning Signs</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Rank</th><th>Warning Sign</th><th>Verification Status</th><th>Commercial Impact</th><th>World Bank Baseline Implication</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="strong">1</span></td>
+          <td>Trump called off planned Iran strike for 19 May; military remains on hair-trigger</td>
+          <td>Verified: AP, NPR, MS NOW, WSJ, Truth Social</td>
+          <td>Strike could be reinstated "on a moment's notice" if talks fail. Oil instantly repriced $2+ on the announcement.</td>
+          <td>Makes May-easing assumption less credible; extends uncertainty window</td>
+        </tr>
+        <tr>
+          <td><span class="strong">2</span></td>
+          <td>EIA assumes Hormuz closed through end-May; 10.8 million bpd shut in</td>
+          <td>Verified: EIA STEO May 2026, Reuters</td>
+          <td>Largest supply shock on record. Global inventories falling 2.6 million bpd. Brent forecast $106 May-Jun.</td>
+          <td>Directly challenges World Bank's "disruption ends in May" baseline</td>
+        </tr>
+        <tr>
+          <td><span class="strong">3</span></td>
+          <td>UAE nuclear plant drone attack; IAEA warns of nuclear safety risk</td>
+          <td>Verified: UAE Foreign Ministry, IAEA, NPR, JPost</td>
+          <td>First nuclear infrastructure targeting. UAE reserved right to respond. Regional escalation risk increased materially.</td>
+          <td>Increases probability of wider infrastructure disruption beyond oil/gas</td>
+        </tr>
+        <tr>
+          <td><span class="strong">4</span></td>
+          <td>European gas storage at 36% (-19pp vs 5-yr norm); refill at risk</td>
+          <td>Verified: AGSI+/Bruegel data, GEF</td>
+          <td>At current pace, only ~67% by Nov 1 (vs 80% relaxed target). Summer refill now more expensive and less reliable.</td>
+          <td>Higher gas prices through summer refill season even if Hormuz reopens</td>
+        </tr>
+        <tr>
+          <td><span class="strong">5</span></td>
+          <td>UK NBP up 19.84% in 30 days; power up 5.2%; supplier books lagging</td>
+          <td>Verified: Trading Economics, ICE, Smart Energy Co</td>
+          <td>Wholesale has moved before supplier books. Short procurement window exists. Spot gas hit 128.5p/therm (+7% intraday).</td>
+          <td>Confirms market is already pricing higher energy costs before institutional forecasts fully embed</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-</section>
 
-<!-- SUPPLIER PRICE-BOOK LAG -->
-<section class="section">
-  <div class="container">
-    <div class="section-title"><div class="accent-line"></div>Supplier Price-Book Lag and Procurement Window</div>
-    <p class="section-subtitle">Why wholesale market movement may not yet be fully reflected in supplier pricing</p>
-    <div class="glass-card">
-      <div class="grid-2">
-        <div>
-          <h3 style="font-size:1rem;margin-bottom:16px;color:var(--c-accent-start)">The Lag Mechanism</h3>
-          <ul style="list-style:none;font-size:0.85rem;color:var(--c-offwhite);line-height:1.8">
-            <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">1. Wholesale moves first:</strong> TTF, NBP, and Brent respond in real-time to geopolitical developments.</li>
-            <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">2. Supplier books lag:</strong> UK suppliers typically update price books on a cycle &mdash; daily, weekly, or when thresholds are breached.</li>
-            <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">3. Quote validity shortens:</strong> During volatility, suppliers may reduce quote validity from 48 hours to 24 hours or less.</li>
-            <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">4. Fixed offers withdrawn:</strong> At peak volatility (March&ndash;April), many suppliers withdrew fixed pricing entirely.</li>
-            <li style="padding:6px 0"><strong style="color:#fff">5. Catch-up repricing:</strong> When suppliers do update, the move can be sudden and large, not gradual.</li>
-          </ul>
-        </div>
-        <div>
-          <h3 style="font-size:1rem;margin-bottom:16px;color:var(--c-accent-start)">Current Assessment</h3>
-          <div style="background:rgba(0,211,154,0.05);border:1px solid rgba(0,211,154,0.2);border-radius:10px;padding:16px;margin-bottom:16px">
-            <div style="font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:8px">Status: Possible Procurement Window</div>
-            <p style="font-size:0.82rem;color:var(--c-offwhite);line-height:1.6">Brent dipped from ~$112 to ~$109 on Trump's pause announcement. TTF and NBP also softened slightly. However, this is headline-driven softness, not physical de-escalation. If supplier books have not fully caught up with the recent wholesale rally, customers may still be able to secure pricing before the next supplier update. If supplier books have already incorporated the higher wholesale levels, the window may be narrowing.</p>
-          </div>
-          <div style="background:rgba(255,71,87,0.05);border:1px solid rgba(255,71,87,0.2);border-radius:10px;padding:16px">
-            <div style="font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:8px">Risk: Window Closes Quickly</div>
-            <p style="font-size:0.82rem;color:var(--c-offwhite);line-height:1.6">If talks fail and Trump resumes military preparations, or if Hormuz disruption extends into June (EIA's +$20/bbl scenario), wholesale prices could spike rapidly. Supplier books would then reprice higher, potentially withdrawing fixed offers again. The current softness is contingent on diplomatic optimism that may prove fleeting.</p>
-          </div>
-        </div>
-      </div>
-      <div class="exec-highlight" style="margin-top:24px">
-        <p><strong style="color:#fff">Commercial conclusion:</strong> If your business is within 12 months of contract end, this temporary market softness should be treated as a potential procurement window, not proof the crisis is over. Test available supplier pricing immediately. Where current forward pricing, supplier availability, and your risk profile support it, consider fixing now and fixing longer (36+ months) before further repricing lands.</p>
-      </div>
-    </div>
+  <!-- WHAT CHANGED -->
+  <h2>What Changed Since the Last Report</h2>
+
+  <h3>3.1 Military and Political Developments</h3>
+  <p class="text-secondary">The military-diplomatic landscape shifted dramatically during the 18–19 May reporting period. The most consequential development was President Trump's disclosure on 18 May that he had planned and then cancelled a "very major attack" on Iran scheduled for Tuesday 19 May. The planned strike, which Trump said he had not previously disclosed, was called off following direct requests from the Emir of Qatar Sheikh Tamim bin Hamad Al Thani, Saudi Crown Prince Mohammed bin Salman Al Saud, and UAE President Mohamed bin Zayed Al Nahyan. These leaders asked Trump to "hold off" for two to three days to allow negotiations to proceed, expressing confidence that a deal would emerge that would include "NO NUCLEAR WEAPONS FOR IRAN". Trump's social media post explicitly stated that he had ordered the U.S. military "to be prepared to go forward with a full, large scale assault of Iran, on a moment's notice, in the event that an acceptable Deal is not reached".</p>
+  <p class="text-secondary">This development followed Trump's "clock is ticking" warning issued on 17 May via Truth Social, which came after a phone call with Israeli Prime Minister Benjamin Netanyahu. The warning—"For Iran, the Clock is Ticking, and they better get moving, FAST, or there won't be anything left of them. TIME IS OF THE ESSENCE!"—represented Trump's most explicit deadline threat since the April 8 ceasefire. According to Axios, Trump was expected to meet with his senior national security team on 19 May in the White House Situation Room to "discuss options for military actions against Iran," citing two American officials. The convergence of these signals—a public deadline warning, a planned strike, and Gulf-state intervention to prevent it—creates a compressed diplomatic timeline where the window for negotiation is measured in days rather than weeks.</p>
+
+  <div class="callout-box">
+    <h4>Gulf-State Intervention</h4>
+    <p>The Gulf-state intervention is double-edged. On one side, it has prevented immediate military escalation and created a narrow diplomatic window. On the other, it has prolonged uncertainty—the market is now in "limbo" where a deal might emerge in days or military action might resume just as suddenly. For UK business energy buyers, this limbo is not a reason to delay procurement decisions.</p>
   </div>
-</section>
 
-<!-- MARKET INTERPRETATION -->
-<section class="section">
-  <div class="container">
-    <div class="section-title"><div class="accent-line"></div>Market Interpretation</div>
-    <p class="section-subtitle">What the market is pricing now and what would trigger the next move</p>
-    <div class="grid-2">
-      <div class="glass-card">
-        <h3 style="font-size:1rem;margin-bottom:16px;color:var(--c-accent-start)">What the Market Is Pricing Now</h3>
-        <ul style="list-style:none;font-size:0.85rem;color:var(--c-offwhite);line-height:1.8">
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Risk premium is elevated</strong> and likely to persist. Even if Hormuz reopens, full normalisation will take months (World Bank: late 2026).</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Temporary softness</strong> from Trump's pause announcement is sentiment-driven, not backed by physical supply improvement.</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Traders are not fading</strong> the underlying risk. Forward curves remain in backwardation, signalling tight near-term supply.</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Current Brent ($110)</strong> is above both World Bank baseline ($86) and EIA average ($96), suggesting the market expects either longer disruption or higher risk premium.</li>
-          <li style="padding:6px 0"><strong style="color:#fff">Qatari LNG offline</strong> removes ~20% of global LNG supply. Competition for replacement cargoes between Europe and Asia keeps LNG prices elevated, which feeds into UK NBP via the global LNG arbitrage.</li>
-        </ul>
-      </div>
-      <div class="glass-card">
-        <h3 style="font-size:1rem;margin-bottom:16px;color:var(--c-risk-high)">What Would Trigger the Next Leg</h3>
-        <div style="margin-bottom:16px">
-          <div style="font-size:0.85rem;font-weight:700;color:var(--c-risk-high);margin-bottom:8px">UP (Higher Prices)</div>
-          <ul style="list-style:none;font-size:0.82rem;color:var(--c-offwhite);line-height:1.7">
-            <li style="padding:4px 0">&#9654; Talks fail, Trump resumes attack plans</li>
-            <li style="padding:4px 0">&#9654; Hormuz closure extends into June (EIA +$20/bbl scenario)</li>
-            <li style="padding:4px 0">&#9654; Houthi action closes Bab el-Mandeb</li>
-            <li style="padding:4px 0">&#9654; Further Gulf infrastructure attacks (LNG, nuclear, oil)</li>
-            <li style="padding:4px 0">&#9654; Israeli escalation in Lebanon or against Iran</li>
-          </ul>
-        </div>
-        <div>
-          <div style="font-size:0.85rem;font-weight:700;color:var(--c-accent-start);margin-bottom:8px">DOWN (Lower Prices)</div>
-          <ul style="list-style:none;font-size:0.82rem;color:var(--c-offwhite);line-height:1.7">
-            <li style="padding:4px 0">&#9654; Verified full Hormuz reopening (not selective passage)</li>
-            <li style="padding:4px 0">&#9654; Confirmed US-Iran agreement with implementation timeline</li>
-            <li style="padding:4px 0">&#9654; Blockade relief and normal commercial traffic resumes</li>
-            <li style="padding:4px 0">&#9654; War-risk premiums fall materially</li>
-            <li style="padding:4px 0">&#9654; Qatari LNG restarts and normalises</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+  <p class="text-secondary">On the ground in Lebanon, Israeli military operations have continued unabated and outside the U.S.-Iran ceasefire framework. Netanyahu has consistently maintained that the ceasefire does not apply to Lebanon, and Israeli airstrikes have continued on a daily basis with significant fatalities. During the week of 11–17 May, Israeli strikes killed 23 people on 11 May, 13 on 12 May, and 22 (including 8 children) on 13 May. Hezbollah has responded with increasingly sophisticated drone attacks, including its largest coordinated drone attack since the war began on 12 May, using multiple waves of fiber-optic-guided drones that have demonstrated an ability to evade Israeli jamming technology. The Lebanon front thus remains an independent escalation vector that could trigger wider conflict regardless of the status of U.S.-Iran negotiations.</p>
+
+  <h3>3.2 Shipping and Commodity Market Changes</h3>
+  <p class="text-secondary">The physical situation in the Strait of Hormuz has seen only marginal change. The waterway remains effectively closed to normal commercial traffic, with the only meaningful development being the commencement of selective passage for Chinese-linked vessels under Iranian management protocols. Iranian state media reported that more than 30 ships had been permitted to pass since 13 May, with MarineTraffic data confirming at least four China-linked vessels transiting in a 24-hour period via a designated Iranian safe-shipping corridor. A Chinese supertanker carrying approximately 2 million barrels of Iraqi crude sailed through on 13 May after being stranded for over two months. However, this selective access does not constitute a general reopening. The 1,550+ vessels and 22,500 mariners stranded in and around the strait remain in place, and traffic continues to run at approximately 5% of pre-war average.</p>
+  <p class="text-secondary">The drone attack on the UAE's Barakah nuclear power plant on 17 May introduced a new and deeply concerning element to the conflict. Three drones entered UAE airspace from the western border; two were intercepted but one struck an electrical generator outside the inner perimeter of the Barakah plant, causing a fire. The IAEA confirmed that radiation levels remained normal and no injuries were reported, but Director General Rafael Mariano Grossi expressed "grave concern" and reiterated his call for "maximum military restraint near any NPP". The UAE Foreign Ministry described the incident as an "unprovoked terrorist attack" and stated that "the targeting of peaceful nuclear energy facilities is a flagrant violation of international law". Saudi Arabia separately reported intercepting three drones that entered its territory from Iraqi airspace on the same day. These developments suggest that infrastructure targeting is expanding beyond oil and gas facilities into nuclear and power infrastructure, significantly broadening the potential escalation landscape.</p>
+
+  <h3>3.3 World Bank and EIA Institutional Updates</h3>
+  <p class="text-secondary">The EIA's revised Short-Term Energy Outlook published on 12 May represents the most significant institutional reassessment of the disruption timeline. The agency now assumes the Strait of Hormuz will be effectively closed through the end of May, pushing back its earlier assumption that the closure would last through April. Production shut-ins are now estimated at 10.5 million bpd in April, rising to a peak of 10.8 million bpd in May as Middle Eastern storage tanks reach maximum capacity. This compares to the EIA's earlier forecast that losses would peak at 9.1 million bpd in April. The revised assumptions imply global oil inventories will fall by 2.6 million bpd this year—up dramatically from the earlier estimate of a 300,000 bpd draw. Brent crude is forecast to average $106 per barrel in May and June, before declining to around $89 in Q4 as production gradually recovers. Critically, the EIA noted that if Hormuz remains shut through June, oil prices would be approximately $20 per barrel higher over the near term than current forecasts.</p>
+
+  <div class="callout-box">
+    <h4>World Bank Warning</h4>
+    <p>The World Bank baseline projects energy prices surging 24% in 2026, explicitly conditional on "the most acute phase of supply disruptions ending within the second quarter of 2026." Current Brent pricing at ~$110/bbl is already trading above this baseline and closer to the World Bank's upside scenario of $115/bbl.</p>
   </div>
-</section>
 
-<!-- IMPACT ON UK BUSINESS ENERGY PRICES -->
-<section class="section">
-  <div class="container">
-    <div class="section-title"><div class="accent-line"></div>Impact on UK Business Energy Prices</div>
-    <p class="section-subtitle">Why Middle East disruption flows through to UK business energy bills</p>
-    <div class="glass-card">
-      <div class="grid-2">
-        <div>
-          <h3 style="font-size:1rem;margin-bottom:16px;color:var(--c-accent-start)">The Transmission Chain</h3>
-          <div class="timeline" style="padding-left:28px">
-            <div class="timeline-item" style="margin-bottom:16px;padding-bottom:16px">
-              <div class="timeline-time" style="color:var(--c-offwhite)">1. Hormuz Disruption</div>
-              <div class="timeline-desc">~20% of global oil and LNG flows restricted. Qatari LNG offline. Middle East production shut-ins at 10.8 mbd.</div>
-            </div>
-            <div class="timeline-item" style="margin-bottom:16px;padding-bottom:16px">
-              <div class="timeline-time" style="color:var(--c-offwhite)">2. Global Price Spike</div>
-              <div class="timeline-desc">Brent rises 60%+ YTD. LNG prices in Asia and Europe surge. Competition for alternative cargoes intensifies.</div>
-            </div>
-            <div class="timeline-item" style="margin-bottom:16px;padding-bottom:16px">
-              <div class="timeline-time" style="color:var(--c-offwhite)">3. UK Gas (NBP) Rises</div>
-              <div class="timeline-desc">UK imports ~50% of gas, much via LNG. Global LNG tightness pushes NBP higher. TTF-NBP arbitrage links UK to European gas.</div>
-            </div>
-            <div class="timeline-item" style="margin-bottom:16px;padding-bottom:16px">
-              <div class="timeline-time" style="color:var(--c-offwhite)">4. UK Electricity Follows</div>
-              <div class="timeline-desc">Gas-fired power sets marginal price in UK. Wholesale electricity tracks gas. Business electricity now ~25.8p/kWh average.</div>
-            </div>
-            <div class="timeline-item" style="margin-bottom:0;padding-bottom:0;border:none">
-              <div class="timeline-time" style="color:var(--c-offwhite)">5. Supplier Repricing</div>
-              <div class="timeline-desc">Suppliers pass through wholesale costs with a lag. Fixed contracts reprice when renewed. Pass-through contracts move immediately.</div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h3 style="font-size:1rem;margin-bottom:16px;color:var(--c-accent-start)">Why the World Bank Baseline Matters</h3>
-          <p style="font-size:0.85rem;color:var(--c-offwhite);line-height:1.8;margin-bottom:16px">The World Bank baseline already forecasts a <strong style="color:#fff">24% energy price surge</strong> in 2026, even assuming the major disruption ends in May and Hormuz shipping returns to normal by late 2026. This is not a worst-case scenario. It is the <em>baseline</em>.</p>
-          <p style="font-size:0.85rem;color:var(--c-offwhite);line-height:1.8;margin-bottom:16px">If the EIA is correct that disruption lasts longer (through late May, possibly into June), the World Bank baseline becomes optimistic. If disruption extends beyond May, the World Bank's stress case &mdash; Brent up to <strong style="color:#fff">$115/bbl</strong> &mdash; becomes more likely.</p>
-          <p style="font-size:0.85rem;color:var(--c-offwhite);line-height:1.8;margin-bottom:16px">Current Brent at ~$110 is already above the World Bank baseline. This means the market is already pricing in more risk than the World Bank's base case assumes.</p>
-          <div style="background:rgba(0,211,154,0.05);border:1px solid rgba(0,211,154,0.2);border-radius:10px;padding:16px">
-            <p style="font-size:0.82rem;color:var(--c-offwhite);line-height:1.6;margin:0"><strong style="color:#fff">For UK businesses on flexible or pass-through contracts:</strong> You are already exposed to these wholesale moves. Every week of delay is a week of potential further price exposure.</p>
-          </div>
-          <div style="background:rgba(255,71,87,0.05);border:1px solid rgba(255,71,87,0.2);border-radius:10px;padding:16px;margin-top:12px">
-            <p style="font-size:0.82rem;color:var(--c-offwhite);line-height:1.6;margin:0"><strong style="color:#fff">For UK businesses on fixed contracts ending within 12 months:</strong> Your renewal price will be set by forward wholesale prices at the time of pricing, plus supplier margin. Those forward prices are currently elevated and could go higher.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+  <p class="text-secondary">This EIA framing makes the World Bank's baseline assumption—published on 28 April and projecting energy prices to rise 24% in 2026 with the "most acute disruptions" ending in May—increasingly appear optimistic. The World Bank's baseline projected Brent to average $86 per barrel in 2026, with an upside scenario of $115 per barrel if critical facilities suffer more damage and export volumes recover slowly. Current Brent pricing at approximately $110 per barrel is already trading above the World Bank's annual average baseline and closer to its stress scenario, suggesting the market is pricing a more prolonged disruption than the World Bank's central case assumes. The IEA has also revised its outlook, now projecting world oil supply to fall by 3.9 million bpd in 2026 (up from a previous forecast of 1.5 million bpd) assuming Hormuz flows gradually resume from June.</p>
+
+  <div class="callout-box">
+    <h4>EIA Disruption Warning</h4>
+    <p>The EIA's revised assumptions, published two weeks after the World Bank's outlook, make the baseline look increasingly optimistic. Where the World Bank assumed "the most acute disruptions end in May," the EIA now assumes Hormuz "effectively closed through late May" with production shut-ins rising to 10.8 million bpd.</p>
   </div>
-</section>
 
-<!-- DURATION SCENARIOS -->
-<section class="section">
-  <div class="container">
-    <div class="section-title"><div class="accent-line"></div>Duration Scenarios</div>
-    <p class="section-subtitle">Three disruption timelines and their implications for UK business energy procurement</p>
-    <div class="grid-3">
-      <div class="glass-card scenario-card">
-        <h3>Short Disruption <span style="font-size:0.75rem;color:var(--c-offwhite);font-weight:400">(1&ndash;2 weeks)</span></h3>
-        <ul>
-          <li><span class="li-label">Hormuz Status</span><span>Partial reopening by late May</span></li>
-          <li><span class="li-label">Brent Range</span><span>$95&ndash;$110/bbl</span></li>
-          <li><span class="li-label">TTF Range</span><span>&euro;40&ndash;55/MWh</span></li>
-          <li><span class="li-label">NBP Range</span><span>100&ndash;130 GBp/thm</span></li>
-          <li><span class="li-label">UK Power</span><span>~22&ndash;28 p/kWh</span></li>
-          <li><span class="li-label">LNG Impact</span><span>Qatar restarts within weeks</span></li>
-          <li><span class="li-label">Supplier Books</span><span>Gradual normalisation</span></li>
-        </ul>
-        <div style="margin-top:16px;padding:12px;background:rgba(0,211,154,0.08);border-radius:8px;font-size:0.8rem">
-          <strong style="color:#fff">Probability:</strong> Low. Requires rapid deal and full Hormuz reopening. World Bank baseline assumes this but current conditions don't support it.
-        </div>
-      </div>
-      <div class="glass-card scenario-card medium">
-        <h3>Medium Disruption <span style="font-size:0.75rem;color:var(--c-offwhite);font-weight:400">(1&ndash;3 months)</span></h3>
-        <ul>
-          <li><span class="li-label">Hormuz Status</span><span>Selective passage until July/August</span></li>
-          <li><span class="li-label">Brent Range</span><span>$105&ndash;$125/bbl</span></li>
-          <li><span class="li-label">TTF Range</span><span>&euro;50&ndash;70/MWh</span></li>
-          <li><span class="li-label">NBP Range</span><span>120&ndash;160 GBp/thm</span></li>
-          <li><span class="li-label">UK Power</span><span>~26&ndash;32 p/kWh</span></li>
-          <li><span class="li-label">LNG Impact</span><span>Qatar offline 3&ndash;6 months minimum</span></li>
-          <li><span class="li-label">Supplier Books</span><span>Elevated, volatile repricing</span></li>
-        </ul>
-        <div style="margin-top:16px;padding:12px;background:rgba(255,165,2,0.08);border-radius:8px;font-size:0.8rem">
-          <strong style="color:#fff">Probability:</strong> Moderate. Aligns with EIA's extended assumption and current diplomatic timeline. Most likely near-term path.
-        </div>
-      </div>
-      <div class="glass-card scenario-card severe">
-        <h3>Severe Escalation <span style="font-size:0.75rem;color:var(--c-offwhite);font-weight:400">(3+ months / Regional)</span></h3>
-        <ul>
-          <li><span class="li-label">Hormuz Status</span><span>Closed or severely restricted</span></li>
-          <li><span class="li-label">Brent Range</span><span>$120&ndash;$150+/bbl</span></li>
-          <li><span class="li-label">TTF Range</span><span>&euro;70&ndash;100+/MWh</span></li>
-          <li><span class="li-label">NBP Range</span><span>160&ndash;220+ GBp/thm</span></li>
-          <li><span class="li-label">UK Power</span><span>~30&ndash;40+ p/kWh</span></li>
-          <li><span class="li-label">LNG Impact</span><span>Prolonged Qatar outage; global shortage</span></li>
-          <li><span class="li-label">Supplier Books</span><span>Fixed offers withdrawn; pass-through spikes</span></li>
-        </ul>
-        <div style="margin-top:16px;padding:12px;background:rgba(255,71,87,0.08);border-radius:8px;font-size:0.8rem">
-          <strong style="color:#fff">Probability:</strong> Low-moderate. Requires talks to fail, military escalation to resume, and/or Houthi Bab el-Mandeb closure. Cannot be ruled out.
-        </div>
-      </div>
-    </div>
-    <div class="callout" style="margin-top:24px">
-      <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--c-accent-start)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> Scenario Comparison with Institutional Baselines</h3>
-      <p>All three scenarios are above the World Bank baseline ($86 Brent) for the near term. Even the short disruption scenario assumes Brent $95&ndash;110, which is 10&ndash;28% above the World Bank annual average. The medium disruption scenario aligns with the EIA's May&ndash;June forecast ($106) and the World Bank stress case (up to $115). The severe escalation scenario exceeds all institutional baselines and would trigger demand destruction, emergency policy responses, and potential recessionary pressure. For procurement decisions, the key insight is that <strong style="color:#fff">even the most optimistic scenario</strong> (short disruption) implies energy prices well above 2025 levels for the remainder of 2026.</p>
-    </div>
+  <!-- FULL TIMELINE -->
+  <h2>Full Timeline</h2>
+
+  <h3>4.1 Primary Research Window: 18–19 May 2026</h3>
+  <div class="timeline">
+    <div class="timeline-item"><div class="dot"></div><div class="time">17 May (evening)</div><div class="event">Trump posts "clock is ticking" warning to Iran on Truth Social after call with Netanyahu: "they better get moving, FAST, or there won't be anything left of them"</div></div>
+    <div class="timeline-item"><div class="dot"></div><div class="time">17 May</div><div class="event">Drone attack on UAE Barakah nuclear power plant; one drone hits electrical generator, two intercepted. IAEA confirms no radiological damage</div></div>
+    <div class="timeline-item"><div class="dot"></div><div class="time">17 May</div><div class="event">Saudi Arabia intercepts three drones entering from Iraqi airspace</div></div>
+    <div class="timeline-item"><div class="dot"></div><div class="time">18 May (evening)</div><div class="event">Trump announces on Truth Social he has called off planned "very major attack" on Iran scheduled for 19 May at request of Qatar, Saudi Arabia, UAE leaders</div></div>
+    <div class="timeline-item"><div class="dot"></div><div class="time">18 May (evening)</div><div class="event">Trump states he instructed military to remain ready for "full, large scale assault of Iran, on a moment's notice" if deal not reached</div></div>
+    <div class="timeline-item"><div class="dot"></div><div class="time">18 May</div><div class="event">Iran submits revised 14-point peace proposal to Pakistani mediators; Tasnim reports focus on "trust-building" measures and sanctions suspension</div></div>
+    <div class="timeline-item"><div class="dot"></div><div class="time">18 May</div><div class="event">Oil prices fall &gt;$2/barrel within minutes of Trump's announcement, from $108.83 to ~$106; recover to $107.25 by close</div></div>
+    <div class="timeline-item"><div class="dot"></div><div class="time">19 May</div><div class="event">Brent crude settles ~$110.21/bbl; UK NBP at 121.41 p/therm (down 1.54%); TTF at €50.16/MWh</div></div>
+    <div class="timeline-item"><div class="dot"></div><div class="time">19 May</div><div class="event">Trump meets senior national security team in White House Situation Room to discuss military options (per Axios)</div></div>
+    <div class="timeline-item"><div class="dot"></div><div class="time">19 May</div><div class="event">Iranian state TV calls Trump's postponement a "retreat" based on "fear"; defense systems activated on Qeshm Island</div></div>
   </div>
-</section>
 
-<!-- WHAT WOULD CHANGE THIS VIEW -->
-<section class="section">
-  <div class="container">
-    <div class="section-title"><div class="accent-line"></div>What Would Change This View?</div>
-    <p class="section-subtitle">Evidence that would reduce risk or confirm real de-escalation</p>
-    <div class="grid-2">
-      <div class="glass-card">
-        <h3 style="font-size:1rem;margin-bottom:16px;color:var(--c-accent-start)">Evidence That Would Reduce Risk</h3>
-        <ul style="list-style:none;font-size:0.85rem;color:var(--c-offwhite);line-height:1.8">
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">&#10003; <strong style="color:#fff">Verified full reopening of Hormuz</strong> to all commercial traffic (not selective passage)</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">&#10003; <strong style="color:#fff">Normal commercial traffic returning</strong> without Iranian management protocols</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">&#10003; <strong style="color:#fff">War-risk premiums falling materially</strong> and insurance markets normalising</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">&#10003; <strong style="color:#fff">Confirmed US-Iran agreement</strong> with implementation timeline and verification</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">&#10003; <strong style="color:#fff">US naval blockade relief</strong> and Iranian port access restored</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">&#10003; <strong style="color:#fff">Qatari LNG normalisation</strong> with confirmed restart timeline</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">&#10003; <strong style="color:#fff">TTF/NBP sustained decline</strong> backed by physical flows, not just headlines</li>
-          <li style="padding:6px 0">&#10003; <strong style="color:#fff">Supplier price books reducing</strong>, not merely holding steady</li>
-        </ul>
-      </div>
-      <div class="glass-card">
-        <h3 style="font-size:1rem;margin-bottom:16px;color:var(--c-risk-high)">Evidence That Would Increase Risk</h3>
-        <ul style="list-style:none;font-size:0.85rem;color:var(--c-offwhite);line-height:1.8">
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">&#9654; <strong style="color:#fff">Talks fail and Trump resumes attack plans</strong> within days</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">&#9654; <strong style="color:#fff">Hormuz closure extends into June</strong> (EIA +$20/bbl scenario)</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">&#9654; <strong style="color:#fff">Houthi closure of Bab el-Mandeb</strong> creating dual choke point crisis</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">&#9654; <strong style="color:#fff">Further Gulf infrastructure attacks</strong> on LNG, nuclear, or oil facilities</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">&#9654; <strong style="color:#fff">Israeli escalation</strong> in Lebanon or direct strikes on Iran</li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">&#9654; <strong style="color:#fff">Iranian strikes on Saudi or UAE oil infrastructure</strong></li>
-          <li style="padding:6px 0;border-bottom:1px solid var(--c-glass-border)">&#9654; <strong style="color:#fff">European gas storage failing to refill</strong> at seasonal norms</li>
-          <li style="padding:6px 0">&#9654; <strong style="color:#fff">Winter 2026/27 forward prices spiking</strong> on supply fears</li>
-        </ul>
-      </div>
-    </div>
-    <div class="exec-highlight" style="margin-top:24px">
-      <p><strong style="color:#fff">Important distinction:</strong> Temporary diplomatic language is not enough. The 18 May pause is conditional and time-limited. A deal that is "close" is not agreed, accepted, or implemented. For the risk assessment to materially improve, we need to see physical de-escalation: Hormuz open to all traffic, Qatari LNG flowing, war-risk premiums falling, and supplier books reducing. None of these are present as of 19 May 2026.</p>
-    </div>
+  <h3>4.2 Extended Verification Window: 12–17 May 2026</h3>
+  <div class="timeline">
+    <div class="timeline-item"><div class="dot"></div><div class="time">12 May</div><div class="event">EIA publishes revised STEO: assumes Hormuz closed through end-May; 10.5M bpd shut in April, 10.8M bpd peak in May</div></div>
+    <div class="timeline-item"><div class="dot"></div><div class="time">12 May</div><div class="event">Saudi Arabia launches secret strikes against Iranian-backed Iraqi militias near border (Reuters, citing multiple sources)</div></div>
+    <div class="timeline-item"><div class="dot"></div><div class="time">13 May</div><div class="event">Chinese vessels begin transiting Hormuz under Iranian management protocols; 30+ ships reported passed</div></div>
+    <div class="timeline-item"><div class="dot"></div><div class="time">13 May</div><div class="event">Trump-Xi meeting in Beijing: agree Hormuz "must remain open" but no concrete framework or Chinese commitment to pressure Iran</div></div>
+    <div class="timeline-item"><div class="dot"></div><div class="time">14 May</div><div class="event">Chinese supertanker carrying 2 million barrels Iraqi crude transits Hormuz after being stranded 2+ months</div></div>
+    <div class="timeline-item"><div class="dot"></div><div class="time">14 May</div><div class="event">Trump meets Xi in Beijing; discussion on Iran conflict and Hormuz central to agenda</div></div>
+    <div class="timeline-item"><div class="dot"></div><div class="time">15 May</div><div class="event">Israel-Lebanon truce extended 45 days; Israeli bombing continues daily</div></div>
+    <div class="timeline-item"><div class="dot"></div><div class="time">15 May</div><div class="event">GCC countries submit joint letter to UN condemning Iran's claims of "administration" over Hormuz</div></div>
+    <div class="timeline-item"><div class="dot"></div><div class="time">16 May</div><div class="event">European gas storage at 36% (-19pp vs 5-yr norm) per AGSI+/Bruegel</div></div>
   </div>
-</section>
 
-<!-- COMMERCIAL TAKEAWAY -->
-<section class="section">
-  <div class="container">
-    <div class="section-title"><div class="accent-line"></div>Commercial Takeaway</div>
-    <p class="section-subtitle">Direct guidance for Switch 365 Ltd's UK business customers</p>
-    <div class="glass-card exec-summary">
-      <p style="font-size:1rem;font-weight:600;color:#fff;margin-bottom:16px">Waiting is not neutral. It is a bet that the World Bank, the EIA, current market pricing, Gulf-state intervention, Trump's warning, the delayed military threat, Hormuz disruption, supplier price-book lag, and the unresolved peace proposal are all overstating the risk.</p>
-      <p>For UK businesses within <strong style="color:#fff">12 months of contract end date</strong>, the commercially sensible step is:</p>
-      <div style="margin:16px 0;padding:16px;background:rgba(0,211,154,0.08);border-radius:10px;border:1px solid rgba(0,211,154,0.2)">
-        <ol style="font-size:0.9rem;color:var(--c-offwhite);line-height:2;margin-left:20px">
-          <li><strong style="color:#fff">Review immediately.</strong> Do not wait for perfect clarity. The market moves before headlines confirm.</li>
-          <li><strong style="color:#fff">Test available supplier pricing.</strong> Use this potential window before supplier books reprice.</li>
-          <li><strong style="color:#fff">Where pricing and risk profile support it, consider fixing now and fixing longer.</strong> 36+ month fixed contracts can lock in current rates before further escalation.</li>
-          <li><strong style="color:#fff">Understand your exposure.</strong> Pass-through and flexible contracts will continue to track wholesale volatility.</li>
-          <li><strong style="color:#fff">Do not treat temporary softness as proof the crisis is over.</strong> This is a procurement window, not a return to normal.</li>
-        </ol>
-      </div>
-      <p><strong style="color:#fff">Why fix longer?</strong> The World Bank baseline already assumes energy prices rise 24% in 2026 even if the major disruption ends in May. The EIA now assumes disruption lasts longer. Current Brent is above both baselines. Forward curves suggest sustained elevation through 2026 and into 2027. A 36-month fix at current rates could protect against a multi-year period of elevated energy costs.</p>
-      <p><strong style="color:#fff">Segment-specific notes:</strong></p>
-      <ul style="font-size:0.85rem;color:var(--c-offwhite);line-height:1.8;margin-left:20px;margin-top:8px">
-        <li><strong style="color:#fff">High-consumption electricity users</strong> (manufacturing, data centres): Most exposed to wholesale volatility. Priority for immediate review.</li>
-        <li><strong style="color:#fff">Gas-intensive users</strong> (hospitality, care homes, food processing): NBP elevation directly impacts costs. Consider longer fixes.</li>
-        <li><strong style="color:#fff">Multi-site operators:</strong> Portfolio approach may suit flexible baskets, but ensure downside protection.</li>
-        <li><strong style="color:#fff">SMEs and charities:</strong> Simple fixed contracts offer most protection. Avoid default/rollover tariffs.</li>
-        <li><strong style="color:#fff">Churches and community buildings:</strong> Budget certainty is paramount. Fixed rates reduce forecast risk.</li>
-      </ul>
-    </div>
+  <!-- RHETORIC TRACKER -->
+  <h2>Trump, Gulf States, China and Iran Rhetoric Tracker</h2>
+
+  <h3>5.1 Trump and US Officials</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Date</th><th>Statement</th><th>Platform/Source</th></tr></thead>
+      <tbody>
+        <tr><td>17 May</td><td>"For Iran, the Clock is Ticking, and they better get moving, FAST, or there won't be anything left of them. TIME IS OF THE ESSENCE!"</td><td>Truth Social</td></tr>
+        <tr><td>18 May</td><td>"I have instructed our Military to be prepared to go forward with a full, large scale assault of Iran, on a moment's notice, in the event that an acceptable Deal is not reached"</td><td>Truth Social</td></tr>
+        <tr><td>18 May</td><td>"There seems to be a very good chance that they can work something out. If we can do that without bombing the hell out of them, I'd be very happy"</td><td>White House remarks</td></tr>
+        <tr><td>18 May</td><td>"It's a very positive development, but we'll see whether or not it amounts to anything. We've had periods of time where we had, we thought, pretty much getting close to making a deal, and didn't work out, but this is a little bit different now"</td><td>White House</td></tr>
+        <tr><td>18 May</td><td>Called off attack "for a little while, hopefully, maybe forever"</td><td>White House</td></tr>
+      </tbody>
+    </table>
   </div>
-</section>
+  <p class="text-secondary small"><strong>Analyst note:</strong> Trump has repeatedly set deadlines for Tehran and then backed off, most notably ordering strikes in late February shortly after indicating he would let talks play out. The pattern of escalating rhetoric followed by last-minute reversal is now well-established. The current postponement is explicitly time-limited ("two to three days" per Gulf allies), and the instruction to keep military forces on hair-trigger readiness means the strike option remains active.</p>
 
-<!-- CUSTOMER-FACING OUTPUTS -->
-<section class="section">
-  <div class="container">
-    <div class="section-title"><div class="accent-line"></div>Customer-Facing Outputs</div>
-    <p class="section-subtitle">Ready-to-use materials for Switch 365 Ltd sales and customer engagement</p>
-
-    <div class="output-card">
-      <h4>A. 15-Second Morning Blurb (for sales calls)</h4>
-      <div class="output-body">
-        "President Trump has paused a planned military strike on Iran after Gulf leaders asked for a few more days of talks. That caused a small dip in oil prices &mdash; but the Strait of Hormuz is still effectively closed, Qatari LNG is still offline, and the EIA says disruption could last through late May. For businesses within a year of renewal, this dip is a potential window, not proof the crisis is over. Shall we look at what's available for your site?"
-      </div>
-    </div>
-
-    <div class="output-card">
-      <h4>B. Customer Email Draft</h4>
-      <div class="output-body">
-        <strong>Subject: Energy market update &mdash; why now may be the time to review your contract</strong><br><br>
-        Dear [Customer Name],<br><br>
-        You may have seen that President Trump paused a planned military strike on Iran yesterday after requests from Gulf leaders. This caused a temporary dip in oil and gas prices.<br><br>
-        We want to be clear with you: <strong>this is not de-escalation. It is a short diplomatic pause.</strong><br><br>
-        The Strait of Hormuz remains effectively closed. The US Energy Information Administration now expects disruption to last through late May. The World Bank has already forecast a 24% rise in energy prices this year &mdash; and that is their baseline, not a worst case. Qatari LNG remains offline with force majeure declared.<br><br>
-        What this means for your business:<br>
-        &bull; Wholesale markets can move before supplier price books fully catch up<br>
-        &bull; This temporary softness may represent a short procurement window<br>
-        &bull; If your contract ends within 12 months, delaying your review is a decision to stay exposed to further volatility<br><br>
-        <strong>Our recommendation:</strong> Review your options now. Test available supplier pricing. Where it makes sense for your risk profile and budget, consider fixing now and fixing longer (36+ months) before the next round of repricing.<br><br>
-        <strong>Reply YES to this email and we will contact you today to discuss your contract.</strong><br><br>
-        Best regards,<br>
-        [Your Name]<br>
-        Switch 365 Ltd
-      </div>
-    </div>
-
-    <div class="output-card">
-      <h4>C. SMS / Text Message Draft</h4>
-      <div class="output-body">
-        Trump paused a planned Iran strike &mdash; markets dipped briefly. But Hormuz is still closed, Qatari LNG is offline, and the World Bank forecasts 24% higher energy prices this year. If your business energy contract ends within 12 months, this dip is a window, not safety. Reply YES and we'll put you in the queue to be contacted today. Switch 365 Ltd.
-      </div>
-    </div>
+  <h3>5.2 Gulf-State Leaders</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Date</th><th>Statement/Source</th><th>Significance</th></tr></thead>
+      <tbody>
+        <tr><td>18 May</td><td>Qatar Emir, Saudi Crown Prince, UAE President jointly requested Trump "hold off on our planned Military attack"</td><td>Unprecedented coordinated Gulf intervention</td></tr>
+        <tr><td>18 May</td><td>Gulf leaders told Trump "a Deal will be made, which will be very acceptable to the United States"</td><td>Suggests Gulf states have visibility into Iranian position</td></tr>
+        <tr><td>17 May</td><td>UAE Foreign Ministry: Barakah attack is "unprovoked terrorist attack" and "dangerous escalation"</td><td>UAE reserved sovereign right to respond</td></tr>
+        <tr><td>17 May</td><td>Anwar Gargash (UAE presidential adviser): attack "whether carried out directly by those responsible or through one of their proxies... represents a dangerous escalation"</td><td>UAE investigating Iran vs Houthi responsibility</td></tr>
+        <tr><td>15 May</td><td>GCC joint letter to UN condemning Iran's claims of Hormuz "administration"</td><td>Collective Gulf rejection of Iranian control claims</td></tr>
+      </tbody>
+    </table>
   </div>
-</section>
 
-<!-- SOURCE QUALITY AND CONFIDENCE -->
-<section class="section">
-  <div class="container">
-    <div class="section-title"><div class="accent-line"></div>Source Quality and Confidence</div>
-    <p class="section-subtitle">What was verified, what was inferred, and what needs further confirmation</p>
-    <div class="grid-3">
-      <div class="glass-card">
-        <h3 style="font-size:0.95rem;margin-bottom:16px;color:var(--c-accent-start)">Highest Confidence</h3>
-        <ul style="list-style:none;font-size:0.8rem;color:var(--c-offwhite);line-height:1.7">
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Trump paused planned attack:</strong> Verified via Truth Social post, confirmed by CBS, NPR, Axios, WSJ, Politico. Direct presidential statement.</li>
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Gulf leaders requested delay:</strong> Verified &mdash; Trump named Qatar Emir, Saudi Crown Prince, UAE President specifically.</li>
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">World Bank 24% energy price rise:</strong> Verified &mdash; direct from World Bank Commodity Markets Outlook April 2026 press release and report.</li>
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">EIA Hormuz closure through late May:</strong> Verified &mdash; EIA May STEO official publication.</li>
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Brent at ~$109&ndash;110:</strong> Verified &mdash; FT Markets, ICE, Trading Economics, MarketWatch.</li>
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">TTF at ~&euro;50/MWh:</strong> Verified &mdash; Trading Economics.</li>
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">NBP at ~121 GBp/thm:</strong> Verified &mdash; Trading Economics, ICE.</li>
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">UAE Barakah drone strike:</strong> Verified &mdash; The National UAE, NPR, IAEA statements.</li>
-          <li style="padding:5px 0"><strong style="color:#fff">Qatar LNG force majeure:</strong> Verified &mdash; QatarEnergy statements, Oxford Energy Institute analysis.</li>
-        </ul>
-      </div>
-      <div class="glass-card">
-        <h3 style="font-size:0.95rem;margin-bottom:16px;color:var(--c-risk-medium)">Medium Confidence</h3>
-        <ul style="list-style:none;font-size:0.8rem;color:var(--c-offwhite);line-height:1.7">
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">"Deal is close":</strong> Claimed by Trump relaying Gulf leaders' assessment. Not independently verified. Gulf official statements did not independently confirm this wording.</li>
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Iran sent amended proposal:</strong> Reported by CBS citing Iranian sources. Not independently confirmed by US or Pakistani officials.</li>
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Pause is "two or three days":</strong> Trump's own words to reporters. Could change based on talks.</li>
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Military "ready at moment's notice":</strong> Trump's instruction via Truth Social. Actual military readiness posture not independently confirmed.</li>
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Hormuz selective passage for Chinese vessels:</strong> Multiple maritime intelligence reports (Windward, MarineTraffic) but exact numbers vary.</li>
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Israeli bombing in Lebanon:</strong> Verified by UK Gov, BBC, Reuters, ACLED, ISW-CTP. Scale of casualties varies by source.</li>
-          <li style="padding:5px 0"><strong style="color:#fff">Supplier price-book lag:</strong> Inferred from normal market behaviour and industry reporting (WeSave, Catalyst Commercial). Not confirmed by direct supplier pricing data.</li>
-        </ul>
-      </div>
-      <div class="glass-card">
-        <h3 style="font-size:0.95rem;margin-bottom:16px;color:var(--c-risk-high)">Unconfirmed / Needs Verification</h3>
-        <ul style="list-style:none;font-size:0.8rem;color:var(--c-offwhite);line-height:1.7">
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Actual military preparations:</strong> Trump claimed a "scheduled attack" was planned. Independent sources have not confirmed actual strike preparations vs presidential claim.</li>
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Gulf-state statements independent of Trump:</strong> No independent Gulf official statements confirming they requested the delay have been found. All reporting flows through Trump/US sources.</li>
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Content of Iranian amended proposal:</strong> No details publicly available.</li>
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Barakah drone source:</strong> UAE investigating. Not officially attributed to Iran, though Gargash hinted strongly.</li>
-          <li style="padding:5px 0;border-bottom:1px solid var(--c-glass-border)"><strong style="color:#fff">Houthi capability to close Bab el-Mandeb:</strong> Threats verified; operational capability assessed by analysts but not tested in current conflict phase.</li>
-          <li style="padding:5px 0"><strong style="color:#fff">Exact supplier price-book status:</strong> Would require direct supplier pricing data, which is proprietary. Assessment is inferred from market behaviour.</li>
-        </ul>
-      </div>
-    </div>
-    <div style="margin-top:24px">
-      <div class="glass-card">
-        <h3 style="font-size:1rem;margin-bottom:16px">Key Source Links</h3>
-        <div style="display:flex;flex-wrap:wrap;gap:8px">
-          <span class="source-chip"><a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" target="_blank">World Bank CMO Press Release</a></span>
-          <span class="source-chip"><a href="https://openknowledge.worldbank.org/entities/publication/3ede6f8c-ba03-4176-867c-40e604698570" target="_blank">World Bank CMO Report</a></span>
-          <span class="source-chip"><a href="https://www.eia.gov/outlooks/steo/" target="_blank">EIA Short-Term Energy Outlook</a></span>
-          <span class="source-chip"><a href="https://www.cbsnews.com/news/trump-says-called-off-scheduled-iran-attack-gulf-partners/" target="_blank">CBS News: Trump Pauses Attack</a></span>
-          <span class="source-chip"><a href="https://www.npr.org/2026/05/19/g-s1-122762/trump-says-hes-called-off-iran-strike" target="_blank">NPR: Trump Calls Off Strike</a></span>
-          <span class="source-chip"><a href="https://www.axios.com/2026/05/18/trump-iran-attack-suspend-nuclear-talks" target="_blank">Axios: Trump Pauses Attack</a></span>
-          <span class="source-chip"><a href="https://www.axios.com/2026/05/17/trump-iran-warning-harder-strikes" target="_blank">Axios: Clock Is Ticking</a></span>
-          <span class="source-chip"><a href="https://www.wsj.com/world/middle-east/trump-says-he-will-hold-off-on-iran-attack-as-serious-negotiations-are-under-way-7ff01a96" target="_blank">WSJ: Trump Holds Off Attack</a></span>
-          <span class="source-chip"><a href="https://www.politico.com/news/2026/05/18/trump-delays-major-strikes-iran-00926589" target="_blank">Politico: Trump Delays Strikes</a></span>
-          <span class="source-chip"><a href="https://www.thenationalnews.com/news/uae/2026/05/17/uae-launches-investigation-into-source-of-drone-strike-on-barakah-nuclear-plant/" target="_blank">The National: Barakah Drone Strike</a></span>
-          <span class="source-chip"><a href="https://www.npr.org/2026/05/18/g-s1-122534/drone-strikes-uae-nuclear-plant" target="_blank">NPR: Barakah Attack</a></span>
-          <span class="source-chip"><a href="https://www.gov.uk/government/publications/lebanon-country-policy-and-information-notes/country-bulletin-security-situation-lebanon-may-2026" target="_blank">UK Gov: Lebanon Security</a></span>
-          <span class="source-chip"><a href="https://www.straitstimes.com/world/middle-east/us-governments-energy-arm-assumes-strait-of-hormuz-will-stay-shut-through-late-may" target="_blank">Straits Times: EIA Hormuz</a></span>
-          <span class="source-chip"><a href="https://www.foxnews.com/politics/second-choke-point-crisis-looms-houthis-threaten-key-red-sea-shipping-lane" target="_blank">Fox News: Houthi Threat</a></span>
-          <span class="source-chip"><a href="https://www.oxfordenergy.org/wpcms/wp-content/uploads/2026/03/Comment-The-Iran-War-and-Disruption-to-LNG-.pdf" target="_blank">Oxford Energy: Qatar LNG</a></span>
-          <span class="source-chip"><a href="https://tradingeconomics.com/commodity/brent-crude-oil" target="_blank">Trading Economics: Brent</a></span>
-          <span class="source-chip"><a href="https://tradingeconomics.com/commodity/eu-natural-gas" target="_blank">Trading Economics: TTF</a></span>
-          <span class="source-chip"><a href="https://tradingeconomics.com/commodity/uk-natural-gas" target="_blank">Trading Economics: NBP</a></span>
-        </div>
-      </div>
-    </div>
+  <h3>5.3 China and Xi Jinping</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Date</th><th>Development</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>13-14 May</td><td>Trump-Xi summit in Beijing; Hormuz discussed</td><td></td></tr>
+        <tr><td>14 May</td><td>White House readout: "The two sides agreed that the Strait of Hormuz must remain open to support the free flow of energy"</td><td></td></tr>
+        <tr><td>14 May</td><td>Chinese vessels begin transiting under Iranian management protocols following Wang Yi discussions with Tehran</td><td></td></tr>
+        <tr><td>14 May</td><td>IRGC announces 30+ vessels passed; simultaneous vessel seizure 38nm off UAE coast</td><td></td></tr>
+        <tr><td>14 May</td><td>Xi's reported offer to Trump: "if I can be of any help"—conditional and absent from Beijing's official account</td><td></td></tr>
+      </tbody>
+    </table>
   </div>
-</section>
+  <p class="text-secondary small"><strong>Analyst note:</strong> Beijing has moved from "passive beneficiary of the crisis to active manager of its own corridor access". This is a meaningful step but not committed mediation for a comprehensive settlement. China remains Iran's largest oil buyer and primary goods supplier—the leverage instrument Trump named publicly in Beijing. The selective Chinese transit arrangement creates a two-tier global energy market where Chinese-flagged or Chinese-linked vessels receive preferential access while European and other neutral vessels remain excluded. This weakens the idea that Hormuz is reopening for the market as a whole and could disadvantage European and UK buyers in the competition for alternative LNG cargoes.</p>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-logo">SWITCH 365 LTD</div>
-    <p style="color:var(--c-offwhite);margin-bottom:8px">Commercial Energy Market Intelligence</p>
-    <p>Report Date: 19 May 2026 | Research Window: 18&ndash;19 May 2026</p>
-    <p style="margin-top:12px;font-size:0.7rem;opacity:0.5">This report is produced for internal briefing and customer guidance purposes. Market data is sourced from publicly available information. Past performance is not indicative of future results. Customer-specific procurement advice requires individual consumption, contract and renewal data.</p>
+  <h3>5.4 Iranian Leadership</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Date</th><th>Statement</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>18 May</td><td>Iran submits revised 14-point proposal via Pakistan; focuses on "trust-building" and sanctions suspension</td><td>Tasnim</td></tr>
+        <tr><td>18 May</td><td>Iranian President Pezeshkian: "We negotiate with dignity and will never back down... We must speak logically and receive answers"</td><td>Presidential office</td></tr>
+        <tr><td>18 May</td><td>Iranian state TV calls Trump's postponement a "retreat" based on "fear"</td><td></td></tr>
+        <tr><td>18 May</td><td>Iranian Foreign Ministry: "Our concerns were conveyed to the American side"; exchanges continuing through Pakistani mediators</td><td></td></tr>
+        <tr><td>17 May</td><td>Mohsen Rezaei (military adviser to Supreme Leader): "Our armed forces' fingers are on the trigger, while diplomacy is also continuing"</td><td>State TV</td></tr>
+        <tr><td>17 May</td><td>Tasnim: Washington set five conditions including Iran keeping only one nuclear site and transferring enriched uranium stockpile to US</td><td></td></tr>
+      </tbody>
+    </table>
   </div>
-</footer>
+
+  <!-- CEASEFIRE REALITY CHECK -->
+  <h2>Ceasefire Reality Check</h2>
+
+  <div class="callout-box">
+    <h4>Ceasefire Reality Check</h4>
+    <p>The ceasefire agreement reached on 8 April 2026 was explicitly designed to facilitate negotiations toward a permanent resolution. However, the ceasefire has always been partial and conditional. The most important limitation is that the ceasefire does not include Lebanon. Netanyahu stated unequivocally on 8 April that "there is not a ceasefire in Lebanon" and that strikes on Lebanon would resume.</p>
+  </div>
+
+  <h3>6.1 What the Ceasefire Says and What It Excludes</h3>
+  <p class="text-secondary">The ceasefire agreement reached on 8 April 2026 between the U.S., Iran and Israel was explicitly designed to facilitate negotiations toward a permanent resolution of the conflict. However, the ceasefire has always been partial and conditional, and critical ambiguities have persisted since its inception. The most important limitation is that the ceasefire does not include Lebanon. Israeli Prime Minister Benjamin Netanyahu stated unequivocally on 8 April that "there is not a ceasefire in Lebanon" and that strikes on Lebanon would resume. This position has been maintained consistently, with Netanyahu asserting that the ceasefire agreed between Iran and the U.S.-Israel coalition does not apply to Israeli operations against Hezbollah. The Pakistani mediator, Prime Minister Shehbaz Sharif, had indicated that Lebanon was included, but Netanyahu's contradiction of this claim has been borne out by events on the ground.</p>
+  <p class="text-secondary">The ceasefire's operational terms have also been subject to continuous strain. While the agreement called for a halt to direct U.S.-Iran military hostilities, it did not address the U.S. naval blockade of Iranian ports that remains in effect, nor did it resolve the status of the Strait of Hormuz, which Iran effectively closed on 2 March. The blockade, which U.S. Central Command has enforced by redirecting commercial vessels (85 vessels redirected through 18 May per CENTCOM's own reporting), has been a major sticking point in negotiations. Iran has consistently demanded the blockade's removal as a precondition for progress, while the U.S. has maintained that nuclear concessions must come first. This fundamental sequencing disagreement has meant that even during periods of nominal ceasefire, the physical conditions of economic warfare—blockade, sanctions, and Hormuz closure—have remained in place.</p>
+
+  <h3>6.2 Ground Reality: What Actually Happened</h3>
+  <p class="text-secondary">The ground reality during the ceasefire period has been one of persistent low-intensity conflict punctuated by significant escalations. Since the April 8 ceasefire, the following major incidents have occurred: Iranian and proxy drone and missile attacks against Gulf states including the UAE, Saudi Arabia, Kuwait, Qatar and Bahrain; Israeli daily airstrikes in Lebanon killing hundreds of civilians; the UAE's disclosure of secret retaliatory strikes against Iranian targets including the Lavan Island refinery; Saudi Arabia's secret strikes against Iran and Iranian-backed militias; the dramatic escalation on 4–5 May when Iranian forces attacked multiple vessels in Hormuz, the U.S. destroyed six Iranian small boats, and the UAE intercepted Iranian missiles and drones; and the 17 May drone attack on the Barakah nuclear power plant.</p>
+  <p class="text-secondary">Trump's postponement of the planned 19 May strike represents the second time the U.S. has pulled back from the brink of renewed major hostilities during the ceasefire period. The first was on 6 May, when Trump announced a temporary halt to the "Project Freedom" Hormuz reopening operation, citing "great progress" in negotiations. NBC News reported that this earlier pause was forced by Saudi Arabia's refusal to allow U.S. military aircraft to use Prince Sultan Air Base or fly through Saudi airspace, suggesting that Gulf-state pressure has been a consistent factor in preventing escalation. The pattern that emerges is not of a durable ceasefire but of a tense standoff where military options are continuously prepared and then held in abeyance at Gulf-state request, while diplomatic channels produce proposals that have not yet bridged the fundamental gaps between U.S. and Iranian positions.</p>
+
+  <!-- SHIPPING AND CHOKE POINT STATUS -->
+  <h2>Shipping and Choke Point Status</h2>
+
+  <h3>7.1 Strait of Hormuz</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Indicator</th><th>Status (19 May 2026)</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Traffic level</td><td>~5% of pre-war average</td><td>Kpler vessel data</td></tr>
+        <tr><td>Vessels stranded</td><td>1,550+ vessels, 22,500 mariners</td><td>General Dan Caine, JCS Chairman</td></tr>
+        <tr><td>Insurance status</td><td>P&I cancelled from 5 Mar; war risk 2-3% of hull value</td><td>Howden Re; Lloyd's</td></tr>
+        <tr><td>Chinese transit</td><td>30+ vessels under Iranian management protocols</td><td>Fars/Tasnim</td></tr>
+        <tr><td>US blockade</td><td>85 commercial vessels redirected through 18 May</td><td>CENTCOM</td></tr>
+        <tr><td>General reopening</td><td>No evidence of normal commercial traffic returning</td><td>Multiple</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-secondary">The distinction between selective Chinese passage and general reopening is commercially critical. Iranian state media has described the arrangement as vessels passing under "Iranian management protocols" and a "safe corridor". The semi-official Fars news agency attributed the passage to "deep relations and strategic partnership" between China and Iran, and noted that the move followed requests by China's foreign minister and ambassador to Tehran. MarineTraffic data confirmed at least four China-linked vessels transiting in a 24-hour period. However, this arrangement does not extend to neutral, European, or U.S.-linked vessels, and there is no evidence that shipowners and insurers are willing to resume normal commercial operations through Hormuz. The insurance market, which was the first system to buckle when the crisis began (with P&I clubs issuing 72-hour cancellation notices within 48 hours of the February 28 strikes), has not reinstated standard coverage for Gulf transits. War risk premiums remain at 2-3% of hull value—up to 24 times pre-crisis levels—and in some cases have reached 10% of hull and machinery value.</p>
+
+  <h3>7.2 Bab el-Mandeb / Red Sea</h3>
+  <p class="text-secondary">The risk of a dual choke point crisis—simultaneous disruption at both Hormuz and Bab el-Mandeb—remains acute. Houthi forces resumed attacks on Red Sea shipping on 28 February 2026, the same day as the U.S.-Israeli strikes on Iran, reversing the limited progress made after the October 2025 Gaza ceasefire. The U.S. Maritime Advisory 2026-006, issued on 26 March, warns that "the Houthis continue to pose a threat to U.S. assets, including commercial vessels" and notes that the group has demonstrated the capability to conduct UAV, USV, ballistic missile, and small boat attacks. Suez Canal transits, which were recovering toward 120 vessel passages per month, have dropped sharply again, with most major carriers rerouting via the Cape of Good Hope. The Times reported on 16 March that the Houthis are awaiting an Iranian signal to resume attacks if U.S. military actions weaken Iran's control of Hormuz, and that approximately 30 tankers near the Saudi port of Yanbu are currently within Houthi strike range. A senior Houthi politburo member has stated that the group is considering a naval blockade targeting vessels belonging to "aggressor countries".</p>
+  <p class="text-secondary">The commercial implications of dual choke point disruption are severe. The Red Sea route to Europe was already operating at 49% below pre-crisis capacity before the Hormuz closure, and the combination of both corridors being blocked has created what DHL describes as the most disruptive logistics environment since the pandemic. For UK energy markets, the Bab el-Mandeb risk matters because Qatari LNG cargoes destined for Europe that might otherwise route via Suez now face a much longer journey around the Cape of Good Hope, adding 10-14 days to transit times and significantly increasing freight costs.</p>
+
+  <!-- ENERGY MARKET STAT SHEET -->
+  <h2>Updated Energy Market Stat Sheet</h2>
+
+  <h3>8.1 Oil Markets</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>Value (19 May 2026)</th><th>Change</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Brent front-month</td><td>$110.21/bbl</td><td>-1.69% daily; +15.43% monthly; +68.57% YoY</td><td></td></tr>
+        <tr><td>Brent intraday (18 May)</td><td>$108.83 → $107.25</td><td>-$2.00 on Trump announcement</td><td></td></tr>
+        <tr><td>WTI front-month</td><td>~$95.56/bbl</td><td>+0.50%</td><td></td></tr>
+        <tr><td>Brent 1-day</td><td>-1.69%</td><td></td><td></td></tr>
+        <tr><td>Brent 5-day</td><td>+4.5%</td><td>From ~$105.64 (14 May)</td><td></td></tr>
+        <tr><td>Brent since crisis start (28 Feb)</td><td>+~65%</td><td>From ~$72 pre-conflict</td><td></td></tr>
+        <tr><td>World Bank 2026 Brent forecast</td><td>$86/bbl (baseline); $115 (upside)</td><td>Baseline assumes disruption ends May</td><td></td></tr>
+        <tr><td>EIA 2026 Brent forecast</td><td>$106 (May-Jun); $89 (Q4)</td><td>Assumes Hormuz closed through end-May</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-container"><canvas id="brentChart"></canvas></div>
+
+  <h3>8.2 Gas Markets</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>Value (19 May 2026)</th><th>Change</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>UK NBP front-month</td><td>121.41 p/therm</td><td>-1.54% daily; +19.84% monthly; +36.15% YoY</td><td></td></tr>
+        <tr><td>UK NBP intraday (18 May)</td><td>128.5 p/therm</td><td>+7% overnight spike</td><td></td></tr>
+        <tr><td>Dutch TTF</td><td>€50.16/MWh</td><td>Elevated</td><td></td></tr>
+        <tr><td>NBP Sum-27</td><td>87.83 p/therm</td><td>+3.7% day; +6.6% 30-day</td><td></td></tr>
+        <tr><td>NBP Win-26</td><td>122.49 p/therm</td><td>+5.6% day; +11.0% week</td><td></td></tr>
+        <tr><td>NBP Cal-27</td><td>96.04 p/therm</td><td>+4.2% day; +8.9% 30-day</td><td></td></tr>
+        <tr><td>European gas storage</td><td>36% full</td><td>-19pp vs 5-yr norm</td><td></td></tr>
+        <tr><td>EU Nov 1 target (relaxed)</td><td>80%</td><td>At current pace → ~67%</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-container"><canvas id="gasChart"></canvas></div>
+
+  <h3>8.3 UK Power Markets</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>Value (15 May settlement)</th><th>Change</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>UK Power Jun-26</td><td>£102.74/MWh</td><td>+3.6% day; +13.9% 30-day</td><td></td></tr>
+        <tr><td>UK Power Sum-27</td><td>£76.27/MWh</td><td>+2.0% day; +5.2% 30-day</td><td></td></tr>
+        <tr><td>UK Power Win-26</td><td>£101.37/MWh</td><td>+2.7% day; +7.3% week</td><td></td></tr>
+        <tr><td>UK Power Cal-27</td><td>£82.85/MWh</td><td>+1.7% day; +5.6% 30-day</td><td></td></tr>
+        <tr><td>UK Power Cal-28</td><td>£67.10/MWh</td><td>+0.8% day; +1.1% 30-day</td><td></td></tr>
+        <tr><td>Spot power (18 May)</td><td>£119.37/MWh</td><td>+18% intraday</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-container"><canvas id="powerChart"></canvas></div>
+
+  <h3>8.4 LNG and Shipping</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>Status</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Qatar LNG</td><td>Force majeure declared; 17% export capacity offline</td><td></td></tr>
+        <tr><td>Ras Laffan damage</td><td>2 LNG trains (4, 6) damaged; 12.8 MTPA offline</td><td></td></tr>
+        <tr><td>Repair timeline</td><td>3-5 years; $20B annual lost revenue</td><td></td></tr>
+        <tr><td>LNG freight rates</td><td>Surged 600% to ~$300,000/day (Atlantic)</td><td></td></tr>
+        <tr><td>War risk premium</td><td>2-3% of hull value (up from 0.1%); some cases 10%</td><td></td></tr>
+        <tr><td>Tanker freight (TD3C)</td><td>Nearly tripled since Jan 2026</td><td></td></tr>
+        <tr><td>Container surcharges</td><td>Hapag-Lloyd: $1,500/TEU; $3,500/reefer</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MARKET INTERPRETATION -->
+  <h2>Market Interpretation</h2>
+
+  <h3>9.1 What the Market Is Pricing Now</h3>
+  <p class="text-secondary">Current market pricing across Brent, TTF, NBP and UK power suggests traders are pricing a medium-duration disruption scenario that extends beyond the World Bank's May-easing baseline but falls short of a full-year crisis. Brent at ~$110/bbl is trading $24 above the World Bank's $86 annual average baseline and essentially at the World Bank's upside scenario of $115/bbl for a case where critical facilities suffer more damage and export volumes recover slowly. This implies the market is already assigning meaningful probability to a more prolonged disruption than the World Bank's central case assumes. The EIA's revised forecast of $106/bbl for May-June, with an explicit warning that prices would be $20/bbl higher if Hormuz remains shut through June, provides a near-term anchor that current pricing is broadly consistent with.</p>
+  <p class="text-secondary">In UK gas markets, the NBP at 121.41 p/therm (down 1.54% on the day but up 19.84% over 30 days) reflects a market that has absorbed significant LNG supply risk premium and is now sensitive to any further deterioration in global supply availability. The intraday spike to 128.5 p/therm on 18 May—a 7% overnight move—demonstrates how quickly UK gas can reprice when geopolitical headlines intensify. The shape of the NBP forward curve, with Summer-27 at 87.83 p/therm and Winter-26 at 122.49 p/therm, shows the market is pricing sustained elevation through the coming winter.</p>
+
+  <h3>9.2 World Bank Baseline vs. Market Pricing</h3>
+  <p class="text-secondary">The World Bank's baseline projection of energy prices rising 24% in 2026 is explicitly conditional on "the most acute phase of supply disruptions related to the conflict in the Middle East end[ing] within the second quarter of 2026" and "shipping through the Strait of Hormuz gradually return[ing] to pre-war levels by late 2026". The baseline projects Brent averaging $86/bbl in 2026 and European natural gas prices surging by approximately 25%. Current Brent pricing at $110/bbl is already 28% above the World Bank's annual average baseline, suggesting either that the market is pricing a more severe disruption than the baseline assumes, or that the baseline will need significant upward revision if current conditions persist into June.</p>
+  <p class="text-secondary">The EIA's revised assumptions, published two weeks after the World Bank's outlook, make the baseline look increasingly optimistic. Where the World Bank assumed "the most acute disruptions end in May," the EIA now assumes Hormuz "effectively closed through late May" with production shut-ins rising to 10.8 million bpd—nearly 2 million bpd higher than the EIA's earlier forecast. The IEA has similarly revised its outlook, now projecting world oil supply to fall by 3.9 million bpd in 2026 (up from 1.5 million bpd previously). These sequential upward revisions by major institutions suggest that the consensus view of disruption severity is still catching up to physical reality.</p>
+
+  <h3>9.3 Does the Paused Strike Make a Deal More Likely?</h3>
+  <p class="text-secondary">The Gulf-state intervention has created a narrow diplomatic window measured in days rather than weeks. The fact that Qatar, Saudi Arabia and the UAE coordinated their request to Trump suggests they have some visibility into Iranian negotiating positions and believe a deal is achievable. Iran's submission of a revised 14-point proposal on 18 May, with its reported inclusion of nuclear concessions and focus on "trust-building" measures, represents movement from Tehran. However, the fundamental sticking points remain unresolved: Iran continues to demand blockade removal and sanctions relief as preconditions for progress, while the U.S. insists on nuclear concessions first. Trump's own track record of setting deadlines and then backing off—while simultaneously keeping military options at hair-trigger readiness—creates an environment where diplomatic optimism can turn to military action with minimal warning.</p>
+  <p class="text-secondary">For UK business energy buyers, the key insight is that the paused strike does not change the physical supply picture. Hormuz remains closed to most commercial traffic. Qatari LNG remains under force majeure. European gas storage remains well below normal. War risk premiums remain at extreme levels. The only thing that has changed is the near-term probability of additional military escalation, and even that change is temporary and conditional. If talks fail, the strike option returns "on a moment's notice".</p>
+
+  <!-- SUPPLIER PRICE-BOOK LAG -->
+  <h2>Supplier Price-Book Lag and Procurement Window</h2>
+
+  <div class="callout-box">
+    <h4>Supplier Price-Book Lag</h4>
+    <p>UK energy supplier price books typically lag wholesale market movements by days to weeks, creating periodic windows where available fixed pricing does not yet fully reflect recent wholesale gains or losses. The current market environment exhibits the classic conditions for such a lag.</p>
+  </div>
+
+  <h3>10.1 Wholesale vs. Supplier Pricing Gap</h3>
+  <p class="text-secondary">UK energy supplier price books typically lag wholesale market movements by days to weeks, creating periodic windows where available fixed pricing does not yet fully reflect recent wholesale gains or losses. The current market environment exhibits the classic conditions for such a lag. Wholesale gas prices have risen 6.6% on the Summer-27 benchmark and 18.4% on the front-month June contract over 30 days, while wholesale power has risen 5.2% on Summer-27 and 13.9% on the June contract. These are significant moves in a short period, and the intraday volatility on 18 May—spot gas up 7% overnight, spot power up 18%—suggests supplier risk management teams have been under pressure to keep pricing current.</p>
+  <p class="text-secondary">The market intelligence from Smart Energy Co, which tracks supplier behaviour, indicates that after a period during peak volatility in March-April when many suppliers withdrew pricing entirely, most have now returned to the market and are actively quoting again. However, pricing remains cautious and can change quickly. The spread between competitive fixed deals and average market pricing remains wide, creating opportunity for businesses that compare suppliers. Business electricity rates in May 2026 are averaging 25.82-25.96 p/kWh for small-to-medium businesses, with standing charges of 90.20p/day. Business gas rates are averaging 8.52-8.97 p/kWh depending on consumption level.</p>
+
+  <h3>10.2 Is There a Short Procurement Window?</h3>
+  <p class="text-secondary">The conditions for a short-term procurement window appear to exist. Wholesale markets moved sharply higher on 18 May following Trump's "clock is ticking" warning and the Barakah nuclear plant attack, with spot gas hitting 128.5 p/therm and front-month power breaking through £100/MWh. Trump's subsequent announcement calling off the planned strike caused an immediate $2+ pullback in Brent and likely some moderation in gas and power pricing. If supplier price books had begun to embed the 18 May escalation but had not yet fully adjusted for the 18-19 May de-escalation signal, there may be a brief period where available fixed pricing reflects some but not all of the recent volatility.</p>
+  <p class="text-secondary">However, this window should be understood as narrow and closing. The underlying drivers of higher pricing—Hormuz closure, Qatari LNG force majeure, low European storage, elevated war risk premiums—have not changed. Trump's postponement is explicitly time-limited to "two to three days". If talks show no progress by late May, the strike option returns and wholesale markets will likely reprice higher rapidly. For businesses within 12 months of contract end, the rational action is to test available pricing now rather than wait for clarity that may not arrive.</p>
+
+  <!-- IMPACT ON UK BUSINESS ENERGY PRICES -->
+  <h2>Impact on UK Business Energy Prices</h2>
+
+  <h3>11.1 The Transmission Mechanism</h3>
+  <p class="text-secondary">UK business energy prices are determined through a multi-layered transmission mechanism that begins with global oil and gas markets and ends with supplier price books. The key linkages are as follows. First, UK wholesale gas (NBP) tracks European gas (TTF) because the UK is part of the integrated North-West European gas market, with physical interconnections to Belgium and the Netherlands. Second, European gas tracks global LNG prices because Europe now depends on LNG for approximately 40-45% of its gas supply following the reduction in Russian pipeline flows. Third, global LNG prices are directly affected by Middle East supply disruptions because Qatar supplies approximately 20% of global LNG and roughly 12-14% of European LNG previously transited Hormuz. Fourth, UK electricity prices track gas prices because gas-fired power plants provide 30-40% of UK generation and set the marginal price for much of the day. Fifth, supplier price books reflect wholesale costs plus risk premiums, operating costs, and margin, with typical lag times of days to weeks.</p>
+  <p class="text-secondary">The Hormuz crisis has disrupted this supply chain at multiple points simultaneously. The effective closure of Hormuz has removed Qatar's LNG exports from the market (force majeure declared on 4 March), forcing European buyers to compete more intensely for alternative LNG cargoes from the U.S., Norway, and Algeria. This competition drives up TTF, which drives up NBP, which drives up UK power prices. The war risk premium on shipping—now at 2-3% of hull value, up from 0.1% pre-crisis—adds directly to the delivered cost of any LNG cargoes that do reach European terminals. The LNG freight rate surge—up 600% to $300,000/day in the Atlantic Basin—further increases the cost of delivered gas. These costs flow through to supplier hedging costs and ultimately to business contract pricing.</p>
+
+  <h3>11.2 World Bank Baseline: Why 24% Matters</h3>
+  <p class="text-secondary">The World Bank's projection of a 24% surge in energy prices in 2026 is commercially significant for UK business buyers even before considering any worst-case escalation. This baseline projection assumes "the most acute disruptions end in May"—an assumption that the EIA's revised outlook now challenges. If the World Bank's baseline is already for a 24% price increase in a best-case scenario where major disruption ends in May, then any prolongation of the crisis into June or beyond implies materially higher prices than even this elevated baseline. The World Bank's upside scenario—where critical facilities suffer more damage and export volumes recover slowly—projects Brent averaging $115/bbl in 2026, which would translate into even larger increases for UK gas and power.</p>
+  <p class="text-secondary">For a UK business currently paying 25.82 p/kWh for electricity and 8.67 p/kWh for gas, a 24% increase would raise those costs to approximately 32.0 p/kWh and 10.8 p/kWh respectively. For a medium-sized business using 50,000 kWh of electricity and 100,000 kWh of gas annually, that represents an additional ~£5,300 per year in energy costs. The World Bank's warning that "commodity prices could rise even higher if hostilities escalate or supply disruptions from the war last longer than projected" is not an abstract risk—it is a direct threat to business operating costs.</p>
+
+  <!-- DURATION SCENARIOS -->
+  <h2>Duration Scenarios</h2>
+
+  <h3>12.1 Scenario Comparison Table</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Scenario</th><th>Duration</th><th>Brent</th><th>TTF</th><th>NBP</th><th>UK Power</th><th>Key Assumptions</th></tr></thead>
+      <tbody>
+        <tr><td>Short disruption</td><td>1-2 weeks (Hormuz reopens by early Jun)</td><td>$90-100/bbl</td><td>€40-45/MWh</td><td>100-110 p/therm</td><td>£85-95/MWh</td><td>Deal reached; gradual reopening; Qatari LNG partial restart</td></tr>
+        <tr><td>Medium disruption</td><td>1-3 months (Hormuz closed through Jul-Aug)</td><td>$110-130/bbl</td><td>€55-70/MWh</td><td>130-160 p/therm</td><td>£105-130/MWh</td><td>Talks fail; intermittent military action; European storage refill compromised</td></tr>
+        <tr><td>Severe escalation</td><td>3+ months or regional widening</td><td>$130-150+/bbl</td><td>€80+/MWh</td><td>180+ p/therm</td><td>£140+/MWh</td><td>Full military resumption; Hormuz + Bab el-Mandeb blocked; infrastructure targeting spreads</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-container"><canvas id="scenarioChart"></canvas></div>
+
+  <h3>12.2 Scenario Details</h3>
+  <p class="text-secondary"><strong>Short disruption (1-2 weeks):</strong> This scenario assumes the current diplomatic window succeeds and a framework agreement is reached within days, leading to a gradual, managed reopening of Hormuz beginning in early June. Even under this optimistic case, full normalisation would take months—DHL forecasts 4-6 months for shipping through Hormuz to normalise, and Qatari LNG repairs will take 3-5 years for the damaged trains. The World Bank's baseline essentially assumes this scenario, with Brent at $86/bbl annual average. However, current Brent pricing at $110/bbl suggests the market is not yet assigning high probability to this outcome.</p>
+  <p class="text-secondary"><strong>Medium disruption (1-3 months):</strong> This scenario assumes talks fail and military action resumes, but remains limited in scope—targeted strikes rather than full-scale war, with Hormuz remaining closed or only partially reopened through the summer. The EIA's current assumptions align with the lower end of this scenario (Hormuz closed through end-May, gradual reopening from June). However, the EIA explicitly warns that if Hormuz remains shut through June, prices would be $20/bbl higher than its current forecast, implying Brent at $125-126/bbl in the near term. Under this scenario, European gas storage refill becomes seriously compromised, with the current pace of injection pointing to only ~67% full by November 1 versus the relaxed target of 80%.</p>
+  <p class="text-secondary"><strong>Severe escalation (3+ months or regional widening):</strong> This scenario assumes either a full resumption of major military hostilities or a widening of the conflict to include sustained Houthi action against Red Sea shipping, direct Iranian retaliation against Gulf infrastructure, or Hezbollah escalation from Lebanon. The World Bank's upside scenario—Brent at $115/bbl annual average—partially captures this case, but a full regional war could push prices significantly higher. The IEA's description of the situation as the "greatest global energy and food security challenge in history" provides context for the potential severity. Under this scenario, UK business energy buyers would face sustained prices at or above current elevated levels through 2026 and potentially into 2027.</p>
+
+  <h3>12.3 World Bank and EIA Comparison</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Institution</th><th>Disruption Assumption</th><th>Brent Forecast</th><th>2026 Energy Price Change</th><th>Scenario Type</th></tr></thead>
+      <tbody>
+        <tr><td>World Bank</td><td>Most acute disruption ends May; gradual reopening by late 2026</td><td>$86/bbl (base); $115 (upside)</td><td>+24% (baseline)</td><td>Base case with upside risk</td></tr>
+        <tr><td>EIA</td><td>Hormuz closed through end-May; gradual reopening from June</td><td>$106/bbl (May-Jun); $89 (Q4)</td><td>Not explicitly stated</td><td>Later disruption than World Bank</td></tr>
+        <tr><td>EIA (extended)</td><td>Hormuz closed through June</td><td>+$20/bbl above current forecast</td><td>Not explicitly stated</td><td>Conditional stress case</td></tr>
+        <tr><td>IEA</td><td>Hormuz flows gradually resume from June</td><td>Supply -3.9M bpd in 2026</td><td>Not explicitly stated</td><td>Revised from -1.5M bpd</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-secondary">The key insight from this comparison is that even the most optimistic institutional assumptions (World Bank baseline) project a 24% energy price increase in 2026, while the more recent EIA and IEA revisions suggest disruption may last longer and bite harder than the World Bank baseline assumes. For UK businesses, this means that delaying procurement decisions is a bet against the consensus view of major international institutions.</p>
+
+  <!-- WHAT WOULD CHANGE THIS VIEW -->
+  <h2>What Would Change This View?</h2>
+  <p class="text-secondary">The following developments would constitute genuine evidence of de-escalation sufficient to revise the current risk assessment:</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Evidence Required</th><th>Current Status (19 May)</th></tr></thead>
+      <tbody>
+        <tr><td>Verified full reopening of Hormuz to normal commercial traffic</td><td><strong>Not achieved.</strong> Only selective Chinese passage under Iranian management</td></tr>
+        <tr><td>War-risk premiums falling materially toward pre-crisis levels</td><td><strong>Not achieved.</strong> Still at 2-3% of hull value (20-30x pre-crisis)</td></tr>
+        <tr><td>Confirmed US-Iran agreement with signed terms</td><td><strong>Not achieved.</strong> Proposal under review; "closer but not done"</td></tr>
+        <tr><td>Qatari LNG normalisation with force majeure lifted</td><td><strong>Not achieved.</strong> 17% capacity offline; 3-5 year repairs</td></tr>
+        <tr><td>Sustained TTF/NBP decline backed by physical flow improvement</td><td><strong>Not achieved.</strong> NBP up 19.84% over 30 days</td></tr>
+        <tr><td>Supplier price books reducing rather than holding or rising</td><td><strong>Not achieved.</strong> Most suppliers have returned to market but pricing remains cautious and volatile</td></tr>
+        <tr><td>European gas storage refilling at or above seasonal norms</td><td><strong>Not achieved.</strong> 36% full, -19pp vs 5-yr norm; on pace for ~67% by Nov 1 vs 80% target</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="text-secondary">Temporary diplomatic language is not sufficient to change the commercial risk assessment. The current postponement of military action is explicitly time-limited to "two to three days". The 14-point proposal is "under review," not agreed or implemented. Hormuz remains closed to normal commercial traffic. Qatari LNG remains under force majeure. European storage remains well below normal. Until physical, financial, and market evidence demonstrates real de-escalation, UK business energy buyers should operate on the assumption that elevated prices and high volatility are the baseline for 2026.</p>
+
+  <!-- COMMERCIAL TAKEAWAY -->
+  <h2>Commercial Takeaway</h2>
+
+  <h3>14.1 The Core Message for UK Businesses</h3>
+  <p class="text-secondary">The commercial conclusion from this reporting period is direct and unambiguous: <span class="strong gradient-text">waiting is not neutral.</span> It is a decision to remain exposed while wholesale markets, supplier books, and geopolitical risks move. The postponement of a planned U.S. strike on Iran has created a moment of temporary market softness, but it has not changed the fundamental conditions that have driven UK wholesale gas prices up 19.84% in 30 days and UK power prices up 5.2% over the same period. The World Bank's baseline already projects energy prices rising 24% in 2026 even if the major part of the disruption ends in May, and the EIA's revised assumptions suggest disruption may last longer than the World Bank baseline assumes. Hormuz remains effectively closed to normal commercial traffic, with only selective passage for Chinese vessels under Iranian management protocols. Qatari LNG remains under force majeure with 17% of export capacity offline and repairs estimated at 3-5 years. European gas storage is at 36% full, 19 percentage points below the 5-year norm, with current injection pace pointing to a 13 percentage point shortfall versus even the relaxed 80% winter target.</p>
+  <p class="text-secondary">For businesses within 12 months of contract end date, the commercially rational step is to review immediately, test available supplier pricing, and where current forward pricing and the customer's own risk profile support it, consider fixing now and fixing long—typically 36+ months. The reasons for this recommendation are as follows. First, the World Bank baseline of 24% higher energy prices in 2026 is not a worst-case scenario—it is the central case that assumes the major disruption ends in May. If disruption persists into June or beyond, prices will be higher still. Second, the EIA's revised outlook, published after the World Bank's baseline, assumes Hormuz remains closed through end of May with 10.8 million bpd of production shut in—making the World Bank baseline look increasingly optimistic. Third, wholesale markets move before supplier price books fully catch up, creating a short procurement window that can close quickly when the next escalation headline hits. Fourth, the current diplomatic pause is explicitly time-limited to two to three days, and Trump's instruction to keep military forces on hair-trigger readiness means the strike option can be reactivated "on a moment's notice". Fifth, even if a deal is reached, the physical normalisation of Hormuz shipping, Qatari LNG production, and European gas storage will take months to years, not days or weeks.</p>
+
+  <h3>14.2 Customer Segmentation</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Customer Type</th><th>Risk Level</th><th>Recommended Action</th></tr></thead>
+      <tbody>
+        <tr><td>Contract ending within 6 months</td><td><span class="strong">Critical</span></td><td>Review immediately; obtain quotes; consider fixing 36+ months if pricing supports</td></tr>
+        <tr><td>Contract ending 6-12 months</td><td><span class="strong">High</span></td><td>Begin review process; monitor market; be prepared to act on short window</td></tr>
+        <tr><td>High consumption / energy-intensive</td><td><span class="strong">High</span></td><td>Greater exposure to unit rate increases; longer fixes provide more certainty</td></tr>
+        <tr><td>Multi-site operators</td><td><span class="strong">High</span></td><td>Complexity requires earlier planning; staggered renewals may capture value</td></tr>
+        <tr><td>Flexible / pass-through contracts</td><td><span class="strong">Very High</span></td><td>Directly exposed to wholesale movements; fixed-price conversion should be priority</td></tr>
+        <tr><td>Hospitality, care, manufacturing</td><td><span class="strong">High</span></td><td>Thin margins make energy cost volatility especially damaging; certainty has premium value</td></tr>
+        <tr><td>SMEs with limited procurement resource</td><td><span class="strong">Medium-High</span></td><td>Broker-led review recommended; avoid rollover/deemed tariffs</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- CUSTOMER-FACING OUTPUTS -->
+  <h2>Customer-Facing Outputs</h2>
+
+  <h3>15.1 15-Second Morning Sales Blurb</h3>
+  <div class="callout-box">
+    <p>"Trump called off a planned Iran strike last night after Gulf allies asked for a few more days of talks, but he told the military to stay ready to attack at a moment's notice if a deal isn't reached. Oil dropped two dollars on the news but gas and power are still up nearly 20% over the past month. Hormuz is still closed, Qatari LNG is still offline, and European gas storage is at just 36%. This dip could be a short window—if you've got a contract ending in the next 12 months, we need to talk today."</p>
+  </div>
+
+  <h3>15.2 Customer Email Draft</h3>
+  <div class="callout-box">
+    <p><strong>Subject:</strong> Energy markets: a short window may have opened—but the structural risk hasn't changed</p>
+    <p>Dear [Name],</p>
+    <p>You may have seen that President Trump called off a planned military strike on Iran last night after Gulf allies requested a pause for negotiations. Oil prices fell slightly on the news.</p>
+    <p>But we want to be clear: the underlying conditions driving UK energy prices higher have not changed.</p>
+    <ul>
+      <li>The Strait of Hormuz remains closed to normal commercial shipping</li>
+      <li>Qatar's LNG exports remain under force majeure with 17% of capacity damaged</li>
+      <li>European gas storage is at just 36%—19 percentage points below normal for this time of year</li>
+      <li>UK wholesale gas prices are still up nearly 20% over the past month</li>
+      <li>UK power prices are up more than 5% and rising</li>
+    </ul>
+    <p>The World Bank projects energy prices will rise 24% this year even if the major disruption ends in May. The US Energy Information Administration now assumes the Strait of Hormuz will stay closed through at least the end of May.</p>
+    <p><strong>What this means for your business:</strong></p>
+    <p>If your energy contract ends within the next 12 months, you are exposed to these rising prices when you come to renew. Wholesale markets can move before supplier price books fully catch up, which means there may be a short window to secure current pricing before the next round of increases lands.</p>
+    <p>We are recommending that businesses in your position review their options immediately and, where pricing and risk profile support it, consider fixing now for 36 months or longer to lock in certainty.</p>
+    <p>To get started, simply reply YES to this email and we will put you in the queue to be contacted today.</p>
+    <p>There is no obligation. We will review your current contract end date, consumption, and available pricing from 28+ suppliers, and give you a clear recommendation.</p>
+    <p><strong>Do not wait for perfect clarity. The market will not wait for you.</strong></p>
+    <p>Best regards,<br>[Your name]<br>Switch 365 Ltd</p>
+  </div>
+
+  <h3>15.3 SMS / Text Message</h3>
+  <div class="callout-box">
+    <p>"Trump paused an Iran strike but told military to stay ready. Hormuz still CLOSED. UK gas up 20% in 30 days. If your business energy contract ends in 12 months, reply YES and we will put you in the queue to be contacted today. Switch 365 Ltd."</p>
+  </div>
+
+  <!-- SOURCE QUALITY AND CONFIDENCE -->
+  <h2>Source Quality and Confidence</h2>
+
+  <h3>16.1 Highest-Confidence Facts</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Fact</th><th>Verification Sources</th></tr></thead>
+      <tbody>
+        <tr><td>Trump called off planned Iran strike for 19 May at Gulf allies' request</td><td>AP, NPR, MS NOW, WSJ, Truth Social, White House remarks</td></tr>
+        <tr><td>Trump instructed military to remain ready for "full, large scale assault"</td><td>Truth Social, AP, NPR</td></tr>
+        <tr><td>Gulf leaders (Qatar, Saudi Arabia, UAE) requested 2-3 day pause</td><td>Truth Social, AP, MS NOW</td></tr>
+        <tr><td>Trump "clock is ticking" warning on 17-18 May</td><td>Truth Social, Times of Israel, Yahoo, MS NOW</td></tr>
+        <tr><td>UAE Barakah nuclear plant drone attack on 17 May</td><td>UAE Foreign Ministry, IAEA, NPR, JPost</td></tr>
+        <tr><td>Hormuz effectively closed; 1,550+ vessels stranded</td><td>General Dan Caine (JCS), Kpler data</td></tr>
+        <tr><td>Chinese vessels transiting under Iranian management protocols</td><td>Fars News, Tasnim, MarineTraffic, Reuters</td></tr>
+        <tr><td>World Bank: 24% energy price surge in 2026 baseline</td><td>World Bank press release, Commodity Markets Outlook</td></tr>
+        <tr><td>EIA: Hormuz closed through end-May; 10.8M bpd shut in May</td><td>EIA STEO May 2026, Reuters</td></tr>
+        <tr><td>Qatar LNG force majeure; 17% capacity offline, 3-5 year repairs</td><td>QatarEnergy CEO, CE Energy News</td></tr>
+        <tr><td>European gas storage at 36% (-19pp vs 5-yr norm)</td><td>AGSI+/Bruegel, GEF</td></tr>
+        <tr><td>Brent ~$110/bbl; NBP 121.41 p/therm; UK Power Sum-27 £76.27/MWh</td><td>Trading Economics, ICE, Smart Energy Co</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>16.2 Medium-Confidence Areas</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Area</th><th>Assessment</th><th>Key Sources</th></tr></thead>
+      <tbody>
+        <tr><td>Actual military preparations for 19 May strike</td><td>Trump claimed a strike was planned; independent military confirmation not publicly available</td><td>Truth Social, AP</td></tr>
+        <tr><td>Content of revised 14-point proposal</td><td>Tasnim reported general focus; specific terms not independently verified</td><td>Tasnim, Xinhua</td></tr>
+        <tr><td>Gulf states' assessment that deal is close</td><td>Trump relayed this; Gulf official statements more cautious</td><td>Truth Social</td></tr>
+        <tr><td>Iranian responsibility for Barakah attack</td><td>UAE investigating; sources told JPost "it's Iran who ordered" but not officially confirmed</td><td>JPost</td></tr>
+        <tr><td>Supplier price-book lag</td><td>Inferred from normal market behaviour and wholesale-supplier price differentials; specific supplier pricing data proprietary</td><td>Smart Energy Co</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>16.3 Unconfirmed Claims to Watch</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Claim</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Iran charging tolls/fees in yuan for Hormuz transit</td><td>Reported by some sources in March; no recent credible confirmation</td></tr>
+        <tr><td>Trump considering lifting sanctions on Chinese oil companies buying Iranian oil</td><td>Mentioned in some reporting; no official confirmation</td></tr>
+        <tr><td>Pakistan hosting Iranian military aircraft despite mediator role</td><td>CBS News reported; potentially complicates mediation</td></tr>
+        <tr><td>UAE conducting secret retaliatory strikes against Iran</td><td>WSJ, NYT reported; UAE has not officially confirmed</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>16.4 What Needs Further Verification Tomorrow</h3>
+  <ul class="text-secondary">
+    <li>Did Trump's national security meeting on 19 May result in any new military decisions or diplomatic initiatives? (Axios reported the meeting was scheduled)</li>
+    <li>Has Iran made any further movement on its proposal, or has the U.S. responded to the revised 14-point plan? (Tasnim reported submission on 18 May)</li>
+    <li>Are there any signs of Gulf allies extending their requested pause beyond the initial 2-3 days?</li>
+    <li>Has the UAE officially attributed the Barakah attack to Iran or any specific actor? (Investigation ongoing as of 18 May)</li>
+    <li>Have any additional Chinese or neutral vessels transited Hormuz under the management protocols? (Initial reporting from 13-14 May)</li>
+    <li>Has any supplier begun withdrawing pricing or shortening quote validity periods? (Smart Energy Co monitoring)</li>
+  </ul>
+
+  <div class="footer">
+    <p>Middle East Energy Market Intelligence Report — 19 May 2026</p>
+    <p>Prepared for Switch 365 Ltd</p>
+  </div>
+
+</div>
 
 <script>
-// Fade-in animation on scroll
-const observerOptions = {threshold: 0.1, rootMargin: '0px 0px -50px 0px'};
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('fade-in');
-      observer.unobserve(entry.target);
+// Common chart options for dark theme
+const commonOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: { labels: { color: '#dadada', font: { family: 'Montserrat' } } }
+  },
+  scales: {
+    x: { ticks: { color: '#dadada', font: { family: 'Montserrat' } }, grid: { color: 'rgba(255,255,255,0.08)' } },
+    y: { ticks: { color: '#dadada', font: { family: 'Montserrat' } }, grid: { color: 'rgba(255,255,255,0.08)' } }
+  }
+};
+
+// Brent Chart
+const ctxBrent = document.getElementById('brentChart').getContext('2d');
+new Chart(ctxBrent, {
+  type: 'line',
+  data: {
+    labels: ['Feb 28','Mar 15','Apr 1','Apr 15','May 1','May 14','May 18','May 19'],
+    datasets: [{
+      label: 'Brent Crude ($/bbl)',
+      data: [72,78,85,92,98,105.64,107.25,110.21],
+      borderColor: '#00d39a',
+      backgroundColor: 'rgba(0,211,154,0.15)',
+      fill: true,
+      tension: 0.4,
+      pointBackgroundColor: '#dd40ff',
+      pointBorderColor: '#fff',
+      pointRadius: 5
+    }]
+  },
+  options: {
+    ...commonOptions,
+    plugins: {
+      ...commonOptions.plugins,
+      title: { display: true, text: 'Brent Crude Price Trajectory', color: '#ffffff', font: { size: 14, weight: '700', family: 'Montserrat' } }
     }
-  });
-}, observerOptions);
-document.querySelectorAll('.glass-card, .callout, .output-card').forEach(el => {
-  el.style.opacity = '0';
-  observer.observe(el);
+  }
+});
+
+// Gas Chart
+const ctxGas = document.getElementById('gasChart').getContext('2d');
+new Chart(ctxGas, {
+  type: 'line',
+  data: {
+    labels: ['Apr 19','Apr 26','May 3','May 10','May 14','May 18','May 19'],
+    datasets: [{
+      label: 'UK NBP (p/therm)',
+      data: [101.3,105.5,110.2,115.8,118.5,128.5,121.41],
+      borderColor: '#dd40ff',
+      backgroundColor: 'rgba(221,64,255,0.15)',
+      fill: true,
+      tension: 0.4,
+      pointBackgroundColor: '#00d39a',
+      pointBorderColor: '#fff',
+      pointRadius: 5
+    }]
+  },
+  options: {
+    ...commonOptions,
+    plugins: {
+      ...commonOptions.plugins,
+      title: { display: true, text: 'UK NBP Gas Price (30-Day)', color: '#ffffff', font: { size: 14, weight: '700', family: 'Montserrat' } }
+    }
+  }
+});
+
+// Power Chart
+const ctxPower = document.getElementById('powerChart').getContext('2d');
+new Chart(ctxPower, {
+  type: 'bar',
+  data: {
+    labels: ['Jun-26','Sum-27','Win-26','Cal-27','Cal-28'],
+    datasets: [{
+      label: 'UK Power Price (£/MWh)',
+      data: [102.74,76.27,101.37,82.85,67.10],
+      backgroundColor: [
+        'rgba(0,211,154,0.7)',
+        'rgba(221,64,255,0.7)',
+        'rgba(0,211,154,0.7)',
+        'rgba(221,64,255,0.7)',
+        'rgba(0,211,154,0.5)'
+      ],
+      borderColor: '#fff',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    ...commonOptions,
+    plugins: {
+      ...commonOptions.plugins,
+      title: { display: true, text: 'UK Power Forward Curve (15 May Settlement)', color: '#ffffff', font: { size: 14, weight: '700', family: 'Montserrat' } }
+    }
+  }
+});
+
+// Scenario Chart
+const ctxScenario = document.getElementById('scenarioChart').getContext('2d');
+new Chart(ctxScenario, {
+  type: 'bar',
+  data: {
+    labels: ['Short (1-2 wks)','Medium (1-3 mo)','Severe (3+ mo)'],
+    datasets: [
+      { label: 'Brent ($/bbl)', data: [95,120,140], backgroundColor: 'rgba(0,211,154,0.7)' },
+      { label: 'TTF (€/MWh)', data: [42.5,62.5,85], backgroundColor: 'rgba(221,64,255,0.7)' },
+      { label: 'NBP (p/therm)', data: [105,145,180], backgroundColor: 'rgba(255,255,255,0.25)' }
+    ]
+  },
+  options: {
+    ...commonOptions,
+    plugins: {
+      ...commonOptions.plugins,
+      title: { display: true, text: 'Scenario Price Comparison (Midpoint Estimates)', color: '#ffffff', font: { size: 14, weight: '700', family: 'Montserrat' } }
+    }
+  }
 });
 </script>
-
 </body>
 </html>
