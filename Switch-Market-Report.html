@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Switch 365 Ltd | I&C and Mid Market Energy Market Report | 01 June 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SWITCH 365 LTD — I&C ENERGY MARKET REPORT
+   Self-contained single-file HTML/CSS/JS
+   Report Date: 01 June 2026
+   ============================================================ */
+
+:root {
+  --bg-midnight-start: #262262;
+  --bg-midnight-end: #26227f;
+  --accent-gradient-start: #00d39a;
+  --accent-gradient-end: #dd40ff;
+  --text-primary: #ffffff;
+  --text-secondary: #dadada;
+  --card-bg: rgba(255,255,255,0.04);
+  --card-border: rgba(255,255,255,0.08);
+  --card-bg-solid: #1a1845;
+  --glass-bg: rgba(255,255,255,0.06);
+  --glass-border: rgba(255,255,255,0.12);
+  --success: #00d39a;
+  --danger: #ff4757;
+  --warning: #ffa502;
+  --info: #70a1ff;
+  --neutral: #a4b0be;
+  --font-family: 'Montserrat', sans-serif;
+  --max-width: 1200px;
+  --section-gap: 2.5rem;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-family);
+  background: linear-gradient(180deg, var(--bg-midnight-start) 0%, var(--bg-midnight-end) 100%);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-midnight-start); }
+::-webkit-scrollbar-thumb { background: var(--accent-gradient-start); border-radius: 4px; }
+
+/* Navigation */
+.nav-fixed {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(38,34,98,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--card-border);
+  padding: 0.6rem 1rem;
+}
+
+.nav-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.nav-logo {
+  font-weight: 800;
+  font-size: 0.95rem;
+  background: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  white-space: nowrap;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  overflow-x: auto;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.35rem 0.6rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  background: var(--glass-bg);
+  color: var(--text-primary);
+}
+
+/* Layout */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 5rem 1.5rem 3rem;
+}
+
+/* Hero / Cover Panel */
+.hero {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-bottom: var(--section-gap);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-end));
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-logo img {
+  height: 40px;
+  filter: brightness(1.1);
+}
+
+.hero-meta {
+  text-align: right;
+}
+
+.hero-date {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.hero-cutoff {
+  font-size: 0.75rem;
+  color: var(--neutral);
+  margin-top: 0.2rem;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-end));
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  margin-top: 0.5rem;
+}
+
+.hero-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  max-width: 700px;
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.hero-period {
+  font-size: 0.8rem;
+  color: var(--neutral);
+  margin-bottom: 1.25rem;
+}
+
+.hero-disclaimer {
+  font-size: 0.7rem;
+  color: var(--neutral);
+  line-height: 1.5;
+  max-width: 800px;
+  padding-top: 1rem;
+  border-top: 1px solid var(--card-border);
+}
+
+/* Section styling */
+.section {
+  margin-bottom: var(--section-gap);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.section-ribbon {
+  width: 4px;
+  height: 28px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--accent-gradient-start), var(--accent-gradient-end));
+  flex-shrink: 0;
+}
+
+.section-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.section-title span {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--neutral);
+  text-transform: none;
+  letter-spacing: normal;
+  margin-left: 0.5rem;
+}
+
+/* Cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.card-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.card-grid-6 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.75rem;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.card:hover {
+  border-color: var(--glass-border);
+  transform: translateY(-2px);
+}
+
+.card-accent-top {
+  border-top: 3px solid;
+  border-image: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-end)) 1;
+}
+
+.card-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--neutral);
+  margin-bottom: 0.5rem;
+}
+
+.card-value {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.4rem;
+}
+
+.card-sub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.6rem;
+}
+
+.card-note {
+  font-size: 0.7rem;
+  color: var(--neutral);
+  line-height: 1.5;
+}
+
+/* Status labels */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  margin-bottom: 0.5rem;
+}
+
+.status::before {
+  content: '';
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+
+.status-rising { background: rgba(0,211,154,0.12); color: var(--success); }
+.status-rising::before { background: var(--success); }
+
+.status-falling { background: rgba(255,71,87,0.12); color: var(--danger); }
+.status-falling::before { background: var(--danger); }
+
+.status-holding { background: rgba(164,176,190,0.12); color: var(--neutral); }
+.status-holding::before { background: var(--neutral); }
+
+.status-volatile { background: rgba(255,165,2,0.12); color: var(--warning); }
+.status-volatile::before { background: var(--warning); }
+
+.status-mixed { background: rgba(112,161,255,0.12); color: var(--info); }
+.status-mixed::before { background: var(--info); }
+
+.status-elevated { background: rgba(255,165,2,0.15); color: var(--warning); }
+.status-elevated::before { background: var(--warning); }
+
+/* Tables */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin-top: 1rem;
+}
+
+.data-table th {
+  text-align: left;
+  padding: 0.7rem 0.8rem;
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--neutral);
+  border-bottom: 2px solid var(--glass-border);
+  background: var(--card-bg-solid);
+}
+
+.data-table td {
+  padding: 0.7rem 0.8rem;
+  border-bottom: 1px solid var(--card-border);
+  color: var(--text-secondary);
+}
+
+.data-table tr:hover td {
+  background: var(--glass-bg);
+  color: var(--text-primary);
+}
+
+.data-table .num {
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: right;
+}
+
+.data-table .change-up { color: var(--success); font-weight: 700; }
+.data-table .change-down { color: var(--danger); font-weight: 700; }
+
+/* Commentary block */
+.commentary {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.commentary p {
+  margin-bottom: 0.75rem;
+}
+
+.commentary p:last-child {
+  margin-bottom: 0;
+}
+
+/* Source chips */
+.source-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--neutral);
+  background: var(--card-bg-solid);
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  margin-top: 0.5rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.source-chip:hover {
+  color: var(--accent-gradient-start);
+}
+
+/* Charts — CSS bar charts */
+.chart-container {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.bar-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.bar-label {
+  width: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.bar-track {
+  flex: 1;
+  height: 22px;
+  background: var(--card-bg-solid);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.8s ease;
+}
+
+.bar-fill-gas { background: linear-gradient(90deg, #00d39a, #00b894); }
+.bar-fill-wind { background: linear-gradient(90deg, #70a1ff, #5352ed); }
+.bar-fill-nuclear { background: linear-gradient(90deg, #ff9f43, #ffa502); }
+.bar-fill-biomass { background: linear-gradient(90deg, #2ed573, #7bed9f); }
+.bar-fill-imports { background: linear-gradient(90deg, #dd40ff, #a55eea); }
+.bar-fill-solar { background: linear-gradient(90deg, #f9ca24, #f0932b); }
+.bar-fill-hydro { background: linear-gradient(90deg, #22a6b3, #7ed6df); }
+
+.bar-value {
+  width: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+/* Mini sparkline bars */
+.sparkline {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 40px;
+}
+
+.spark-bar {
+  flex: 1;
+  border-radius: 2px;
+  background: linear-gradient(180deg, var(--accent-gradient-start), var(--accent-gradient-end));
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.spark-bar:hover { opacity: 1; }
+
+/* Storage visual */
+.storage-gauge {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.storage-track {
+  flex: 1;
+  height: 28px;
+  background: var(--card-bg-solid);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.storage-fill {
+  height: 100%;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--danger), var(--warning), var(--success));
+  transition: width 0.8s ease;
+}
+
+.storage-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  color: var(--neutral);
+  margin-top: 0.3rem;
+}
+
+/* Driver board */
+.driver-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+}
+
+.driver-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  padding: 1rem;
+  border-left: 3px solid;
+}
+
+.driver-bullish { border-left-color: var(--success); }
+.driver-bearish { border-left-color: var(--danger); }
+.driver-mixed { border-left-color: var(--warning); }
+.driver-neutral { border-left-color: var(--neutral); }
+
+.driver-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.driver-tag {
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+}
+
+.tag-bullish { background: rgba(0,211,154,0.15); color: var(--success); }
+.tag-bearish { background: rgba(255,71,87,0.15); color: var(--danger); }
+.tag-mixed { background: rgba(255,165,2,0.15); color: var(--warning); }
+.tag-neutral { background: rgba(164,176,190,0.15); color: var(--neutral); }
+
+.driver-desc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Procurement impact cards */
+.proc-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.proc-card h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.proc-card h4::before {
+  content: '';
+  width: 6px; height: 18px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--accent-gradient-start), var(--accent-gradient-end));
+  display: inline-block;
+}
+
+.proc-card p {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+
+.proc-card p:last-child { margin-bottom: 0; }
+
+.proc-highlight {
+  background: linear-gradient(90deg, rgba(0,211,154,0.1), rgba(221,64,255,0.1));
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 0.75rem;
+}
+
+/* Takeaway box */
+.takeaway-box {
+  background: linear-gradient(135deg, rgba(0,211,154,0.08), rgba(221,64,255,0.08));
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  padding: 2rem;
+  position: relative;
+}
+
+.takeaway-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-gradient-start), var(--accent-gradient-end));
+  border-radius: 14px 14px 0 0;
+}
+
+.takeaway-box h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.takeaway-box p {
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.takeaway-quote {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  border-left: 3px solid var(--accent-gradient-start);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+}
+
+/* Glossary */
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.5rem;
+}
+
+.glossary-item {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.glossary-term {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.glossary-def {
+  font-size: 0.72rem;
+  color: var(--neutral);
+  line-height: 1.5;
+}
+
+/* Sources */
+.source-group {
+  margin-bottom: 1.25rem;
+}
+
+.source-group h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--neutral);
+  margin-bottom: 0.5rem;
+}
+
+.source-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.source-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.35rem 0.7rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.source-links a:hover {
+  background: var(--glass-bg);
+  border-color: var(--accent-gradient-start);
+  color: var(--text-primary);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem 0;
+  border-top: 1px solid var(--card-border);
+  margin-top: 2rem;
+}
+
+.footer p {
+  font-size: 0.7rem;
+  color: var(--neutral);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+/* Print styles */
+@media print {
+  .nav-fixed { display: none; }
+  .container { padding-top: 1rem; }
+  body { background: #fff; color: #000; }
+  .card, .hero, .commentary, .chart-container, .proc-card, .takeaway-box, .driver-card {
+    background: #f5f5f5;
+    border-color: #ddd;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-title { font-size: 1.3rem; }
+  .hero { padding: 1.5rem; }
+  .nav-links { gap: 0.2rem; }
+  .nav-links a { font-size: 0.6rem; padding: 0.25rem 0.4rem; }
+  .container { padding: 4.5rem 1rem 2rem; }
+  .card-grid-6 { grid-template-columns: repeat(2, 1fr); }
+  .bar-label { width: 70px; font-size: 0.68rem; }
+  .data-table { font-size: 0.72rem; }
+  .data-table th, .data-table td { padding: 0.5rem 0.4rem; }
+}
+
+/* Utility */
+.text-center { text-align: center; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mt-1 { margin-top: 0.5rem; }
+.flex { display: flex; }
+.flex-between { justify-content: space-between; }
+.items-center { align-items: center; }
+.gap-1 { gap: 0.5rem; }
+</style>
+</head>
+<body>
+
+<!-- Fixed Navigation -->
+<nav class="nav-fixed">
+  <div class="nav-inner">
+    <div class="nav-logo">Switch 365</div>
+    <div class="nav-links">
+      <a href="#summary">Summary</a>
+      <a href="#gas">Gas</a>
+      <a href="#power">Power</a>
+      <a href="#demand">Demand</a>
+      <a href="#generation">Generation</a>
+      <a href="#storage">Storage</a>
+      <a href="#lng">LNG</a>
+      <a href="#markets">Markets</a>
+      <a href="#forward">Forward</a>
+      <a href="#procurement">I&C Impact</a>
+      <a href="#suppliers">Suppliers</a>
+      <a href="#takeaway">Takeaway</a>
+      <a href="#terms">Terms</a>
+      <a href="#sources">Sources</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- ============================================================
+       1. HEADER / COVER PANEL
+       ============================================================ -->
+  <header class="hero" id="top">
+    <div class="hero-top">
+      <div class="hero-logo">
+        <img src="https://switch365.com/assets/img/logos/switch365-energy-comparison-website.svg" alt="Switch 365 Ltd">
+      </div>
+      <div class="hero-meta">
+        <div class="hero-date">Report Date: 01 June 2026</div>
+        <div class="hero-cutoff">Market Data Cut-off: 31 December 2028</div>
+        <div class="hero-cutoff">Research Period: 24 May 2026 – 01 June 2026</div>
+        <div class="hero-badge">I&C and Mid Market</div>
+      </div>
+    </div>
+    <h1 class="hero-title">I&C and Mid Market Energy Market Report</h1>
+    <p class="hero-subtitle">Daily market intelligence for UK business energy procurement</p>
+    <p class="hero-period">Primary market data period: 24/05/2026 – 01/06/2026</p>
+    <p class="hero-disclaimer">
+      <strong>Disclaimer:</strong> This report has been prepared by Switch 365 Ltd for general commercial market intelligence only. It uses publicly available and/or supplier market data where available. Prices are indicative, may be delayed and are not a live quotation. Business energy prices depend on site, usage, credit, contract structure, supplier appetite and live pricing at the time of quote. This report is not financial advice. Past market movement is not a reliable indicator of future pricing. Some data may be paywalled or delayed.
+    </p>
+  </header>
+
+  <!-- ============================================================
+       2. MARKET SUMMARY SNAPSHOT
+       ============================================================ -->
+  <section class="section" id="summary">
+    <div class="section-header">
+      <div class="section-ribbon"></div>
+      <h2 class="section-title">Market Summary Snapshot</h2>
+    </div>
+    <div class="card-grid-6">
+      <div class="card card-accent-top">
+        <div class="card-label">Gas Market</div>
+        <div class="status status-holding">Holding</div>
+        <div class="card-note">NBP front-month settled at 113.94p/th. Geopolitical risk has eased week-on-week but the 30-day trend remains elevated. Norwegian flows steady, LNG arrivals providing prompt relief.</div>
+        <span class="source-chip">ICE / Smart Energy</span>
+      </div>
+      <div class="card card-accent-top">
+        <div class="card-label">Power Market</div>
+        <div class="status status-holding">Holding</div>
+        <div class="card-note">UK baseload Jun-26 at £101.04/MWh. Power has decoupled from gas weakness, supported by firmer carbon. Wind output below seasonal norms is sustaining CCGT burn.</div>
+        <span class="source-chip">ICE / Smart Energy</span>
+      </div>
+      <div class="card card-accent-top">
+        <div class="card-label">Brent / Oil</div>
+        <div class="status status-falling">Softening</div>
+        <div class="card-note">Brent at $93.10/bbl, down ~17.6% over the past month as Hormuz concerns ease. WTI front month at $89.79/bbl. Structural supply tightness persists.</div>
+        <span class="source-chip">Yahoo Finance / MarketWatch</span>
+      </div>
+      <div class="card card-accent-top">
+        <div class="card-label">Carbon EUA</div>
+        <div class="status status-rising">Rising</div>
+        <div class="card-note">EU carbon allowances firm near €80–92/t range. Dec-26 EUA contracts supported by tighter EU ETS supply and correlation with gas. UKA–EUA spread remains wide.</div>
+        <span class="source-chip">ICE / Reuters</span>
+      </div>
+      <div class="card card-accent-top">
+        <div class="card-label">LNG / Storage</div>
+        <div class="status status-elevated">Elevated</div>
+        <div class="card-note">EU storage at ~38% (early June), below 5-year norms. GB storage at comparable levels to 2025. LNG arrivals to UK terminals improving. Qatar supply disruption still reverberating.</div>
+        <span class="source-chip">AGSI+ / National Gas</span>
+      </div>
+      <div class="card card-accent-top">
+        <div class="card-label">Procurement Signal</div>
+        <div class="status status-mixed">Review</div>
+        <div class="card-note">Near-term gas has softened week-on-week. Forward curve still shows winter premium. I&C customers inside 6–18 month renewal windows should test live pricing now.</div>
+        <span class="source-chip">Switch 365 Analysis</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. GAS
+       ============================================================ -->
+  <section class="section" id="gas">
+    <div class="section-header">
+      <div class="section-ribbon"></div>
+      <h2 class="section-title">Gas <span>NBP — pence per therm</span></h2>
+    </div>
+
+    <div class="commentary">
+      <p>UK NBP gas has eased over the past week as geopolitical risk premium partially unwound following reduced Middle East tensions. The front-month Jun-26 contract settled at <strong>113.94p/therm</strong> on 29 May, down 5.7% week-on-week but still up 6.1% over 30 days. The summer strip (Jul–Aug) trades in a tight 113–114p range, while Winter 2026 holds a modest premium at 116.53p, reflecting storage refill risk and winter demand uncertainty.</p>
+      <p>TTF influence remains strong, with Dutch TTF front-month trading around <strong>€45.94/MWh</strong> (equivalent to ~£39/MWh or ~133p/therm). The NBP–TTF spread has narrowed from earlier extremes but still favours NBP. Norwegian flows have recovered from the Troll field maintenance that extended into early May, restoring roughly 15% of UK import capacity. UKCS production continues its long-term decline, forecast at 13.1 bcm for summer 2026 (down 6% year-on-year). LNG send-out to UK terminals has picked up, with arrivals expected at Milford Haven, Isle of Grain and South Hook over the coming days. Four LNG cargoes are due within the week, providing prompt supply relief. Weather forecasts show mild temperatures, suppressing NDM demand, though intra-day volatility in gas-for-power persists as wind output fluctuates.</p>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Contract</th>
+          <th style="text-align:right">Previous Report (~24/05)</th>
+          <th style="text-align:right">Current Report (29/05)</th>
+          <th style="text-align:right">Change</th>
+          <th style="text-align:right">One Year Ago (Jun 2025)</th>
+          <th>Direction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Jun-26 (Front Month)</strong></td>
+          <td class="num">120.80p</td>
+          <td class="num">113.94p</td>
+          <td class="change-down">−5.7%</td>
+          <td class="num">~67p</td>
+          <td><span class="status status-falling" style="font-size:0.6rem;padding:0.2rem 0.5rem">Falling</span></td>
+        </tr>
+        <tr>
+          <td>Jul-26</td>
+          <td class="num">120.00p</td>
+          <td class="num">113.43p</td>
+          <td class="change-down">−5.5%</td>
+          <td class="num">~66p</td>
+          <td><span class="status status-falling" style="font-size:0.6rem;padding:0.2rem 0.5rem">Falling</span></td>
+        </tr>
+        <tr>
+          <td>Aug-26</td>
+          <td class="num">120.30p</td>
+          <td class="num">113.80p</td>
+          <td class="change-down">−5.4%</td>
+          <td class="num">~65p</td>
+          <td><span class="status status-falling" style="font-size:0.6rem;padding:0.2rem 0.5rem">Falling</span></td>
+        </tr>
+        <tr>
+          <td><strong>Q3-26 (Summer)</strong></td>
+          <td class="num">120.50p</td>
+          <td class="num">114.01p</td>
+          <td class="change-down">−5.4%</td>
+          <td class="num">~66p</td>
+          <td><span class="status status-falling" style="font-size:0.6rem;padding:0.2rem 0.5rem">Falling</span></td>
+        </tr>
+        <tr>
+          <td><strong>Win-26 (Front Season)</strong></td>
+          <td class="num">122.00p</td>
+          <td class="num">116.53p</td>
+          <td class="change-down">−4.5%</td>
+          <td class="num">~78p</td>
+          <td><span class="status status-falling" style="font-size:0.6rem;padding:0.2rem 0.5rem">Falling</span></td>
+        </tr>
+        <tr>
+          <td>Sum-27</td>
+          <td class="num">86.05p</td>
+          <td class="num">85.09p</td>
+          <td class="change-down">−1.1%</td>
+          <td class="num">~72p</td>
+          <td><span class="status status-falling" style="font-size:0.6rem;padding:0.2rem 0.5rem">Falling</span></td>
+        </tr>
+        <tr>
+          <td><strong>Cal-27 (Front Year)</strong></td>
+          <td class="num">94.60p</td>
+          <td class="num">92.67p</td>
+          <td class="change-down">−2.0%</td>
+          <td class="num">~75p</td>
+          <td><span class="status status-falling" style="font-size:0.6rem;padding:0.2rem 0.5rem">Falling</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <span class="source-chip">Source: ICE Futures / Smart Energy UK (settlement 29 May 2026)</span>
+
+    <!-- Gas Key Drivers -->
+    <div style="margin-top:1.5rem;">
+      <h4 style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--neutral);margin-bottom:0.75rem;">Key Gas Drivers</h4>
+      <div class="driver-grid">
+        <div class="driver-card driver-mixed">
+          <div class="driver-title">TTF Hub <span class="driver-tag tag-mixed">Mixed</span></div>
+          <div class="driver-desc">TTF front-month at €45.94/MWh. European storage refill pace is the key swing factor. EU storage at ~38% vs 5-year norm of ~55%.</div>
+        </div>
+        <div class="driver-card driver-bullish">
+          <div class="driver-title">Norwegian Flows <span class="driver-tag tag-bullish">Supportive</span></div>
+          <div class="driver-desc">Troll maintenance complete. Norwegian supplies forecast up 3% YoY. GASSCO outages lower than last summer.</div>
+        </div>
+        <div class="driver-card driver-bearish">
+          <div class="driver-title">LNG Arrivals <span class="driver-tag tag-bearish">Softening</span></div>
+          <div class="driver-desc">Four cargoes due this week. US remains dominant source. Qatar supply disruption still limits global availability.</div>
+        </div>
+        <div class="driver-card driver-bearish">
+          <div class="driver-title">Weather / Demand <span class="driver-tag tag-bearish">Softening</span></div>
+          <div class="driver-desc">Mild temperatures suppressing NDM demand. Gas-for-power volatile but summer average lower than winter.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. POWER
+       ============================================================ -->
+  <section class="section" id="power">
+    <div class="section-header">
+      <div class="section-ribbon"></div>
+      <h2 class="section-title">Power <span>UK Baseload — £/MWh</span></h2>
+    </div>
+
+    <div class="commentary">
+      <p>UK power has <strong>decoupled from gas direction</strong> over the past week, holding firmer as carbon allowances strengthened independently. The front-month Jun-26 baseload contract settled at <strong>£101.04/MWh</strong> on 29 May, up 2.2% on the day and 10.8% over 30 days. The winter strip (Q4-26 / Q1-27) trades around £102/MWh, with the summer 2027 contract at £77.76/MWh — a clear backwardation that reflects near-term tightness versus longer-term expectations of supply relief.</p>
+      <p>Gas-fired generation (CCGT) continues to set the marginal price for significant periods, contributing <strong>~45% of UK generation</strong> as of early June. Wind output has been below seasonal norms at ~18% of the mix, down from a 27% seasonal average, forcing greater reliance on thermal plant. Nuclear availability remains constrained at ~9% with ongoing outages. Interconnector imports are providing critical margin, with <strong>net imports of +7.44 GW</strong> across IFA, IFA2, ElecLink, BritNed, Nemo, North Sea Link and Viking — utilising 88% of total interconnector capacity. Carbon prices have firmed, with EUA Dec-26 around €80/t, adding to the cost of CCGT generation and supporting baseload levels even as gas softened.</p>
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Contract</th>
+          <th style="text-align:right">Previous Report (~24/05)</th>
+          <th style="text-align:right">Current Report (29/05)</th>
+          <th style="text-align:right">Change</th>
+          <th style="text-align:right">One Year Ago (Jun 2025)</th>
+          <th>Direction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Jun-26 (Front Month)</strong></td>
+          <td class="num">£102.16</td>
+          <td class="num">£101.04</td>
+          <td class="change-down">−1.1%</td>
+          <td class="num">~£68</td>
+          <td><span class="status status-falling" style="font-size:0.6rem;padding:0.2rem 0.5rem">Falling</span></td>
+        </tr>
+        <tr>
+          <td>Jul-26</td>
+          <td class="num">£101.75</td>
+          <td class="num">£100.43</td>
+          <td class="change-down">−1.3%</td>
+          <td class="num">~£67</td>
+          <td><span class="status status-falling" style="font-size:0.6rem;padding:0.2rem 0.5rem">Falling</span></td>
+        </tr>
+        <tr>
+          <td>Aug-26</td>
+          <td class="num">£99.11</td>
+          <td class="num">£97.72</td>
+          <td class="change-down">−1.4%</td>
+          <td class="num">~£66</td>
+          <td><span class="status status-falling" style="font-size:0.6rem;padding:0.2rem 0.5rem">Falling</span></td>
+        </tr>
+        <tr>
+          <td><strong>Q3-26 (Summer)</strong></td>
+          <td class="num">£100.88</td>
+          <td class="num">£99.46</td>
+          <td class="change-down">−1.4%</td>
+          <td class="num">~£67</td>
+          <td><span class="status status-falling" style="font-size:0.6rem;padding:0.2rem 0.5rem">Falling</span></td>
+        </tr>
+        <tr>
+          <td><strong>Win-26 (Front Season)</strong></td>
+          <td class="num">£102.47</td>
+          <td class="num">£102.06</td>
+          <td class="change-down">−0.4%</td>
+          <td class="num">~£75</td>
+          <td><span class="status status-holding" style="font-size:0.6rem;padding:0.2rem 0.5rem">Holding</span></td>
+        </tr>
+        <tr>
+          <td>Sum-27</td>
+          <td class="num">£75.56</td>
+          <td class="num">£77.76</td>
+          <td class="change-up">+2.9%</td>
+          <td class="num">~£72</td>
+          <td><span class="status status-rising" style="font-size:0.6rem;padding:0.2rem 0.5rem">Rising</span></td>
+        </tr>
+        <tr>
+          <td><strong>Cal-27 (Front Year)</strong></td>
+          <td class="num">£82.74</td>
+          <td class="num">£83.98</td>
+          <td class="change-up">+1.5%</td>
+          <td class="num">~£73</td>
+          <td><span class="status status-rising" style="font-size:0.6rem;padding:0.2rem 0.5rem">Rising</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <span class="source-chip">Source: ICE Futures / Smart Energy UK (settlement 29 May 2026)</span>
+
+    <!-- Power Key Drivers -->
+    <div style="margin-top:1.5rem;">
+      <h4 style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--neutral);margin-bottom:0.75rem;">Key Power Drivers</h4>
+      <div class="driver-grid">
+        <div class="driver-card driver-bullish">
+          <div class="driver-title">CCGT / Gas-for-Power <span class="driver-tag tag-bullish">Supportive</span></div>
+          <div class="driver-desc">CCGT at ~45% of generation mix. Marginal gas plant still sets price during peak and low-wind periods. Clean spark spreads positive.</div>
+        </div>
+        <div class="driver-card driver-bullish">
+          <div class="driver-title">Carbon EUA <span class="driver-tag tag-bullish">Supportive</span></div>
+          <div class="driver-desc">EUA Dec-26 near €80/t. Rising carbon adds ~£15–20/MWh to CCGT generation cost. UKA–EUA spread wide due to sterling weakness.</div>
+        </div>
+        <div class="driver-card driver-mixed">
+          <div class="driver-title">Wind Output <span class="driver-tag tag-mixed">Mixed</span></div>
+          <div class="driver-desc">Wind at ~18% of mix vs 27% seasonal norm. Forecasts suggest recovery mid-week. Low wind = higher gas burn and firmer prices.</div>
+        </div>
+        <div class="driver-card driver-bearish">
+          <div class="driver-title">Interconnector Imports <span class="driver-tag tag-bearish">Capping</span></div>
+          <div class="driver-desc">Net +7.44 GW imports, 88% capacity utilisation. French nuclear and Nordic hydro providing price-capping volumes.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. SYSTEM DEMAND
+       ============================================================ -->
+  <section class="section" id="demand">
+    <div class="section-header">
+      <div class="section-ribbon"></div>
+      <h2 class="section-title">System Demand</h2>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">GB Electricity Demand</div>
+        <div class="card-value">~24.4 GW</div>
+        <div class="card-sub">Current system demand (early June, overnight)</div>
+        <div class="card-note">Peak demand expected ~35–38 GW during daytime. Summer demand typically 25–35 GW range. Mild weather keeping NDM gas demand subdued.</div>
+        <span class="source-chip">GridWatch / NESO</span>
+      </div>
+      <div class="card">
+        <div class="card-label">GB Gas Demand (Summer 2026 Forecast)</div>
+        <div class="card-value">29.8 bcm</div>
+        <div class="card-sub">Total summer demand (Apr–Sep) — comparable to 2025</div>
+        <div class="card-note">Gas-for-power: 5.1 bcm (−6% YoY). NDM demand: 10.1 bcm (+2%). Industrial: 3.4 bcm. Storage injection: 1.8 bcm. Exports to Ireland: 2.6 bcm.</div>
+        <span class="source-chip">National Gas Summer Outlook 2026</span>
+      </div>
+    </div>
+
+    <div class="commentary">
+      <p>Electricity demand is in the seasonal summer lull, with overnight lows around 22–24 GW and daytime peaks reaching 35–38 GW. Gas system demand is correspondingly lower, though gas-for-power remains volatile as CCGT plants respond to renewable intermittency. National Gas forecasts total summer 2026 demand at <strong>29.8 bcm</strong>, essentially flat versus 2025. The key swing factor is gas-for-power, which depends on wind and solar output. For I&C customers, the demand shape matters: higher system demand during peak periods translates to higher half-hourly prices, particularly for customers exposed to peak-time DUoS and TNUoS charges. Off-peak and overnight consumption offers a growing arbitrage opportunity as renewable penetration increases.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. POWER GENERATION MIX
+       ============================================================ -->
+  <section class="section" id="generation">
+    <div class="section-header">
+      <div class="section-ribbon"></div>
+      <h2 class="section-title">Power Generation Mix</h2>
+    </div>
+
+    <div class="chart-container">
+      <div class="bar-chart">
+        <div class="bar-row">
+          <div class="bar-label">CCGT</div>
+          <div class="bar-track"><div class="bar-fill bar-fill-gas" style="width:44.66%"></div></div>
+          <div class="bar-value">44.7%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Wind</div>
+          <div class="bar-track"><div class="bar-fill bar-fill-wind" style="width:17.76%"></div></div>
+          <div class="bar-value">17.8%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Imports</div>
+          <div class="bar-track"><div class="bar-fill bar-fill-imports" style="width:32%"></div></div>
+          <div class="bar-value">~32%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Nuclear</div>
+          <div class="bar-track"><div class="bar-fill bar-fill-nuclear" style="width:9.27%"></div></div>
+          <div class="bar-value">9.3%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Biomass</div>
+          <div class="bar-track"><div class="bar-fill bar-fill-biomass" style="width:10.54%"></div></div>
+          <div class="bar-value">10.5%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Hydro</div>
+          <div class="bar-track"><div class="bar-fill bar-fill-hydro" style="width:0.77%"></div></div>
+          <div class="bar-value">0.8%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Solar</div>
+          <div class="bar-track"><div class="bar-fill bar-fill-solar" style="width:0%"></div></div>
+          <div class="bar-value">0.0%*</div>
+        </div>
+      </div>
+      <p style="font-size:0.7rem;color:var(--neutral);margin-top:0.75rem;">* Solar at 0% due to overnight measurement. Daytime solar output typically 5–15% in summer. Source: GridWatch (01 June 2026, 03:45 BST). Import figure includes all ICT contributions to meet demand.</p>
+    </div>
+
+    <div class="commentary">
+      <p>The UK generation mix illustrates why <strong>CCGT remains the price-maker</strong> even in a decarbonising system. At ~45% of output, gas-fired plant is the largest single source and the marginal technology during most pricing periods. When wind drops to 18% (below the 27% seasonal norm), CCGT fill the gap — directly lifting wholesale power prices. Interconnector imports at 88% capacity utilisation are providing critical balancing, but this volume is price-sensitive: if Continental European prices rise, import economics worsen and GB must rely more heavily on domestic CCGT.</p>
+      <p>For I&C customers, this means <strong>power prices still track gas during tight periods</strong>, regardless of renewable build-out. The correlation between NBP and UK baseload remains strong, particularly for Winter-26 and near-curve contracts. Customers on flexible or pass-through arrangements should monitor CCGT margins and carbon prices alongside gas. The growth of solar (5–15% daytime in summer) and continued wind additions will gradually erode gas's share, but the marginal unit — and therefore the price-setter — remains gas for the foreseeable future.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. EUROPEAN GAS STORAGE
+       ============================================================ -->
+  <section class="section" id="storage">
+    <div class="section-header">
+      <div class="section-ribbon"></div>
+      <h2 class="section-title">European Gas Storage</h2>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">EU Aggregate Storage (AGSI+)</div>
+        <div class="card-value">~38%</div>
+        <div class="card-sub">As of early June 2026</div>
+        <div class="card-note">~17 percentage points below 5-year June norm (~55%). Injection season began in April. Refill pace must accelerate to meet November targets. EU relaxed target: 80% by 1 Nov 2026 (vs 90% standard).</div>
+        <span class="source-chip">AGSI+ / GIE</span>
+      </div>
+      <div class="card">
+        <div class="card-label">Great Britain Storage</div>
+        <div class="card-value">Comparable to 2025</div>
+        <div class="card-sub">National Gas: "broadly in line with expectations"</div>
+        <div class="card-note">GB storage provides ~5% of summer supply (1.5 bcm withdrawals expected). Rough facility plus LNG tankage provides flexibility. Net summer injection ~0.3 bcm forecast.</div>
+        <span class="source-chip">National Gas / DESNZ</span>
+      </div>
+    </div>
+
+    <div class="chart-container" style="margin-top:1rem;">
+      <h4 style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--neutral);margin-bottom:1rem;">Storage Level vs Seasonal Targets</h4>
+      <div class="storage-gauge">
+        <span style="font-size:0.75rem;font-weight:700;min-width:60px;">EU: ~38%</span>
+        <div class="storage-track">
+          <div class="storage-fill" style="width:38%"></div>
+        </div>
+      </div>
+      <div class="storage-labels">
+        <span>0%</span>
+        <span>Target: 80% (1 Nov)</span>
+        <span>100%</span>
+      </div>
+      <div style="margin-top:1.5rem;">
+        <div class="storage-gauge">
+          <span style="font-size:0.75rem;font-weight:700;min-width:60px;">DE: ~35%</span>
+          <div class="storage-track">
+            <div class="storage-fill" style="width:35%"></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:0.75rem;">
+        <div class="storage-gauge">
+          <span style="font-size:0.75rem;font-weight:700;min-width:60px;">FR: ~34%</span>
+          <div class="storage-track">
+            <div class="storage-fill" style="width:34%"></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:0.75rem;">
+        <div class="storage-gauge">
+          <span style="font-size:0.75rem;font-weight:700;min-width:60px;">IT: ~59%</span>
+          <div class="storage-track">
+            <div class="storage-fill" style="width:59%"></div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:0.7rem;color:var(--neutral);margin-top:1rem;">Source: AGSI+ / Bruegel / Gas Infrastructure Europe. GB and individual country data approximate. 5-year norm is 2020–2024 average.</p>
+    </div>
+
+    <div class="commentary">
+      <p>European gas storage is the critical variable for winter 2026/27 pricing. At <strong>~38% full</strong> in early June, the EU is running roughly 17 percentage points behind the 5-year average. The European Commission has relaxed the mandatory fill target to <strong>80% by 1 November 2026</strong> (from 90%), acknowledging the difficulty of refill after a cold winter and disrupted LNG supply. Even this lower target requires sustained injections of ~2.1 TWh/day through summer — a pace that depends on continued LNG availability and Norwegian flow stability.</p>
+      <p>For UK I&C customers, EU storage matters because it drives TTF, and TTF drives NBP. If EU storage falls short of 80%, winter risk premium will embed in Q4-26 and Q1-27 contracts. Germany at ~35% and France at ~34% are particularly exposed. Italy at ~59% is better positioned. GB storage is smaller in absolute terms but operationally flexible. The bottom line: <strong>strong storage can dampen winter risk; weak storage or slow refill can support forward prices through summer</strong>.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       8. LNG
+       ============================================================ -->
+  <section class="section" id="lng">
+    <div class="section-header">
+      <div class="section-ribbon"></div>
+      <h2 class="section-title">LNG</h2>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">GB Summer LNG Imports (Forecast)</div>
+        <div class="card-value">2.7 bcm</div>
+        <div class="card-sub">+65% vs summer 2025 actual</div>
+        <div class="card-note">US is dominant source (>50%). GB receives LNG from Algeria, Angola, Brazil, Egypt, Equatorial Guinea, Mexico, Nigeria, Norway, Peru, Qatar and Trinidad. Qatar direct supply minimal in summer (&lt;0.5 bcm).</div>
+        <span class="source-chip">National Gas Summer Outlook 2026</span>
+      </div>
+      <div class="card">
+        <div class="card-label">Global LNG Context</div>
+        <div class="card-value">Tight</div>
+        <div class="card-sub">Qatar Ras Laffan force majeure extended</div>
+        <div class="card-note">QatarEnergy force majeure removed ~5.8 Mt from global supply in March. Full recovery unlikely in 2026. Strait of Hormuz shipping gradually resuming but insurance premiums elevated. Asian spot JKM at ~$17/MMBtu.</div>
+        <span class="source-chip">Reuters / ICIS / Kpler</span>
+      </div>
+    </div>
+
+    <div class="commentary">
+      <p>LNG is the <strong>marginal supply source</strong> for GB and Northwest Europe, and therefore the price-setter during tight periods. GB summer LNG imports are forecast at <strong>2.7 bcm</strong>, up 65% from 2025, reflecting higher demand and the need to refill storage. The US remains the dominant source, supplying over half of GB LNG, with liquefaction capacity expected to increase as Corpus Christi Stage 3 and Golden Pass Train 1 ramp up.</p>
+      <p>The global picture remains tight. Qatar's Ras Laffan complex, damaged in earlier conflict, is under force majeure with recovery timelines stretching into 2027. This removes ~20% of global LNG export capacity from the market. Asian competition for spot cargoes is intense — JKM at ~$17/MMBtu — pulling cargoes away from Europe. For UK I&C customers, this means <strong>LNG availability directly affects NBP and therefore business gas prices</strong>. Any disruption to US export capacity, shipping routes, or Asian demand shifts will feed into UK delivered gas costs.</p>
+    </div>
+
+    <div class="chart-container" style="margin-top:1rem;">
+      <h4 style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--neutral);margin-bottom:1rem;">GB Summer LNG Supply by Origin (Typical Mix)</h4>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <div class="bar-label">USA</div>
+          <div class="bar-track"><div class="bar-fill bar-fill-gas" style="width:55%"></div></div>
+          <div class="bar-value">~55%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Qatar</div>
+          <div class="bar-track"><div class="bar-fill bar-fill-wind" style="width:8%"></div></div>
+          <div class="bar-value">~8%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Algeria</div>
+          <div class="bar-track"><div class="bar-fill bar-fill-nuclear" style="width:7%"></div></div>
+          <div class="bar-value">~7%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Nigeria</div>
+          <div class="bar-track"><div class="bar-fill bar-fill-imports" style="width:6%"></div></div>
+          <div class="bar-value">~6%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Other</div>
+          <div class="bar-track"><div class="bar-fill bar-fill-biomass" style="width:24%"></div></div>
+          <div class="bar-value">~24%</div>
+        </div>
+      </div>
+      <p style="font-size:0.7rem;color:var(--neutral);margin-top:0.75rem;">Source: National Gas / LNG Journal. Approximate summer delivery mix. Actual proportions vary by cargo schedule and spot market flows.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       9. NEWS & OTHER MARKETS
+       ============================================================ -->
+  <section class="section" id="markets">
+    <div class="section-header">
+      <div class="section-ribbon"></div>
+      <h2 class="section-title">News & Other Markets</h2>
+    </div>
+
+    <div class="card-grid-3">
+      <div class="card">
+        <div class="card-label">Brent Crude</div>
+        <div class="card-value">$93.10</div>
+        <div class="card-sub">per barrel (31 May 2026 close)</div>
+        <div class="status status-falling" style="margin-top:0.5rem">Falling</div>
+        <div class="card-note">−17.6% over past month. Ceasefire talks and SPR releases easing supply fears. IEA warns markets could remain undersupplied through October. Structural floor around $85–90.</div>
+        <span class="source-chip"><a href="https://finance.yahoo.com/quote/BZ=F/history/" target="_blank" rel="noopener noreferrer">Yahoo Finance</a></span>
+      </div>
+      <div class="card">
+        <div class="card-label">WTI Crude</div>
+        <div class="card-value">$89.79</div>
+        <div class="card-sub">per barrel (Front Month)</div>
+        <div class="status status-falling" style="margin-top:0.5rem">Falling</div>
+        <div class="card-note">Front month at $89.79, back months lower ($87.50 Aug, $85.17 Sep). Contango structure reflecting near-term tightness vs expected rebalancing. US SPR loan of 92.5 Mbbl providing temporary supply.</div>
+        <span class="source-chip"><a href="https://www.marketwatch.com/investing/future/clm26" target="_blank" rel="noopener noreferrer">MarketWatch</a></span>
+      </div>
+      <div class="card">
+        <div class="card-label">EU Carbon EUA</div>
+        <div class="card-value">~€80/t</div>
+        <div class="card-sub">Dec-26 EUA futures (approximate)</div>
+        <div class="status status-rising" style="margin-top:0.5rem">Rising</div>
+        <div class="card-note">Analyst consensus for 2026 average: €92.65/t. Tighter EU ETS supply and gas price correlation driving firmness. UKA trading at discount to EUA due to sterling weakness and market separation.</div>
+        <span class="source-chip"><a href="https://www.ice.com/products/197/EUA-Emissions-Futures" target="_blank" rel="noopener noreferrer">ICE Futures</a></span>
+      </div>
+    </div>
+
+    <div class="commentary" style="margin-top:1rem;">
+      <p><strong>Brent and WTI</strong> have softened significantly from May peaks above $110/bbl as Hormuz-related supply fears partially eased and strategic petroleum reserve releases hit the market. The US-led IEA coordinated release of 172 million barrels (including 92.5 million from SPR) has provided temporary supply relief. However, the IEA warns that markets could remain undersupplied through October 2026 even if the conflict resolves. OPEC+ has announced nominal production increases of 206,000 bpd (May) and 188,000 bpd (June), though these are largely theoretical given ongoing disruptions.</p>
+      <p><strong>Carbon EUA</strong> prices have firmed independently of the gas weakening, with the Dec-26 contract supported by expectations of tighter EU ETS market balances and the gradual phase-out of free allocations to industry. The UKA–EUA spread has blown out to its widest in months, driven by sterling weakness and expectations of a Bank of England rate cut. For UK I&C power buyers, this means UK carbon costs are currently lower than EU equivalents, though linkage talks later in 2026 could change this.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       10. FORWARD CURVE & CONTRACTING WINDOW
+       ============================================================ -->
+  <section class="section" id="forward">
+    <div class="section-header">
+      <div class="section-ribbon"></div>
+      <h2 class="section-title">Forward Curve & Contracting Window</h2>
+    </div>
+
+    <div class="commentary">
+      <p>The forward curve for both gas and power shows a <strong>backwardated structure</strong> from Winter 2026 through Summer 2027, with near-term contracts trading at a premium to further-dated delivery. This is typical of a market pricing in winter risk premium and expecting supply conditions to ease beyond the immediate heating season. However, the shape is relatively flat beyond Cal-27, suggesting limited directional conviction for 2028–2029.</p>
+      <p>For I&C and Mid Market customers, the forward curve is what matters for contracts with future start dates. A customer signing a 12-month fix today for October 2026 start is buying Winter-26 and Summer-27 — not today's spot. The curve indicates that <strong>longer-dated starts (2027, 2028) are priced lower than near-term starts</strong>, but this does not automatically mean they will be cheaper when those periods arrive. As time passes, forward delivery becomes near-term delivery, and the price converges to whatever the spot market is at that time.</p>
+    </div>
+
+    <div class="chart-container">
+      <h4 style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--neutral);margin-bottom:1rem;">NBP Gas Forward Curve (p/therm) — 29 May 2026 Settlement</h4>
+      <div style="display:flex;align-items:flex-end;gap:8px;height:180px;padding-bottom:1.5rem;border-bottom:1px solid var(--card-border);position:relative;">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
+          <div style="font-size:0.7rem;font-weight:700;">114p</div>
+          <div style="width:100%;background:linear-gradient(180deg,var(--accent-gradient-start),var(--accent-gradient-end));border-radius:4px 4px 0 0;height:80%;opacity:0.9;"></div>
+          <div style="font-size:0.6rem;color:var(--neutral);text-align:center;">Q3-26<br>(Sum)</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
+          <div style="font-size:0.7rem;font-weight:700;">118p</div>
+          <div style="width:100%;background:linear-gradient(180deg,var(--accent-gradient-start),var(--accent-gradient-end));border-radius:4px 4px 0 0;height:83%;opacity:0.95;"></div>
+          <div style="font-size:0.6rem;color:var(--neutral);text-align:center;">Q4-26<br>(Win)</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
+          <div style="font-size:0.7rem;font-weight:700;">115p</div>
+          <div style="width:100%;background:linear-gradient(180deg,var(--accent-gradient-start),var(--accent-gradient-end));border-radius:4px 4px 0 0;height:81%;opacity:0.9;"></div>
+          <div style="font-size:0.6rem;color:var(--neutral);text-align:center;">Q1-27</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
+          <div style="font-size:0.7rem;font-weight:700;">117p</div>
+          <div style="width:100%;background:linear-gradient(180deg,var(--accent-gradient-start),var(--accent-gradient-end));border-radius:4px 4px 0 0;height:82%;opacity:0.9;"></div>
+          <div style="font-size:0.6rem;color:var(--neutral);text-align:center;">Win-26<br>(Season)</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
+          <div style="font-size:0.7rem;font-weight:700;">85p</div>
+          <div style="width:100%;background:linear-gradient(180deg,var(--success),#00b894);border-radius:4px 4px 0 0;height:60%;opacity:0.8;"></div>
+          <div style="font-size:0.6rem;color:var(--neutral);text-align:center;">Sum-27</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
+          <div style="font-size:0.7rem;font-weight:700;">93p</div>
+          <div style="width:100%;background:linear-gradient(180deg,var(--success),#00b894);border-radius:4px 4px 0 0;height:65%;opacity:0.8;"></div>
+          <div style="font-size:0.6rem;color:var(--neutral);text-align:center;">Cal-27<br>(Year)</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
+          <div style="font-size:0.7rem;font-weight:700;">72p</div>
+          <div style="width:100%;background:linear-gradient(180deg,var(--info),#5352ed);border-radius:4px 4px 0 0;height:50%;opacity:0.7;"></div>
+          <div style="font-size:0.6rem;color:var(--neutral);text-align:center;">Cal-28</div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:0.3rem;">
+          <div style="font-size:0.7rem;font-weight:700;">64p</div>
+          <div style="width:100%;background:linear-gradient(180deg,var(--info),#5352ed);border-radius:4px 4px 0 0;height:45%;opacity:0.7;"></div>
+          <div style="font-size:0.6rem;color:var(--neutral);text-align:center;">Cal-29</div>
+        </div>
+      </div>
+      <p style="font-size:0.7rem;color:var(--neutral);margin-top:0.75rem;">Y-axis: pence per therm. Visual representation of ICE NBP settlements 29 May 2026. Not to scale for absolute price levels.</p>
+    </div>
+
+    <div style="margin-top:1.5rem;">
+      <h4 style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:var(--neutral);margin-bottom:0.75rem;">Contract Length Comparison</h4>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Start Period</th>
+            <th style="text-align:right">Gas (p/therm)</th>
+            <th style="text-align:right">Power (£/MWh)</th>
+            <th>Curve Assessment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Jul–Sep 2026 (Immediate)</td>
+            <td class="num">113–114p</td>
+            <td class="num">£97–101</td>
+            <td><span style="color:var(--warning);font-weight:700;">Elevated</span> — summer tightness</td>
+          </tr>
+          <tr>
+            <td>Oct 2026 – Mar 2027 (Winter)</td>
+            <td class="num">116–118p</td>
+            <td class="num">£101–103</td>
+            <td><span style="color:var(--warning);font-weight:700;">Premium</span> — winter risk priced in</td>
+          </tr>
+          <tr>
+            <td>Apr–Sep 2027 (Summer 27)</td>
+            <td class="num">85p</td>
+            <td class="num">£78</td>
+            <td><span style="color:var(--success);font-weight:700;">Lower</span> — backwardation benefit</td>
+          </tr>
+          <tr>
+            <td>Calendar 2027 (12-month)</td>
+            <td class="num">93p</td>
+            <td class="num">£84</td>
+            <td><span style="color:var(--info);font-weight:700;">Moderate</span> — blended average</td>
+          </tr>
+          <tr>
+            <td>Calendar 2028 (24-month forward)</td>
+            <td class="num">72p</td>
+            <td class="num">£68</td>
+            <td><span style="color:var(--success);font-weight:700;">Cheaper</span> — far curve discount</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="proc-highlight" style="margin-top:1rem;">
+      <strong>Key point for I&C customers:</strong> Cheaper further out does not mean cheaper later. It means there may be an opportunity while that delivery period is still priced on the forward curve. As time passes, that future delivery becomes near-term delivery and the price will reflect whatever supply/demand conditions exist at that time.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       11. I&C AND MID MARKET PROCUREMENT IMPACT
+       ============================================================ -->
+  <section class="section" id="procurement">
+    <div class="section-header">
+      <div class="section-ribbon"></div>
+      <h2 class="section-title">I&C and Mid Market Procurement Impact</h2>
+    </div>
+
+    <div class="card-grid">
+      <div class="proc-card">
+        <h4>Fixed-Contract Customers</h4>
+        <p>Customers inside <strong>6 to 18 months of contract end</strong> should be testing live supplier pricing now. The near-term curve has softened week-on-week, but the 30-day trend is still elevated. Winter 2026 pricing carries a clear risk premium.</p>
+        <p>Do not wait for the "bottom" — supplier price books can reprice faster than wholesale moves, and quote validity periods may shorten during volatile periods. Compare 12, 24, 36 and 48-month structures where supplier appetite allows.</p>
+        <p class="proc-highlight">Site-level recommendation requires live supplier pricing, consumption profile, contract end date and risk position.</p>
+      </div>
+      <div class="proc-card">
+        <h4>Flexible Procurement Customers</h4>
+        <p>Review your <strong>hedge position, trigger levels, tolerance bands and volume exposure</strong>. The current backwardation (near-term elevated, further-out lower) creates both opportunity and risk for layered hedging.</p>
+        <p>Customers with open Q4-26 / Q1-27 exposure should assess whether current winter pricing meets budget parameters. Those with summer 2027 start dates may see value in the lower far-curve, but should not over-commit before volume certainty is clear.</p>
+        <p class="proc-highlight">Governance and pre-agreed triggers matter more than timing the market. Ensure your flex policy specifies who can hedge, at what volumes, and within what price bands.</p>
+      </div>
+      <div class="proc-card">
+        <h4>Half-Hourly Electricity Users</h4>
+        <p><strong>Shape risk, peak exposure and non-commodity pass-through</strong> are your primary concerns. With CCGT at ~45% of the mix and interconnector imports at 88% capacity, system margins are tight during peak periods.</p>
+        <p>Peak power prices can spike to £150–200+/MWh during tight evenings. Review your DUoS charging band and whether load-shifting or battery storage could reduce exposure. Non-commodity charges (TNUoS, DUoS, BSUoS, RO/CFD) now represent 40–50% of many HH bills — these are largely outside wholesale market control.</p>
+        <p class="proc-highlight">A fixed power contract for HH customers is never truly "fixed" unless non-commodity is also locked. Check your pass-through terms carefully.</p>
+      </div>
+      <div class="proc-card">
+        <h4>Gas-Intensive Users</h4>
+        <p>Your exposure runs through <strong>NBP spot, seasonal shape and LNG availability</strong>. The current 113–117p range for near-term gas is well above historical averages (~75p for Cal-27 one year ago). If your process requires consistent gas supply, consider whether a structured fixed or flexible approach provides better budget certainty than full pass-through.</p>
+        <p>Winter 2026 at 116.53p suggests the market is pricing in storage refill risk and possible cold weather. Gas-intensive I&C customers should model scenarios at 130p, 150p and 170p to understand stress-test exposure.</p>
+        <p class="proc-highlight">Volume tolerance clauses matter: exceeding agreed volume bands during cold snaps can trigger penalty rates significantly above contract prices.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       12. SUPPLIER APPETITE AND PRICE-BOOK WATCH
+       ============================================================ -->
+  <section class="section" id="suppliers">
+    <div class="section-header">
+      <div class="section-ribbon"></div>
+      <h2 class="section-title">Supplier Appetite & Price-Book Watch</h2>
+    </div>
+
+    <div class="commentary">
+      <p>Supplier pricing behaviour has been mixed through May. During the peak volatility in early May (NBP front-month above 130p, Brent above $110), several I&C suppliers shortened quote validity from 5–7 days to 2–3 days, and some withdrew from the spot market for 24–48 hours. As prices have settled, quote validity has largely returned to normal, though credit check requirements have tightened for new customers and those with adverse payment history.</p>
+      <p>For <strong>I&C and Mid Market</strong>, supplier appetite differs materially from SME. Larger volume customers (>&pound;100k annual spend) generally find competitive pricing across 4–6 suppliers. Mid Market customers (&pound;20k–&pound;100k) may find fewer quotes, with some suppliers focusing on larger I&C accounts. Credit position, volume tolerance and shape premiums are increasingly important — suppliers are less willing to absorb volume risk or unusual load profiles without price adjustment.</p>
+      <p>Pass-through terms vary: some suppliers are offering fully delivered (commodity + non-commodity bundled) fixed prices, while others are quoting commodity-only with pass-through for TNUoS, DUoS and policy costs. The trend is toward <strong>greater transparency on pass-through</strong>, driven by customer demand and regulatory pressure. For flexible customers, tolerance band widths have narrowed slightly — some suppliers now requiring &plusmn;10% rather than &plusmn;15% annual volume tolerance.</p>
+    </div>
+
+    <div class="proc-highlight">
+      Supplier book movement is not fully verified from public sources. Treat this as a commercial watch point and confirm against live supplier pricing.
+    </div>
+  </section>
+
+  <!-- ============================================================
+       13. MARKET DRIVERS
+       ============================================================ -->
+  <section class="section" id="drivers">
+    <div class="section-header">
+      <div class="section-ribbon"></div>
+      <h2 class="section-title">Market Drivers</h2>
+    </div>
+
+    <div class="driver-grid">
+      <div class="driver-card driver-bullish">
+        <div class="driver-title">Supply — Norwegian Flows <span class="driver-tag tag-bullish">Bullish</span></div>
+        <div class="driver-desc">Troll maintenance complete, Norwegian supplies forecast up 3% YoY. GASSCO outages lower than last summer. UKCS declining but Norway offsetting.</div>
+      </div>
+      <div class="driver-card driver-bearish">
+        <div class="driver-title">Demand — Mild Weather <span class="driver-tag tag-bearish">Bearish</span></div>
+        <div class="driver-desc">Above-normal temperatures suppressing NDM heating demand. Summer gas-for-power lower than winter. Demand forecast flat YoY.</div>
+      </div>
+      <div class="driver-card driver-mixed">
+        <div class="driver-title">Weather — Wind Output <span class="driver-tag tag-mixed">Mixed</span></div>
+        <div class="driver-desc">Wind below seasonal norms at ~18% of mix vs 27% average. Forecasts suggest recovery mid-week. Solar building through summer.</div>
+      </div>
+      <div class="driver-card driver-bullish">
+        <div class="driver-title">LNG — Global Tightness <span class="driver-tag tag-bullish">Bullish</span></div>
+        <div class="driver-desc">Qatar force majeure continues. Asian JKM at ~$17/MMBtu competing for cargoes. US supply dominant but capacity constraints remain.</div>
+      </div>
+      <div class="driver-card driver-bullish">
+        <div class="driver-title">Storage — Low EU Levels <span class="driver-tag tag-bullish">Bullish</span></div>
+        <div class="driver-desc">EU at ~38% vs 55% 5-year norm. Must inject ~2.1 TWh/day to hit 80% by November. Any slowdown supports winter premiums.</div>
+      </div>
+      <div class="driver-card driver-bullish">
+        <div class="driver-title">Carbon — EUA Firmness <span class="driver-tag tag-bullish">Bullish</span></div>
+        <div class="driver-desc">EUA Dec-26 near €80/t. Tighter EU ETS supply and industrial phase-out of free allocations providing structural support.</div>
+      </div>
+      <div class="driver-card driver-bearish">
+        <div class="driver-title">Oil — SPR Releases <span class="driver-tag tag-bearish">Bearish</span></div>
+        <div class="driver-desc">US/IEA coordinated SPR release of 172 Mbbl easing crude supply. Brent down 17.6% month-on-month. Reduces oil-linked gas sentiment.</div>
+      </div>
+      <div class="driver-card driver-mixed">
+        <div class="driver-title">Power Generation — CCGT Dominance <span class="driver-tag tag-mixed">Mixed</span></div>
+        <div class="driver-desc">CCGT at 45% of mix, setting marginal price. High renewables = softer power; low wind = firmer power. Interconnector imports capping extremes.</div>
+      </div>
+      <div class="driver-card driver-neutral">
+        <div class="driver-title">Geopolitical / Shipping <span class="driver-tag tag-neutral">Neutral</span></div>
+        <div class="driver-desc">Hormuz shipping gradually resuming. Ceasefire holding but fragile. Insurance premiums elevated. Background risk premium priced in.</div>
+      </div>
+      <div class="driver-card driver-mixed">
+        <div class="driver-title">Supplier Pricing <span class="driver-tag tag-mixed">Mixed</span></div>
+        <div class="driver-desc">Quote validity normalised after early-May tightening. Credit checks stricter. Mid Market appetite more selective than I&C. Pass-through terms increasingly transparent.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       14. WHAT CHANGED SINCE LAST REPORT
+       ============================================================ -->
+  <section class="section" id="changed">
+    <div class="section-header">
+      <div class="section-ribbon"></div>
+      <h2 class="section-title">What Changed Since Last Report</h2>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Gas</div>
+        <div class="card-note">NBP front-month <strong>fell 5.7%</strong> week-on-week (113.94p vs ~120.8p). Geopolitical risk premium partially unwound. LNG arrivals improving. Norwegian Troll maintenance complete.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Power</div>
+        <div class="card-note">Baseload <strong>decoupled from gas</strong>, falling only 0.4–1.4% across near curve. Carbon strength offsetting gas weakness. Wind output below norms supporting CCGT burn.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Oil</div>
+        <div class="card-note">Brent <strong>down 17.6%</strong> over past month to $93.10/bbl. SPR releases and eased Hormuz fears driving softness. WTI at $89.79, back end in contango.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Carbon</div>
+        <div class="card-note">EUA <strong>firm near €80/t</strong>. UKA–EUA spread widest in months. Sterling weakness and BoE rate cut expectations driving divergence. UKA at significant discount.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">LNG</div>
+        <div class="card-note">Four cargoes due to UK terminals this week. Qatar force majeure unchanged. Asian JKM competition strong at $17/MMBtu. US supply remains dominant for GB.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Storage</div>
+        <div class="card-note">EU storage <strong>risen to ~38%</strong> from ~36% mid-May. Injection pace must accelerate to meet 80% November target. GB storage comparable to 2025 levels.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Demand</div>
+        <div class="card-note">Mild weather suppressing gas NDM demand. Electricity demand in summer lull (22–38 GW range). Gas-for-power volatile but summer average lower than winter.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Forward Curve</div>
+        <div class="card-note">Backwardation intact: Win-26 at 116.53p, Sum-27 at 85.09p, Cal-27 at 92.67p. Further-out contracts (Cal-28, Cal-29) trading at material discount to near curve.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       15. COMMERCIAL TAKEAWAY
+       ============================================================ -->
+  <section class="section" id="takeaway">
+    <div class="section-header">
+      <div class="section-ribbon"></div>
+      <h2 class="section-title">Commercial Takeaway</h2>
+    </div>
+
+    <div class="takeaway-box">
+      <h3>Current Market Assessment</h3>
+      <p>Gas has softened week-on-week but the <strong>30-day trend remains elevated</strong>. Power has decoupled from gas direction, holding firmer on carbon strength. The near-term market (Summer–Winter 2026) is pricing in a combination of geopolitical risk, storage refill uncertainty and LNG tightness. Further out (2027–2029), the curve is lower, reflecting expectations of supply relief from new LNG capacity and demand moderation.</p>
+      <p>Risk is <strong>mixed but tilted to the upside</strong> for winter 2026/27. A cold winter, delayed LNG recovery, or renewed geopolitical disruption could push NBP above 150p and baseload above £120/MWh. Conversely, a mild winter, rapid storage refill, and successful Qatar recovery could see prices retreat toward 90–100p for Cal-27.</p>
+
+      <div class="takeaway-quote">
+        Waiting is not neutral. It is a decision to stay exposed to wholesale movement, supplier repricing and contract availability.
+      </div>
+
+      <p>For customers inside their renewal window, the practical step is to <strong>review live pricing now</strong>, compare contract lengths, check supplier appetite and decide against budget certainty, risk tolerance and operational need. This is not automatic advice to fix. It is a reason to review live pricing against the customer's contract date, volume, risk profile and budget position.</p>
+
+      <div class="takeaway-quote">
+        Cheaper further out does not mean cheaper later. It means there may be an opportunity while that delivery period is still priced on the forward curve.
+      </div>
+
+      <p><strong>Flexible customers:</strong> Review hedge ratios and trigger levels. The backwardated curve creates opportunity for layered hedging into 2027, but do not over-commit before volume certainty is clear.</p>
+      <p><strong>Fixed customers:</strong> Test 12, 24, 36 and 48-month pricing. Compare fully delivered vs commodity-only quotes. Check pass-through terms for non-commodity charges.</p>
+      <p><strong>Gas-intensive users:</strong> Model stress scenarios at 130p, 150p and 170p. Review volume tolerance clauses. Consider whether fixed or flexible structures provide better budget protection.</p>
+      <p><strong>Half-hourly electricity users:</strong> Review shape risk and peak exposure. Check DUoS banding. Assess whether load-shifting or on-site generation can reduce peak-period costs.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       16. TERMS OF REFERENCE
+       ============================================================ -->
+  <section class="section" id="terms">
+    <div class="section-header">
+      <div class="section-ribbon"></div>
+      <h2 class="section-title">Terms of Reference</h2>
+    </div>
+
+    <div class="glossary-grid">
+      <div class="glossary-item">
+        <div class="glossary-term">NBP</div>
+        <div class="glossary-def">National Balancing Point — the UK virtual trading hub for natural gas. Prices quoted in pence per therm.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">TTF</div>
+        <div class="glossary-def">Title Transfer Facility — the Dutch virtual gas trading hub and European benchmark. Prices quoted in €/MWh.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Day-ahead</div>
+        <div class="glossary-def">The price for delivery on the next trading day. Most liquid prompt contract, reflecting immediate supply/demand balance.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Month-ahead / Front Month</div>
+        <div class="glossary-def">The nearest monthly futures contract. Most actively traded beyond the prompt. Sets the tone for near-curve pricing.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Front Season</div>
+        <div class="glossary-def">The nearest seasonal contract (Summer or Winter). Used for medium-term hedging and budget planning.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Front Year</div>
+        <div class="glossary-def">The nearest calendar year contract (e.g., Cal-27). Provides annual average price for longer-term procurement decisions.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Prompt Market</div>
+        <div class="glossary-def">The market for immediate or near-immediate delivery — typically day-ahead and within-day contracts.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Near Curve</div>
+        <div class="glossary-def">Contracts for delivery within the next 6–12 months. Most sensitive to weather, storage and prompt conditions.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Far Curve</div>
+        <div class="glossary-def">Contracts for delivery beyond 12 months. Driven by structural supply/demand, infrastructure and policy expectations.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Forward Curve</div>
+        <div class="glossary-def">The full set of future prices across all delivery periods. Shows market expectations and seasonal patterns.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Baseload Power</div>
+        <div class="glossary-def">Electricity delivered continuously (24/7) across all half-hourly periods. The standard wholesale power contract.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Peak Power</div>
+        <div class="glossary-def">Electricity delivered during high-demand weekday periods (typically 07:00–19:00). Priced at a premium to baseload.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">CCGT</div>
+        <div class="glossary-def">Combined Cycle Gas Turbine — the dominant gas-fired power plant technology in the UK. Efficiency ~50–55%.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">EUA Carbon</div>
+        <div class="glossary-def">EU Allowance — the carbon permit traded under the EU Emissions Trading Scheme. One allowance = one tonne of CO₂.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">LNG</div>
+        <div class="glossary-def">Liquefied Natural Gas — natural gas cooled to liquid form for transport by ship. The marginal supply source for UK/EU.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">UKCS / NCS</div>
+        <div class="glossary-def">UK Continental Shelf / Norwegian Continental Shelf — offshore gas production areas supplying GB via pipeline.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Interconnector</div>
+        <div class="glossary-def">High-voltage undersea cable linking GB electricity grid to Continental Europe (e.g., IFA, Nemo, BritNed).</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">System Demand</div>
+        <div class="glossary-def">Total electricity or gas required by the GB system at a given time. Measured in GW (electricity) or mcm/day (gas).</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Seasonal Normal</div>
+        <div class="glossary-def">The 5- or 10-year average demand level for a given date, adjusted for temperature and economic conditions.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Flexible Procurement</div>
+        <div class="glossary-def">A purchasing strategy where the buyer hedges portions of volume over time, leaving some exposure to market movements.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Fixed Procurement</div>
+        <div class="glossary-def">A purchasing strategy where the full volume is locked at a single price for the contract duration. Provides budget certainty.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Shape Risk</div>
+        <div class="glossary-def">The risk that a customer's consumption profile (when they use energy) differs from the baseload shape they are priced on.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Volume Tolerance</div>
+        <div class="glossary-def">The allowed deviation from contracted annual volume (typically &plusmn;10–15%). Exceeding bands can trigger penalty rates.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Pass-through Charges</div>
+        <div class="glossary-def">Non-commodity costs (TNUoS, DUoS, BSUoS, RO, CFD) that may be passed through to the customer at actual cost.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Supplier Price Book</div>
+        <div class="glossary-def">The internal pricing matrix suppliers use to quote customers, incorporating wholesale costs, risk margin and overheads.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       17. DATA SOURCES
+       ============================================================ -->
+  <section class="section" id="sources">
+    <div class="section-header">
+      <div class="section-ribbon"></div>
+      <h2 class="section-title">Data Sources</h2>
+    </div>
+
+    <div class="source-group">
+      <h4>Gas Pricing</h4>
+      <div class="source-links">
+        <a href="https://www.ice.com/products/910/UK-NBP-Natural-Gas-Futures" target="_blank" rel="noopener noreferrer">ICE NBP Futures</a>
+        <a href="https://www.barchart.com/futures/quotes/NFM26" target="_blank" rel="noopener noreferrer">Barchart NBP</a>
+        <a href="https://www.investing.com/commodities/uk-nbp-natural-gas-yearly-futures-historical-data" target="_blank" rel="noopener noreferrer">Investing.com NBP</a>
+        <a href="https://www.barchart.com/futures/quotes/TGM26" target="_blank" rel="noopener noreferrer">ICE TTF Futures</a>
+        <a href="https://www.marketwatch.com/investing/future/ttfcm26" target="_blank" rel="noopener noreferrer">MarketWatch TTF</a>
+      </div>
+    </div>
+
+    <div class="source-group">
+      <h4>Power Pricing</h4>
+      <div class="source-links">
+        <a href="https://www.ice.com/products/388/U.K.-Base-Electricity-Futures" target="_blank" rel="noopener noreferrer">ICE UK Base Power</a>
+        <a href="https://www.barchart.com/futures/quotes/N4M26" target="_blank" rel="noopener noreferrer">Barchart UK Power</a>
+        <a href="https://www.smart-energy.uk/post/daily-energy-market-report" target="_blank" rel="noopener noreferrer">Smart Energy UK</a>
+        <a href="https://energycentric.co.uk/2026/05/18/uk-business-energy-market-update-18-may-2026/" target="_blank" rel="noopener noreferrer">Energy Centric</a>
+      </div>
+    </div>
+
+    <div class="source-group">
+      <h4>Oil</h4>
+      <div class="source-links">
+        <a href="https://finance.yahoo.com/quote/BZ=F/history/" target="_blank" rel="noopener noreferrer">Yahoo Finance Brent</a>
+        <a href="https://www.marketwatch.com/investing/future/clm26" target="_blank" rel="noopener noreferrer">MarketWatch WTI</a>
+        <a href="https://tradingeconomics.com/commodity/brent-crude-oil" target="_blank" rel="noopener noreferrer">Trading Economics Brent</a>
+        <a href="https://www.eia.gov/" target="_blank" rel="noopener noreferrer">EIA</a>
+      </div>
+    </div>
+
+    <div class="source-group">
+      <h4>Carbon</h4>
+      <div class="source-links">
+        <a href="https://www.ice.com/products/197/EUA-Emissions-Futures" target="_blank" rel="noopener noreferrer">ICE EUA Futures</a>
+        <a href="https://www.ice.com/products/19799335/UKA-Futures" target="_blank" rel="noopener noreferrer">ICE UKA Futures</a>
+      </div>
+    </div>
+
+    <div class="source-group">
+      <h4>System Demand & Generation</h4>
+      <div class="source-links">
+        <a href="https://www.gridwatch.templar.co.uk/" target="_blank" rel="noopener noreferrer">GridWatch GB</a>
+        <a href="https://livegriddata.co.uk/uk-interconnectors/" target="_blank" rel="noopener noreferrer">Live Grid Data</a>
+        <a href="https://www.nationalgas.com/" target="_blank" rel="noopener noreferrer">National Gas</a>
+        <a href="https://www.neso.energy/" target="_blank" rel="noopener noreferrer">NESO</a>
+      </div>
+    </div>
+
+    <div class="source-group">
+      <h4>Storage</h4>
+      <div class="source-links">
+        <a href="https://agsi.gie.eu/" target="_blank" rel="noopener noreferrer">AGSI+ (GIE)</a>
+        <a href="https://global-energy-flow.com/storage/" target="_blank" rel="noopener noreferrer">Global Energy Flow Tracker</a>
+        <a href="https://www.bruegel.org/dataset/european-natural-gas-imports" target="_blank" rel="noopener noreferrer">Bruegel Gas Tracker</a>
+      </div>
+    </div>
+
+    <div class="source-group">
+      <h4>LNG</h4>
+      <div class="source-links">
+        <a href="https://www.nationalgas.com/sites/default/files/documents/Gas%20Summer%20Outlook%202026.pdf" target="_blank" rel="noopener noreferrer">National Gas Summer Outlook</a>
+        <a href="https://lngpriceindex.com/" target="_blank" rel="noopener noreferrer">LNG Price Index</a>
+        <a href="https://www.kpler.com/" target="_blank" rel="noopener noreferrer">Kpler</a>
+      </div>
+    </div>
+
+    <div class="source-group">
+      <h4>Weather</h4>
+      <div class="source-links">
+        <a href="https://www.metoffice.gov.uk/" target="_blank" rel="noopener noreferrer">Met Office</a>
+      </div>
+    </div>
+
+    <div class="source-group">
+      <h4>News & Market Commentary</h4>
+      <div class="source-links">
+        <a href="https://www.reuters.com/business/energy/" target="_blank" rel="noopener noreferrer">Reuters Energy</a>
+        <a href="https://www.ft.com/energy" target="_blank" rel="noopener noreferrer">FT Energy</a>
+        <a href="https://www.icis.com/explore/commodities/energy/" target="_blank" rel="noopener noreferrer">ICIS</a>
+        <a href="https://www.montelnews.com/" target="_blank" rel="noopener noreferrer">Montel</a>
+        <a href="https://www.cornwall-insight.com/" target="_blank" rel="noopener noreferrer">Cornwall Insight</a>
+      </div>
+    </div>
+
+    <div class="commentary" style="margin-top:1.5rem;font-size:0.78rem;">
+      <p><strong>Note on data access:</strong> Some sources listed above require subscription or registration (ICIS, Montel, Kpler, Bloomberg, LSEG). ICE futures data is available through delayed feeds or paid subscriptions. Settlement prices from Smart Energy UK are based on publicly reported ICE close data. GridWatch and Live Grid Data provide free real-time access. National Gas publications are freely available. This report uses publicly available data where possible and clearly marks where figures are approximate or derived from multiple sources.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p><strong>Switch 365 Ltd</strong> | I&C and Mid Market Energy Market Report | 01 June 2026</p>
+    <p>This report has been prepared by Switch 365 Ltd for general commercial market intelligence only. It uses publicly available and/or supplier market data where available.</p>
+    <p>Prices are indicative, may be delayed and are not a live quotation. Business energy prices depend on site, usage, credit, contract structure, supplier appetite and live pricing at the time of quote.</p>
+    <p>This report is not financial advice. Past market movement is not a reliable indicator of future pricing.</p>
+    <p style="margin-top:1rem;color:var(--accent-gradient-start);">switch365.com | enquiries@switch365.com</p>
+  </footer>
+
+</div><!-- /container -->
+
+</body>
+</html>
