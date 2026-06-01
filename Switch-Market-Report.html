@@ -722,8 +722,7 @@ body {
       </div>
     </div>
     <div style="position:relative; height:320px;">
-      <canvas id="curveChart"></canvas>
-      <canvas id="trendChart" style="display:none;"></canvas>
+      <canvas id="mainChart"></canvas>
     </div>
     <p class="text-[10px] text-gray-500 mt-3">Y-axis: pence per therm (gas) / &pound;/MWh (power). Data: ICE NBP settlements 29 May 2026. Interactive &mdash; toggle between chart views above.</p>
   </div>
@@ -959,194 +958,217 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// ===== Chart Toggle =====
-let curveChartInstance = null;
-let trendChartInstance = null;
+// ===== Single Chart with Toggle =====
+let mainChart = null;
+let currentChartType = 'curve';
+
+// Gradient helpers for trend chart
+function makeGradient(color, alpha) {
+  const ctx = document.getElementById('mainChart').getContext('2d');
+  const g = ctx.createLinearGradient(0, 0, 0, 300);
+  g.addColorStop(0, 'rgba(' + color + ',' + alpha + ')');
+  g.addColorStop(1, 'rgba(' + color + ',0)');
+  return g;
+}
+
+const curveConfig = {
+  type: 'bar',
+  data: {
+    labels: ['Q3-26', 'Q4-26', 'Q1-27', 'Win-26', 'Sum-27', 'Cal-27', 'Cal-28', 'Cal-29'],
+    datasets: [
+      {
+        label: 'NBP Gas (p/therm)',
+        data: [114.01, 117.95, 115.0, 116.53, 85.09, 92.67, 72.0, 64.0],
+        backgroundColor: 'rgba(0, 211, 154, 0.85)',
+        borderColor: '#00d39a',
+        borderWidth: 1,
+        borderRadius: 4,
+        borderSkipped: false,
+      },
+      {
+        label: 'UK Baseload (£/MWh)',
+        data: [99.46, 102.06, 101.0, 102.06, 77.76, 83.98, 68.0, 62.0],
+        backgroundColor: 'rgba(221, 64, 255, 0.85)',
+        borderColor: '#dd40ff',
+        borderWidth: 1,
+        borderRadius: 4,
+        borderSkipped: false,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: { duration: 1200, easing: 'easeOutQuart' },
+    plugins: {
+      legend: { labels: { color: '#a4b0be', font: { family: 'Montserrat', size: 11 } } },
+      tooltip: {
+        backgroundColor: '#1a1845',
+        titleColor: '#fff',
+        bodyColor: '#a4b0be',
+        borderColor: 'rgba(255,255,255,0.1)',
+        borderWidth: 1,
+        cornerRadius: 8,
+        callbacks: {
+          label: function(ctx) {
+            return ctx.dataset.label.split(' ')[0] + ': ' + ctx.parsed.y + (ctx.datasetIndex === 0 ? 'p' : '£');
+          }
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: { color: '#a4b0be', font: { family: 'Montserrat', size: 11 } },
+        grid: { color: 'rgba(255,255,255,0.04)' }
+      },
+      y: {
+        ticks: { color: '#a4b0be', font: { family: 'Montserrat', size: 11 } },
+        grid: { color: 'rgba(255,255,255,0.06)' },
+        beginAtZero: false,
+        min: 50
+      }
+    }
+  }
+};
+
+const trendConfig = {
+  type: 'line',
+  data: {
+    labels: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    datasets: [
+      {
+        label: 'NBP Spot',
+        data: [88, 85, 92, 95, 102, 118, 125, 115, 108, 98, 95, 105, 114],
+        borderColor: '#00d39a',
+        backgroundColor: 'rgba(0,211,154,0.12)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 3,
+        pointBackgroundColor: '#00d39a',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 1,
+      },
+      {
+        label: 'NBP M+1',
+        data: [90, 87, 94, 97, 104, 120, 123, 117, 110, 100, 97, 108, 110],
+        borderColor: '#dd40ff',
+        backgroundColor: 'rgba(221,64,255,0.12)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 3,
+        pointBackgroundColor: '#dd40ff',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 1,
+      },
+      {
+        label: 'NBP S+1',
+        data: [92, 89, 95, 98, 105, 119, 121, 116, 109, 101, 98, 110, 112],
+        borderColor: '#70a1ff',
+        backgroundColor: 'transparent',
+        fill: false,
+        tension: 0.4,
+        pointRadius: 2,
+        borderDash: [5, 5],
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    animation: { duration: 1200, easing: 'easeOutQuart' },
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { labels: { color: '#a4b0be', font: { family: 'Montserrat', size: 11 } } },
+      tooltip: {
+        backgroundColor: '#1a1845',
+        titleColor: '#fff',
+        bodyColor: '#a4b0be',
+        borderColor: 'rgba(255,255,255,0.1)',
+        borderWidth: 1,
+        cornerRadius: 8,
+      }
+    },
+    scales: {
+      x: {
+        ticks: { color: '#a4b0be', font: { family: 'Montserrat', size: 11 } },
+        grid: { color: 'rgba(255,255,255,0.04)' }
+      },
+      y: {
+        ticks: { color: '#a4b0be', font: { family: 'Montserrat', size: 11 } },
+        grid: { color: 'rgba(255,255,255,0.06)' },
+        min: 70,
+        max: 135
+      }
+    }
+  }
+};
+
+function initChart(type) {
+  const canvas = document.getElementById('mainChart');
+  if (mainChart) {
+    mainChart.destroy();
+  }
+  const config = type === 'curve' ? JSON.parse(JSON.stringify(curveConfig)) : JSON.parse(JSON.stringify(trendConfig));
+  // Re-create gradient for trend
+  if (type === 'trend') {
+    const ctx = canvas.getContext('2d');
+    const g1 = ctx.createLinearGradient(0, 0, 0, 300);
+    g1.addColorStop(0, 'rgba(0,211,154,0.25)');
+    g1.addColorStop(1, 'rgba(0,211,154,0)');
+    const g2 = ctx.createLinearGradient(0, 0, 0, 300);
+    g2.addColorStop(0, 'rgba(221,64,255,0.25)');
+    g2.addColorStop(1, 'rgba(221,64,255,0)');
+    config.data.datasets[0].backgroundColor = g1;
+    config.data.datasets[1].backgroundColor = g2;
+  }
+  mainChart = new Chart(canvas.getContext('2d'), config);
+}
 
 function showChart(type) {
-  const curveCanvas = document.getElementById('curveChart');
-  const trendCanvas = document.getElementById('trendChart');
   const btnCurve = document.getElementById('btn-curve');
   const btnTrend = document.getElementById('btn-trend');
+  currentChartType = type;
 
   if (type === 'curve') {
-    curveCanvas.style.display = 'block';
-    trendCanvas.style.display = 'none';
     btnCurve.className = 'text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full transition-all gradient-bg text-white';
     btnTrend.className = 'text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full transition-all';
     btnTrend.style.background = 'rgba(255,255,255,0.05)';
-    btnTrend.style.color = 'var(--neutral)';
-    if (!curveChartInstance) initCurveChart();
+    btnTrend.style.color = '#a4b0be';
   } else {
-    curveCanvas.style.display = 'none';
-    trendCanvas.style.display = 'block';
     btnTrend.className = 'text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full transition-all gradient-bg text-white';
     btnCurve.className = 'text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full transition-all';
     btnCurve.style.background = 'rgba(255,255,255,0.05)';
-    btnCurve.style.color = 'var(--neutral)';
-    if (!trendChartInstance) initTrendChart();
+    btnCurve.style.color = '#a4b0be';
+  }
+  initChart(type);
+}
+
+// ===== Init chart when Forward section scrolls into view =====
+let chartInitialized = false;
+function tryInitChart() {
+  if (chartInitialized) return;
+  const canvas = document.getElementById('mainChart');
+  if (!canvas) return;
+  const rect = canvas.getBoundingClientRect();
+  if (rect.width > 0 && rect.height > 0) {
+    chartInitialized = true;
+    setTimeout(() => initChart('curve'), 100);
   }
 }
-
-function initCurveChart() {
-  const ctx = document.getElementById('curveChart').getContext('2d');
-  curveChartInstance = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Q3-26', 'Q4-26', 'Q1-27', 'Win-26', 'Sum-27', 'Cal-27', 'Cal-28', 'Cal-29'],
-      datasets: [
-        {
-          label: 'NBP Gas (p/therm)',
-          data: [114.01, 117.95, 115.0, 116.53, 85.09, 92.67, 72.0, 64.0],
-          backgroundColor: 'rgba(0, 211, 154, 0.85)',
-          borderColor: '#00d39a',
-          borderWidth: 1,
-          borderRadius: 4,
-          borderSkipped: false,
-        },
-        {
-          label: 'UK Baseload (£/MWh)',
-          data: [99.46, 102.06, 101.0, 102.06, 77.76, 83.98, 68.0, 62.0],
-          backgroundColor: 'rgba(221, 64, 255, 0.85)',
-          borderColor: '#dd40ff',
-          borderWidth: 1,
-          borderRadius: 4,
-          borderSkipped: false,
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: { duration: 1500, easing: 'easeOutQuart' },
-      plugins: {
-        legend: {
-          labels: { color: '#a4b0be', font: { family: 'Montserrat', size: 11 } }
-        },
-        tooltip: {
-          backgroundColor: '#1a1845',
-          titleColor: '#fff',
-          bodyColor: '#a4b0be',
-          borderColor: 'rgba(255,255,255,0.1)',
-          borderWidth: 1,
-          cornerRadius: 8,
-          displayColors: true,
-          callbacks: {
-            label: function(ctx) {
-              return ctx.dataset.label.split(' ')[0] + ': ' + ctx.parsed.y + (ctx.datasetIndex === 0 ? 'p' : '£');
-            }
-          }
-        }
-      },
-      scales: {
-        x: {
-          ticks: { color: '#a4b0be', font: { family: 'Montserrat', size: 11 } },
-          grid: { color: 'rgba(255,255,255,0.04)' }
-        },
-        y: {
-          ticks: { color: '#a4b0be', font: { family: 'Montserrat', size: 11 } },
-          grid: { color: 'rgba(255,255,255,0.06)' },
-          beginAtZero: false,
-          min: 50
-        }
-      }
+const chartObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !chartInitialized) {
+      tryInitChart();
+      chartObserver.disconnect();
     }
   });
-}
-
-function initTrendChart() {
-  const ctx = document.getElementById('trendChart').getContext('2d');
-  const gradient1 = ctx.createLinearGradient(0, 0, 0, 300);
-  gradient1.addColorStop(0, 'rgba(0, 211, 154, 0.3)');
-  gradient1.addColorStop(1, 'rgba(0, 211, 154, 0)');
-  const gradient2 = ctx.createLinearGradient(0, 0, 0, 300);
-  gradient2.addColorStop(0, 'rgba(221, 64, 255, 0.3)');
-  gradient2.addColorStop(1, 'rgba(221, 64, 255, 0)');
-
-  trendChartInstance = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-      datasets: [
-        {
-          label: 'NBP Spot',
-          data: [88, 85, 92, 95, 102, 118, 125, 115, 108, 98, 95, 105, 114],
-          borderColor: '#00d39a',
-          backgroundColor: gradient1,
-          fill: true,
-          tension: 0.4,
-          pointRadius: 3,
-          pointBackgroundColor: '#00d39a',
-          pointBorderColor: '#fff',
-          pointBorderWidth: 1,
-        },
-        {
-          label: 'NBP M+1',
-          data: [90, 87, 94, 97, 104, 120, 123, 117, 110, 100, 97, 108, 110],
-          borderColor: '#dd40ff',
-          backgroundColor: gradient2,
-          fill: true,
-          tension: 0.4,
-          pointRadius: 3,
-          pointBackgroundColor: '#dd40ff',
-          pointBorderColor: '#fff',
-          pointBorderWidth: 1,
-        },
-        {
-          label: 'NBP S+1',
-          data: [92, 89, 95, 98, 105, 119, 121, 116, 109, 101, 98, 110, 112],
-          borderColor: '#70a1ff',
-          backgroundColor: 'transparent',
-          fill: false,
-          tension: 0.4,
-          pointRadius: 2,
-          borderDash: [5, 5],
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: { duration: 1500, easing: 'easeOutQuart' },
-      interaction: { mode: 'index', intersect: false },
-      plugins: {
-        legend: {
-          labels: { color: '#a4b0be', font: { family: 'Montserrat', size: 11 } }
-        },
-        tooltip: {
-          backgroundColor: '#1a1845',
-          titleColor: '#fff',
-          bodyColor: '#a4b0be',
-          borderColor: 'rgba(255,255,255,0.1)',
-          borderWidth: 1,
-          cornerRadius: 8,
-        }
-      },
-      scales: {
-        x: {
-          ticks: { color: '#a4b0be', font: { family: 'Montserrat', size: 11 } },
-          grid: { color: 'rgba(255,255,255,0.04)' }
-        },
-        y: {
-          ticks: { color: '#a4b0be', font: { family: 'Montserrat', size: 11 } },
-          grid: { color: 'rgba(255,255,255,0.06)' },
-          min: 70,
-          max: 135
-        }
-      }
-    }
-  });
-}
-
-// ===== Initialize Curve Chart on Load =====
+}, { threshold: 0.05, rootMargin: '50px' });
+chartObserver.observe(document.getElementById('forward'));
+// Fallback: try init on load + after short delay
 document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => {
-    const forwardSection = document.getElementById('forward');
-    const rect = forwardSection.getBoundingClientRect();
-    if (rect.top < window.innerHeight) {
-      initCurveChart();
-    }
-  }, 500);
+  tryInitChart();
+  setTimeout(tryInitChart, 500);
+  setTimeout(tryInitChart, 1000);
 });
 </script>
 </body>
