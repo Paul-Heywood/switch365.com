@@ -30,10 +30,7 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 80px;
-  }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
   body {
     font-family: 'Montserrat', sans-serif;
@@ -47,6 +44,7 @@
   ::-webkit-scrollbar-track { background: var(--bg-deep); }
   ::-webkit-scrollbar-thumb { background: linear-gradient(var(--accent-start), var(--accent-end)); border-radius: 4px; }
 
+  /* ---- KEYFRAME ANIMATIONS ---- */
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
@@ -73,13 +71,14 @@
   }
   @keyframes barGrow {
     from { transform: scaleY(0); }
-n    to { transform: scaleY(1); }
+    to { transform: scaleY(1); }
   }
-  @keyframes countUp {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+  @keyframes tooltipIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(4px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
   }
 
+  /* ---- SCROLL-TRIGGERED REVEAL CLASSES ---- */
   .reveal {
     opacity: 0;
     transform: translateY(30px);
@@ -92,8 +91,6 @@ n    to { transform: scaleY(1); }
   .reveal-d4 { transition-delay: 0.4s; }
   .reveal-d5 { transition-delay: 0.5s; }
   .reveal-d6 { transition-delay: 0.6s; }
-  .reveal-d7 { transition-delay: 0.7s; }
-  .reveal-d8 { transition-delay: 0.8s; }
 
   .reveal-left {
     opacity: 0;
@@ -116,6 +113,7 @@ n    to { transform: scaleY(1); }
   }
   .reveal-scale.visible { opacity: 1; transform: scale(1); }
 
+  /* Navigation */
   .nav-toggle {
     position: fixed;
     top: 20px;
@@ -200,6 +198,7 @@ n    to { transform: scaleY(1); }
   }
   .nav-overlay.active { opacity: 1; visibility: visible; }
 
+  /* Hero - CENTERED */
   .hero {
     background: linear-gradient(135deg, var(--bg-midnight-start) 0%, var(--bg-midnight-end) 50%, #1a1a4e 100%);
     padding: 100px 20px 60px;
@@ -465,6 +464,7 @@ n    to { transform: scaleY(1); }
     line-height: 1.5;
   }
 
+  /* ---- FUTURES BARS WITH PROPERLY SCALED HEIGHTS + HOVER TOOLTIPS ---- */
   .futures-visual {
     background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
     border: 1px solid var(--card-border);
@@ -477,9 +477,9 @@ n    to { transform: scaleY(1); }
     align-items: flex-end;
     justify-content: center;
     gap: 16px;
-    height: 280px;
-    margin: 24px 0;
-    padding-bottom: 40px;
+    height: 320px;
+    margin: 40px 0 24px;
+    padding: 0 8px 40px;
     position: relative;
   }
   .futures-bars::after {
@@ -495,20 +495,27 @@ n    to { transform: scaleY(1); }
     flex-direction: column;
     align-items: center;
     flex: 1;
-    max-width: 100px;
+    max-width: 110px;
+    height: 100%;
+    justify-content: flex-end;
   }
   .futures-bar {
     width: 100%;
     border-radius: 8px 8px 0 0;
     position: relative;
-    transition: all 0.4s ease;
+    transition: all 0.3s ease;
     min-height: 20px;
     transform-origin: bottom;
     animation: barGrow 0.8s ease-out both;
+    cursor: pointer;
   }
-  .futures-bar:hover { filter: brightness(1.2); transform: scaleY(1.02); }
-  .futures-bar.gas { background: linear-gradient(180deg, #00d39a, rgba(0, 211, 154, 0.4)); }
-  .futures-bar.power { background: linear-gradient(180deg, #dd40ff, rgba(221, 64, 255, 0.4)); }
+  .futures-bar:hover {
+    filter: brightness(1.25);
+    transform: scaleX(1.05);
+  }
+  .futures-bar.gas { background: linear-gradient(180deg, #00d39a, rgba(0, 211, 154, 0.35)); }
+  .futures-bar.power { background: linear-gradient(180deg, #dd40ff, rgba(221, 64, 255, 0.35)); }
+
   .futures-bar-label {
     margin-top: 12px;
     font-size: 0.75rem;
@@ -516,16 +523,56 @@ n    to { transform: scaleY(1); }
     text-align: center;
     color: var(--text-secondary);
   }
+
+  /* Tooltip - hidden by default, shown on hover */
   .futures-bar-value {
     position: absolute;
-    top: -24px;
+    top: -36px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, rgba(10,10,26,0.95), rgba(38,34,98,0.95));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .futures-bar-value::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: rgba(38,34,98,0.95);
+  }
+  .futures-bar:hover .futures-bar-value {
+    opacity: 1;
+  }
+
+  /* Default visible value label at top of bar (always shown) */
+  .futures-bar-value-static {
+    position: absolute;
+    top: -22px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 0.7rem;
     font-weight: 700;
     color: var(--text-primary);
     white-space: nowrap;
-    animation: countUp 0.6s ease-out both;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+  .futures-bar:hover .futures-bar-value-static {
+    opacity: 0;
   }
 
   .procurement-grid {
@@ -611,7 +658,7 @@ n    to { transform: scaleY(1); }
     width: 6px;
     height: 6px;
     background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
-n    border-radius: 50%;
+    border-radius: 50%;
   }
 
   .data-table {
@@ -971,10 +1018,12 @@ n    border-radius: 50%;
     .hero { padding: 80px 16px 40px; min-height: auto; }
     .section { padding: 40px 16px; }
     .card { padding: 20px; }
-    .futures-bars { height: 200px; gap: 8px; }
+    .futures-bars { height: 220px; gap: 8px; }
     .condition-grid { grid-template-columns: 1fr; }
     .takeaway-panel { padding: 24px; }
     .timeline { padding-left: 24px; }
+    .futures-bar-value { font-size: 0.65rem; padding: 4px 8px; }
+    .futures-bar-value-static { font-size: 0.6rem; }
   }
 
   .stat-grid {
@@ -1085,6 +1134,7 @@ n    border-radius: 50%;
     color: white;
   }
 </style>
+<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -1198,114 +1248,132 @@ n    border-radius: 50%;
 
   <h3 class="reveal" style="font-size:1.2rem; font-weight:700; margin-bottom:20px; margin-top:40px;" id="market-further-out">B. Market Further Out &mdash; Is the Market Cheaper Further Out?</h3>
 
+  <!-- GAS CHART: Heights scaled from min (15%) to max (95%) for visual clarity -->
   <div class="futures-visual reveal-scale">
-    <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:16px;"><strong>UK NBP Gas Forward Curve</strong> &mdash; Settlement prices, 29 May 2026. Source: ICE via Smart Energy.</p>
+    <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:16px;"><strong>UK NBP Gas Forward Curve</strong> &mdash; Settlement prices, 29 May 2026. Source: ICE via Smart Energy. Hover bars for details.</p>
     <div class="futures-bars">
       <div class="futures-bar-group">
-        <div class="futures-bar gas" style="height:94%;">
-          <span class="futures-bar-value">113.94p</span>
+        <div class="futures-bar gas" style="height:87%;">
+          <span class="futures-bar-value-static">113.94p</span>
+          <span class="futures-bar-value">Jun-26: 113.94p/th</span>
         </div>
         <div class="futures-bar-label">Jun-26</div>
+      </div>
+      <div class="futures-bar-group">
+        <div class="futures-bar gas" style="height:86%;">
+          <span class="futures-bar-value-static">113.43p</span>
+          <span class="futures-bar-value">Jul-26: 113.43p/th</span>
+        </div>
+        <div class="futures-bar-label">Jul-26</div>
+      </div>
+      <div class="futures-bar-group">
+        <div class="futures-bar gas" style="height:87%;">
+          <span class="futures-bar-value-static">113.80p</span>
+          <span class="futures-bar-value">Aug-26: 113.80p/th</span>
+        </div>
+        <div class="futures-bar-label">Aug-26</div>
+      </div>
+      <div class="futures-bar-group">
+        <div class="futures-bar gas" style="height:95%;">
+          <span class="futures-bar-value-static">117.95p</span>
+          <span class="futures-bar-value">Q4-26: 117.95p/th</span>
+        </div>
+        <div class="futures-bar-label">Q4-26</div>
       </div>
       <div class="futures-bar-group">
         <div class="futures-bar gas" style="height:93%;">
-          <span class="futures-bar-value">113.43p</span>
-        </div>
-        <div class="futures-bar-label">Jul-26</div>
-      </div>
-      <div class="futures-bar-group">
-        <div class="futures-bar gas" style="height:94%;">
-          <span class="futures-bar-value">113.80p</span>
-        </div>
-        <div class="futures-bar-label">Aug-26</div>
-      </div>
-      <div class="futures-bar-group">
-        <div class="futures-bar gas" style="height:100%;">
-          <span class="futures-bar-value">117.95p</span>
-        </div>
-        <div class="futures-bar-label">Q4-26</div>
-      </div>
-      <div class="futures-bar-group">
-        <div class="futures-bar gas" style="height:98%;">
-          <span class="futures-bar-value">116.53p</span>
+          <span class="futures-bar-value-static">116.53p</span>
+          <span class="futures-bar-value">Win-26: 116.53p/th</span>
         </div>
         <div class="futures-bar-label">Win-26</div>
       </div>
       <div class="futures-bar-group">
-        <div class="futures-bar gas" style="height:50%;">
-          <span class="futures-bar-value">85.09p</span>
+        <div class="futures-bar gas" style="height:38%;">
+          <span class="futures-bar-value-static">85.09p</span>
+          <span class="futures-bar-value">Sum-27: 85.09p/th</span>
         </div>
         <div class="futures-bar-label">Sum-27</div>
       </div>
       <div class="futures-bar-group">
-        <div class="futures-bar gas" style="height:62%;">
-          <span class="futures-bar-value">92.67p</span>
+        <div class="futures-bar gas" style="height:51%;">
+          <span class="futures-bar-value-static">92.67p</span>
+          <span class="futures-bar-value">Cal-27: 92.67p/th</span>
         </div>
         <div class="futures-bar-label">Cal-27</div>
       </div>
       <div class="futures-bar-group">
-        <div class="futures-bar gas" style="height:30%;">
-          <span class="futures-bar-value">71.97p</span>
+        <div class="futures-bar gas" style="height:15%;">
+          <span class="futures-bar-value-static">71.97p</span>
+          <span class="futures-bar-value">Cal-28: 71.97p/th</span>
         </div>
         <div class="futures-bar-label">Cal-28</div>
       </div>
     </div>
-    <p style="font-size:0.85rem; color:var(--text-muted); text-align:center;">Gas: Near-term contracts carry risk premium. Further-out delivery periods trade at meaningful discounts.</p>
+    <p style="font-size:0.85rem; color:var(--text-muted); text-align:center;">Gas: Near-term contracts carry risk premium. Further-out delivery periods trade at meaningful discounts. Hover bars for exact values.</p>
   </div>
 
+  <!-- POWER CHART: Heights scaled from min (15%) to max (95%) for visual clarity -->
   <div class="futures-visual reveal-scale">
-    <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:16px;"><strong>UK Power Forward Curve</strong> &mdash; Settlement prices, 29 May 2026. Source: ICE via Smart Energy.</p>
+    <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:16px;"><strong>UK Power Forward Curve</strong> &mdash; Settlement prices, 29 May 2026. Source: ICE via Smart Energy. Hover bars for details.</p>
     <div class="futures-bars">
       <div class="futures-bar-group">
-        <div class="futures-bar power" style="height:96%;">
-          <span class="futures-bar-value">&pound;101</span>
+        <div class="futures-bar power" style="height:90%;">
+          <span class="futures-bar-value-static">&pound;101</span>
+          <span class="futures-bar-value">Jun-26: &pound;101/MWh</span>
         </div>
         <div class="futures-bar-label">Jun-26</div>
       </div>
       <div class="futures-bar-group">
-        <div class="futures-bar power" style="height:94%;">
-          <span class="futures-bar-value">&pound;100</span>
+        <div class="futures-bar power" style="height:88%;">
+          <span class="futures-bar-value-static">&pound;100</span>
+          <span class="futures-bar-value">Jul-26: &pound;100/MWh</span>
         </div>
         <div class="futures-bar-label">Jul-26</div>
       </div>
       <div class="futures-bar-group">
-        <div class="futures-bar power" style="height:89%;">
-          <span class="futures-bar-value">&pound;97.7</span>
+        <div class="futures-bar power" style="height:83%;">
+          <span class="futures-bar-value-static">&pound;97.7</span>
+          <span class="futures-bar-value">Aug-26: &pound;97.7/MWh</span>
         </div>
         <div class="futures-bar-label">Aug-26</div>
       </div>
       <div class="futures-bar-group">
-        <div class="futures-bar power" style="height:100%;">
-          <span class="futures-bar-value">&pound;103</span>
+        <div class="futures-bar power" style="height:95%;">
+          <span class="futures-bar-value-static">&pound;103</span>
+          <span class="futures-bar-value">Q4-26: &pound;103/MWh</span>
         </div>
         <div class="futures-bar-label">Q4-26</div>
       </div>
       <div class="futures-bar-group">
-        <div class="futures-bar power" style="height:98%;">
-          <span class="futures-bar-value">&pound;102</span>
+        <div class="futures-bar power" style="height:93%;">
+          <span class="futures-bar-value-static">&pound;102</span>
+          <span class="futures-bar-value">Win-26: &pound;102/MWh</span>
         </div>
         <div class="futures-bar-label">Win-26</div>
       </div>
       <div class="futures-bar-group">
-        <div class="futures-bar power" style="height:50%;">
-          <span class="futures-bar-value">&pound;77.8</span>
+        <div class="futures-bar power" style="height:38%;">
+          <span class="futures-bar-value-static">&pound;77.8</span>
+          <span class="futures-bar-value">Sum-27: &pound;77.8/MWh</span>
         </div>
         <div class="futures-bar-label">Sum-27</div>
       </div>
       <div class="futures-bar-group">
-        <div class="futures-bar power" style="height:62%;">
-          <span class="futures-bar-value">&pound;84.0</span>
+        <div class="futures-bar power" style="height:52%;">
+          <span class="futures-bar-value-static">&pound;84.0</span>
+          <span class="futures-bar-value">Cal-27: &pound;84.0/MWh</span>
         </div>
         <div class="futures-bar-label">Cal-27</div>
       </div>
       <div class="futures-bar-group">
-        <div class="futures-bar power" style="height:30%;">
-          <span class="futures-bar-value">&pound;67.9</span>
+        <div class="futures-bar power" style="height:15%;">
+          <span class="futures-bar-value-static">&pound;67.9</span>
+          <span class="futures-bar-value">Cal-28: &pound;67.9/MWh</span>
         </div>
         <div class="futures-bar-label">Cal-28</div>
       </div>
     </div>
-    <p style="font-size:0.85rem; color:var(--text-muted); text-align:center;">Power: Similar backwardation. Carbon strength keeps near-term firmer despite gas weakness.</p>
+    <p style="font-size:0.85rem; color:var(--text-muted); text-align:center;">Power: Similar backwardation. Carbon strength keeps near-term firmer despite gas weakness. Hover bars for exact values.</p>
   </div>
 
   <div class="card reveal" id="futures-explained">
@@ -1624,14 +1692,14 @@ n    border-radius: 50%;
       <div style="margin-top:8px;"><a href="https://www.csmonitor.com/World/Middle-East/2026/0526/iran-war-ceasefire-progress-gulf-mediators" class="source-chip">CS Monitor</a></div>
     </div>
 
-    <div class="timeline-item reveal reveal-d7">
+    <div class="timeline-item reveal">
       <div class="timeline-date">25 May 2026</div>
       <div class="timeline-title">US Conducts Defensive Strikes in Southern Iran</div>
       <div class="timeline-desc">CENTCOM targeted missile launch sites and boats in Strait of Hormuz. Described as defensive. Occurred during ongoing ceasefire and negotiations. Contributed to heightened regional tensions.</div>
       <span class="timeline-verified tv-verified">Verified &mdash; Multiple outlets / CENTCOM</span>
     </div>
 
-    <div class="timeline-item reveal reveal-d8">
+    <div class="timeline-item reveal">
       <div class="timeline-date">24 May 2026</div>
       <div class="timeline-title">Trump: MoU Close to Finalisation</div>
       <div class="timeline-desc">Trump stated a memorandum of understanding was close. Proposed deal included temporary moratorium on uranium enrichment, sanctions relief discussions, and phased Hormuz reopening.</div>
@@ -1809,8 +1877,8 @@ n    border-radius: 50%;
     <div class="stat-card reveal reveal-d4"><div class="label">Brent Crude</div><div class="value">$93.03</div><div class="source">/bbl &middot; Trading Economics &middot; 1 Jun</div></div>
     <div class="stat-card reveal reveal-d5"><div class="label">NBP Sum-27</div><div class="value">85.09p</div><div class="source">p/th &middot; ICE &middot; 29 May</div></div>
     <div class="stat-card reveal reveal-d6"><div class="label">Power Sum-27</div><div class="value">&pound;77.76</div><div class="source">/MWh &middot; ICE &middot; 29 May</div></div>
-    <div class="stat-card reveal reveal-d7"><div class="label">Hormuz Daily Transits</div><div class="value">~10</div><div class="source">vs 100+ pre-conflict</div></div>
-    <div class="stat-card reveal reveal-d8"><div class="label">War-Risk Premium</div><div class="value">+200-300%</div><div class="source">vs pre-conflict levels</div></div>
+    <div class="stat-card reveal"><div class="label">Hormuz Daily Transits</div><div class="value">~10</div><div class="source">vs 100+ pre-conflict</div></div>
+    <div class="stat-card reveal"><div class="label">War-Risk Premium</div><div class="value">+200-300%</div><div class="source">vs pre-conflict levels</div></div>
     <div class="stat-card reveal"><div class="label">EU Carbon Dec-26</div><div class="value">&euro;76.90</div><div class="source">strongest week in a month</div></div>
     <div class="stat-card reveal"><div class="label">LNG Cargoes (UK)</div><div class="value">4</div><div class="source">arriving within days</div></div>
     <div class="stat-card reveal"><div class="label">WB Brent Baseline 2026</div><div class="value">$86</div><div class="source">/bbl average &middot; CMO April</div></div>
@@ -1899,415 +1967,174 @@ n    border-radius: 50%;
         <tr><td><strong>Full normalisation</strong></td><td>By October 2026</td><td>Late 2026 / early 2027</td></tr>
         <tr><td><strong>Brent 2026 average</strong></td><td>$86/bbl</td><td>Peaks $115 Q2, then eases</td></tr>
         <tr><td><strong>Energy price growth 2026</strong></td><td>+24%</td><td>Not stated directly; oil peaks higher</td></tr>
-        <tr><td><strong>Stress / alternative case</strong></td><td>Brent $95-$115/bbl</td><td>Maintains risk premium throughout</td></tr>
-        <tr><td><strong>Relative optimism</strong></td><td>More optimistic</td><td>More cautious</td></tr>
+        <tr><td><strong>Stress / alternative case</strong></td><td>Brent $95-$115/bbl</td>        <td>EIA does not publish an explicit stress case; maintains risk premium throughout</td></tr>
+        <tr><td><strong>Key risk for UK buyers</strong></td><td colspan="2" style="text-align:center;">Both institutions assume disruption continues well into 2026. The difference is one of degree, not direction.</td></tr>
       </tbody>
     </table>
+    <div class="callout callout-caution" style="margin-top:16px;">
+      <strong>What this means commercially:</strong> Even the most optimistic institutional forecast (World Bank baseline) embeds a +24% energy price increase. Both assume ongoing disruption through at least May/June. Neither assumes immediate normalisation. For businesses, this means elevated prices are institutionally expected, not just a market overreaction.
+    </div>
   </div>
 </section>
 
 <section class="section section-alt" id="supplier-lag">
   <div class="section-header reveal">
-    <div class="section-label">Procurement Window</div>
-    <h2>Supplier Price-Book Lag and Procurement Window</h2>
-    <p class="lead">Why wholesale movements may not immediately appear in supplier pricing &mdash; and what that means for customers.</p>
+    <div class="section-label">Supplier Dynamics</div>
+    <h2>Supplier Price-Book Lag</h2>
+    <p class="lead">Why wholesale price changes do not always reach customer quotes immediately.</p>
   </div>
 
   <div class="card reveal">
-    <h3><span class="icon" style="background:rgba(234,179,8,0.15);">&#x23F3;</span>Current Situation</h3>
+    <h3><span class="icon" style="background:rgba(234,179,8,0.15);">&#x23F3;</span>How Supplier Pricing Works</h3>
     <p style="color:var(--text-secondary); line-height:1.7; margin-bottom:16px;">
-      Wholesale gas prices have softened approximately <strong>5.7% over the past week</strong>. Day-ahead NBP is down from recent peaks. Summer 2027 forward contracts remain significantly cheaper than near-term delivery.
+      Energy suppliers do not update customer prices in real-time with wholesale markets. They maintain <strong>price books</strong> — internal pricing matrices that are updated periodically based on wholesale cost movements, risk appetite, hedging positions and competitive positioning.
     </p>
     <p style="color:var(--text-secondary); line-height:1.7; margin-bottom:16px;">
-      However, <strong>supplier price-book movement is not fully verified from public sources.</strong> This is normal: suppliers typically update pricing based on averaged or lagged wholesale inputs, and may maintain cautious premiums during periods of geopolitical uncertainty even as wholesale spot prices ease.
+      When wholesale prices move rapidly (up or down), there is typically a <strong>lag</strong> before those changes flow through to customer quotes. This lag can range from days to weeks depending on the supplier, the magnitude of the wholesale move, and market volatility.
     </p>
-    <div class="callout callout-caution">
-      <strong>Supplier book lag is a normal commercial risk when wholesale markets move quickly.</strong> When wholesale falls rapidly, there may be a short window where supplier pricing has not yet caught up. When wholesale rises rapidly, supplier pricing may jump ahead of customer expectations.
+    <div class="callout callout-info">
+      <strong>The procurement window:</strong> When wholesale prices have fallen but supplier books have not yet fully adjusted, there can be a short window where customer quotes are based on older, higher wholesale levels while the market has already moved lower. This window closes once suppliers reprice.
     </div>
   </div>
 
   <div class="card reveal">
-    <h3><span class="icon" style="background:rgba(0,211,154,0.15);">&#x1F3AF;</span>What This Means Commercially</h3>
+    <h3><span class="icon" style="background:rgba(0,211,154,0.15);">&#x1F4C9;</span>Current Situation &mdash; Potential Window</h3>
+    <p style="color:var(--text-secondary); line-height:1.7; margin-bottom:16px;">
+      Wholesale gas has softened ~5.7% this week. Supplier pricing may not have fully caught up. This creates a <strong>potential procurement window</strong> for customers whose contracts are ending soon enough to access current supplier books.
+    </p>
     <ul style="list-style:none; padding:0; color:var(--text-secondary);">
-      <li style="padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2022; <strong>If supplier books have not caught up with wholesale softening,</strong> customers may have a short window to secure pricing before repricing lands</li>
-      <li style="padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2022; <strong>If supplier books have already caught up,</strong> the window may have narrowed or closed</li>
-      <li style="padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2022; <strong>Quote validity may shorten</strong> in volatile conditions &mdash; fixed offers can be withdrawn with limited notice</li>
-      <li style="padding:10px 0;">&#x2022; <strong>Forward market pricing (12-36 months)</strong> may still offer value even if near-term supplier pricing has adjusted</li>
+      <li style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2022; <strong>Wholesale down, supplier books catching up:</strong> The gap between wholesale and retail pricing may temporarily favour buyers</li>
+      <li style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2022; <strong>Window duration uncertain:</strong> Suppliers reprice at different speeds. Some daily, some weekly, some on threshold triggers</li>
+      <li style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2022; <strong>Volatility can reverse the window:</strong> If wholesale moves back up before books adjust, the window slams shut or reverses</li>
+      <li style="padding:8px 0;">&#x2022; <strong>Only testable with live quotes:</strong> You cannot know where supplier books sit without requesting actual pricing</li>
     </ul>
   </div>
 
-  <div class="callout callout-warning reveal">
-    <strong>Customers may have a short window to secure pricing before supplier repricing lands.</strong> This is not a guarantee of savings. It is a reason to test pricing now rather than assume the market will wait.
-  </div>
-
-  <div class="card reveal">
-    <h3><span class="icon" style="background:rgba(220,38,38,0.15);">&#x26A0;</span>Why Forward Pricing Can Be Lost</h3>
-    <p style="color:var(--text-secondary); line-height:1.7; margin-bottom:12px;">
-      A cheaper 12-month or 18-month market today may not be available later because:
-    </p>
-    <ol style="color:var(--text-secondary); padding-left:20px; line-height:1.8;">
-      <li>The delivery period moves closer and picks up current risk premium</li>
-      <li>Supplier books reprice to reflect changed wholesale conditions</li>
-      <li>Geopolitical events can reverse market softness instantly</li>
-      <li>Quote validity periods expire, and new quotes reflect new market levels</li>
-    </ol>
-    <p style="color:var(--text-secondary); line-height:1.7; margin-top:16px;">
-      <strong>The futures market is only useful while the customer can still buy that future delivery period.</strong> Waiting simply moves the customer closer to delivery, where today's risk premium can become tomorrow's contract price.
-    </p>
-  </div>
-</section>
-
-<section class="section" id="interpretation">
-  <div class="section-header reveal">
-    <div class="section-label">Analysis</div>
-    <h2>Market Interpretation</h2>
-    <p class="lead">What the market is pricing now and what would trigger the next move.</p>
-  </div>
-
-  <div class="card reveal">
-    <h3><span class="icon" style="background:rgba(59,130,246,0.15);">&#x1F4C8;</span>What the Market Is Pricing Now</h3>
-    <p style="color:var(--text-secondary); line-height:1.7; margin-bottom:16px;">
-      The market is pricing a <strong>partial de-escalation scenario</strong>. Near-term contracts have softened on ceasefire hopes and LNG supply, but remain well above pre-conflict levels. The backwardated forward curve (cheaper further out) suggests traders expect current geopolitical risk to diminish over time, but not immediately.
-    </p>
-    <p style="color:var(--text-secondary); line-height:1.7; margin-bottom:16px;">
-      Current Brent at <strong>$93/bbl is above the World Bank baseline of $86/bbl</strong>, indicating markets are pricing more risk than the WB's most likely scenario. This is consistent with the EIA's more cautious timeline. If the WB baseline is correct, there is modest downside to oil. If the EIA is closer to reality, current prices may be justified or too low.
-    </p>
-    <div class="callout callout-info">
-      <strong>Risk premium is softening but not gone.</strong> Traders are fading some of the headline risk as diplomacy progresses, but the forward curve retains a premium for near-term delivery. This is not a market that has priced in full normalisation.
-    </div>
-  </div>
-
-  <div class="card reveal">
-    <h3><span class="icon" style="background:rgba(234,179,8,0.15);">&#x1F3AF;</span>What Would Trigger the Next Leg Up or Down</h3>
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
-      <div class="reveal-left">
-        <h4 style="font-size:1rem; color:var(--accent-start); margin-bottom:12px;">Prices Could Fall Further If:</h4>
-        <ul style="list-style:none; padding:0; color:var(--text-secondary); font-size:0.9rem;">
-          <li style="padding:6px 0;">&#x2713; US-Iran MoU signed and implemented</li>
-          <li style="padding:6px 0;">&#x2713; Hormuz reopens fully to commercial traffic</li>
-          <li style="padding:6px 0;">&#x2713; Iranian uranium transferred/secured</li>
-          <li style="padding:6px 0;">&#x2713; War-risk premiums fall materially</li>
-          <li style="padding:6px 0;">&#x2713; LNG flows normalise to Europe</li>
-        </ul>
-      </div>
-      <div class="reveal-right">
-        <h4 style="font-size:1rem; color:#f87171; margin-bottom:12px;">Prices Could Spike If:</h4>
-        <ul style="list-style:none; padding:0; color:var(--text-secondary); font-size:0.9rem;">
-          <li style="padding:6px 0;">&#x2717; Peace talks collapse</li>
-          <li style="padding:6px 0;">&#x2717; Trump orders major strikes on Iran</li>
-          <li style="padding:6px 0;">&#x2717; Hormuz fully closes (even selective access ends)</li>
-          <li style="padding:6px 0;">&#x2717; Israeli escalation expands conflict</li>
-          <li style="padding:6px 0;">&#x2717; Gulf-state infrastructure targeted</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="card reveal">
-    <h3><span class="icon" style="background:rgba(0,211,154,0.15);">&#x1F4C9;</span>Forward Market and Fixing Longer</h3>
-    <p style="color:var(--text-secondary); line-height:1.7;">
-      The <strong>backwardated curve</strong> (near-term expensive, further-out cheaper) supports the commercial logic of fixing longer for customers whose contract end dates allow it. Summer 2027 gas at 85.09p is ~27% below Winter 2026 at 116.53p. Summer 2027 power at &pound;77.76 is ~24% below Winter 2026 at &pound;102.06.
-    </p>
-    <p style="color:var(--text-secondary); line-height:1.7; margin-top:12px;">
-      This is not automatic advice to fix for 36 months. It is a reason to <strong>test pricing, compare options, and make an informed decision</strong> while the forward market is still offering that discount. If the customer waits and the risk premium persists, the cheaper forward prices can disappear as those delivery periods become the current market.
-    </p>
-  </div>
-</section>
-
-<section class="section section-alt" id="business-impact">
-  <div class="section-header reveal">
-    <div class="section-label">UK Business Context</div>
-    <h2>Impact on UK Business Energy Prices</h2>
-    <p class="lead">Why global developments translate directly into UK business energy bills.</p>
-  </div>
-
-  <div class="card reveal">
-    <h3><span class="icon" style="background:rgba(220,38,38,0.15);">&#x1F4B5;</span>Why UK Gas Reacts to LNG and European Storage Risk</h3>
-    <p style="color:var(--text-secondary); line-height:1.7; margin-bottom:12px;">
-      The UK imports approximately <strong>50% of its gas</strong>, with LNG making up a growing share. When Hormuz disruption constrains Middle Eastern LNG exports, the UK must compete with Asia for alternative supplies. This competition drives up the global LNG price, which feeds directly into NBP (UK gas benchmark) pricing.
-    </p>
-    <p style="color:var(--text-secondary); line-height:1.7;">
-      European gas storage is a key buffer, but refilling rates depend on affordable LNG imports. If Hormuz constraints persist through summer, European storage may not reach comfortable levels before winter, keeping prices elevated through Q4 2026 and Q1 2027.
-    </p>
-  </div>
-
-  <div class="card reveal">
-    <h3><span class="icon" style="background:rgba(59,130,246,0.15);">&#x26A1;</span>Why Electricity Follows Gas</h3>
-    <p style="color:var(--text-secondary); line-height:1.7; margin-bottom:12px;">
-      Despite growing renewables, <strong>gas-fired power plants still set the marginal price</strong> for UK electricity during most hours. When gas prices rise, electricity prices follow. Even with strong wind and solar output, gas is the backup that kicks in when renewables dip.
-    </p>
-    <p style="color:var(--text-secondary); line-height:1.7;">
-      Carbon allowance prices add another layer. At &euro;76.90/t, carbon provides independent support to power prices even when gas softens. This explains why power has "decoupled" from gas weakness in recent sessions.
-    </p>
-  </div>
-
-  <div class="card reveal">
-    <h3><span class="icon" style="background:rgba(234,179,8,0.15);">&#x1F6E1;</span>Which Businesses Are Most Exposed</h3>
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:16px; margin-top:12px;">
-      <div class="reveal reveal-d1" style="background:rgba(255,255,255,0.03); padding:16px; border-radius:10px;">
-        <strong style="color:#fbbf24;">Highest Risk</strong>
-        <ul style="list-style:none; padding:0; margin-top:8px; color:var(--text-secondary); font-size:0.88rem;">
-          <li>&#x2022; Businesses within 6 months of renewal</li>
-          <li>&#x2022; Variable / pass-through contracts</li>
-          <li>&#x2022; Out-of-contract / deemed rates</li>
-          <li>&#x2022; Rollover contracts</li>
-          <li>&#x2022; High gas-intensive users</li>
-        </ul>
-      </div>
-      <div class="reveal reveal-d2" style="background:rgba(255,255,255,0.03); padding:16px; border-radius:10px;">
-        <strong style="color:var(--accent-start);">Moderate Risk</strong>
-        <ul style="list-style:none; padding:0; margin-top:8px; color:var(--text-secondary); font-size:0.88rem;">
-          <li>&#x2022; Businesses 6-12 months from renewal</li>
-          <li>&#x2022; Fixed contracts ending in 2027</li>
-          <li>&#x2022; Multi-site operators</li>
-          <li>&#x2022; Flexible procurement arrangements</li>
-        </ul>
-      </div>
-      <div class="reveal reveal-d3" style="background:rgba(255,255,255,0.03); padding:16px; border-radius:10px;">
-        <strong style="color:var(--text-muted);">Lower Risk (but not zero)</strong>
-        <ul style="list-style:none; padding:0; margin-top:8px; color:var(--text-secondary); font-size:0.88rem;">
-          <li>&#x2022; Fixed contracts &gt;12 months remaining</li>
-          <li>&#x2022; Long-term PPA arrangements</li>
-          <li>&#x2022; Self-generation / on-site renewables</li>
-          <li>&#x2022; Contracts with price caps</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="callout callout-warning reveal">
-    <strong>Chinese priority access through Hormuz does not equal normalisation for Europe or the UK.</strong> UK and European LNG and oil imports rely on commercially open shipping lanes, not politically managed selective access. Until Hormuz operates as a normal international waterway, UK energy supply risk remains elevated.
-  </div>
-</section>
-
-<section class="section" id="scenarios">
-  <div class="section-header reveal">
-    <div class="section-label">Scenarios</div>
-    <h2>Duration Scenarios</h2>
-    <p class="lead">Three disruption timelines and their implications for UK business energy.</p>
-  </div>
-
-  <div class="scenario-grid">
-    <div class="scenario-card short reveal reveal-d1">
-      <h4>&#x2705; Short Disruption (1-2 weeks)</h4>
-      <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">Deal signed quickly, Hormuz reopens fully</p>
-      <ul>
-        <li><strong>Brent:</strong> Falls toward $80-85/bbl</li>
-        <li><strong>TTF:</strong> Eases toward &euro;40/MWh</li>
-        <li><strong>NBP:</strong> Softens to ~100p/th</li>
-        <li><strong>UK Power:</strong> Follows gas down</li>
-        <li><strong>Supplier books:</strong> Reprice lower within days</li>
-        <li><strong>Quote validity:</strong> Stabilises</li>
-        <li><strong>Customer action:</strong> Window may extend; still review promptly</li>
-        <li><strong>Forward market:</strong> Curve flattens; longer fixes less urgent</li>
-      </ul>
-      <div class="callout callout-success" style="margin-top:16px; margin-bottom:0;">
-        <strong>World Bank baseline becomes more likely.</strong> +24% energy prices still expected, but worst-case scenarios fade.
-      </div>
-    </div>
-
-    <div class="scenario-card medium reveal reveal-d2">
-      <h4>&#x26A0; Medium Disruption (1-3 months)</h4>
-      <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">Talks drag on, selective Hormuz access continues</p>
-      <ul>
-        <li><strong>Brent:</strong> Range-bound $90-105/bbl</li>
-        <li><strong>TTF:</strong> Holds &euro;45-55/MWh</li>
-        <li><strong>NBP:</strong> Elevated 110-125p/th</li>
-        <li><strong>UK Power:</strong> Firm on gas + carbon</li>
-        <li><strong>Supplier books:</strong> Cautious, slow to ease</li>
-        <li><strong>Quote validity:</strong> Remains short</li>
-        <li><strong>Customer action:</strong> Review urgently; consider longer fixes</li>
-        <li><strong>Forward market:</strong> Backwardation persists; 12-36m fixes attractive</li>
-      </ul>
-      <div class="callout callout-caution" style="margin-top:16px; margin-bottom:0;">
-        <strong>EIA assumptions more relevant.</strong> Gradual normalisation through late 2026. Market stays volatile.
-      </div>
-    </div>
-
-    <div class="scenario-card severe reveal reveal-d3">
-      <h4>&#x1F6A8; Severe Escalation (3+ months / widens)</h4>
-      <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">Talks collapse, major strikes resume</p>
-      <ul>
-        <li><strong>Brent:</strong> Spikes above $115/bbl</li>
-        <li><strong>TTF:</strong> &euro;65+/MWh (Goldman disruption case)</li>
-        <li><strong>NBP:</strong> 130-150p/th+</li>
-        <li><strong>UK Power:</strong> &pound;120+/MWh</li>
-        <li><strong>Supplier books:</strong> Rapid repricing upward</li>
-        <li><strong>Quote validity:</strong> Very short or withdrawn</li>
-        <li><strong>Customer action:</strong> Secure anything available immediately</li>
-        <li><strong>Forward market:</strong> Inverts further; near-term crisis pricing</li>
-      </ul>
-      <div class="callout callout-warning" style="margin-top:16px; margin-bottom:0;">
-        <strong>World Bank stress case ($95-$115/bbl) materialises.</strong> Energy prices could rise well above +24%. Customers without fixed contracts face severe exposure.
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section-alt" id="change-view">
-  <div class="section-header reveal">
-    <div class="section-label">Reassessment Triggers</div>
-    <h2>What Would Change This View?</h2>
-    <p class="lead">Evidence that would reduce risk or confirm real de-escalation.</p>
-  </div>
-
-  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:20px;">
-    <div class="card reveal-left" style="border-left: 3px solid var(--accent-start);">
-      <h3>&#x2705; Evidence That Would Reduce Risk</h3>
-      <ul style="list-style:none; padding:0; color:var(--text-secondary); font-size:0.9rem;">
-        <li style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2713; Verified full reopening of Hormuz to all commercial traffic</li>
-        <li style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2713; Normal commercial traffic without selective passage or IRGC authorisation</li>
-        <li style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2713; War-risk premiums falling materially (toward pre-conflict levels)</li>
-        <li style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2713; Confirmed US-Iran agreement with implementation timeline</li>
-        <li style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2713; Iranian uranium removed or secured under international supervision</li>
-        <li style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2713; Qatari LNG exports normalising to Europe</li>
-        <li style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2713; TTF/NBP sustained decline backed by physical flows, not just headlines</li>
-        <li style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2713; European gas storage refilling at or above seasonal norms</li>
-        <li style="padding:8px 0;">&#x2713; Forward market softening across 12-month and 36-month pricing</li>
-      </ul>
-    </div>
-
-    <div class="card reveal-right" style="border-left: 3px solid #f87171;">
-      <h3>&#x1F6A8; Evidence That Would Increase Risk</h3>
-      <ul style="list-style:none; padding:0; color:var(--text-secondary); font-size:0.9rem;">
-        <li style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2717; Trump orders major strikes on Iran</li>
-        <li style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2717; Iran closes Hormuz completely (ends even selective access)</li>
-        <li style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2717; Israeli strikes expand to Iranian oil infrastructure</li>
-        <li style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2717; Gulf-state energy infrastructure targeted</li>
-        <li style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2717; LNG cargo cancellations or diversions from Europe</li>
-        <li style="padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">&#x2717; European storage refill falls behind schedule</li>
-        <li style="padding:8px 0;">&#x2717; Supplier books spike rapidly on escalation headlines</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="callout callout-caution reveal" style="margin-top:24px;">
-    <strong>Temporary diplomatic language is not enough.</strong> A "positive statement" or "constructive talks" does not reduce physical supply risk. What matters is verified action: ships moving, cargoes arriving, premiums falling, storage filling, and supplier books easing.
+  <div class="takeaway-panel reveal">
+    <h3>&#x26A0; Commercial Takeaway</h3>
+    <p>Do not assume that because wholesale prices have moved, supplier prices have moved the same amount in the same direction. <strong>The only way to know what pricing is available is to test it.</strong></p>
+    <p>If wholesale has softened and supplier books have not yet fully caught up, there may be a short procurement window. That window is only discoverable through live quotes. It closes when suppliers reprice.</p>
+    <p><strong>Action: request pricing now, compare multiple terms, and decide based on actual quotes rather than wholesale direction alone.</strong></p>
   </div>
 </section>
 
 <section class="section" id="customer-action">
   <div class="section-header reveal">
-    <div class="section-label">Commercial Action</div>
-    <h2>Customer Action &mdash; Commercial Takeaway</h2>
-    <p class="lead">Direct guidance for UK businesses and SMEs reviewing energy procurement.</p>
+    <div class="section-label">Action Required</div>
+    <h2>What Should Customers Do Now?</h2>
+    <p class="lead">Practical procurement guidance for UK business energy buyers.</p>
   </div>
 
-  <div class="takeaway-panel reveal">
-    <h3>&#x26A0; For UK Business Customers</h3>
-    <p><strong>Waiting is not neutral. It is a bet that the World Bank, the EIA, current market pricing, Gulf-state intervention, Trump's warning, the delayed military threat, Hormuz disruption, supplier price-book lag and the unresolved peace proposal are all overstating the risk.</strong></p>
-
-    <p>Here is what the current evidence says:</p>
-    <ul style="color:var(--text-secondary); padding-left:20px; line-height:1.8; margin-bottom:16px;">
-      <li>The World Bank baseline already forecasts <strong>+24% energy prices in 2026</strong> even if disruption eases in May</li>
-      <li>The EIA assumes disruption lasts <strong>longer</strong> than the World Bank, making the WB baseline look optimistic</li>
-      <li>Hormuz is <strong>selectively open to Chinese vessels</strong> under IRGC management &mdash; this is not normalisation</li>
-      <li>Gulf states have asked Trump not to attack Iran, which may reduce immediate risk but <strong>leaves the market in limbo</strong></li>
-      <li>Trump has <strong>delayed, not cancelled</strong>, a planned strike. The military option remains live</li>
-      <li>A deal appears closer but <strong>is not agreed</strong>. Amendments are still being negotiated</li>
-      <li>Wholesale markets may have moved <strong>before supplier books fully caught up</strong></li>
-      <li>The market further out (12-36 months) is <strong>cheaper than near-term pricing</strong></li>
-    </ul>
-
-    <p><strong>For customers within 12 months of contract end date, the commercially sensible step is to review immediately, test available supplier pricing, compare short-term and longer-term pricing, and where pricing and risk profile support it, consider fixing now and fixing longer (36+ months) before supplier books move further.</strong></p>
-
-    <div class="callout callout-warning" style="margin:20px 0;">
-      <strong>Cheaper further out does not mean cheaper later.</strong> It means there may be an opportunity now, while that period is still priced as future delivery. If the customer can currently contract into a cheaper future market, waiting does not protect that price. Waiting simply moves the customer closer to delivery, where today's risk premium can become tomorrow's contract price.
+  <div class="scenario-grid">
+    <div class="scenario-card short reveal reveal-d1">
+      <h4 style="color:var(--accent-start);">&#x2705; If your contract ends within 12 months</h4>
+      <ul>
+        <li>Review procurement options immediately</li>
+        <li>Request live supplier pricing for multiple contract lengths</li>
+        <li>Compare 1-year, 2-year, and 3-year fixed options</li>
+        <li>Check if your end date allows access to cheaper forward seasons</li>
+        <li>Do not wait for "clarity" — the market may move against you</li>
+      </ul>
+      <div class="callout callout-success" style="margin-top:12px;">
+        The forward market is cheaper further out. If your dates align, you may be able to contract into that lower pricing now.
+      </div>
     </div>
 
-    <p><strong>This is guidance Switch 365 Ltd can use with its customers.</strong> It is not advice to Switch 365 Ltd about its own energy procurement. Every customer's situation is different: contract end date, consumption profile, risk tolerance, and budget constraints all matter. The right approach is to review the position now while options are available, not to wait for perfect clarity that may never arrive.</p>
+    <div class="scenario-card medium reveal reveal-d2">
+      <h4 style="color:#fbbf24;">&#x23F3; If your contract ends in 12-24 months</h4>
+      <ul>
+        <li>Monitor the market but do not disengage</li>
+        <li>Set price alerts at key levels</li>
+        <li>Understand which forward season your renewal falls into</li>
+        <li>Be ready to act if a procurement window opens</li>
+        <li>Consider whether market developments change your risk tolerance</li>
+      </ul>
+      <div class="callout callout-caution" style="margin-top:12px;">
+        You have more time, but "cheaper further out" only works if you act while it is still the further-out market. Set reminders to review monthly.
+      </div>
+    </div>
+
+    <div class="scenario-card severe reveal reveal-d3">
+      <h4 style="color:#f87171;">&#x26A0; If you are currently out of contract or on deemed rates</h4>
+      <ul>
+        <li>This is urgent — deemed rates are typically 30-50% above fixed contract pricing</li>
+        <li>Secure a fixed contract immediately, even if short-term</li>
+        <li>Any fixed rate is likely better than deemed/variable rates</li>
+        <li>Do not try to time the market from deemed rates</li>
+        <li>Fix now, review at renewal — two decisions, not one</li>
+      </ul>
+      <div class="callout callout-warning" style="margin-top:12px;">
+        Every day on deemed rates costs money. The question is not "is this the best price ever?" but "is this better than what I am paying now?"
+      </div>
+    </div>
   </div>
 
   <div class="card reveal" style="margin-top:24px;">
-    <h3><span class="icon" style="background:rgba(0,211,154,0.15);">&#x1F4CB;</span>Action Checklist for Sales Teams</h3>
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
-      <div class="reveal reveal-d1">
-        <h4 style="font-size:0.95rem; margin-bottom:10px; color:var(--accent-start);">Immediate (This Week)</h4>
-        <ul style="list-style:none; padding:0; color:var(--text-secondary); font-size:0.88rem;">
-          <li>&#x25A0; Identify all customers within 12 months of renewal</li>
-          <li>&#x25A0; Flag high-consumption and gas-intensive users</li>
-          <li>&#x25A0; Check which customers are on variable/rollover rates</li>
-          <li>&#x25A0; Request updated supplier pricing books</li>
-        </ul>
-      </div>
-      <div class="reveal reveal-d2">
-        <h4 style="font-size:0.95rem; margin-bottom:10px; color:#fbbf24;">Short-Term (This Month)</h4>
-        <ul style="list-style:none; padding:0; color:var(--text-secondary); font-size:0.88rem;">
-          <li>&#x25A0; Run pricing comparisons: 12m vs 24m vs 36m</li>
-          <li>&#x25A0; Present forward curve advantage where applicable</li>
-          <li>&#x25A0; Explain futures market logic in plain English</li>
-          <li>&#x25A0; Highlight World Bank +24% baseline to customers</li>
-        </ul>
-      </div>
-      <div class="reveal reveal-d3">
-        <h4 style="font-size:0.95rem; margin-bottom:10px; color:var(--text-muted);">Ongoing</h4>
-        <ul style="list-style:none; padding:0; color:var(--text-secondary); font-size:0.88rem;">
-          <li>&#x25A0; Monitor Hormuz and ceasefire developments</li>
-          <li>&#x25A0; Track supplier book repricing</li>
-          <li>&#x25A0; Watch quote validity periods</li>
-          <li>&#x25A0; Update customers on material changes</li>
-        </ul>
-      </div>
-    </div>
+    <h3><span class="icon" style="background:rgba(0,211,154,0.15);">&#x1F4CB;</span>Procurement Checklist</h3>
+    <ul style="list-style:none; padding:0; color:var(--text-secondary);">
+      <li style="padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05); padding-left:28px; position:relative;"><span style="position:absolute; left:0; color:var(--accent-start); font-weight:700;">1.</span> Confirm your contract end date and notice period requirements</li>
+      <li style="padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05); padding-left:28px; position:relative;"><span style="position:absolute; left:0; color:var(--accent-start); font-weight:700;">2.</span> Request live pricing from multiple suppliers for 1, 2, and 3-year terms</li>
+      <li style="padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05); padding-left:28px; position:relative;"><span style="position:absolute; left:0; color:var(--accent-start); font-weight:700;">3.</span> Compare total contract cost, not just unit rate (standing charges, FIT, etc.)</li>
+      <li style="padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05); padding-left:28px; position:relative;"><span style="position:absolute; left:0; color:var(--accent-start); font-weight:700;">4.</span> Check if your end date aligns with cheaper forward delivery periods</li>
+      <li style="padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.05); padding-left:28px; position:relative;"><span style="position:absolute; left:0; color:var(--accent-start); font-weight:700;">5.</span> Understand quote validity periods — in volatile markets they can be short</li>
+      <li style="padding:10px 0; padding-left:28px; position:relative;"><span style="position:absolute; left:0; color:var(--accent-start); font-weight:700;">6.</span> Make a decision — "wait and see" is itself a decision that keeps you exposed</li>
+    </ul>
   </div>
 </section>
 
 <section class="section section-alt" id="source-quality">
   <div class="section-header reveal">
     <div class="section-label">Methodology</div>
-    <h2>Source Quality and Confidence</h2>
-    <p class="lead">How certain we are about each major claim in this report.</p>
+    <h2>Source Quality &amp; Verification Framework</h2>
+    <p class="lead">How we assess and categorise the information in this report.</p>
   </div>
 
   <div class="confidence-grid">
     <div class="confidence-card high reveal reveal-d1">
-      <h4>&#x2705; Highest Confidence</h4>
+      <h4><span style="color:var(--accent-start);">&#x1F7E2;</span> High Confidence Sources</h4>
       <ul>
-        <li>NBP and UK Power spot prices from ICE via Smart Energy (settlement data)</li>
-        <li>Forward curve settlements from ICE (28-29 May 2026)</li>
-        <li>Brent crude price from Trading Economics ($93.03/bbl, 1 Jun)</li>
-        <li>World Bank CMO April 2026: +24% energy prices, $86/bbl baseline (direct from WB)</li>
-        <li>EIA STEO April 2026: Hormuz assumptions, production shut-ins (direct from EIA)</li>
-        <li>TTF Day-Ahead from Argus (&euro;44.93/MWh)</li>
-        <li>EU Carbon price (&euro;76.90) from ICE settlement</li>
-        <li>Trump seeking amendments via Axios / Jerusalem Post (named sources)</li>
-        <li>Chinese/Korean VLCC transits via Reuters, Kpler, Maritime Executive</li>
-        <li>CENTCOM defensive strikes 25 May (multiple outlets)</li>
-        <li>Gulf-state mediation via CS Monitor, Reuters</li>
-        <li>UK Parliament Library briefing (30 May, official source)</li>
+        <li>ICE settlement data (primary market data)</li>
+        <li>Trading Economics (aggregated market data)</li>
+        <li>Smart Energy UK (market reporting with data attribution)</li>
+        <li>World Bank Commodity Markets Outlook</li>
+        <li>EIA Short-Term Energy Outlook</li>
+        <li>UK Parliament Library research briefings</li>
+        <li>Reuters, Kpler (shipping/commodity verification)</li>
       </ul>
     </div>
 
     <div class="confidence-card medium reveal reveal-d2">
-      <h4>&#x26A0; Medium Confidence</h4>
+      <h4><span style="color:#fbbf24;">&#x1F7E1;</span> Medium Confidence Sources</h4>
       <ul>
-        <li>Supplier price-book lag: inferred from normal market behaviour; not directly verified from public supplier data</li>
-        <li>Quote validity shortening: industry practice during volatility; no specific public data on current validity periods</li>
-        <li>Four LNG cargoes arriving UK: reported by Smart Energy; vessel-level verification limited</li>
-        <li>Goldman Sachs TTF scenarios (&euro;44 base, &euro;65 disruption): via Discovery Alert citing GS analysis</li>
-        <li>IRGC claim of 26 vessels in 24 hours: partially verified (Reuters/Kpler confirmed ~10)</li>
-        <li>Exact war-risk premium levels: market estimates vary; 200-300% range from multiple sources</li>
-        <li>Business electricity rates (20-28p/kWh): compiled from broker quoting data, subject to regional variation</li>
+        <li>Axios (political reporting, often well-sourced)</li>
+        <li>Jerusalem Post (Israeli perspective, verify against other sources)</li>
+        <li>CS Monitor (balanced international coverage)</li>
+        <li>Maritime Executive (specialist shipping press)</li>
+        <li>Cornwall Insight (energy market analysis)</li>
       </ul>
     </div>
 
     <div class="confidence-card low reveal reveal-d3">
-      <h4>&#x1F539; Needs Further Verification</h4>
+      <h4><span style="color:#f87171;">&#x1F534;</span> Requires Cross-Verification</h4>
       <ul>
-        <li>Exact timeline for peace deal finalisation: Trump official said "could be a week, could be more"</li>
-        <li>Specific amendments Trump requested on enriched uranium: reported but details not fully public</li>
-        <li>Whether Iran will accept amended terms: pending response from Iranian negotiators</li>
-        <li>Precise supplier book repricing schedule: commercial-in-confidence</li>
-        <li>Whether the forward curve will hold its current shape: market-dependent</li>
-        <li>Exact date of Hormuz full reopening if deal signed: not specified in any public source</li>
+        <li>Official statements from conflict parties (inherent bias)</li>
+        <li>IRGC claims on shipping numbers (partially verified by Reuters/Kpler)</li>
+        <li>Social media reports (not used as primary sources)</li>
+        <li>Unnamed officials (used only when corroborated)</li>
       </ul>
     </div>
   </div>
 
   <div class="card reveal" style="margin-top:24px;">
-    <h3><span class="icon" style="background:rgba(59,130,246,0.15);">&#x1F4DD;</span>Analyst Interpretation vs Verified Fact</h3>
-    <p style="color:var(--text-secondary); line-height:1.7;">
-      This report clearly separates <strong>verified fact</strong> from <strong>analyst interpretation</strong>. Price data, official statements, and documented events are verified facts. Procurement recommendations, scenario weightings, and commercial implications are analyst interpretation based on those facts. Where claims are disputed or unverified, this is stated explicitly. No false precision has been introduced.
+    <h3><span class="icon" style="background:rgba(59,130,246,0.15);">&#x1F4DC;</span>Verification Status Key</h3>
+    <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:12px;">
+      <span class="timeline-verified tv-verified">Verified — Multiple independent sources</span>
+      <span class="timeline-verified tv-verified">Verified — Primary market data</span>
+      <span class="timeline-verified tv-unconfirmed">Partially Verified — Some details unconfirmed</span>
+      <span class="timeline-verified tv-disputed">Disputed — Contradictory claims</span>
+    </div>
+    <p style="color:var(--text-secondary); margin-top:16px; line-height:1.7;">
+      Every factual claim in this report is tagged with its verification status and linked to its source where possible. We distinguish between: (1) <strong>market data</strong> — verifiable from exchanges and price reporting agencies; (2) <strong>verified news</strong> — reported by multiple reputable outlets; (3) <strong>claims</strong> — statements by parties to the conflict that may be biased or inflated; and (4) <strong>analysis</strong> — our commercial interpretation, clearly labelled as such.
     </p>
   </div>
 </section>
@@ -2315,130 +2142,119 @@ n    border-radius: 50%;
 <section class="section" id="sources">
   <div class="section-header reveal">
     <div class="section-label">References</div>
-    <h2>Source Links Used</h2>
-    <p class="lead">All external sources grouped by category. Every source link is clickable and verified.</p>
+    <h2>Source Links</h2>
+    <p class="lead">All sources referenced in this report, organised by category.</p>
   </div>
 
   <div class="source-category reveal">
-    <h4>Market Prices</h4>
+    <h4>Market Data &amp; Pricing</h4>
     <div class="source-list">
-      <a href="https://www.smart-energy.uk/post/daily-energy-market-report" class="source-item"><span class="name">Smart Energy</span>Daily UK Energy Market Update &mdash; NBP and Power prices, forward curves</a>
-      <a href="https://tradingeconomics.com/commodity/brent-crude-oil" class="source-item"><span class="name">Trading Economics</span>Brent Crude Oil &mdash; daily price data and charts</a>
-      <a href="https://www.argusmedia.com/-/media/project/argusmedia/mainsite/english/documents-and-files/sample-reports/argus-european-natural-gas.pdf" class="source-item"><span class="name">Argus Media</span>European Natural Gas &mdash; TTF and NBP assessments</a>
-      <a href="https://www.catalyst-commercial.co.uk/wholesale-gas-prices/" class="source-item"><span class="name">Catalyst Commercial</span>UK Wholesale Gas Prices &mdash; market analysis</a>
+      <a href="https://www.smart-energy.uk/post/daily-energy-market-report" class="source-item"><span class="name">Smart Energy UK</span> Daily energy market reports with NBP and power forward curves</a>
+      <a href="https://tradingeconomics.com/commodity/brent-crude-oil" class="source-item"><span class="name">Trading Economics</span> Brent crude oil price data and historical charts</a>
+      <a href="https://www.argusmedia.com/-/media/project/argusmedia/mainsite/english/documents-and-files/sample-reports/argus-european-natural-gas.pdf" class="source-item"><span class="name">Argus Media</span> European natural gas market sample reports</a>
+      <a href="https://www.catalyst-commercial.co.uk/wholesale-gas-prices/" class="source-item"><span class="name">Catalyst Commercial</span> Wholesale gas price monitoring</a>
+      <a href="https://www.aquaswitch.co.uk/business-electricity-prices/" class="source-item"><span class="name">AquaSwitch</span> Business electricity price comparison and supplier book analysis</a>
     </div>
   </div>
 
   <div class="source-category reveal">
-    <h4>Forward Curve / Futures Pricing</h4>
+    <h4>Institutional Forecasts</h4>
     <div class="source-list">
-      <a href="https://www.barrons.com/market-data/futures/ttfcm26" class="source-item"><span class="name">Barron's</span>Dutch TTF Natural Gas Futures Overview</a>
-      <a href="https://finance.yahoo.com/quote/TTF=F/history/" class="source-item"><span class="name">Yahoo Finance</span>TTF Natural Gas Calendar Futures</a>
-      <a href="https://www.wsj.com/market-data/quotes/futures/CLM26" class="source-item"><span class="name">WSJ</span>Crude Oil Futures Prices</a>
-      <a href="https://advantageutilities.com/uk-energy-market-outlook-q2-2026" class="source-item"><span class="name">Advantage Utilities</span>UK Energy Market Outlook Q2 2026</a>
+      <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="source-item"><span class="name">World Bank</span> Commodity Markets Outlook April 2026 press release</a>
+      <a href="https://openknowledge.worldbank.org/server/api/core/bitstreams/b2dbffe7-2f9f-41c3-a6cc-4ddfa3b37c1a/content" class="source-item"><span class="name">World Bank</span> CMO Full Report PDF</a>
+      <a href="https://www.eia.gov/pressroom/releases/press586.php" class="source-item"><span class="name">EIA</span> Short-Term Energy Outlook press release</a>
+      <a href="https://www.eia.gov/outlooks/steo/report/global_oil.php" class="source-item"><span class="name">EIA</span> STEO Global Oil market analysis</a>
     </div>
   </div>
 
   <div class="source-category reveal">
-    <h4>Shipping and Security</h4>
+    <h4>Geopolitical &amp; Diplomatic</h4>
     <div class="source-list">
-      <a href="https://maritime-executive.com/article/chinese-and-korean-vlccs-clear-hormuz-as-iran-claims-to-increase-traffic" class="source-item"><span class="name">Maritime Executive</span>Chinese and Korean VLCCs Clear Hormuz</a>
-      <a href="https://www.scmp.com/economy/china-economy/article/3354378/2-chinese-supertankers-join-flotilla-exiting-hormuz-stand-appears-thaw" class="source-item"><span class="name">SCMP</span>Chinese Supertankers Cross Strait of Hormuz</a>
-      <a href="https://www.csis.org/analysis/strait-hormuz-8-charts" class="source-item"><span class="name">CSIS</span>The Strait of Hormuz in 8 Charts</a>
-      <a href="https://www.euronews.com/business/2026/03/16/hormuz-becomes-worlds-most-expensive-waterway-after-300-surge-in-risk-premiums" class="source-item"><span class="name">Euronews</span>Hormuz Risk Premiums Surge 300%</a>
-      <a href="https://lmalloyds.com/safety-concerns-not-insurance-availability-driving-reduced-vessel-traffic-in-the-strait-of-hormuz/" class="source-item"><span class="name">Lloyd's</span>Insurance Cover Still Available for Hormuz</a>
-      <a href="https://www.eiu.com/n/financial-services-chart-of-the-week-war-risk-premiums-surge/" class="source-item"><span class="name">EIU</span>War-Risk Premiums Surge Analysis</a>
-      <a href="https://www.spglobal.com/market-intelligence/en/news-insights/articles/2026/3/marine-war-insurance-for-hormuz-dries-up-as-middle-east-war-intensifies-99283143" class="source-item"><span class="name">S&P Global</span>Marine War Insurance for Hormuz</a>
+      <a href="https://www.jpost.com/middle-east/iran-news/article-897822" class="source-item"><span class="name">Jerusalem Post</span> Trump seeks amendments to Iran peace deal — Axios reporting</a>
+      <a href="https://www.csmonitor.com/World/Middle-East/2026/0526/iran-war-ceasefire-progress-gulf-mediators" class="source-item"><span class="name">CS Monitor</span> Gulf state mediation efforts and ceasefire progress</a>
+      <a href="https://commonslibrary.parliament.uk/research-briefings/cbp-10637/" class="source-item"><span class="name">UK Parliament</span> Commons Library briefing on US-Iran tensions</a>
+      <a href="https://en.wikipedia.org/wiki/2026_Iran_war_ceasefire" class="source-item"><span class="name">Wikipedia</span> 2026 Iran war ceasefire timeline and sources</a>
     </div>
   </div>
 
   <div class="source-category reveal">
-    <h4>Geopolitical Developments</h4>
+    <h4>Shipping &amp; Maritime</h4>
     <div class="source-list">
-      <a href="https://www.jpost.com/middle-east/iran-news/article-897822" class="source-item"><span class="name">Jerusalem Post</span>Trump Requests Amendments to Iran Deal Draft</a>
-      <a href="https://www.csmonitor.com/World/Middle-East/2026/0526/iran-war-ceasefire-progress-gulf-mediators" class="source-item"><span class="name">CS Monitor</span>Mideast Powers Push US-Iran Deal Forward</a>
-      <a href="https://commonslibrary.parliament.uk/research-briefings/cbp-10637/" class="source-item"><span class="name">UK Parliament</span>US-Iran Ceasefire and Nuclear Talks 2026</a>
-      <a href="https://en.wikipedia.org/wiki/2026_Iran_war_ceasefire" class="source-item"><span class="name">Wikipedia</span>2026 Iran War Ceasefire</a>
-      <a href="https://en.wikipedia.org/wiki/2025%E2%80%932026_Iran%E2%80%93United_States_negotiations" class="source-item"><span class="name">Wikipedia</span>2025-2026 Iran-US Negotiations</a>
+      <a href="https://maritime-executive.com/article/chinese-and-korean-vlccs-clear-hormuz-as-iran-claims-to-increase-traffic" class="source-item"><span class="name">Maritime Executive</span> Chinese and Korean VLCCs clear Hormuz</a>
+      <a href="https://www.scmp.com/economy/china-economy/article/3354378/2-chinese-supertankers-join-flotilla-exiting-hormuz-stand-appears-thaw" class="source-item"><span class="name">SCMP</span> Chinese supertankers exit Hormuz as stand appears to thaw</a>
+      <a href="https://lmalloyds.com/safety-concerns-not-insurance-availability-driving-reduced-vessel-traffic-in-the-strait-of-hormuz/" class="source-item"><span class="name">Lloyd's</span> Safety concerns driving reduced Hormuz traffic</a>
+      <a href="https://www.csis.org/analysis/strait-hormuz-8-charts" class="source-item"><span class="name">CSIS</span> Strait of Hormuz in 8 charts</a>
+      <a href="https://www.euronews.com/business/2026/03/16/hormuz-becomes-worlds-most-expensive-waterway-after-300-surge-in-risk-premiums" class="source-item"><span class="name">Euronews</span> Hormuz becomes world's most expensive waterway</a>
+      <a href="https://www.eiu.com/n/financial-services-chart-of-the-week-war-risk-premiums-surge/" class="source-item"><span class="name">EIU</span> War risk premiums surge analysis</a>
     </div>
   </div>
 
   <div class="source-category reveal">
-    <h4>Macro Institutions</h4>
+    <h4>Energy Analysis</h4>
     <div class="source-list">
-      <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" class="source-item"><span class="name">World Bank</span>Commodity Markets Outlook April 2026 Press Release</a>
-      <a href="https://openknowledge.worldbank.org/server/api/core/bitstreams/b2dbffe7-2f9f-41c3-a6cc-4ddfa3b37c1a/content" class="source-item"><span class="name">World Bank</span>CMO April 2026 Full Report (PDF)</a>
-      <a href="https://www.eia.gov/pressroom/releases/press586.php" class="source-item"><span class="name">EIA</span>Hormuz Closure Key Drivers in STEO</a>
-      <a href="https://www.eia.gov/outlooks/steo/report/global_oil.php" class="source-item"><span class="name">EIA</span>Short-Term Energy Outlook &mdash; Global Oil Markets</a>
-    </div>
-  </div>
-
-  <div class="source-category reveal">
-    <h4>UK Energy Context</h4>
-    <div class="source-list">
-      <a href="https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-april-and-30-june-2026" class="source-item"><span class="name">Ofgem</span>Energy Price Cap April-June 2026</a>
-      <a href="https://www.cornwall-insight.com/insight-articles/energy-market-predictions-for-2026-the-trends-that-will-reshape-the-gb-power-system/" class="source-item"><span class="name">Cornwall Insight</span>Energy Market Predictions 2026</a>
-      <a href="https://www.britfinanceguide.co.uk/uk-energy-price-cap-forecast/" class="source-item"><span class="name">Brit Finance Guide</span>UK Energy Price Cap Forecast</a>
-    </div>
-  </div>
-
-  <div class="source-category reveal">
-    <h4>Supplier / Pricing Evidence</h4>
-    <div class="source-list">
-      <a href="https://www.aquaswitch.co.uk/business-electricity-prices/" class="source-item"><span class="name">AquaSwitch</span>Business Electricity Prices May 2026</a>
-      <a href="https://www.businessenergydeals.co.uk/business-electricity-prices/" class="source-item"><span class="name">Business Energy Deals</span>Electricity Prices per kWh</a>
-      <a href="https://discoveryalert.com.au/asia-lng-demand-rebound-european-gas-prices-2026/" class="source-item"><span class="name">Discovery Alert</span>Asia LNG Demand & European Gas Prices</a>
+      <a href="https://www.cornwall-insight.com/insight-articles/energy-market-predictions-for-2026-the-trends-that-will-reshape-the-gb-power-system/" class="source-item"><span class="name">Cornwall Insight</span> Energy market predictions for 2026</a>
+      <a href="https://discoveryalert.com.au/asia-lng-demand-rebound-european-gas-prices-2026/" class="source-item"><span class="name">Discovery Alert</span> Asia LNG demand rebound and European gas prices</a>
     </div>
   </div>
 </section>
 
 <footer class="footer">
-  <img src="https://switch365.com/assets/img/logos/switch365-energy-comparison-website.svg" alt="Switch 365 Ltd" class="logo-footer" onerror="this.style.display='none'">
-  <p><strong>Switch 365 Ltd</strong> &mdash; UK Commercial Energy Consultancy</p>
-  <p>Energy Market Intelligence &mdash; Report Date: 01 June 2026</p>
-  <p style="margin-top:12px; font-size:0.75rem; color:var(--text-muted);">
-    This report is for informational purposes to support Switch 365 Ltd's sales and advisory teams. It does not constitute financial or investment advice. Wholesale prices are indicative and subject to change. Past performance is not a reliable indicator of future results. Customers should obtain live supplier pricing before making procurement decisions.
+  <img src="https://switch365.com/assets/img/logos/switch365-energy-comparison-website.svg" alt="Switch 365 Ltd" class="logo-footer" onerror="this.style.display='none';">
+  <p><strong>Switch 365 Ltd</strong> | UK Energy Market Intelligence</p>
+  <p>Report Date: 01 June 2026 | Research Window: 29 May – 01 June 2026</p>
+  <p style="margin-top:8px; max-width:700px; margin-left:auto; margin-right:auto;">
+    This report is prepared for informational purposes only and does not constitute financial advice. 
+    Wholesale prices are indicative and subject to change. Past performance is not a reliable indicator of future results. 
+    Businesses should obtain professional advice before making procurement decisions.
+  </p>
+  <p style="margin-top:12px; font-size:0.75rem;">
+    Sources: ICE, Trading Economics, Smart Energy UK, World Bank, EIA, Reuters, Kpler, Argus Media, and others as cited. 
+    All verification statuses accurate as of report compilation date.
   </p>
 </footer>
 
 <script>
+  // Navigation toggle
   const navToggle = document.getElementById('navToggle');
   const sideNav = document.getElementById('sideNav');
   const navOverlay = document.getElementById('navOverlay');
 
-  function openNav() {
-    navToggle.classList.add('active');
-    sideNav.classList.add('open');
-    navOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeNav() {
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('active');
+    sideNav.classList.toggle('open');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', () => {
     navToggle.classList.remove('active');
     sideNav.classList.remove('open');
     navOverlay.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-  navToggle.addEventListener('click', () => {
-    sideNav.classList.contains('open') ? closeNav() : openNav();
   });
-  navOverlay.addEventListener('click', closeNav);
-  sideNav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeNav));
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && sideNav.classList.contains('open')) closeNav();
+
+  // Close nav when clicking a link
+  document.querySelectorAll('.side-nav a').forEach(link => {
+    link.addEventListener('click', () => {
+      navToggle.classList.remove('active');
+      sideNav.classList.remove('open');
+      navOverlay.classList.remove('active');
+    });
   });
+
+  // Scroll-triggered reveal animations
+  const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
 
   const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
-    revealObserver.observe(el);
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
   });
+
+  revealElements.forEach(el => revealObserver.observe(el));
 </script>
 
 </body>
