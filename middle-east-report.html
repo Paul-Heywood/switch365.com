@@ -1264,6 +1264,17 @@ body {
 ::-webkit-scrollbar-track { background: var(--midnight-start); }
 ::-webkit-scrollbar-thumb { background: var(--accent-start); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent-end); }
+
+/* Cursor sparkle canvas */
+#sparkleCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  pointer-events: none;
+}
 </style>
 <base target="_blank">
 <base target="_blank">
@@ -1275,6 +1286,9 @@ body {
 <div class="orb orb-2"></div>
 <div class="orb orb-3"></div>
 <div class="orb orb-4"></div>
+
+<!-- Cursor sparkle trail canvas -->
+<canvas id="sparkleCanvas"></canvas>
 
 <!-- Navigation -->
 <button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation" id="navToggle">
@@ -3034,6 +3048,153 @@ document.addEventListener('DOMContentLoaded', function() {
     Report date: 05 June 2026 | Research window: 04/05/2026 &ndash; 05/06/2026
   </p>
 </footer>
+
+<script>
+// Cursor sparkle trail effect
+(function() {
+  const canvas = document.getElementById('sparkleCanvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let mouseX = -100, mouseY = -100;
+  let lastMouseX = -100, lastMouseY = -100;
+  let isMoving = false;
+  let moveTimeout;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Sparkle particle class
+  class Sparkle {
+    constructor(x, y) {
+      this.x = x + (Math.random() - 0.5) * 12;
+      this.y = y + (Math.random() - 0.5) * 12;
+      this.size = Math.random() * 3 + 1;
+      this.speedX = (Math.random() - 0.5) * 1.5;
+      this.speedY = (Math.random() - 0.5) * 1.5 - 0.5;
+      this.life = 1;
+      this.decay = Math.random() * 0.025 + 0.015;
+      // Green variations: mint, teal, bright green, emerald
+      const greens = [
+        [0, 211, 154],
+        [0, 255, 170],
+        [80, 255, 200],
+        [0, 200, 140],
+        [120, 255, 220],
+        [0, 180, 130]
+      ];
+      this.color = greens[Math.floor(Math.random() * greens.length)];
+      this.rotation = Math.random() * Math.PI * 2;
+      this.rotationSpeed = (Math.random() - 0.5) * 0.15;
+      this.star = Math.random() > 0.3; // 70% stars, 30% dots
+    }
+
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      this.speedY += 0.02; // slight gravity
+      this.size *= 0.97;
+      this.life -= this.decay;
+      this.rotation += this.rotationSpeed;
+    }
+
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation);
+      ctx.globalAlpha = this.life;
+
+      if (this.star) {
+        // Draw a 4-point star
+        const spikes = 4;
+        const outerRadius = this.size;
+        const innerRadius = this.size * 0.4;
+        ctx.beginPath();
+        for (let i = 0; i < spikes * 2; i++) {
+          const r = i % 2 === 0 ? outerRadius : innerRadius;
+          const angle = (i / (spikes * 2)) * Math.PI * 2 - Math.PI / 2;
+          const px = Math.cos(angle) * r;
+          const py = Math.sin(angle) * r;
+          if (i === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        ctx.fillStyle = 'rgb(' + this.color[0] + ',' + this.color[1] + ',' + this.color[2] + ')';
+        ctx.fill();
+        // Glow
+        ctx.shadowColor = 'rgb(' + this.color[0] + ',' + this.color[1] + ',' + this.color[2] + ')';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+      } else {
+        // Round sparkle dot
+        ctx.beginPath();
+        ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgb(' + this.color[0] + ',' + this.color[1] + ',' + this.color[2] + ')';
+        ctx.fill();
+        ctx.shadowColor = 'rgb(' + this.color[0] + ',' + this.color[1] + ',' + this.color[2] + ')';
+        ctx.shadowBlur = 10;
+        ctx.fill();
+      }
+
+      ctx.restore();
+    }
+  }
+
+  // Track mouse
+  document.addEventListener('mousemove', function(e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    isMoving = true;
+
+    // Spawn sparkles along the movement path for smooth trails
+    const dx = mouseX - lastMouseX;
+    const dy = mouseY - lastMouseY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const steps = Math.min(Math.floor(dist / 3), 8);
+
+    for (let i = 0; i < steps; i++) {
+      const t = i / steps;
+      const px = lastMouseX + dx * t;
+      const py = lastMouseY + dy * t;
+      particles.push(new Sparkle(px, py));
+    }
+
+    // Always spawn at least one at current position
+    particles.push(new Sparkle(mouseX, mouseY));
+
+    lastMouseX = mouseX;
+    lastMouseY = mouseY;
+
+    clearTimeout(moveTimeout);
+    moveTimeout = setTimeout(() => { isMoving = false; }, 100);
+  });
+
+  // Animation loop
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Update and draw particles
+    for (let i = particles.length - 1; i >= 0; i--) {
+      particles[i].update();
+      particles[i].draw();
+      if (particles[i].life <= 0) {
+        particles.splice(i, 1);
+      }
+    }
+
+    // Limit particle count for performance
+    if (particles.length > 300) {
+      particles = particles.slice(-250);
+    }
+
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+</script>
 
 </body>
 </html>
