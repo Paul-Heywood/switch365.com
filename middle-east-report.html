@@ -3,1018 +3,1311 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Switch 365 Ltd | Middle East Energy Risk Update | 08/06/2026</title>
+<title>Switch 365 Energy Market Intelligence | 8 June 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
-  :root {
-    --midnight-start: #262262;
-    --midnight-end: #26227f;
-    --accent-start: #00d39a;
-    --accent-end: #dd40ff;
-    --primary-text: #ffffff;
-    --secondary-text: #dadada;
-    --card-bg: rgba(20, 20, 60, 0.65);
-    --card-border: rgba(255, 255, 255, 0.12);
-    --warning-gold: #f0b429;
-    --risk-high: #e74c3c;
-    --risk-medium: #f39c12;
-    --risk-low: #27ae60;
-  }
+:root {
+  --bg-midnight: linear-gradient(135deg, #262262 0%, #26227f 100%);
+  --bg-midnight-solid: #262262;
+  --bg-midnight-light: #26227f;
+  --accent-gradient: linear-gradient(135deg, #00d39a 0%, #dd40ff 100%);
+  --accent-teal: #00d39a;
+  --accent-purple: #dd40ff;
+  --text-white: #ffffff;
+  --text-offwhite: #dadada;
+  --text-muted: #a0a0c0;
+  --card-bg: rgba(255,255,255,0.06);
+  --card-border: rgba(255,255,255,0.12);
+  --glass-bg: rgba(255,255,255,0.08);
+  --glass-border: rgba(255,255,255,0.15);
+  --risk-high: #ff4757;
+  --risk-medium: #ffa502;
+  --risk-low: #2ed573;
+  --gold: #ffd700;
+  --chart-grid: rgba(255,255,255,0.08);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:'Montserrat',sans-serif; background:var(--bg-midnight); color:var(--text-white); min-height:100vh; overflow-x:hidden; }
+a { color:var(--accent-teal); text-decoration:none; }
+a:hover { text-decoration:underline; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+/* ===== NAV SIDEBAR ===== */
+.nav-toggle { position:fixed; top:20px; left:20px; z-index:1001; width:44px; height:44px; border-radius:10px; background:var(--glass-bg); border:1px solid var(--glass-border); cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; backdrop-filter:blur(10px); transition:all .3s; }
+.nav-toggle span { display:block; width:22px; height:2px; background:var(--text-white); border-radius:1px; transition:all .3s; }
+.nav-toggle:hover { background:var(--accent-gradient); }
+.nav-sidebar { position:fixed; top:0; left:-300px; width:300px; height:100vh; background:rgba(18,16,48,0.98); border-right:1px solid var(--card-border); z-index:1000; overflow-y:auto; padding:80px 20px 40px; transition:left .4s ease; backdrop-filter:blur(20px); }
+.nav-sidebar.open { left:0; }
+.nav-sidebar h3 { font-size:12px; text-transform:uppercase; letter-spacing:2px; color:var(--text-muted); margin:24px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--card-border); }
+.nav-sidebar a { display:block; padding:10px 14px; color:var(--text-offwhite); font-size:13px; font-weight:500; border-radius:8px; margin-bottom:2px; transition:all .2s; }
+.nav-sidebar a:hover { background:var(--accent-gradient); color:#fff; text-decoration:none; }
+.nav-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:999; opacity:0; pointer-events:none; transition:opacity .3s; }
+.nav-overlay.open { opacity:1; pointer-events:all; }
 
-  body {
-    font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(135deg, var(--midnight-start) 0%, var(--midnight-end) 100%);
-    color: var(--primary-text);
-    line-height: 1.6;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+/* ===== HERO ===== */
+.hero { position:relative; padding:100px 24px 60px; text-align:center; overflow:hidden; }
+.hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%, rgba(0,211,154,0.12) 0%, transparent 60%); pointer-events:none; }
+.hero-logo { width:220px; margin:0 auto 24px; display:block; filter:brightness(0) invert(1); }
+.hero-badge { display:inline-flex; align-items:center; gap:8px; padding:8px 20px; border-radius:50px; background:rgba(255,71,87,0.15); border:1px solid rgba(255,71,87,0.3); color:var(--risk-high); font-size:13px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:24px; animation:pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(255,71,87,0.3);} 50%{box-shadow:0 0 0 10px rgba(255,71,87,0);} }
+.hero-badge-dot { width:8px; height:8px; background:var(--risk-high); border-radius:50%; }
+.hero h1 { font-size:clamp(28px,5vw,52px); font-weight:800; line-height:1.15; margin-bottom:16px; background:linear-gradient(135deg,#fff 0%,var(--accent-teal) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero-subtitle { font-size:clamp(15px,2vw,20px); color:var(--text-offwhite); max-width:800px; margin:0 auto 20px; font-weight:400; line-height:1.6; }
+.hero-meta { display:flex; flex-wrap:wrap; justify-content:center; gap:16px; margin-top:24px; }
+.hero-meta span { padding:6px 16px; border-radius:20px; background:var(--glass-bg); border:1px solid var(--glass-border); font-size:12px; color:var(--text-muted); }
+.hero-chips { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:20px; }
+.source-chip { display:inline-flex; padding:6px 14px; border-radius:20px; background:var(--glass-bg); border:1px solid var(--glass-border); font-size:11px; font-weight:600; color:var(--accent-teal); transition:all .2s; }
+.source-chip:hover { background:var(--accent-gradient); color:#fff; text-decoration:none; }
 
-  /* Navigation */
-  .nav-toggle {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1001;
-    width: 45px;
-    height: 45px;
-    background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-  }
-  .nav-toggle span { display: block; width: 22px; height: 2px; background: white; transition: all 0.3s ease; }
-  .nav-toggle:hover { transform: scale(1.05); }
+/* ===== SECTIONS ===== */
+.section { max-width:1200px; margin:0 auto; padding:48px 24px; }
+.section-title { font-size:clamp(22px,3vw,36px); font-weight:700; margin-bottom:8px; }
+.section-subtitle { color:var(--text-muted); font-size:15px; margin-bottom:32px; }
+.section-accent { width:60px; height:4px; border-radius:2px; background:var(--accent-gradient); margin-bottom:32px; }
 
-  .side-nav {
-    position: fixed;
-    top: 0;
-    left: -300px;
-    width: 280px;
-    height: 100vh;
-    background: rgba(15, 15, 45, 0.98);
-    backdrop-filter: blur(20px);
-    z-index: 1000;
-    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    padding: 80px 20px 20px;
-    overflow-y: auto;
-    border-right: 1px solid var(--card-border);
-  }
-  .side-nav.open { left: 0; }
-  .side-nav h3 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; color: var(--accent-start); }
-  .side-nav a { display: block; padding: 10px 15px; color: var(--secondary-text); text-decoration: none; font-size: 0.85rem; font-weight: 500; border-radius: 8px; transition: all 0.2s ease; margin-bottom: 4px; }
-  .side-nav a:hover { background: rgba(255, 255, 255, 0.08); color: var(--primary-text); }
+/* ===== CARDS ===== */
+.card { background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px; padding:28px; margin-bottom:20px; backdrop-filter:blur(10px); transition:all .3s; }
+.card:hover { border-color:var(--glass-border); transform:translateY(-2px); box-shadow:0 12px 40px rgba(0,0,0,0.2); }
+.card-header { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+.card-icon { width:44px; height:44px; border-radius:12px; background:var(--accent-gradient); display:flex; align-items:center; justify-content:center; font-size:20px; }
+.card-title { font-size:18px; font-weight:700; }
 
-  .nav-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-  }
-  .nav-overlay.open { opacity: 1; visibility: visible; }
+/* ===== GRID ===== */
+.grid-2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
+.grid-3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+.grid-4 { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; }
 
-  /* Hero */
-  .hero {
-    min-height: 85vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 100px 20px 60px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at center, rgba(231,76,60,0.08) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-logo { width: 220px; margin-bottom: 30px; filter: brightness(1.1); }
+/* ===== CONDITION CARDS ===== */
+.condition-card { background:var(--card-bg); border:1px solid var(--card-border); border-radius:16px; padding:24px; text-align:center; transition:all .3s; }
+.condition-card:hover { border-color:var(--accent-teal); transform:translateY(-3px); }
+.condition-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); margin-bottom:8px; }
+.condition-price { font-size:32px; font-weight:800; margin-bottom:4px; }
+.condition-unit { font-size:13px; color:var(--text-muted); margin-bottom:12px; }
+.condition-tag { display:inline-block; padding:6px 16px; border-radius:20px; font-size:12px; font-weight:700; margin-bottom:12px; }
+.tag-bullish { background:rgba(46,213,115,0.15); color:var(--risk-low); border:1px solid rgba(46,213,115,0.3); }
+.tag-bearish { background:rgba(255,71,87,0.15); color:var(--risk-high); border:1px solid rgba(255,71,87,0.3); }
+.tag-volatile { background:rgba(255,165,2,0.15); color:var(--risk-medium); border:1px solid rgba(255,165,2,0.3); }
+.tag-elevated { background:rgba(0,211,154,0.15); color:var(--accent-teal); border:1px solid rgba(0,211,154,0.3); }
+.condition-note { font-size:13px; color:var(--text-offwhite); line-height:1.5; }
 
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 20px;
-    background: linear-gradient(135deg, rgba(231,76,60,0.2), rgba(231,76,60,0.1));
-    border: 1px solid rgba(231,76,60,0.4);
-    border-radius: 50px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #ff6b6b;
-    margin-bottom: 25px;
-    animation: pulse-badge 2s ease-in-out infinite;
-  }
-  @keyframes pulse-badge {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(231,76,60,0.3); }
-    50% { box-shadow: 0 0 20px 5px rgba(231,76,60,0.1); }
-  }
+/* ===== WARNING CARDS ===== */
+.warning-card { background:rgba(255,71,87,0.06); border:1px solid rgba(255,71,87,0.2); border-radius:16px; padding:24px; position:relative; overflow:hidden; }
+.warning-card::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background:var(--risk-high); }
+.warning-number { font-size:48px; font-weight:900; color:rgba(255,71,87,0.2); position:absolute; top:8px; right:16px; line-height:1; }
+.warning-card h4 { font-size:16px; font-weight:700; margin-bottom:8px; color:var(--risk-high); }
+.warning-card p { font-size:13px; color:var(--text-offwhite); line-height:1.6; }
 
-  .hero h1 {
-    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
-    font-weight: 800;
-    line-height: 1.15;
-    max-width: 950px;
-    margin-bottom: 20px;
-    background: linear-gradient(135deg, #ffffff 0%, #dadada 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .hero-summary {
-    font-size: clamp(1rem, 1.8vw, 1.25rem);
-    color: var(--secondary-text);
-    max-width: 800px;
-    margin-bottom: 25px;
-    font-weight: 400;
-    line-height: 1.6;
-  }
-  .hero-meta {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 30px;
-    letter-spacing: 1px;
-  }
-  .hero-sources {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-  }
+/* ===== STAT CARDS ===== */
+.stat-card { background:var(--card-bg); border:1px solid var(--card-border); border-radius:14px; padding:22px; text-align:center; }
+.stat-value { font-size:28px; font-weight:800; background:var(--accent-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.stat-label { font-size:12px; color:var(--text-muted); margin-top:6px; font-weight:500; }
+.stat-date { font-size:11px; color:var(--text-muted); margin-top:4px; }
 
-  /* Container */
-  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+/* ===== TIMELINE ===== */
+.timeline { position:relative; padding-left:32px; }
+.timeline::before { content:''; position:absolute; left:8px; top:0; bottom:0; width:2px; background:var(--accent-gradient); }
+.timeline-item { position:relative; margin-bottom:28px; padding-left:20px; }
+.timeline-item::before { content:''; position:absolute; left:-28px; top:4px; width:14px; height:14px; border-radius:50%; background:var(--bg-midnight); border:3px solid var(--accent-teal); }
+.timeline-item.verified::before { border-color:var(--risk-low); background:var(--risk-low); }
+.timeline-item.disputed::before { border-color:var(--risk-medium); }
+.timeline-item.unconfirmed::before { border-color:var(--text-muted); }
+.timeline-date { font-size:13px; font-weight:700; color:var(--accent-teal); margin-bottom:6px; }
+.timeline-content { background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; padding:16px; }
+.timeline-content p { font-size:13px; color:var(--text-offwhite); line-height:1.6; margin-bottom:6px; }
+.timeline-label { display:inline-block; padding:3px 10px; border-radius:10px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-top:8px; }
+.label-verified { background:rgba(46,213,115,0.15); color:var(--risk-low); }
+.label-analyst { background:rgba(0,211,154,0.15); color:var(--accent-teal); }
+.label-unconfirmed { background:rgba(160,160,192,0.15); color:var(--text-muted); }
 
-  /* Section Headers */
-  .section-header { text-align: center; margin-bottom: 40px; padding-top: 40px; }
-  .section-label {
-    display: inline-block;
-    padding: 6px 18px;
-    background: linear-gradient(135deg, rgba(0,211,154,0.15), rgba(221,64,255,0.15));
-    border: 1px solid rgba(0,211,154,0.3);
-    border-radius: 50px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--accent-start);
-    margin-bottom: 15px;
-  }
-  .section-title { font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 700; margin-bottom: 10px; }
-  .section-subtitle { color: var(--secondary-text); font-size: 1rem; max-width: 600px; margin: 0 auto; }
+/* ===== TABLE ===== */
+.data-table { width:100%; border-collapse:collapse; font-size:13px; }
+.data-table th { text-align:left; padding:14px 16px; background:rgba(0,211,154,0.08); border-bottom:2px solid var(--accent-teal); font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:1px; color:var(--accent-teal); }
+.data-table td { padding:14px 16px; border-bottom:1px solid var(--card-border); color:var(--text-offwhite); }
+.data-table tr:hover td { background:rgba(255,255,255,0.03); }
+.data-table .price-cell { font-size:18px; font-weight:800; color:var(--text-white); }
 
-  /* Glass Cards */
-  .glass-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    padding: 30px;
-    margin-bottom: 25px;
-    transition: all 0.3s ease;
-  }
-  .glass-card:hover { border-color: rgba(255, 255, 255, 0.2); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); }
+/* ===== CALLOUT ===== */
+.callout { background:linear-gradient(135deg,rgba(0,211,154,0.08) 0%,rgba(221,64,255,0.08) 100%); border:1px solid var(--glass-border); border-radius:16px; padding:28px; position:relative; }
+.callout-icon { position:absolute; top:-16px; left:28px; width:32px; height:32px; border-radius:50%; background:var(--accent-gradient); display:flex; align-items:center; justify-content:center; font-size:16px; }
+.callout h4 { font-size:18px; font-weight:700; margin-bottom:12px; margin-top:8px; }
+.callout p { font-size:14px; color:var(--text-offwhite); line-height:1.7; margin-bottom:8px; }
 
-  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 25px; }
-  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+/* ===== CHART CONTAINER ===== */
+.chart-container { position:relative; height:320px; margin:20px 0; }
+.chart-container-sm { position:relative; height:240px; }
 
-  /* Condition Cards */
-  .condition-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    padding: 25px;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-  .condition-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-  .condition-card:hover::before { opacity: 1; }
-  .condition-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25); }
+/* ===== RHETORIC TRACKER ===== */
+.rhetoric-card { background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; padding:20px; margin-bottom:16px; }
+.rhetoric-header { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.rhetoric-actor { font-size:13px; font-weight:700; color:var(--accent-teal); }
+.rhetoric-date { font-size:11px; color:var(--text-muted); margin-left:auto; }
+.rhetoric-text { font-size:13px; color:var(--text-offwhite); font-style:italic; line-height:1.6; border-left:3px solid var(--accent-purple); padding-left:14px; }
+.rhetoric-assessment { font-size:12px; color:var(--text-muted); margin-top:10px; }
 
-  .condition-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-  .condition-name { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--secondary-text); }
-  .condition-badge {
-    padding: 3px 10px;
-    border-radius: 50px;
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-  .badge-escalating { background: rgba(231,76,60,0.2); color: #ff6b6b; border: 1px solid rgba(231,76,60,0.3); }
-  .badge-elevated { background: rgba(231,76,60,0.15); color: #ff6b6b; border: 1px solid rgba(231,76,60,0.25); }
-  .badge-volatile { background: rgba(243,156,18,0.2); color: #f39c12; border: 1px solid rgba(243,156,18,0.3); }
-  .badge-active { background: rgba(231,76,60,0.25); color: #ff6b6b; border: 1px solid rgba(231,76,60,0.4); }
+/* ===== SOURCE DIRECTORY ===== */
+.source-dir { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+.source-category h4 { font-size:14px; font-weight:700; color:var(--accent-teal); margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--card-border); }
+.source-item { display:block; padding:8px 0; font-size:12px; color:var(--text-offwhite); border-bottom:1px solid rgba(255,255,255,0.04); transition:all .2s; }
+.source-item:hover { color:var(--accent-teal); padding-left:8px; }
+.source-item small { display:block; color:var(--text-muted); font-size:11px; }
 
-  .condition-price { font-size: 2rem; font-weight: 800; margin-bottom: 6px; line-height: 1; }
-  .condition-unit { font-size: 0.85rem; color: var(--secondary-text); margin-bottom: 10px; }
-  .condition-meaning { font-size: 0.85rem; color: var(--secondary-text); line-height: 1.5; }
+/* ===== FOOTER ===== */
+.footer { text-align:center; padding:40px 24px; border-top:1px solid var(--card-border); margin-top:40px; }
+.footer p { font-size:12px; color:var(--text-muted); }
 
-  /* Source Chips */
-  .source-chip {
-    display: inline-flex;
-    align-items: center;
-    padding: 5px 14px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 50px;
-    color: var(--secondary-text);
-    font-size: 0.72rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .source-chip:hover { background: rgba(255,255,255,0.15); color: var(--primary-text); border-color: var(--accent-start); }
+/* ===== SCROLL TOP ===== */
+.scroll-top { position:fixed; bottom:24px; right:24px; width:44px; height:44px; border-radius:50%; background:var(--accent-gradient); border:none; color:#fff; font-size:20px; cursor:pointer; opacity:0; pointer-events:none; transition:all .3s; z-index:100; }
+.scroll-top.visible { opacity:1; pointer-events:all; }
 
-  /* Stats Grid */
-  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
-  .stat-box { background: var(--card-bg); backdrop-filter: blur(20px); border: 1px solid var(--card-border); border-radius: 12px; padding: 20px; text-align: center; }
-  .stat-value { font-size: 1.6rem; font-weight: 800; margin-bottom: 5px; background: linear-gradient(135deg, var(--accent-start), var(--accent-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .stat-label { font-size: 0.75rem; color: var(--secondary-text); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
-
-  /* Warning Cards */
-  .warning-card {
-    background: linear-gradient(135deg, rgba(231,76,60,0.1), rgba(243,156,18,0.05));
-    border: 1px solid rgba(231,76,60,0.25);
-    border-radius: 14px;
-    padding: 25px;
-    margin-bottom: 15px;
-  }
-  .warning-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-  .warning-num { width: 36px; height: 36px; background: linear-gradient(135deg, #e74c3c, #c0392b); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; flex-shrink: 0; }
-  .warning-title { font-weight: 700; font-size: 1.05rem; }
-  .warning-body { color: var(--secondary-text); font-size: 0.9rem; line-height: 1.6; padding-left: 48px; }
-
-  /* Tables */
-  .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-bottom: 20px; }
-  .data-table thead { background: linear-gradient(135deg, rgba(0,211,154,0.15), rgba(221,64,255,0.15)); }
-  .data-table th { padding: 14px 16px; text-align: left; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-start); border-bottom: 2px solid rgba(0,211,154,0.3); }
-  .data-table td { padding: 14px 16px; border-bottom: 1px solid var(--card-border); color: var(--secondary-text); }
-  .data-table tr:hover td { background: rgba(255,255,255,0.03); color: var(--primary-text); }
-  .data-table .price-cell { font-weight: 700; font-size: 1.05rem; color: var(--primary-text); }
-
-  /* Timeline */
-  .timeline { position: relative; padding-left: 40px; }
-  .timeline::before { content: ''; position: absolute; left: 15px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--accent-start), var(--accent-end)); }
-  .timeline-item { position: relative; margin-bottom: 30px; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 20px; }
-  .timeline-dot { position: absolute; left: -33px; top: 24px; width: 14px; height: 14px; background: linear-gradient(135deg, var(--accent-start), var(--accent-end)); border-radius: 50%; border: 3px solid var(--midnight-start); }
-  .timeline-date { font-size: 0.75rem; font-weight: 700; color: var(--accent-start); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
-  .timeline-event { font-weight: 700; font-size: 1rem; margin-bottom: 8px; }
-  .timeline-desc { color: var(--secondary-text); font-size: 0.85rem; line-height: 1.6; margin-bottom: 8px; }
-
-  /* Callout Boxes */
-  .callout { border-radius: 14px; padding: 25px; margin-bottom: 20px; }
-  .callout-danger { background: linear-gradient(135deg, rgba(231,76,60,0.12), rgba(231,76,60,0.05)); border: 1px solid rgba(231,76,60,0.25); }
-  .callout-warning { background: linear-gradient(135deg, rgba(243,156,18,0.12), rgba(243,156,18,0.05)); border: 1px solid rgba(243,156,18,0.25); }
-  .callout-info { background: linear-gradient(135deg, rgba(0,211,154,0.12), rgba(0,211,154,0.05)); border: 1px solid rgba(0,211,154,0.25); }
-  .callout-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
-  .callout p { color: var(--secondary-text); font-size: 0.9rem; line-height: 1.7; }
-
-  /* Scenario Cards */
-  .scenario-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; padding: 25px; margin-bottom: 18px; }
-  .scenario-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
-  .scenario-title { font-weight: 700; font-size: 1.1rem; }
-  .scenario-tag { padding: 4px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
-  .tag-contained { background: rgba(243,156,18,0.2); color: #f39c12; }
-  .tag-hormuz { background: rgba(231,76,60,0.2); color: #ff6b6b; }
-  .tag-regional { background: rgba(139,0,0,0.3); color: #ff4444; }
-
-  /* Footer */
-  .footer { text-align: center; padding: 50px 20px; border-top: 1px solid var(--card-border); margin-top: 40px; }
-  .footer-logo { width: 160px; margin-bottom: 15px; opacity: 0.7; }
-  .footer-text { font-size: 0.8rem; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
-
-  /* Gradient text */
-  .gradient-text { background: linear-gradient(135deg, var(--accent-start), var(--accent-end)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-
-  /* Section spacing */
-  section { padding-bottom: 30px; }
-
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 8px; }
-  ::-webkit-scrollbar-track { background: var(--midnight-start); }
-  ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--accent-start), var(--accent-end)); border-radius: 4px; }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .hero { min-height: 70vh; padding: 100px 15px 40px; }
-    .glass-card { padding: 20px; }
-    .condition-price { font-size: 1.6rem; }
-    .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    .timeline { padding-left: 30px; }
-    .timeline-dot { left: -26px; }
-    .warning-body { padding-left: 0; margin-top: 10px; }
-  }
-
-  /* Animations */
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .fade-in { animation: fadeInUp 0.6s ease forwards; }
-  .delay-1 { animation-delay: 0.1s; }
-  .delay-2 { animation-delay: 0.2s; }
-  .delay-3 { animation-delay: 0.3s; }
+/* ===== RESPONSIVE ===== */
+@media (max-width:768px) {
+  .hero { padding:90px 16px 40px; }
+  .section { padding:32px 16px; }
+  .grid-2,.grid-3,.grid-4 { grid-template-columns:1fr; }
+  .nav-sidebar { width:260px; left:-260px; }
+  .chart-container { height:260px; }
+}
 </style>
 <base target="_blank">
 </head>
 <body>
 
-<!-- Navigation Toggle -->
-<button class="nav-toggle" onclick="toggleNav()" aria-label="Toggle navigation">
+<!-- NAV TOGGLE -->
+<div class="nav-toggle" onclick="toggleNav()" id="navToggle">
   <span></span><span></span><span></span>
-</button>
+</div>
 <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
-<nav class="side-nav" id="sideNav">
-  <h3>Navigate</h3>
+
+<!-- NAV SIDEBAR -->
+<nav class="nav-sidebar" id="navSidebar">
+  <h3>Quick Navigation</h3>
   <a href="#summary" onclick="toggleNav()">Summary</a>
-  <a href="#escalation" onclick="toggleNav()">US-Iran Escalation</a>
-  <a href="#iran-israel" onclick="toggleNav()">Iran-Israel Escalation</a>
-  <a href="#energy-infrastructure" onclick="toggleNav()">Energy Infrastructure Risk</a>
-  <a href="#yemen" onclick="toggleNav()">Yemen / Red Sea</a>
+  <a href="#conditions" onclick="toggleNav()">Current Conditions</a>
+  <a href="#futures" onclick="toggleNav()">Market Further Out</a>
+  <a href="#procurement" onclick="toggleNav()">Procurement Window</a>
+  <a href="#drivers" onclick="toggleNav()">Market Drivers</a>
+  <a href="#images" onclick="toggleNav()">Visual Evidence</a>
+  <a href="#warnings" onclick="toggleNav()">Warning Signs</a>
+  <a href="#changed" onclick="toggleNav()">What Changed</a>
   <a href="#timeline" onclick="toggleNav()">Timeline</a>
-  <a href="#warning-signs" onclick="toggleNav()">Warning Signs</a>
-  <a href="#uk-impact" onclick="toggleNav()">UK Business Impact</a>
+  <a href="#rhetoric" onclick="toggleNav()">Rhetoric Tracker</a>
+  <a href="#ceasefire" onclick="toggleNav()">Ceasefire Reality</a>
+  <a href="#shipping" onclick="toggleNav()">Shipping Risk</a>
+  <a href="#stats" onclick="toggleNav()">Market Stats</a>
+  <a href="#institutions" onclick="toggleNav()">World Bank vs EIA</a>
+  <a href="#supplier-lag" onclick="toggleNav()">Supplier Lag</a>
+  <a href="#impact" onclick="toggleNav()">UK Business Impact</a>
   <a href="#scenarios" onclick="toggleNav()">Scenarios</a>
-  <a href="#commercial-takeaway" onclick="toggleNav()">Commercial Takeaway</a>
-  <a href="#sources" onclick="toggleNav()">Sources</a>
+  <a href="#action" onclick="toggleNav()">Customer Action</a>
+  <a href="#sources" onclick="toggleNav()">Source Links</a>
 </nav>
 
-<!-- ===== HERO SUMMARY ===== -->
-<section class="hero" id="summary">
-  <img src="https://switch365.com/assets/img/logos/switch365-energy-comparison-website.svg" alt="Switch 365 Ltd Logo" class="hero-logo">
-
-  <div class="hero-badge">
-    <span style="width:8px;height:8px;background:#ff6b6b;border-radius:50%;display:inline-block;"></span>
-    High and Rising
+<!-- HERO -->
+<header class="hero" id="summary">
+  <img src="https://switch365.com/assets/img/logos/switch365-energy-comparison-website.svg" alt="Switch 365 Ltd" class="hero-logo">
+  <div class="hero-badge"><span class="hero-badge-dot"></span>High Risk - Escalation Watch</div>
+  <h1>Middle East Energy Risk Update</h1>
+  <p class="hero-subtitle">US-Iran, Iran-Israel and Gulf Escalation, June 2026. Current pricing remains exposed to geopolitical and shipping risk, while the forward market may still offer better value further out where live supplier pricing supports it. Customers inside 12 months of renewal should review now, because waiting does not guarantee access to today's future prices later.</p>
+  <div class="hero-meta">
+    <span>Report: 08/06/2026</span>
+    <span>Research: 05/06 - 08/06/2026</span>
+    <span>UK English</span>
   </div>
-
-  <h1>Middle East Energy Risk Update<br>US-Iran, Iran-Israel and Gulf Escalation, June 2026</h1>
-
-  <p class="hero-summary">
-    The situation has moved from fragile diplomatic brinkmanship into live multi-front military escalation.
-    The key risk is no longer just that talks could fail. The key risk is that the US, Iran, Israel, Lebanon/Hezbollah,
-    Gulf states and shipping routes around the Strait of Hormuz are now being pulled into the same escalation chain.
-  </p>
-
-  <p class="hero-meta">Last Updated: Monday 8 June 2026 | Research Window: Friday 5 June to Monday 8 June 2026</p>
-
-  <div class="hero-sources">
-    <a href="https://www.dvidshub.net/news/567021/centcom-forces-defeat-missiles-drones-launched-iran" target="_blank" rel="noopener noreferrer" class="source-chip">CENTCOM</a>
-    <a href="https://www.thehindu.com/news/international/west-asia-conflict-iran-us-israel-war-beirut-strikes-strait-of-hormuz-live-updates-june-8-2026/article71074947.ece" target="_blank" rel="noopener noreferrer" class="source-chip">The Hindu</a>
-    <a href="https://www.washingtonpost.com/business/2026/06/07/iran-israel-strikes-missiles-trump-netanyahu-8-june-2026/8dc77cb4-62e7-11f1-bdd4-805ebb99a693_story.html" target="_blank" rel="noopener noreferrer" class="source-chip">Washington Post</a>
-    <a href="https://www.npr.org/2026/06/08/g-s1-126844/iran-war-updates" target="_blank" rel="noopener noreferrer" class="source-chip">NPR</a>
+  <div class="hero-chips">
+    <a href="https://www.centcom.mil/MEDIA/PUBLIC-RELEASES/Article/4510668/centcom-forces-defeat-missiles-drones-launched-by-iran/" target="_blank" rel="noopener noreferrer" class="source-chip">CENTCOM</a>
+    <a href="https://www.aljazeera.com/news/2026/6/6/us-intercepts-iranian-attacks-as-israel-continues-to-bomb-lebanon" target="_blank" rel="noopener noreferrer" class="source-chip">Al Jazeera</a>
+    <a href="https://www.theguardian.com/world/2026/jun/07/israel-escalates-war-hezbollah-airstrikes-beirut" target="_blank" rel="noopener noreferrer" class="source-chip">The Guardian</a>
+    <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" target="_blank" rel="noopener noreferrer" class="source-chip">World Bank</a>
   </div>
-</section>
+</header>
 
-<!-- ===== CURRENT CONDITIONS / ESCALATION OVERVIEW ===== -->
-<section id="escalation-overview">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">Situation Report</div>
-      <h2 class="section-title">Current Escalation Overview</h2>
-      <p class="section-subtitle">A fast-moving multi-front military escalation over 72 hours</p>
+<!-- UK WHOLESALE ENERGY UPDATE -->
+<section class="section" id="conditions">
+  <h2 class="section-title">UK Wholesale Energy Update</h2>
+  <p class="section-subtitle">Current Conditions, Futures Market &amp; Market Drivers</p>
+  <div class="section-accent"></div>
+
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--gold);">A. Current Market Conditions</h3>
+  <div class="grid-4">
+    <div class="condition-card">
+      <div class="condition-label">UK Day-Ahead Gas</div>
+      <div class="condition-price" style="color:var(--risk-high);">119.60</div>
+      <div class="condition-unit">p/therm</div>
+      <div class="condition-tag tag-volatile">Volatile</div>
+      <div class="condition-note">NBP spot elevated on geopolitical risk and supply uncertainty. <a href="https://www.smart-energy.uk/post/daily-energy-market-report" target="_blank" rel="noopener noreferrer">Smart Energy UK</a></div>
     </div>
-
-    <div class="card-grid">
-      <div class="condition-card">
-        <div class="condition-header">
-          <span class="condition-name">Brent Crude</span>
-          <span class="condition-badge badge-escalating">+2.5%</span>
-        </div>
-        <div class="condition-price">$95.42</div>
-        <div class="condition-unit">/bbl (Monday 8 June, early GMT)</div>
-        <div class="condition-meaning">Up $2.33/bbl as markets repriced weekend escalation. Reversed Friday's $1.94 loss on de-escalation hopes.</div>
-        <a href="https://www.thehindu.com/news/international/west-asia-conflict-iran-us-israel-war-beirut-strikes-strait-of-hormuz-live-updates-june-8-2026/article71074947.ece" target="_blank" rel="noopener noreferrer" class="source-chip">The Hindu</a>
-      </div>
-
-      <div class="condition-card">
-        <div class="condition-header">
-          <span class="condition-name">WTI Crude</span>
-          <span class="condition-badge badge-escalating">+2.3%</span>
-        </div>
-        <div class="condition-price">$92.64</div>
-        <div class="condition-unit">/bbl (Monday 8 June, early GMT)</div>
-        <div class="condition-meaning">Up $2.10/bbl. Both benchmarks erased Friday losses within hours of weekend military developments.</div>
-        <a href="https://www.thehindu.com/news/international/west-asia-conflict-iran-us-israel-war-beirut-strikes-strait-of-hormuz-live-updates-june-8-2026/article71074947.ece" target="_blank" rel="noopener noreferrer" class="source-chip">The Hindu</a>
-      </div>
-
-      <div class="condition-card">
-        <div class="condition-header">
-          <span class="condition-name">Strait of Hormuz</span>
-          <span class="condition-badge badge-active">Restricted</span>
-        </div>
-        <div class="condition-price" style="font-size:1.3rem;">~5% Normal Traffic</div>
-        <div class="condition-unit">Selective passage only</div>
-        <div class="condition-meaning">Iranian envoy says strait will reopen with transit fees. Not normalisation. ~20% of global oil normally transits here.</div>
-        <a href="https://www.thehindu.com/news/international/west-asia-conflict-iran-us-israel-war-beirut-strikes-strait-of-hormuz-live-updates-june-8-2026/article71074947.ece" target="_blank" rel="noopener noreferrer" class="source-chip">The Hindu</a>
-      </div>
-
-      <div class="condition-card">
-        <div class="condition-header">
-          <span class="condition-name">Ceasefire Status</span>
-          <span class="condition-badge badge-active">Broken</span>
-        </div>
-        <div class="condition-price" style="font-size:1.3rem;">Effectively Collapsed</div>
-        <div class="condition-unit">April 8 truce no longer holding</div>
-        <div class="condition-meaning">Monday 8 June marked 100 days since the war began. First direct Iran-Israel missile exchange since April ceasefire.</div>
-        <a href="https://www.npr.org/2026/06/08/g-s1-126844/iran-war-updates" target="_blank" rel="noopener noreferrer" class="source-chip">NPR</a>
-      </div>
+    <div class="condition-card">
+      <div class="condition-label">UK Day-Ahead Power</div>
+      <div class="condition-price" style="color:var(--risk-high);">£101.42</div>
+      <div class="condition-unit">/MWh</div>
+      <div class="condition-tag tag-volatile">Volatile</div>
+      <div class="condition-note">Gas-led generation keeps power exposed to wholesale gas movements. <a href="https://www.smart-energy.uk/post/daily-energy-market-report" target="_blank" rel="noopener noreferrer">Smart Energy UK</a></div>
+    </div>
+    <div class="condition-card">
+      <div class="condition-label">TTF Gas Benchmark</div>
+      <div class="condition-price" style="color:var(--risk-high);">€50.79</div>
+      <div class="condition-unit">/MWh</div>
+      <div class="condition-tag tag-bullish">Rising</div>
+      <div class="condition-note">+4.73% day-on-day. European gas reacting to Hormuz risk and LNG supply concerns. <a href="https://tradingeconomics.com/commodity/eu-natural-gas" target="_blank" rel="noopener noreferrer">Trading Economics</a></div>
+    </div>
+    <div class="condition-card">
+      <div class="condition-label">Brent Crude</div>
+      <div class="condition-price" style="color:var(--risk-high);">$97.37</div>
+      <div class="condition-unit">/barrel</div>
+      <div class="condition-tag tag-bullish">+4.60%</div>
+      <div class="condition-note">Rebounding on Iran-Israel direct exchange and energy infrastructure strike. <a href="https://tradingeconomics.com/commodity/brent-crude-oil" target="_blank" rel="noopener noreferrer">Trading Economics</a></div>
     </div>
   </div>
 </section>
 
-<!-- ===== 1. US-IRAN ESCALATION ===== -->
-<section id="escalation">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">Flashpoint 1</div>
-      <h2 class="section-title">US and Iran Escalation</h2>
-      <p class="section-subtitle">Drones, missiles and strikes in the Strait of Hormuz and Gulf region</p>
+
+<!-- B. MARKET FURTHER OUT -->
+<section class="section" id="futures" style="padding-top:0;">
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--gold);">B. Market Further Out - Futures Market Explained</h3>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon" style="font-size:22px;">&#128200;</div>
+      <div class="card-title">Is the Market Cheaper Further Out?</div>
     </div>
+    <div class="chart-container-sm">
+      <canvas id="forwardCurveChart"></canvas>
+    </div>
+    <p style="font-size:12px;color:var(--text-muted);margin-top:8px;text-align:center;">Forward pricing not fully verified from public sources. Use live supplier or broker pricing before making a customer recommendation.</p>
+  </div>
 
-    <div class="glass-card">
-      <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:15px;">What Happened</h3>
+  <div class="grid-2">
+    <div class="callout">
+      <div class="callout-icon">&#128161;</div>
+      <h4>What This Means</h4>
+      <p>The futures market is the market price for energy delivered in a future period. When the near-term market is expensive but the further-out market is cheaper, it usually means today's price contains more immediate risk.</p>
+      <p>For a customer whose contract starts 12 months from now, the relevant question is what the market is offering for their delivery period. If that future period is cheaper, the customer may be able to contract into that lower forward market now.</p>
+    </div>
+    <div class="callout">
+      <div class="callout-icon">&#9888;&#65039;</div>
+      <h4>Why Waiting Can Be Expensive</h4>
+      <p>Customers often assume that if the 12-month or 18-month market is cheaper today, they can wait and pick it up later. That is not how the market works.</p>
+      <p>If the customer waits, the delivery period moves closer, current risk gets built into the price, and supplier books can change. The cheaper forward market can become the expensive current market.</p>
+    </div>
+  </div>
 
-      <div style="display:grid;gap:15px;margin-bottom:20px;">
-        <div style="padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;border-left:4px solid var(--accent-start);">
-          <h4 style="font-weight:700;margin-bottom:6px;font-size:0.95rem;">Friday 5 June: Iranian Drones Toward Hormuz</h4>
-          <p style="color:var(--secondary-text);font-size:0.85rem;line-height:1.6;">Iran launched four one-way attack drones toward the Strait of Hormuz. The drones posed an immediate threat to regional maritime traffic. US Central Command forces intercepted and shot down all four drones before they could reach their targets.</p>
-        </div>
-
-        <div style="padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;border-left:4px solid var(--accent-start);">
-          <h4 style="font-weight:700;margin-bottom:6px;font-size:0.95rem;">US Response: Strikes on Goruk and Qeshm Island</h4>
-          <p style="color:var(--secondary-text);font-size:0.85rem;line-height:1.6;">Following the drone interception, US forces conducted self-defence strikes on Iranian coastal surveillance radar sites at <strong>Goruk</strong> and on <strong>Qeshm Island</strong>. These were targeting radars used to guide maritime attacks.</p>
-        </div>
-
-        <div style="padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;border-left:4px solid #e74c3c;">
-          <h4 style="font-weight:700;margin-bottom:6px;font-size:0.95rem;">Iran Retaliates: Seven Ballistic Missiles at Kuwait and Bahrain</h4>
-          <p style="color:var(--secondary-text);font-size:0.85rem;line-height:1.6;">Hours after the US strikes, Iran fired <strong>seven ballistic missiles</strong> toward <strong>Kuwait</strong> and <strong>Bahrain</strong> — both of which host US-linked military presence. CENTCOM reported that <strong>six missiles were intercepted</strong> and <strong>a seventh failed to reach its target</strong>. No US personnel were harmed. Iranian claims of damaging US 5th Fleet headquarters in Bahrain were denied as false.</p>
-        </div>
+  <div class="card" style="margin-top:20px;">
+    <h4 style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--accent-teal);">Commercial Message for Customers</h4>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
+      <div style="padding:16px;background:rgba(0,211,154,0.06);border-radius:12px;border-left:4px solid var(--accent-teal);">
+        <p style="font-size:14px;color:var(--text-offwhite);line-height:1.7;margin:0;"><strong style="color:#fff;">Cheaper further out does not mean cheaper later.</strong> The future market is only useful if you act while it is still future pricing.</p>
       </div>
-
-      <div class="callout callout-danger">
-        <div class="callout-title">Commercial Interpretation</div>
-        <p>This matters because the escalation is now directly linked to the <strong>Strait of Hormuz</strong>, <strong>Gulf military infrastructure</strong> and <strong>oil and gas shipping risk</strong>. When missiles are fired at countries that host US military bases and major oil export terminals, the risk premium in energy markets increases immediately — even before any physical supply is disrupted.</p>
+      <div style="padding:16px;background:rgba(221,64,255,0.06);border-radius:12px;border-left:4px solid var(--accent-purple);">
+        <p style="font-size:14px;color:var(--text-offwhite);line-height:1.7;margin:0;"><strong style="color:#fff;">Waiting means the customer stays exposed</strong> while today's future market becomes tomorrow's current market.</p>
       </div>
-
-      <div style="margin-top:15px;">
-        <a href="https://www.dvidshub.net/news/567021/centcom-forces-defeat-missiles-drones-launched-iran" target="_blank" rel="noopener noreferrer" class="source-chip">CENTCOM Official Release</a>
-        <a href="https://www.npr.org/2026/06/08/g-s1-126844/iran-war-updates" target="_blank" rel="noopener noreferrer" class="source-chip">NPR</a>
+      <div style="padding:16px;background:rgba(255,215,0,0.06);border-radius:12px;border-left:4px solid var(--gold);">
+        <p style="font-size:14px;color:var(--text-offwhite);line-height:1.7;margin:0;"><strong style="color:#fff;">This is not automatic advice to fix.</strong> It is a reason to review now and test live supplier pricing.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== 2. IRAN-ISRAEL ESCALATION ===== -->
-<section id="iran-israel">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">Flashpoint 2</div>
-      <h2 class="section-title">Iran and Israel Escalation</h2>
-      <p class="section-subtitle">Beirut strikes, ballistic missile exchange and direct military confrontation</p>
-    </div>
-
-    <div class="glass-card">
-      <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:15px;">What Happened</h3>
-
-      <div style="display:grid;gap:15px;margin-bottom:20px;">
-        <div style="padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;border-left:4px solid var(--warning-gold);">
-          <h4 style="font-weight:700;margin-bottom:6px;font-size:0.95rem;">Sunday 7 June: Israel Strikes Beirut's Southern Suburbs</h4>
-          <p style="color:var(--secondary-text);font-size:0.85rem;line-height:1.6;">Israel launched strikes on <strong>Beirut's southern suburbs</strong> (Dahiyeh district), targeting what it described as Hezbollah-linked infrastructure. The strike came despite Washington's request days earlier for Israel to stand down. Iran's military central command said the attack "crossed all red lines."</p>
-        </div>
-
-        <div style="padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;border-left:4px solid #e74c3c;">
-          <h4 style="font-weight:700;margin-bottom:6px;font-size:0.95rem;">Sunday 7 / Monday 8 June: Iran Launches ~10 Ballistic Missiles at Israel</h4>
-          <p style="color:var(--secondary-text);font-size:0.85rem;line-height:1.6;">Iran launched approximately <strong>10 ballistic missiles</strong> at Israel in three waves overnight — the first such bombardment since the April ceasefire. Iran's Revolutionary Guards said they targeted <strong>Nevatim and Tel Nof air bases</strong> as part of "Operation Nasr" (Victory). The operation was described as retaliation for Israel's Beirut strike. Israel said the missiles were intercepted or caused no major damage. Explosions were heard in central Israel as air defences operated. Sirens also sounded in Jordan.</p>
-        </div>
-
-        <div style="padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;border-left:4px solid #e74c3c;">
-          <h4 style="font-weight:700;margin-bottom:6px;font-size:0.95rem;">Monday 8 June: Israel Strikes Inside Iran</h4>
-          <p style="color:var(--secondary-text);font-size:0.85rem;line-height:1.6;">Israel launched strikes on <strong>central and western Iran</strong> early Monday morning. Explosions were reported in <strong>Tehran, Isfahan, Karaj and Tabriz</strong>. Iran closed airspace around Tehran's Imam Khomeini International Airport. Iran's Revolutionary Guards said Israel used air-launched ballistic missiles. This was the most serious crossfire since the April 8 ceasefire.</p>
-        </div>
+<!-- C. PROCUREMENT WINDOW -->
+<section class="section" id="procurement" style="padding-top:0;">
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--gold);">C. Procurement Window Check</h3>
+  <div class="card">
+    <div class="grid-2">
+      <div>
+        <table class="data-table">
+          <tr><th>Factor</th><th>Status</th></tr>
+          <tr><td>Wholesale movement</td><td><span style="color:var(--risk-high);font-weight:700;">Volatile</span> - exposed to escalation</td></tr>
+          <tr><td>Supplier books</td><td><span style="color:var(--risk-medium);font-weight:700;">May not have fully caught up</span></td></tr>
+          <tr><td>Quote validity</td><td><span style="color:var(--risk-high);font-weight:700;">Risk of shortening</span></td></tr>
+          <tr><td>Renewal urgency</td><td><span style="color:var(--risk-high);font-weight:700;">High</span> for customers inside 12 months</td></tr>
+          <tr><td>Best action</td><td><span style="color:var(--accent-teal);font-weight:700;">Review now</span> - test pricing, compare options</td></tr>
+        </table>
       </div>
-
-      <div class="callout callout-danger">
-        <div class="callout-title">Commercial Interpretation</div>
-        <p>This matters because <strong>Lebanon is now acting as the fuse</strong>. Iran is tying the Israel-Lebanon front into the wider Iran-US negotiation track. When Israel strikes Beirut and Iran responds with missiles at Israeli air bases, the conflict is no longer confined to diplomatic channels or the Strait of Hormuz. It becomes a direct military exchange between two powers with the capacity to disrupt regional energy flows.</p>
-      </div>
-
-      <div style="margin-top:15px;">
-        <a href="https://www.thehindu.com/news/international/west-asia-conflict-iran-us-israel-war-beirut-strikes-strait-of-hormuz-live-updates-june-8-2026/article71074947.ece" target="_blank" rel="noopener noreferrer" class="source-chip">The Hindu Live Updates</a>
-        <a href="https://www.npr.org/2026/06/08/g-s1-126844/iran-war-updates" target="_blank" rel="noopener noreferrer" class="source-chip">NPR</a>
-        <a href="https://www.washingtonpost.com/business/2026/06/07/iran-israel-strikes-missiles-trump-netanyahu-8-june-2026/8dc77cb4-62e7-11f1-bdd4-805ebb99a693_story.html" target="_blank" rel="noopener noreferrer" class="source-chip">Washington Post</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== 3. ENERGY INFRASTRUCTURE RISK ===== -->
-<section id="energy-infrastructure">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">Flashpoint 3</div>
-      <h2 class="section-title">Israel Strikes Iranian Energy Infrastructure</h2>
-      <p class="section-subtitle">The Mahshahr petrochemical complex and what it signals</p>
-    </div>
-
-    <div class="glass-card">
-      <div style="padding:20px;background:rgba(231,76,60,0.1);border-radius:14px;border:1px solid rgba(231,76,60,0.25);margin-bottom:20px;">
-        <h3 style="font-weight:700;margin-bottom:10px;color:#ff6b6b;">Monday 8 June: Israeli Air Force Strikes Mahshahr Petrochemical Complex</h3>
-        <p style="color:var(--secondary-text);font-size:0.9rem;line-height:1.7;">The Israeli military confirmed it struck <strong>several targets at the petrochemical complex in Mahshahr</strong> in southwestern Iran. Iranian media reported the Karoon Petrochemical Company was hit. This was the <strong>first Israeli strike on an Iranian energy-related site</strong> since the April ceasefire.</p>
-        <p style="color:var(--secondary-text);font-size:0.9rem;line-height:1.7;margin-top:10px;">Mahshahr is a major industrial and petrochemical hub in Khuzestan province, near the Persian Gulf coast. It sits close to Iran's key oil and gas export infrastructure.</p>
-      </div>
-
-      <div class="callout callout-danger">
-        <div class="callout-title">Why This Matters for Energy Markets</div>
-        <p>The escalation has moved from <strong>military targets and shipping lanes into energy infrastructure risk</strong>. When petrochemical facilities — which sit near oil export terminals, refineries and pipeline networks — become targets, the market must price the possibility of broader energy supply disruption. Even if the immediate damage is limited, the precedent changes the risk calculation for every barrel of oil and every LNG cargo in the region.</p>
-      </div>
-
-      <div style="margin-top:15px;">
-        <a href="https://www.thehindu.com/news/international/west-asia-conflict-iran-us-israel-war-beirut-strikes-strait-of-hormuz-live-updates-june-8-2026/article71074947.ece" target="_blank" rel="noopener noreferrer" class="source-chip">The Hindu / AFP</a>
-        <a href="https://www.trtworld.com/article/3e120e26d015" target="_blank" rel="noopener noreferrer" class="source-chip">TRT World</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== 4. YEMEN / RED SEA RISK ===== -->
-<section id="yemen">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">Flashpoint 4</div>
-      <h2 class="section-title">Yemen / Red Sea Risk</h2>
-      <p class="section-subtitle">Secondary escalation point with shipping implications</p>
-    </div>
-
-    <div class="glass-card">
-      <div style="display:grid;gap:15px;margin-bottom:20px;">
-        <div style="padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;border-left:4px solid var(--warning-gold);">
-          <h4 style="font-weight:700;margin-bottom:6px;font-size:0.95rem;">Monday 8 June: Missile from Yemen Toward Israel</h4>
-          <p style="color:var(--secondary-text);font-size:0.85rem;line-height:1.6;">Israel said it <strong>intercepted a missile launched from Yemen</strong> targeting Israeli territory. Sirens sounded across the greater Tel Aviv area and parts of central and southern Israel. Israel temporarily closed its airspace following the incident. No casualties or impacts were reported. The Houthis did not immediately claim the attack.</p>
-        </div>
-
-        <div style="padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;border-left:4px solid var(--warning-gold);">
-          <h4 style="font-weight:700;margin-bottom:6px;font-size:0.95rem;">Houthis Threaten Red Sea Shipping</h4>
-          <p style="color:var(--secondary-text);font-size:0.85rem;line-height:1.6;">Yemen's Houthi rebels <strong>threatened to target Israel-affiliated ships in the Red Sea</strong> and announced a ban on Israeli ships passing through. This raises the prospect of a dual choke point crisis — both Hormuz and Bab el-Mandeb under threat simultaneously.</p>
-        </div>
-
-        <div style="padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;border-left:4px solid var(--warning-gold);">
-          <h4 style="font-weight:700;margin-bottom:6px;font-size:0.95rem;">Saudi Arabia: Missile Alert at Prince Sultan Air Base</h4>
-          <p style="color:var(--secondary-text);font-size:0.85rem;line-height:1.6;">Missile alert sirens sounded in Saudi Arabia's <strong>Al Kharj governorate</strong>, home to <strong>Prince Sultan Air Base</strong> which hosts US forces. Saudi state media reported the alert following Israel's strikes on Iran. The danger was later declared to have passed.</p>
-        </div>
-      </div>
-
-      <div class="callout callout-warning">
-        <div class="callout-title">Commercial Interpretation</div>
-        <p>This is a <strong>secondary escalation point</strong>, not the main story. However, Yemen/Houthi activity can affect <strong>Red Sea shipping</strong>, <strong>insurance costs</strong>, <strong>LNG flows</strong> and <strong>wider market sentiment</strong>. If the Houthis begin targeting commercial shipping in the Red Sea as they did during the 2023-2024 Gaza conflict, the dual choke point risk (Hormuz + Bab el-Mandeb) becomes a serious concern for global energy supply chains.</p>
-      </div>
-
-      <div style="margin-top:15px;">
-        <a href="https://www.npr.org/2026/06/08/g-s1-126844/iran-war-updates" target="_blank" rel="noopener noreferrer" class="source-chip">NPR</a>
-        <a href="https://www.washingtonpost.com/business/2026/06/07/iran-israel-strikes-missiles-trump-netanyahu-8-june-2026/8dc77cb4-62e7-11f1-bdd4-805ebb99a693_story.html" target="_blank" rel="noopener noreferrer" class="source-chip">Washington Post</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== TIMELINE ===== -->
-<section id="timeline">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">Chronology</div>
-      <h2 class="section-title">Escalation Timeline: 5-8 June 2026</h2>
-      <p class="section-subtitle">Events unfolded rapidly across four days</p>
-    </div>
-
-    <div class="glass-card">
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">Friday 5 June 2026</div>
-          <div class="timeline-event">Iranian drones heading toward Strait of Hormuz intercepted by US forces</div>
-          <div class="timeline-desc">Iran launched four one-way attack drones toward the Strait of Hormuz. CENTCOM shot them down, then struck Iranian radar sites at Goruk and on Qeshm Island in self-defence. Hours later, Iran fired seven ballistic missiles at Kuwait and Bahrain. Six were intercepted; one failed to reach target.</div>
-          <a href="https://www.dvidshub.net/news/567021/centcom-forces-defeat-missiles-drones-launched-iran" target="_blank" rel="noopener noreferrer" class="source-chip">CENTCOM</a>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">Saturday 6 June 2026</div>
-          <div class="timeline-event">Iran accuses US of breaching ceasefire; oil prices fall on de-escalation hopes</div>
-          <div class="timeline-desc">Iran described the US strikes as a breach of the April ceasefire. Oil markets were pricing reduced conflict risk — Brent settled at $93.09, down $1.94, as traders saw de-escalation. This softness proved temporary. Hezbollah rejected a US-brokered Lebanon ceasefire.</div>
-          <a href="https://www.thedailystar.net/business/news/oil-prices-fall-mounting-hopes-de-escalation-us-iran-war-4191796" target="_blank" rel="noopener noreferrer" class="source-chip">Daily Star / Reuters</a>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">Sunday 7 June 2026</div>
-          <div class="timeline-event">Israel strikes Beirut; Iran says Israel "crossed all red lines"</div>
-          <div class="timeline-desc">Israel struck Beirut's southern suburbs (Dahiyeh) targeting Hezbollah-linked infrastructure, defying Washington's request to stand down. Trump told the Financial Times that Netanyahu would have to accept whatever deal the US negotiates with Iran. Iran's military central command warned Israel had "crossed all red lines." Oil prices began moving higher.</div>
-          <a href="https://www.thehindu.com/news/international/west-asia-conflict-iran-us-israel-war-beirut-strikes-strait-of-hormuz-live-updates-june-8-2026/article71074947.ece" target="_blank" rel="noopener noreferrer" class="source-chip">The Hindu / FT / AFP</a>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">Sunday 7 / Monday 8 June 2026</div>
-          <div class="timeline-event">Iran launches ~10 ballistic missiles at Israel; first exchange since April ceasefire</div>
-          <div class="timeline-desc">Iran fired approximately 10 ballistic missiles at Israel in three waves overnight, targeting Nevatim and Tel Nof air bases. Israel said missiles were intercepted. Explosions heard in central Israel and Jordan. Sirens across multiple cities. This was the first direct Iran-Israel missile exchange since the April 8 ceasefire.</div>
-          <a href="https://www.npr.org/2026/06/08/g-s1-126844/iran-war-updates" target="_blank" rel="noopener noreferrer" class="source-chip">NPR</a>
-          <a href="https://www.washingtonpost.com/business/2026/06/07/iran-israel-strikes-missiles-trump-netanyahu-8-june-2026/8dc77cb4-62e7-11f1-bdd4-805ebb99a693_story.html" target="_blank" rel="noopener noreferrer" class="source-chip">Washington Post</a>
-        </div>
-
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">Monday 8 June 2026</div>
-          <div class="timeline-event">Israel strikes inside Iran including Mahshahr petrochemical complex; oil spikes</div>
-          <div class="timeline-desc">Israel launched strikes on central and western Iran. Explosions in Tehran, Isfahan, Karaj, Tabriz. Israeli Air Force confirmed strikes on the Mahshahr petrochemical complex — first energy infrastructure hit since April. Yemen missile intercepted. Houthis threatened Red Sea shipping. Brent jumped $2.33 to $95.42. Monday marked the 100th day of the war.</div>
-          <a href="https://www.thehindu.com/news/international/west-asia-conflict-iran-us-israel-war-beirut-strikes-strait-of-hormuz-live-updates-june-8-2026/article71074947.ece" target="_blank" rel="noopener noreferrer" class="source-chip">The Hindu</a>
-          <a href="https://www.nbcnews.com/world/iran/live-blog/live-updates-israel-iran-strikes-rcna346556" target="_blank" rel="noopener noreferrer" class="source-chip">NBC News</a>
+      <div>
+        <div class="callout">
+          <div class="callout-icon">&#128273;</div>
+          <h4>Window May Be Open</h4>
+          <p>If wholesale prices move before supplier books fully catch up, there may be a short window to secure pricing. That window can close quickly.</p>
+          <p>If the forward market is cheaper than the near-term market, the customer should check whether their contract end date allows them to buy into that future period now.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== TOP FIVE WARNING SIGNS ===== -->
-<section id="warning-signs">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">Risk Assessment</div>
-      <h2 class="section-title">Top Five Warning Signs</h2>
-      <p class="section-subtitle">The strongest signals that energy market risk is intensifying</p>
+<!-- D. MARKET DRIVERS -->
+<section class="section" id="drivers" style="padding-top:0;">
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--gold);">D. Market Drivers</h3>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">&#127759;</div>
+        <div class="card-title">Geopolitical Risk</div>
+      </div>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9679;</span>Direct US-Iran military action near Hormuz (June 5)</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9679;</span>Iran missiles at Israel after Beirut strikes (June 7)</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9679;</span>Israel struck Iranian petrochemical plant (June 8)</li>
+        <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span>Hormuz shipping remains disrupted and managed</li>
+      </ul>
     </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">&#9889;</div>
+        <div class="card-title">UK Power Market</div>
+      </div>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--accent-teal);margin-right:8px;">&#9679;</span>Gas-fired generation dominates UK electricity pricing</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--accent-teal);margin-right:8px;">&#9679;</span>Reduced nuclear availability increasing gas dependency</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--accent-teal);margin-right:8px;">&#9679;</span>Wind generation variable - gas sets marginal price</li>
+        <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--accent-teal);margin-right:8px;">&#9679;</span>Carbon prices firm, adding to power cost</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">&#128200;</div>
+        <div class="card-title">Price Volatility</div>
+      </div>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span>Prices remain elevated vs pre-crisis levels</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span>Market softening from peaks but fragile</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span>Supplier pricing remains cautious and reactive</li>
+        <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span>Spread between fixed and rollover rates matters</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
+<!-- E. WHOLESALE SNAPSHOT TABLE -->
+<section class="section" style="padding-top:0;">
+  <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:var(--gold);">E. Wholesale Snapshot</h3>
+  <div class="card" style="overflow-x:auto;">
+    <table class="data-table">
+      <tr>
+        <th>Commodity</th>
+        <th>Current Level</th>
+        <th>Condition</th>
+        <th>Comment</th>
+        <th>Source</th>
+      </tr>
+      <tr>
+        <td>Day-Ahead Gas (NBP)</td>
+        <td class="price-cell">119.60 p/th</td>
+        <td><span class="condition-tag tag-volatile" style="margin:0;">Volatile</span></td>
+        <td>Elevated on geopolitical risk and supply uncertainty</td>
+        <td><a href="https://www.smart-energy.uk/post/daily-energy-market-report" target="_blank" rel="noopener noreferrer" class="source-chip">Smart Energy UK</a></td>
+      </tr>
+      <tr>
+        <td>Day-Ahead Power (UK)</td>
+        <td class="price-cell">£101.42 /MWh</td>
+        <td><span class="condition-tag tag-volatile" style="margin:0;">Volatile</span></td>
+        <td>Gas-led generation keeps power exposed</td>
+        <td><a href="https://www.smart-energy.uk/post/daily-energy-market-report" target="_blank" rel="noopener noreferrer" class="source-chip">Smart Energy UK</a></td>
+      </tr>
+      <tr>
+        <td>TTF Gas</td>
+        <td class="price-cell">€50.79 /MWh</td>
+        <td><span class="condition-tag tag-bullish" style="margin:0;">Rising</span></td>
+        <td>+4.73% day-on-day on Hormuz/LNG concerns</td>
+        <td><a href="https://tradingeconomics.com/commodity/eu-natural-gas" target="_blank" rel="noopener noreferrer" class="source-chip">Trading Economics</a></td>
+      </tr>
+      <tr>
+        <td>Brent Crude</td>
+        <td class="price-cell">$97.37 /bbl</td>
+        <td><span class="condition-tag tag-bullish" style="margin:0;">+4.60%</span></td>
+        <td>Rebounding on Iran-Israel direct escalation</td>
+        <td><a href="https://tradingeconomics.com/commodity/brent-crude-oil" target="_blank" rel="noopener noreferrer" class="source-chip">Trading Economics</a></td>
+      </tr>
+      <tr>
+        <td>UK Gas Spot</td>
+        <td class="price-cell">117.05 p/thm</td>
+        <td><span class="condition-tag tag-elevated" style="margin:0;">Elevated</span></td>
+        <td>+37.77% year-on-year on sustained risk premium</td>
+        <td><a href="https://tradingeconomics.com/commodity/uk-natural-gas" target="_blank" rel="noopener noreferrer" class="source-chip">Trading Economics</a></td>
+      </tr>
+      <tr>
+        <td>Forward Market</td>
+        <td class="price-cell">Cal-27: 93.69 p/th</td>
+        <td><span class="condition-tag tag-elevated" style="margin:0;">Flat</span></td>
+        <td>+0.4% over 30 days. Less urgent than near-term</td>
+        <td><a href="https://www.smart-energy.uk/post/daily-energy-market-report" target="_blank" rel="noopener noreferrer" class="source-chip">Smart Energy UK</a></td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- F. COMMERCIAL TAKEAWAY PANEL -->
+<section class="section" style="padding-top:0;">
+  <div class="card" style="background:linear-gradient(135deg,rgba(38,34,98,0.9) 0%,rgba(38,34,127,0.9) 100%);border:1px solid var(--accent-purple);">
+    <h4 style="font-size:20px;font-weight:700;margin-bottom:16px;color:var(--gold);">Commercial Takeaway</h4>
+    <p style="font-size:15px;color:var(--text-offwhite);line-height:1.8;margin-bottom:12px;">Markets remain structurally volatile. Short-term pauses in geopolitical escalation have not normalised wholesale pricing conditions. Businesses approaching renewal windows should review procurement strategy <strong style="color:#fff;">early rather than waiting for stability</strong>.</p>
+    <p style="font-size:15px;color:var(--text-offwhite);line-height:1.8;margin-bottom:12px;">The market may look calmer today, but unless physical supply, shipping and supplier prices have properly improved, <strong style="color:#fff;">waiting still keeps you exposed</strong>.</p>
+    <p style="font-size:14px;color:var(--text-muted);margin-top:16px;">Prices correct as of report date. Wholesale prices are indicative and subject to change. Past performance is not a reliable indicator of future results.</p>
+  </div>
+</section>
+
+
+<!-- SECTION 3: IMAGES / VISUAL EVIDENCE -->
+<section class="section" id="images">
+  <h2 class="section-title">Images / Visual Evidence</h2>
+  <p class="section-subtitle">Key visual context for current market conditions</p>
+  <div class="section-accent"></div>
+  <div class="grid-3">
+    <div class="card" style="padding:0;overflow:hidden;">
+      <img src="https://ichef.bbci.co.uk/ace/standard/1600/cpsprodpb/bed6/live/b4c9fad0-23b3-11f1-934f-036468834728.png" alt="Strait of Hormuz shipping routes" style="width:100%;height:180px;object-fit:cover;display:block;">
+      <div style="padding:20px;">
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">Strait of Hormuz Shipping Risk</h4>
+        <p style="font-size:12px;color:var(--text-muted);line-height:1.5;">Selective passage remains in effect. About 35% of global seaborne crude oil trade normally passes through this chokepoint.</p>
+        <a href="https://www.bbc.co.uk/news/articles/c4geg0eeyjeo" target="_blank" rel="noopener noreferrer" class="source-chip">BBC News</a>
+      </div>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden;">
+      <img src="https://cdn.britannica.com/42/179642-138-98B2270A/Overview-tankers-natural-gas.jpg" alt="LNG tanker ship" style="width:100%;height:180px;object-fit:cover;display:block;">
+      <div style="padding:20px;">
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">LNG Shipping &amp; Supply Chain</h4>
+        <p style="font-size:12px;color:var(--text-muted);line-height:1.5;">LNG flows disrupted by Hormuz management protocols. European gas prices reflect supply uncertainty.</p>
+        <a href="https://www.britannica.com/video/Overview-tankers-natural-gas/-192447" target="_blank" rel="noopener noreferrer" class="source-chip">Britannica</a>
+      </div>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden;">
+      <img src="https://rmi.org/wp-content/uploads/2024/09/oil-refinery-istock-487829113.jpg" alt="Oil refinery and energy infrastructure" style="width:100%;height:180px;object-fit:cover;display:block;">
+      <div style="padding:20px;">
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:6px;">Energy Infrastructure at Risk</h4>
+        <p style="font-size:12px;color:var(--text-muted);line-height:1.5;">Israel struck the Karun petrochemical plant in Mahshahr, Iran on June 8 - the first energy-site hit since the April ceasefire.</p>
+        <a href="https://www.aljazeera.com/news/liveblog/2026/6/8/iran-war-live-trump-urges-restraint-after-iranian-missile-attack-on-israel" target="_blank" rel="noopener noreferrer" class="source-chip">Al Jazeera</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: TOP FIVE WARNING SIGNS -->
+<section class="section" id="warnings">
+  <h2 class="section-title">Top Five Warning Signs</h2>
+  <p class="section-subtitle">Strongest risk indicators for UK business energy buyers</p>
+  <div class="section-accent"></div>
+  <div class="grid-2">
     <div class="warning-card">
-      <div class="warning-header">
-        <div class="warning-num">1</div>
-        <span class="warning-title">Ceasefire Has Effectively Collapsed</span>
-      </div>
-      <div class="warning-body">
-        The April 8 ceasefire is no longer holding. Direct Iran-Israel missile exchanges resumed for the first time in two months. <strong>Monday 8 June marked the 100th day of the war.</strong> When ceasefires break down, energy markets must reprice for sustained conflict rather than temporary disruption.
-        <div style="margin-top:8px;">
-          <a href="https://www.npr.org/2026/06/08/g-s1-126844/iran-war-updates" target="_blank" rel="noopener noreferrer" class="source-chip">NPR</a>
-        </div>
-      </div>
+      <div class="warning-number">1</div>
+      <h4>Direct US-Iran Military Action Near Hormuz</h4>
+      <p><strong>What:</strong> CENTCOM confirmed intercepting Iranian drones and ballistic missiles on June 5, then striking Iranian radar sites at Goruk and Qeshm Island.</p>
+      <p><strong>Why it matters:</strong> Direct US-Iran combat in the Strait of Hormuz corridor raises the immediate risk of shipping disruption, insurance spikes and supply uncertainty that feeds into UK gas and power pricing.</p>
+      <a href="https://www.centcom.mil/MEDIA/PUBLIC-RELEASES/Article/4510668/centcom-forces-defeat-missiles-drones-launched-by-iran/" target="_blank" rel="noopener noreferrer" class="source-chip">CENTCOM</a>
+      <span class="timeline-label label-verified">Verified Fact</span>
     </div>
-
     <div class="warning-card">
-      <div class="warning-header">
-        <div class="warning-num">2</div>
-        <span class="warning-title">Energy Infrastructure Is Now a Target</span>
-      </div>
-      <div class="warning-body">
-        Israel's strike on the <strong>Mahshahr petrochemical complex</strong> is the first hit on Iranian energy-related infrastructure since April. This shifts the risk from military and shipping targets to the production and processing facilities that actually supply global markets. If refineries, export terminals or pipeline infrastructure are hit, physical supply disruption follows immediately.
-        <div style="margin-top:8px;">
-          <a href="https://www.thehindu.com/news/international/west-asia-conflict-iran-us-israel-war-beirut-strikes-strait-of-hormuz-live-updates-june-8-2026/article71074947.ece" target="_blank" rel="noopener noreferrer" class="source-chip">The Hindu / AFP</a>
-        </div>
-      </div>
+      <div class="warning-number">2</div>
+      <h4>Iran Launches Missiles at Israel</h4>
+      <p><strong>What:</strong> Iran fired ballistic missiles at Israel on June 7 after Israeli strikes on Beirut's southern suburbs. IDF intercepted all missiles.</p>
+      <p><strong>Why it matters:</strong> First major direct Iran-to-Israel missile exchange since the April ceasefire. Shatters the truce assumption and raises the regional escalation premium.</p>
+      <a href="https://www.theguardian.com/world/2026/jun/07/israel-escalates-war-hezbollah-airstrikes-beirut" target="_blank" rel="noopener noreferrer" class="source-chip">The Guardian</a>
+      <span class="timeline-label label-verified">Verified Fact</span>
     </div>
-
     <div class="warning-card">
-      <div class="warning-header">
-        <div class="warning-num">3</div>
-        <span class="warning-title">Multiple Flashpoints Are Now Linked</span>
-      </div>
-      <div class="warning-body">
-        The US-Iran track (Hormuz, Gulf missiles), the Iran-Israel track (Beirut, ballistic missiles, air strikes) and the Yemen/Red Sea track are no longer separate issues. They are becoming <strong>connected escalation channels</strong>. When one front flares, the others can follow. This multiplies the probability that at least one channel disrupts energy supply.
-        <div style="margin-top:8px;">
-          <a href="https://www.washingtonpost.com/business/2026/06/07/iran-israel-strikes-missiles-trump-netanyahu-8-june-2026/8dc77cb4-62e7-11f1-bdd4-805ebb99a693_story.html" target="_blank" rel="noopener noreferrer" class="source-chip">Washington Post</a>
-        </div>
-      </div>
+      <div class="warning-number">3</div>
+      <h4>Israel Strikes Iranian Energy Infrastructure</h4>
+      <p><strong>What:</strong> Israeli strikes hit the Karun petrochemical plant in Mahshahr, Iran on June 8. No casualties reported but damage being assessed.</p>
+      <p><strong>Why it matters:</strong> First hit on an Iranian energy or petrochemical site since the April ceasefire. Energy infrastructure strikes are more market-sensitive than rhetoric alone.</p>
+      <a href="https://www.aljazeera.com/news/liveblog/2026/6/8/iran-war-live-trump-urges-restraint-after-iranian-missile-attack-on-israel" target="_blank" rel="noopener noreferrer" class="source-chip">Al Jazeera</a>
+      <span class="timeline-label label-verified">Verified Fact</span>
     </div>
-
     <div class="warning-card">
-      <div class="warning-header">
-        <div class="warning-num">4</div>
-        <span class="warning-title">Oil Prices Reversed Sharply on Headlines Alone</span>
-      </div>
-      <div class="warning-body">
-        Brent fell to <strong>$93.09 on Friday</strong> on de-escalation hopes, then jumped to <strong>$95.42 by Monday morning</strong> — a $2.33 swing driven entirely by military developments over a weekend. This shows how quickly sentiment can shift and how sensitive prices are to escalation news. <strong>Supplier price books typically lag these moves by hours to days.</strong>
-        <div style="margin-top:8px;">
-          <a href="https://www.thehindu.com/news/international/west-asia-conflict-iran-us-israel-war-beirut-strikes-strait-of-hormuz-live-updates-june-8-2026/article71074947.ece" target="_blank" rel="noopener noreferrer" class="source-chip">The Hindu</a>
-          <a href="https://www.thedailystar.net/business/news/oil-prices-fall-mounting-hopes-de-escalation-us-iran-war-4191796" target="_blank" rel="noopener noreferrer" class="source-chip">Daily Star / Reuters</a>
-        </div>
-      </div>
+      <div class="warning-number">4</div>
+      <h4>Brent Crude Rebounds Above $97 on Escalation</h4>
+      <p><strong>What:</strong> Brent jumped 4.60% to $97.37/barrel on June 8 after the Iran-Israel direct exchange and energy site strike.</p>
+      <p><strong>Why it matters:</strong> Oil markets are pricing in renewed geopolitical risk premium. Higher oil feeds into gas and ultimately UK electricity pricing through gas-fired generation.</p>
+      <a href="https://tradingeconomics.com/commodity/brent-crude-oil" target="_blank" rel="noopener noreferrer" class="source-chip">Trading Economics</a>
+      <span class="timeline-label label-verified">Verified Fact</span>
     </div>
-
     <div class="warning-card">
-      <div class="warning-header">
-        <div class="warning-num">5</div>
-        <span class="warning-title">Hormuz Remains Restricted; Red Sea Now at Risk</span>
-      </div>
-      <div class="warning-body">
-        The Strait of Hormuz is still operating at roughly <strong>5% of normal traffic</strong> with selective passage only. Now the Houthis have threatened <strong>Red Sea shipping</strong> too. A dual choke point crisis (Hormuz + Bab el-Mandeb) would severely constrain the alternative routes that have partially compensated for Hormuz closure. Iran's envoy says Hormuz will reopen with transit fees — this is not normalisation.
-        <div style="margin-top:8px;">
-          <a href="https://www.thehindu.com/news/international/west-asia-conflict-iran-us-israel-war-beirut-strikes-strait-of-hormuz-live-updates-june-8-2026/article71074947.ece" target="_blank" rel="noopener noreferrer" class="source-chip">The Hindu / Reuters</a>
-          <a href="https://www.npr.org/2026/06/08/g-s1-126844/iran-war-updates" target="_blank" rel="noopener noreferrer" class="source-chip">NPR</a>
-        </div>
-      </div>
+      <div class="warning-number">5</div>
+      <h4>World Bank Baseline Assumes Disruption Ended in May</h4>
+      <p><strong>What:</strong> The World Bank's April forecast assumed acute disruptions end in May 2026. It is now June 8 and escalation has continued.</p>
+      <p><strong>Why it matters:</strong> If the baseline assumption is already exceeded, the 24% energy price surge forecast may be understated. The longer disruption persists, the higher the upside risk.</p>
+      <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" target="_blank" rel="noopener noreferrer" class="source-chip">World Bank</a>
+      <span class="timeline-label label-analyst">Analyst Interpretation</span>
     </div>
   </div>
 </section>
 
-<!-- ===== WHAT THIS MEANS FOR UK BUSINESS ENERGY BUYERS ===== -->
-<section id="uk-impact">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">UK Commercial Impact</div>
-      <h2 class="section-title">What This Means for UK Business Energy Buyers</h2>
-      <p class="section-subtitle">How Middle East escalation flows through to UK energy bills</p>
-    </div>
-
-    <div class="glass-card">
-      <div style="display:grid;gap:15px;">
-        <div style="padding:18px;background:rgba(0,211,154,0.06);border-radius:12px;border-left:4px solid var(--accent-start);">
-          <h4 style="font-weight:700;margin-bottom:8px;">Wholesale Markets React to Risk Before Physical Disruption Is Confirmed</h4>
-          <p style="color:var(--secondary-text);font-size:0.9rem;line-height:1.6;">Oil and gas markets price in risk premiums based on the <em>probability</em> of supply disruption, not just confirmed physical losses. When missiles fly, drones are intercepted and energy infrastructure is struck, traders increase risk premiums immediately — often before any actual barrels are removed from the market.</p>
-        </div>
-
-        <div style="padding:18px;background:rgba(0,211,154,0.06);border-radius:12px;border-left:4px solid var(--accent-start);">
-          <h4 style="font-weight:700;margin-bottom:8px;">A Single Strike on Energy Infrastructure Can Move Sentiment Quickly</h4>
-          <p style="color:var(--secondary-text);font-size:0.9rem;line-height:1.6;">The Mahshahr petrochemical strike demonstrates that energy facilities are now in the target set. Even if the immediate damage is repairable, the market must price the possibility of follow-on strikes on refineries, export terminals, or pipeline infrastructure. Sentiment shifts faster than physical supply.</p>
-        </div>
-
-        <div style="padding:18px;background:rgba(0,211,154,0.06);border-radius:12px;border-left:4px solid var(--accent-start);">
-          <h4 style="font-weight:700;margin-bottom:8px;">The Strait of Hormuz Is Critical to Global Oil and LNG Flows</h4>
-          <p style="color:var(--secondary-text);font-size:0.9rem;line-height:1.6;">Roughly <strong>one-fifth of global oil</strong> and a significant share of LNG normally passes through Hormuz. Qatar — a major LNG supplier to Europe and the UK — exports through this strait. Even partial closure constrains global supply, pushes buyers to compete for alternative cargoes, and raises prices for every molecule of gas and every barrel of oil.</p>
-        </div>
-
-        <div style="padding:18px;background:rgba(0,211,154,0.06);border-radius:12px;border-left:4px solid var(--accent-start);">
-          <h4 style="font-weight:700;margin-bottom:8px;">UK Power and Gas Pricing Is Connected to Global LNG Competition</h4>
-          <p style="color:var(--secondary-text);font-size:0.9rem;line-height:1.6;">UK gas prices are set in a global market. When Middle East LNG is constrained, Asian and European buyers compete harder for the remaining supply. The UK imports roughly <strong>half its gas</strong>, much of it as LNG. Oil-linked sentiment, shipping risk, and wider European gas market pricing all feed into what UK businesses pay for both gas and electricity.</p>
-        </div>
-
-        <div style="padding:18px;background:rgba(243,156,18,0.08);border-radius:12px;border-left:4px solid var(--warning-gold);">
-          <h4 style="font-weight:700;margin-bottom:8px;">Supplier Fixed-Price Books Can Move Quickly After Market Volatility</h4>
-          <p style="color:var(--secondary-text);font-size:0.9rem;line-height:1.6;">Energy suppliers do not update prices in real time, but they do reprice when volatility is sustained. A $2-3/bbl oil swing over a weekend can flow through to supplier pricing within days. <strong>Quote validity periods may shorten, fixed offers can be withdrawn, and renewal pricing can shift before customers have time to react.</strong></p>
-        </div>
-
-        <div style="padding:18px;background:rgba(231,76,60,0.08);border-radius:12px;border-left:4px solid #e74c3c;">
-          <h4 style="font-weight:700;margin-bottom:8px;">Businesses Inside Their Renewal Window Should Review Before the Next Repricing Event</h4>
-          <p style="color:var(--secondary-text);font-size:0.9rem;line-height:1.6;">If your contract ends within the next 12 months, you are exposed to whatever the market offers at renewal. In volatile conditions, that can mean signing at a price peak. Reviewing options now — while supplier books may still reflect pre-escalation pricing — gives you a chance to lock in before the next wave of repricing hits.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== SCENARIO TABLE ===== -->
-<section id="scenarios">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">Scenario Planning</div>
-      <h2 class="section-title">Three Escalation Scenarios</h2>
-      <p class="section-subtitle">How different conflict trajectories could affect UK business energy</p>
-    </div>
-
-    <div class="scenario-card">
-      <div class="scenario-header">
-        <span class="scenario-title">Scenario 1: Contained Escalation</span>
-        <span class="scenario-tag tag-contained">Medium Likelihood</span>
-      </div>
-      <div class="card-grid card-grid-3" style="margin-bottom:15px;">
-        <div>
-          <h5 style="font-weight:700;color:var(--warning-gold);margin-bottom:6px;font-size:0.85rem;">LIKELIHOOD</h5>
-          <p style="color:var(--secondary-text);font-size:0.85rem;">Medium</p>
-        </div>
-        <div>
-          <h5 style="font-weight:700;color:var(--warning-gold);margin-bottom:6px;font-size:0.85rem;">IMPACT</h5>
-          <p style="color:var(--secondary-text);font-size:0.85rem;">Moderate</p>
-        </div>
-        <div>
-          <h5 style="font-weight:700;color:var(--warning-gold);margin-bottom:6px;font-size:0.85rem;">TIME HORIZON</h5>
-          <p style="color:var(--secondary-text);font-size:0.85rem;">Weeks to months</p>
-        </div>
-      </div>
-      <p style="color:var(--secondary-text);font-size:0.9rem;line-height:1.7;margin-bottom:12px;"><strong>Description:</strong> US, Iran and Israel continue limited strikes but avoid full regional war. Diplomatic channels remain open. Hormuz stays restricted but does not close completely. No major energy infrastructure is destroyed.</p>
-      <p style="color:var(--secondary-text);font-size:0.9rem;line-height:1.7;"><strong>Energy impact:</strong> Volatile pricing with elevated risk premium. Brent likely holds $90-105/bbl range. European gas remains elevated. Supplier prices adjust upward gradually. Fixed-price contracts become more valuable for budget certainty.</p>
-    </div>
-
-    <div class="scenario-card">
-      <div class="scenario-header">
-        <span class="scenario-title">Scenario 2: Hormuz Disruption</span>
-        <span class="scenario-tag tag-hormuz">Low-Medium Likelihood</span>
-      </div>
-      <div class="card-grid card-grid-3" style="margin-bottom:15px;">
-        <div>
-          <h5 style="font-weight:700;color:#e74c3c;margin-bottom:6px;font-size:0.85rem;">LIKELIHOOD</h5>
-          <p style="color:var(--secondary-text);font-size:0.85rem;">Low to Medium</p>
-        </div>
-        <div>
-          <h5 style="font-weight:700;color:#e74c3c;margin-bottom:6px;font-size:0.85rem;">IMPACT</h5>
-          <p style="color:var(--secondary-text);font-size:0.85rem;">Severe</p>
-        </div>
-        <div>
-          <h5 style="font-weight:700;color:#e74c3c;margin-bottom:6px;font-size:0.85rem;">TIME HORIZON</h5>
-          <p style="color:var(--secondary-text);font-size:0.85rem;">Days to weeks if triggered</p>
-        </div>
-      </div>
-      <p style="color:var(--secondary-text);font-size:0.9rem;line-height:1.7;margin-bottom:12px;"><strong>Description:</strong> Iran restricts, mines, threatens or actively disrupts traffic around the Strait of Hormuz in response to military escalation. Even partial closure goes to zero. Alternative routes cannot compensate.</p>
-      <p style="color:var(--secondary-text);font-size:0.9rem;line-height:1.7;"><strong>Energy impact:</strong> Oil and LNG prices spike immediately. Brent could retest $115-130/bbl (April highs). Shipping insurance rates surge. European gas prices rise sharply as LNG competition intensifies. Supplier books reprice within hours. Quote validity collapses. Some suppliers may pause quoting entirely.</p>
-    </div>
-
-    <div class="scenario-card">
-      <div class="scenario-header">
-        <span class="scenario-title">Scenario 3: Regional War Expansion</span>
-        <span class="scenario-tag tag-regional">Low Likelihood</span>
-      </div>
-      <div class="card-grid card-grid-3" style="margin-bottom:15px;">
-        <div>
-          <h5 style="font-weight:700;color:#ff4444;margin-bottom:6px;font-size:0.85rem;">LIKELIHOOD</h5>
-          <p style="color:var(--secondary-text);font-size:0.85rem;">Low</p>
-        </div>
-        <div>
-          <h5 style="font-weight:700;color:#ff4444;margin-bottom:6px;font-size:0.85rem;">IMPACT</h5>
-          <p style="color:var(--secondary-text);font-size:0.85rem;">Extreme</p>
-        </div>
-        <div>
-          <h5 style="font-weight:700;color:#ff4444;margin-bottom:6px;font-size:0.85rem;">TIME HORIZON</h5>
-          <p style="color:var(--secondary-text);font-size:0.85rem;">Months</p>
-        </div>
-      </div>
-      <p style="color:var(--secondary-text);font-size:0.9rem;line-height:1.7;margin-bottom:12px;"><strong>Description:</strong> Israel, Iran, US-linked Gulf assets, Lebanon and Yemen become active parts of one wider conflict. Multiple energy infrastructure targets are hit. Both Hormuz and Bab el-Mandeb are compromised. Diplomatic channels break down completely.</p>
-      <p style="color:var(--secondary-text);font-size:0.9rem;line-height:1.7;"><strong>Energy impact:</strong> Major geopolitical risk premium across all energy markets. Sharp wholesale volatility. Brent could exceed $130/bbl. UK power and gas prices spike. Supplier quotes may be withdrawn or rapidly repriced. Fixed-price contracts may be temporarily unavailable. This is the scenario where businesses without price protection face the most severe cost increases.</p>
-    </div>
-
-    <div class="callout callout-info" style="margin-top:10px;">
-      <p style="font-size:0.9rem;"><strong>Assessment:</strong> The current trajectory points toward Scenario 1 (Contained Escalation) as the most probable near-term outcome, but the risk of Scenario 2 (Hormuz Disruption) has risen materially over the 5-8 June weekend. The connection of multiple flashpoints increases the probability that an event on one front triggers disruption on another.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ===== COMMERCIAL TAKEAWAY ===== -->
-<section id="commercial-takeaway">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">Commercial Action</div>
-      <h2 class="section-title">Commercial Energy Takeaway</h2>
-      <p class="section-subtitle">What UK businesses should understand and do</p>
-    </div>
-
-    <div class="glass-card">
-      <div class="callout callout-danger" style="margin-bottom:25px;">
-        <div class="callout-title">Overall Risk Assessment</div>
-        <p><strong>High and rising.</strong> This does not mean prices will only go one way. Markets can still soften if diplomacy holds or if de-escalation headlines emerge. However, the balance of risk has shifted sharply upwards because <strong>several separate flashpoints are now connected</strong>. The current risk is that energy markets are reacting to several linked escalation channels at once:</p>
-        <ul style="color:var(--secondary-text);font-size:0.9rem;line-height:1.8;margin-top:12px;padding-left:20px;">
-          <li>Strait of Hormuz disruption risk</li>
-          <li>Gulf state military base risk</li>
-          <li>Iranian retaliation risk</li>
-          <li>Israeli direct-strike risk</li>
-          <li>Lebanon/Hezbollah escalation risk</li>
-          <li>Iranian energy infrastructure risk</li>
-          <li>Red Sea/Yemen shipping risk</li>
-          <li>Supplier price-book repricing risk</li>
+<!-- SECTION 5: WHAT CHANGED -->
+<section class="section" id="changed">
+  <h2 class="section-title">What Changed Since the Last Report</h2>
+  <p class="section-subtitle">Material new developments in the primary research window</p>
+  <div class="section-accent"></div>
+  <div class="card">
+    <div class="grid-2">
+      <div>
+        <h4 style="font-size:15px;font-weight:700;color:var(--accent-teal);margin-bottom:12px;">&#9654; Market Movements</h4>
+        <ul style="list-style:none;padding:0;margin-bottom:20px;">
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9650;</span> Brent crude +4.60% to $97.37/bbl</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9650;</span> TTF gas +4.73% to EUR 50.79/MWh</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9632;</span> UK gas spot holding elevated at 117p/th</li>
+          <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9632;</span> Forward curve (Cal-27) relatively flat</li>
+        </ul>
+        <h4 style="font-size:15px;font-weight:700;color:var(--accent-teal);margin-bottom:12px;">&#9654; Military Developments</h4>
+        <ul style="list-style:none;padding:0;">
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9679;</span> June 5: US-Iran direct clash near Hormuz</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9679;</span> June 7: Iran missiles at Israel</li>
+          <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9679;</span> June 8: Israel strikes Iranian energy site</li>
         </ul>
       </div>
-
-      <div style="padding:22px;background:rgba(0,211,154,0.08);border-radius:14px;border:1px solid rgba(0,211,154,0.2);margin-bottom:20px;">
-        <h3 style="font-weight:700;margin-bottom:12px;font-size:1.15rem;">The Core Business Message</h3>
-        <p style="color:var(--secondary-text);font-size:0.95rem;line-height:1.7;margin-bottom:12px;">For UK businesses with contract end dates inside the next 12 months, <strong>this is not a moment to wait passively</strong>. Supplier prices can move quickly when wholesale markets react to geopolitical risk. Waiting for perfect clarity may mean buying after the risk premium has already been priced in.</p>
-        <p style="color:var(--secondary-text);font-size:0.95rem;line-height:1.7;">Brent crude swung $2.33/bbl between Friday and Monday morning — and that was just on weekend headlines. If Hormuz closure deepens or energy infrastructure is hit, the move could be larger and faster. Supplier books do not update instantly, but they do respond to sustained volatility. The window to secure pricing at current levels may be narrow.</p>
-      </div>
-
-      <div style="padding:22px;background:rgba(243,156,18,0.08);border-radius:14px;border:1px solid rgba(243,156,18,0.2);margin-bottom:20px;">
-        <h3 style="font-weight:700;margin-bottom:12px;font-size:1.15rem;">What Switch 365 Recommends</h3>
-        <ul style="color:var(--secondary-text);font-size:0.9rem;line-height:1.8;padding-left:20px;">
-          <li><strong>Review your contract end date.</strong> If it falls within 12 months, your renewal window is open or opening soon.</li>
-          <li><strong>Test the market now.</strong> Get live supplier pricing to understand what is available today — before any further escalation is priced in.</li>
-          <li><strong>Compare fixed vs variable options.</strong> In volatile markets, budget certainty has commercial value that goes beyond the headline rate.</li>
-          <li><strong>Consider duration carefully.</strong> A longer fix (2-3 years) may look more expensive today but could provide protection if the conflict persists.</li>
-          <li><strong>Do not wait for the headline that confirms the worst.</strong> By then, the market has already moved.</li>
+      <div>
+        <h4 style="font-size:15px;font-weight:700;color:var(--accent-teal);margin-bottom:12px;">&#9654; Political &amp; Diplomatic</h4>
+        <ul style="list-style:none;padding:0;margin-bottom:20px;">
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--accent-purple);margin-right:8px;">&#9679;</span> Trump called Netanyahu urging restraint</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--accent-purple);margin-right:8px;">&#9679;</span> Iran called US action "flagrant" ceasefire breach</li>
+          <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--accent-purple);margin-right:8px;">&#9679;</span> Kuwait, Bahrain, Egypt, Jordan, Qatar condemned Iran</li>
+        </ul>
+        <h4 style="font-size:15px;font-weight:700;color:var(--accent-teal);margin-bottom:12px;">&#9654; Shipping &amp; Supply</h4>
+        <ul style="list-style:none;padding:0;margin-bottom:20px;">
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span> Hormuz remains under selective management</li>
+          <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span> EIA: flows not reaching pre-conflict levels until later 2026</li>
+        </ul>
+        <h4 style="font-size:15px;font-weight:700;color:var(--accent-teal);margin-bottom:12px;">&#9654; Supplier Books</h4>
+        <ul style="list-style:none;padding:0;">
+          <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span> Supplier book lag not fully verified - treat as watch point</li>
         </ul>
       </div>
+    </div>
+  </div>
+</section>
 
-      <div style="padding:22px;background:linear-gradient(135deg,rgba(0,211,154,0.12),rgba(221,64,255,0.12));border-radius:14px;border:1px solid rgba(0,211,154,0.25);text-align:center;">
-        <h3 style="font-weight:700;margin-bottom:12px;font-size:1.2rem;">Speak to Switch 365</h3>
-        <p style="color:var(--secondary-text);font-size:0.95rem;line-height:1.7;margin-bottom:15px;">If your business energy contract ends within the next 12 months, now is the time to review the market. The risk is no longer theoretical. The escalation is already affecting market sentiment, and supplier pricing can change quickly.</p>
-        <p style="color:var(--primary-text);font-size:1rem;line-height:1.6;font-weight:600;">Speak to Switch 365 to understand whether your current renewal window gives you an opportunity to secure pricing before further volatility is built into supplier offers.</p>
+
+<!-- SECTION 6: FULL TIMELINE -->
+<section class="section" id="timeline">
+  <h2 class="section-title">Full Timeline</h2>
+  <p class="section-subtitle">Chronological record of the primary research window</p>
+  <div class="section-accent"></div>
+  <div class="timeline">
+    <div class="timeline-item verified">
+      <div class="timeline-date">Friday 5 June 2026</div>
+      <div class="timeline-content">
+        <p><strong>US-Iran direct military clash near Hormuz.</strong> CENTCOM confirmed Iranian forces launched 4 one-way attack drones toward the Strait of Hormuz, posing an immediate threat to regional maritime traffic.</p>
+        <p>Hours later, Iran fired 7 ballistic missiles toward Kuwait and Bahrain. CENTCOM intercepted 6 missiles; a 7th did not reach its target. No reports of harm to US personnel.</p>
+        <p>US forces subsequently struck Iranian coastal surveillance radar sites in <strong>Goruk</strong> and on <strong>Qeshm Island</strong> to defend against further maritime attacks.</p>
+        <a href="https://www.centcom.mil/MEDIA/PUBLIC-RELEASES/Article/4510668/centcom-forces-defeat-missiles-drones-launched-by-iran/" target="_blank" rel="noopener noreferrer" class="source-chip">CENTCOM</a>
+        <a href="https://www.aljazeera.com/news/2026/6/6/us-intercepts-iranian-attacks-as-israel-continues-to-bomb-lebanon" target="_blank" rel="noopener noreferrer" class="source-chip">Al Jazeera</a>
+        <span class="timeline-label label-verified">Verified</span>
+      </div>
+    </div>
+    <div class="timeline-item verified">
+      <div class="timeline-date">Saturday 6 June 2026</div>
+      <div class="timeline-content">
+        <p><strong>Iran accuses US of ceasefire breach.</strong> Iran's Foreign Ministry denounced US attacks as a "flagrant" violation of the April ceasefire, stating the US "not only lacks the will to reduce tensions" but "seriously endangers the security of the region."</p>
+        <p>Kuwait and Bahrain condemned the Iranian strikes as violations of sovereignty. Egypt, Jordan and Qatar also issued condemnations.</p>
+        <p>The IRGC claimed the clash began when the US attempted to "illegally" escort oil tankers through Hormuz without coordinating with Iranian forces.</p>
+        <a href="https://www.aljazeera.com/news/2026/6/6/us-intercepts-iranian-attacks-as-israel-continues-to-bomb-lebanon" target="_blank" rel="noopener noreferrer" class="source-chip">Al Jazeera</a>
+        <span class="timeline-label label-verified">Verified</span>
+      </div>
+    </div>
+    <div class="timeline-item verified">
+      <div class="timeline-date">Sunday 7 June 2026</div>
+      <div class="timeline-content">
+        <p><strong>Israel strikes Beirut; Iran responds with missiles at Israel.</strong> Israeli forces bombed the southern suburbs of Beirut (Dahiyeh), killing at least 2 people and wounding 20.</p>
+        <p>A senior Iranian official promised a "decisive and painful" response. Hours later, Iran launched ballistic missiles at Israel. The IDF said it intercepted all Iranian ballistic missiles.</p>
+        <p><strong>Trump called Netanyahu urging him "not to strike back,"</strong> adding he was "not happy about it" and that it would "not help" negotiations with Tehran.</p>
+        <a href="https://www.theguardian.com/world/2026/jun/07/israel-escalates-war-hezbollah-airstrikes-beirut" target="_blank" rel="noopener noreferrer" class="source-chip">The Guardian</a>
+        <a href="https://www.aljazeera.com/news/liveblog/2026/6/8/iran-war-live-trump-urges-restraint-after-iranian-missile-attack-on-israel" target="_blank" rel="noopener noreferrer" class="source-chip">Al Jazeera</a>
+        <span class="timeline-label label-verified">Verified</span>
+      </div>
+    </div>
+    <div class="timeline-item verified">
+      <div class="timeline-date">Monday 8 June 2026</div>
+      <div class="timeline-content">
+        <p><strong>Israel strikes inside Iran; hits energy infrastructure.</strong> Israeli military struck targets in western and central Iran including Tehran, Tabriz, and Isfahan.</p>
+        <p>The Karun <strong>petrochemical plant in Mahshahr</strong> was hit. Iran's Mehr news agency reported no casualties but damage is being assessed. This is the first strike on an Iranian energy-related site since the April ceasefire.</p>
+        <p>Iran launched a second wave of missiles toward Israel. Sirens sounded across the country. No casualties reported on either side.</p>
+        <p>Airports in Tehran and Kermanshah cancelled all flights until further notice.</p>
+        <p><strong>Brent crude jumped 4.6%</strong> to $97.37/barrel on the escalation.</p>
+        <a href="https://www.aljazeera.com/news/liveblog/2026/6/8/iran-war-live-trump-urges-restraint-after-iranian-missile-attack-on-israel" target="_blank" rel="noopener noreferrer" class="source-chip">Al Jazeera Live</a>
+        <span class="timeline-label label-verified">Verified</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== SOURCES ===== -->
-<section id="sources">
-  <div class="container">
-    <div class="section-header">
-      <div class="section-label">References</div>
-      <h2 class="section-title">Sources</h2>
-      <p class="section-subtitle">Primary sources used in this report</p>
-    </div>
-
-    <div class="glass-card">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
-        <div>
-          <h4 style="font-weight:700;color:var(--accent-start);margin-bottom:10px;font-size:0.85rem;text-transform:uppercase;letter-spacing:1px;">Official / Military</h4>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="https://www.dvidshub.net/news/567021/centcom-forces-defeat-missiles-drones-launched-iran" target="_blank" rel="noopener noreferrer" class="source-chip" style="justify-content:flex-start;width:fit-content;">CENTCOM — June 5 Incident</a>
-            <span style="font-size:0.8rem;color:var(--secondary-text);">Official US military release on drone interception, radar strikes and missile defence.</span>
-          </div>
-        </div>
-
-        <div>
-          <h4 style="font-weight:700;color:var(--accent-start);margin-bottom:10px;font-size:0.85rem;text-transform:uppercase;letter-spacing:1px;">News Agencies</h4>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="https://www.thehindu.com/news/international/west-asia-conflict-iran-us-israel-war-beirut-strikes-strait-of-hormuz-live-updates-june-8-2026/article71074947.ece" target="_blank" rel="noopener noreferrer" class="source-chip" style="justify-content:flex-start;width:fit-content;">The Hindu — Live Updates 8 June</a>
-            <span style="font-size:0.8rem;color:var(--secondary-text);">AFP-sourced live coverage of Iran-Israel exchange, Mahshahr strike, Hormuz transit fees.</span>
-          </div>
-        </div>
-
-        <div>
-          <h4 style="font-weight:700;color:var(--accent-start);margin-bottom:10px;font-size:0.85rem;text-transform:uppercase;letter-spacing:1px;">US Media</h4>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="https://www.washingtonpost.com/business/2026/06/07/iran-israel-strikes-missiles-trump-netanyahu-8-june-2026/8dc77cb4-62e7-11f1-bdd4-805ebb99a693_story.html" target="_blank" rel="noopener noreferrer" class="source-chip" style="justify-content:flex-start;width:fit-content;">Washington Post — 8 June</a>
-            <span style="font-size:0.8rem;color:var(--secondary-text);">AP-sourced report on Israel-Iran exchange, Yemen missile, Houthi threats.</span>
-            <a href="https://www.npr.org/2026/06/08/g-s1-126844/iran-war-updates" target="_blank" rel="noopener noreferrer" class="source-chip" style="justify-content:flex-start;width:fit-content;margin-top:5px;">NPR — 8 June Live Blog</a>
-            <span style="font-size:0.8rem;color:var(--secondary-text);">Comprehensive coverage of strikes, missile alerts, Saudi Arabia, Hormuz context.</span>
-            <a href="https://www.nbcnews.com/world/iran/live-blog/live-updates-israel-iran-strikes-rcna346556" target="_blank" rel="noopener noreferrer" class="source-chip" style="justify-content:flex-start;width:fit-content;margin-top:5px;">NBC News — Live Updates</a>
-            <span style="font-size:0.8rem;color:var(--secondary-text);">Trump statements, Netanyahu warnings, casualty reports, airspace closures.</span>
-          </div>
-        </div>
-
-        <div>
-          <h4 style="font-weight:700;color:var(--accent-start);margin-bottom:10px;font-size:0.85rem;text-transform:uppercase;letter-spacing:1px;">Regional / Trade</h4>
-          <div style="display:flex;flex-direction:column;gap:10px;">
-            <a href="https://www.trtworld.com/article/3e120e26d015" target="_blank" rel="noopener noreferrer" class="source-chip" style="justify-content:flex-start;width:fit-content;">TRT World — 8 June</a>
-            <span style="font-size:0.8rem;color:var(--secondary-text);">Mahshahr petrochemical strike, missile waves, Israel airspace closure.</span>
-            <a href="https://www.thedailystar.net/business/news/oil-prices-fall-mounting-hopes-de-escalation-us-iran-war-4191796" target="_blank" rel="noopener noreferrer" class="source-chip" style="justify-content:flex-start;width:fit-content;margin-top:5px;">Daily Star / Reuters — 6 June</a>
-            <span style="font-size:0.8rem;color:var(--secondary-text);">Oil price movements, Friday settlement at $93.09 Brent.</span>
-          </div>
-        </div>
+<!-- SECTION 7: RHETORIC TRACKER -->
+<section class="section" id="rhetoric">
+  <h2 class="section-title">Rhetoric Tracker</h2>
+  <p class="section-subtitle">What key actors said - and whether it is operationally meaningful</p>
+  <div class="section-accent"></div>
+  <div class="grid-2">
+    <div class="rhetoric-card">
+      <div class="rhetoric-header">
+        <span class="rhetoric-actor">Donald Trump / US</span>
+        <span class="rhetoric-date">7 June 2026</span>
       </div>
+      <p class="rhetoric-text">"Not happy about it... not to strike back... would not help negotiations with Tehran."</p>
+      <p class="rhetoric-assessment">Trump urged Netanyahu not to retaliate against Iranian missile strikes. The call was confirmed by Trump himself after being initially leaked. Operationally meaningful: US attempting to contain escalation. <a href="https://www.theguardian.com/world/2026/jun/07/israel-escalates-war-hezbollah-airstrikes-beirut" target="_blank" rel="noopener noreferrer" class="source-chip">The Guardian</a></p>
+    </div>
+    <div class="rhetoric-card">
+      <div class="rhetoric-header">
+        <span class="rhetoric-actor">Iranian Foreign Ministry</span>
+        <span class="rhetoric-date">6 June 2026</span>
+      </div>
+      <p class="rhetoric-text">"Flagrant violation of the ceasefire... the US not only lacks the will to reduce tensions but seriously endangers the security of the region."</p>
+      <p class="rhetoric-assessment">Iran framing US strikes as ceasefire breach. Rhetorically significant as it justifies further Iranian action. Not independently verified as a legal assessment. <a href="https://www.aljazeera.com/news/2026/6/6/us-intercepts-iranian-attacks-as-israel-continues-to-bomb-lebanon" target="_blank" rel="noopener noreferrer" class="source-chip">Al Jazeera</a></p>
+    </div>
+    <div class="rhetoric-card">
+      <div class="rhetoric-header">
+        <span class="rhetoric-actor">IRGC (Iran)</span>
+        <span class="rhetoric-date">5-6 June 2026</span>
+      </div>
+      <p class="rhetoric-text">Claimed US attempted to "illegally escort oil tankers" through Hormuz without IRGC coordination, triggering the clash.</p>
+      <p class="rhetoric-assessment">Iranian military framing the incident as US provocation. Markets may not price this as heavily as confirmed military action, but it signals continued Hormuz friction. <a href="https://www.aljazeera.com/news/2026/6/6/us-intercepts-iranian-attacks-as-israel-continues-to-bomb-lebanon" target="_blank" rel="noopener noreferrer" class="source-chip">Al Jazeera</a></p>
+    </div>
+    <div class="rhetoric-card">
+      <div class="rhetoric-header">
+        <span class="rhetoric-actor">Al Jazeera Analyst - Trita Parsi</span>
+        <span class="rhetoric-date">8 June 2026</span>
+      </div>
+      <p class="rhetoric-text">"Battle lines and the lines of deterrence have shifted... Tehran establishes a new line of deterrence around Lebanon."</p>
+      <p class="rhetoric-assessment">Analyst interpretation: Iran's defence of Lebanon represents a strategic shift. If accurate, this implies wider regional commitments that could prolong conflict exposure. <a href="https://www.aljazeera.com/news/liveblog/2026/6/8/iran-war-live-trump-urges-restraint-after-iranian-missile-attack-on-israel" target="_blank" rel="noopener noreferrer" class="source-chip">Al Jazeera</a></p>
+    </div>
+  </div>
+</section>
 
-      <div style="margin-top:25px;padding:16px;background:rgba(255,255,255,0.03);border-radius:10px;">
-        <p style="font-size:0.8rem;color:var(--secondary-text);line-height:1.6;"><strong>Note on sourcing:</strong> This report draws on verified official sources (CENTCOM), established news agencies (AFP, AP, Reuters) and credible international media. Claims attributed to Iranian or Israeli military statements are labelled as such. Where information is unconfirmed or disputed, this is noted. Oil price data reflects exchange-reported futures levels. This report is prepared for commercial briefing purposes and does not constitute financial advice.</p>
+<!-- SECTION 8: CEASEFIRE REALITY CHECK -->
+<section class="section" id="ceasefire">
+  <h2 class="section-title">Ceasefire Reality Check</h2>
+  <p class="section-subtitle">What the truce was meant to cover vs. what actually happened</p>
+  <div class="section-accent"></div>
+  <div class="card">
+    <div class="grid-2">
+      <div>
+        <h4 style="font-size:16px;font-weight:700;color:var(--gold);margin-bottom:16px;">What the Ceasefire Covered</h4>
+        <ul style="list-style:none;padding:0;">
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);">&#10003; Cessation of direct US-Iran hostilities (agreed April 2026)</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);">&#10003; Framework for indirect negotiations on interim deal</li>
+          <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);">&#10003; Iran wanted sanctions waivers, frozen asset access, port blockade lifted</li>
+        </ul>
+        <h4 style="font-size:16px;font-weight:700;color:var(--gold);margin:24px 0 16px;">What Actually Happened</h4>
+        <ul style="list-style:none;padding:0;">
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#10007;</span> Direct US-Iran combat on June 5 (drones, missiles, radar strikes)</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#10007;</span> Iran missiles at Israel on June 7</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#10007;</span> Israel strikes Iranian energy site on June 8</li>
+          <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#10007;</span> Hormuz remains under selective management, not normal shipping</li>
+        </ul>
+      </div>
+      <div>
+        <div class="callout">
+          <div class="callout-icon">&#9888;&#65039;</div>
+          <h4>Key Commercial Point</h4>
+          <p><strong>No major escalation is not the same as real de-escalation.</strong></p>
+          <p>Limited escalation is still escalation when it involves direct US-Iran action, direct Iran-Israel fire, Gulf military targets, shipping routes or energy infrastructure.</p>
+          <p>The April ceasefire is operationally hollow if direct military exchanges continue across multiple fronts.</p>
+        </div>
+        <div style="padding:20px;background:rgba(255,71,87,0.06);border-radius:12px;margin-top:16px;border:1px solid rgba(255,71,87,0.2);">
+          <h4 style="font-size:14px;font-weight:700;color:var(--risk-high);margin-bottom:8px;">Ceasefire Status: BREACHED</h4>
+          <p style="font-size:13px;color:var(--text-offwhite);line-height:1.6;margin:0;">Multiple verified instances of direct military action by all parties since 5 June 2026. The truce framework has not prevented escalation on the ground, in the air, or at sea.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
+
+<!-- SECTION 9: SHIPPING AND CHOKE POINT STATUS -->
+<section class="section" id="shipping">
+  <h2 class="section-title">Shipping and Choke Point Status</h2>
+  <p class="section-subtitle">Hormuz and Bab el-Mandeb: what is actually happening on the water</p>
+  <div class="section-accent"></div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">&#128674;</div>
+        <div class="card-title">Strait of Hormuz</div>
+      </div>
+      <table class="data-table">
+        <tr><td>Status</td><td><strong style="color:var(--risk-high);">Selective management / restricted</strong></td></tr>
+        <tr><td>Normal traffic</td><td>Disrupted since February 2026</td></tr>
+        <tr><td>Iranian protocols</td><td>IRGC coordination required for passage</td></tr>
+        <tr><td>EIA assumption</td><td>Effectively closed until late May; pickup in June</td></tr>
+        <tr><td>Reality (8 June)</td><td>Flows not at pre-conflict levels</td></tr>
+        <tr><td>Oil impact</td><td>~10.5 million b/d shut in (April peak)</td></tr>
+        <tr><td>LNG impact</td><td>Qatari LNG exports disrupted</td></tr>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:12px;"><strong>Critical point:</strong> Selective access through Hormuz is not the same as normal global shipping access. Chinese priority or approved vessel passage does not mean Europe or the UK has normalised supply conditions. <a href="https://www.eia.gov/outlooks/steo/" target="_blank" rel="noopener noreferrer" class="source-chip">EIA STEO</a></p>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">&#128738;</div>
+        <div class="card-title">Bab el-Mandeb / Red Sea</div>
+      </div>
+      <table class="data-table">
+        <tr><td>Status</td><td><strong style="color:var(--risk-medium);">Secondary risk - monitored</strong></td></tr>
+        <tr><td>Houthi activity</td><td>Attacks paused since April ceasefire</td></tr>
+        <tr><td>Threat level</td><td>Houthis warn of reactivation if Iran escalation continues</td></tr>
+        <tr><td>Insurance</td><td>War-risk premiums remain elevated</td></tr>
+        <tr><td>UK/Europe impact</td><td>Indirect via LNG and oil supply chain</td></tr>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:12px;"><strong>Watch point:</strong> If Houthi attacks resume, dual chokepoint crisis becomes a genuine risk. Bab el-Mandeb closure would compound Hormuz disruption and extend shipping reroutes around Africa. No verified Houthi attack during this research window. <a href="https://en.wikipedia.org/wiki/2026_Houthi_strikes_on_Israel" target="_blank" rel="noopener noreferrer" class="source-chip">Wikipedia</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: UPDATED ENERGY MARKET STAT SHEET -->
+<section class="section" id="stats">
+  <h2 class="section-title">Updated Energy Market Stat Sheet</h2>
+  <p class="section-subtitle">Key figures at a glance - verified where possible</p>
+  <div class="section-accent"></div>
+  <div class="grid-4">
+    <div class="stat-card">
+      <div class="stat-value">$97.37</div>
+      <div class="stat-label">Brent Crude /bbl</div>
+      <div class="stat-date">08/06/2026 +4.60%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">119.60p</div>
+      <div class="stat-label">NBP Gas Spot /th</div>
+      <div class="stat-date">05/06/2026</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">EUR 50.79</div>
+      <div class="stat-label">TTF Gas /MWh</div>
+      <div class="stat-date">08/06/2026 +4.73%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">£101.42</div>
+      <div class="stat-label">UK Power Spot /MWh</div>
+      <div class="stat-date">05/06/2026</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">117.05p</div>
+      <div class="stat-label">UK Gas CFD /thm</div>
+      <div class="stat-date">05/06/2026 +37.77% YoY</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">93.69p</div>
+      <div class="stat-label">Cal-27 Gas Forward</div>
+      <div class="stat-date">04/06/2026 +0.4% (30d)</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">~10.5m</div>
+      <div class="stat-label">b/d Shut-in (April)</div>
+      <div class="stat-date">Iraq, Saudi, Kuwait, UAE, Qatar, Bahrain</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$86</div>
+      <div class="stat-label">WB Brent Forecast 2026</div>
+      <div class="stat-date">Assumes disruption ends May</div>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:12px;color:var(--text-muted);margin-top:16px;">Forward pricing not fully verified from public sources. Use live supplier or broker pricing before making a customer recommendation.</p>
+</section>
+
+<!-- SECTION 11: WORLD BANK VS EIA -->
+<section class="section" id="institutions">
+  <h2 class="section-title">World Bank vs EIA</h2>
+  <p class="section-subtitle">How major institutions are framing energy price risk for 2026</p>
+  <div class="section-accent"></div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:linear-gradient(135deg,#4a90d9,#357abd);">WB</div>
+        <div class="card-title">World Bank - April 2026</div>
+      </div>
+      <div style="padding:16px;background:rgba(74,144,217,0.08);border-radius:12px;margin-bottom:16px;">
+        <div style="font-size:28px;font-weight:800;color:var(--text-white);">+24%</div>
+        <div style="font-size:13px;color:var(--text-muted);">Energy price surge projected for 2026</div>
+      </div>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--accent-teal);margin-right:8px;">&#9679;</span> Brent forecast: <strong>$86/barrel</strong> (up from $69 in 2025)</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--accent-teal);margin-right:8px;">&#9679;</span> Overall commodities: <strong>+16%</strong></li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--accent-teal);margin-right:8px;">&#9679;</span> Fertilizer: <strong>+31%</strong> (urea +60%)</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span> Assumes acute disruptions <strong>end in May</strong></li>
+        <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span> Assumes Hormuz returns to pre-war levels by <strong>late 2026</strong></li>
+      </ul>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:12px;"><strong>Analyst note:</strong> The World Bank baseline already implies materially higher energy prices even with disruption easing. Renewed escalation in June makes this assumption look optimistic. <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" target="_blank" rel="noopener noreferrer" class="source-chip">World Bank</a></p>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:linear-gradient(135deg,#e67e22,#d35400);">EIA</div>
+        <div class="card-title">EIA - May 2026 STEO</div>
+      </div>
+      <div style="padding:16px;background:rgba(230,126,34,0.08);border-radius:12px;margin-bottom:16px;">
+        <div style="font-size:28px;font-weight:800;color:var(--text-white);">$106/b</div>
+        <div style="font-size:13px;color:var(--text-muted);">Brent forecast May-June 2026</div>
+      </div>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--accent-teal);margin-right:8px;">&#9679;</span> 10.5 million b/d shut in (April)</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--accent-teal);margin-right:8px;">&#9679;</span> Hormuz: <strong>effectively closed until late May</strong></li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--accent-teal);margin-right:8px;">&#9679;</span> Shipping pickup assumed in <strong>June</strong></li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span> Full normalisation: <strong>later in 2026</strong></li>
+        <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--accent-teal);margin-right:8px;">&#9679;</span> Global inventories falling 8.5m b/d (Q2)</li>
+      </ul>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:12px;"><strong>Analyst note:</strong> The EIA assumes a later reopening and longer recovery than the World Bank baseline. This is closer to current market reality given June escalation. <a href="https://www.eia.gov/outlooks/steo/" target="_blank" rel="noopener noreferrer" class="source-chip">EIA</a></p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:20px;">
+    <h4 style="font-size:16px;font-weight:700;color:var(--gold);margin-bottom:16px;">Commercial Interpretation</h4>
+    <p style="font-size:14px;color:var(--text-offwhite);line-height:1.8;margin-bottom:12px;">If the World Bank baseline already points to materially higher energy prices even with disruption easing, then <strong style="color:#fff;">waiting only makes sense if the customer believes the risk is being overstated</strong>.</p>
+    <p style="font-size:14px;color:var(--text-offwhite);line-height:1.8;margin-bottom:12px;">The EIA's more conservative Hormuz reopening assumption (later than May, full normalisation later in 2026) now looks more realistic than the World Bank's baseline given verified events in early June.</p>
+    <p style="font-size:14px;color:var(--text-offwhite);line-height:1.8;">For UK business customers, this means: <strong style="color:#fff;">the institutional consensus already expects higher energy prices in 2026</strong>. Verified escalation beyond those assumptions only adds upside risk.</p>
+  </div>
+</section>
+
+
+<!-- SECTION 12: SUPPLIER PRICE-BOOK LAG -->
+<section class="section" id="supplier-lag">
+  <h2 class="section-title">Supplier Price-Book Lag and Procurement Window</h2>
+  <p class="section-subtitle">Why wholesale moves may not yet show in supplier quotes</p>
+  <div class="section-accent"></div>
+  <div class="grid-2">
+    <div class="card">
+      <h4 style="font-size:16px;font-weight:700;color:var(--gold);margin-bottom:16px;">How Price-Book Lag Works</h4>
+      <p style="font-size:14px;color:var(--text-offwhite);line-height:1.8;margin-bottom:12px;">Supplier price books are typically updated on a schedule - daily, weekly, or when specific thresholds are breached. When wholesale markets move rapidly due to geopolitical events, there can be a <strong style="color:#fff;">gap between the wholesale price movement and the supplier's published price book</strong>.</p>
+      <p style="font-size:14px;color:var(--text-offwhite);line-height:1.8;margin-bottom:12px;">This gap creates a potential <strong style="color:var(--accent-teal);">procurement window</strong>: a period where a customer can secure pricing before the supplier's book catches up with wholesale reality.</p>
+      <p style="font-size:14px;color:var(--text-offwhite);line-height:1.8;">The window is typically <strong style="color:#fff;">hours to days</strong>, not weeks. Once the supplier updates, the opportunity closes.</p>
+    </div>
+    <div class="card">
+      <h4 style="font-size:16px;font-weight:700;color:var(--gold);margin-bottom:16px;">Current Assessment</h4>
+      <div style="padding:16px;background:rgba(255,165,2,0.08);border-radius:12px;border:1px solid rgba(255,165,2,0.2);margin-bottom:16px;">
+        <p style="font-size:14px;color:var(--text-offwhite);line-height:1.7;margin:0;"><strong style="color:var(--risk-medium);">Supplier book lag is not fully verified from public sources</strong>, but it is a normal commercial risk when wholesale markets move quickly.</p>
+      </div>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span> Wholesale gas and power have moved higher over the past 30 days</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span> Brent has jumped 4.6% on June 8 escalation</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span> TTF up 4.73% on the day</li>
+        <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--accent-teal);margin-right:8px;">&#9679;</span> Customers should test live pricing immediately</li>
+      </ul>
+    </div>
+  </div>
+  <div class="callout" style="margin-top:20px;">
+    <div class="callout-icon">&#128273;</div>
+    <h4>Practical Guidance</h4>
+    <p>If wholesale markets have moved but supplier books have not fully caught up, <strong style="color:#fff;">customers may have a short window to secure pricing before supplier repricing lands</strong>.</p>
+    <p>If the forward market is cheaper than the near-term market, check whether the contract end date allows buying into that future period now.</p>
+    <p style="margin-bottom:0;"><strong>Do not wait for perfect clarity.</strong> The window can close within hours or days.</p>
+  </div>
+</section>
+
+<!-- SECTION 13: MARKET INTERPRETATION -->
+<section class="section" style="padding-top:0;">
+  <h2 class="section-title">Market Interpretation</h2>
+  <p class="section-subtitle">What the market is pricing now and what could move it next</p>
+  <div class="section-accent"></div>
+  <div class="card">
+    <div class="grid-2">
+      <div>
+        <h4 style="font-size:15px;font-weight:700;color:var(--accent-teal);margin-bottom:12px;">What the Market is Pricing</h4>
+        <ul style="list-style:none;padding:0;margin-bottom:20px;">
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9679;</span> Geopolitical risk premium remains embedded</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9679;</span> Hormuz supply uncertainty priced into near-term</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span> Forward curve showing some risk discount further out</li>
+          <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span> Traders taking escalation seriously, not fading headlines</li>
+        </ul>
+        <h4 style="font-size:15px;font-weight:700;color:var(--accent-teal);margin-bottom:12px;">What Would Trigger Next Leg Up</h4>
+        <ul style="list-style:none;padding:0;">
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9650;</span> Full Hormuz closure or blockade</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9650;</span> Strike on major Iranian oil/gas facility</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9650;</span> Houthi reactivation in Red Sea</li>
+          <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9650;</span> Gulf states drawn into conflict</li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="font-size:15px;font-weight:700;color:var(--accent-teal);margin-bottom:12px;">What Would Reduce Risk</h4>
+        <ul style="list-style:none;padding:0;margin-bottom:20px;">
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-low);margin-right:8px;">&#9660;</span> Verified full Hormuz reopening</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-low);margin-right:8px;">&#9660;</span> Confirmed US-Iran agreement</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-low);margin-right:8px;">&#9660;</span> War-risk premiums falling materially</li>
+          <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-low);margin-right:8px;">&#9660;</span> TTF/NBP sustained decline on physical flows</li>
+        </ul>
+        <div style="padding:16px;background:rgba(0,211,154,0.06);border-radius:12px;border-left:4px solid var(--accent-teal);">
+          <h4 style="font-size:14px;font-weight:700;color:var(--accent-teal);margin-bottom:8px;">Headline vs Physical</h4>
+          <p style="font-size:13px;color:var(--text-offwhite);line-height:1.6;margin:0;">Temporary diplomatic language is not enough. Physical supply improvement - flows, storage, insurance, supplier books - is required for genuine de-escalation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 14: IMPACT ON UK BUSINESS ENERGY PRICES -->
+<section class="section" id="impact">
+  <h2 class="section-title">Impact on UK Business Energy Prices</h2>
+  <p class="section-subtitle">Why global events reach your energy bill</p>
+  <div class="section-accent"></div>
+  <div class="grid-2">
+    <div class="card">
+      <h4 style="font-size:16px;font-weight:700;color:var(--gold);margin-bottom:16px;">The Transmission Chain</h4>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--risk-high);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;">1</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;">Middle East conflict</div>
+            <div style="font-size:12px;color:var(--text-muted);">US-Iran, Iran-Israel, Hormuz risk</div>
+          </div>
+        </div>
+        <div style="text-align:center;color:var(--text-muted);font-size:18px;">&#8595;</div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--risk-medium);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;">2</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;">Oil &amp; LNG supply disruption</div>
+            <div style="font-size:12px;color:var(--text-muted);">Brent rises, LNG flows constrained</div>
+          </div>
+        </div>
+        <div style="text-align:center;color:var(--text-muted);font-size:18px;">&#8595;</div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--accent-purple);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;">3</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;">European gas prices rise</div>
+            <div style="font-size:12px;color:var(--text-muted);">TTF, NBP reflect supply risk</div>
+          </div>
+        </div>
+        <div style="text-align:center;color:var(--text-muted);font-size:18px;">&#8595;</div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--accent-teal);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;">4</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;">UK gas &amp; power prices increase</div>
+            <div style="font-size:12px;color:var(--text-muted);">Gas sets electricity marginal price</div>
+          </div>
+        </div>
+        <div style="text-align:center;color:var(--text-muted);font-size:18px;">&#8595;</div>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#262262;">5</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;">Supplier price books reprice</div>
+            <div style="font-size:12px;color:var(--text-muted);">Business energy quotes rise</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:20px;">
+        <h4 style="font-size:16px;font-weight:700;color:var(--gold);margin-bottom:16px;">Who is Most Exposed</h4>
+        <ul style="list-style:none;padding:0;">
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9679;</span> Businesses <strong>within 12 months</strong> of contract end</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9679;</span> Customers on <strong>variable, deemed or rollover</strong> rates</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9679;</span> <strong>High-consumption</strong> electricity users</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#9679;</span> <strong>Gas-intensive</strong> industries</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span> <strong>Multi-site operators</strong> with rolling renewals</li>
+          <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-medium);margin-right:8px;">&#9679;</span> <strong>Hospitality, care, manufacturing</strong> - tight margins</li>
+        </ul>
+      </div>
+      <div class="callout">
+        <div class="callout-icon">&#128161;</div>
+        <h4>Why Waiting is Risky</h4>
+        <p style="margin-bottom:0;">If the World Bank baseline already points to materially higher energy prices in 2026, and the EIA's more cautious Hormuz reopening timeline is proving accurate, then <strong style="color:#fff;">waiting is a bet that all of this risk is being overstated</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 15: DURATION SCENARIOS -->
+<section class="section" id="scenarios">
+  <h2 class="section-title">Duration Scenarios</h2>
+  <p class="section-subtitle">What different disruption timelines mean for UK business buyers</p>
+  <div class="section-accent"></div>
+  <div class="grid-3">
+    <div class="card" style="border-top:4px solid var(--risk-low);">
+      <h4 style="font-size:16px;font-weight:700;color:var(--risk-low);margin-bottom:8px;">Short Disruption</h4>
+      <div style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">1-2 weeks</div>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);border-bottom:1px solid var(--card-border);"><strong>Brent:</strong> $90-100 range</li>
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);border-bottom:1px solid var(--card-border);"><strong>TTF/NBP:</strong> Elevated but contained</li>
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);border-bottom:1px solid var(--card-border);"><strong>Supplier books:</strong> Some repricing, limited withdrawal</li>
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);border-bottom:1px solid var(--card-border);"><strong>Quote validity:</strong> May shorten slightly</li>
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);border-bottom:1px solid var(--card-border);"><strong>Forward market:</strong> Still useful for longer fixes</li>
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);"><strong>Action:</strong> Review now; consider fixing longer</li>
+      </ul>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:12px;">Closest to World Bank baseline assumption. Still implies higher 2026 prices than 2025.</p>
+    </div>
+    <div class="card" style="border-top:4px solid var(--risk-medium);">
+      <h4 style="font-size:16px;font-weight:700;color:var(--risk-medium);margin-bottom:8px;">Medium Disruption</h4>
+      <div style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">1-3 months</div>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);border-bottom:1px solid var(--card-border);"><strong>Brent:</strong> $100-120 possible</li>
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);border-bottom:1px solid var(--card-border);"><strong>TTF/NBP:</strong> Significantly elevated</li>
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);border-bottom:1px solid var(--card-border);"><strong>Supplier books:</strong> Rapid repricing, offers withdrawn</li>
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);border-bottom:1px solid var(--card-border);"><strong>Quote validity:</strong> Shortened dramatically</li>
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);border-bottom:1px solid var(--card-border);"><strong>Forward market:</strong> Risk premium builds further out</li>
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);"><strong>Action:</strong> Urgent review; secure pricing immediately</li>
+      </ul>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:12px;">Exceeds World Bank baseline. EIA assumption of "later 2026" normalisation becomes relevant.</p>
+    </div>
+    <div class="card" style="border-top:4px solid var(--risk-high);">
+      <h4 style="font-size:16px;font-weight:700;color:var(--risk-high);margin-bottom:8px;">Severe Escalation</h4>
+      <div style="font-size:13px;color:var(--text-muted);margin-bottom:16px;">Beyond 3 months / widening regionally</div>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);border-bottom:1px solid var(--card-border);"><strong>Brent:</strong> $120+ possible</li>
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);border-bottom:1px solid var(--card-border);"><strong>TTF/NBP:</strong> Major spike, potential volatility</li>
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);border-bottom:1px solid var(--card-border);"><strong>Supplier books:</strong> Freeze or extreme pricing</li>
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);border-bottom:1px solid var(--card-border);"><strong>Quote validity:</strong> Hours or same-day only</li>
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);border-bottom:1px solid var(--card-border);"><strong>Forward market:</strong> Cheaper periods may disappear</li>
+        <li style="padding:6px 0;font-size:13px;color:var(--text-offwhite);"><strong>Action:</strong> Emergency procurement; fix anything available</li>
+      </ul>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:12px;">Well above World Bank baseline. Stress scenario for all institutional forecasts.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 16: WHAT WOULD CHANGE THIS VIEW -->
+<section class="section" style="padding-top:0;">
+  <h2 class="section-title">What Would Change This View?</h2>
+  <p class="section-subtitle">Evidence that would reduce risk vs. evidence that would increase it</p>
+  <div class="section-accent"></div>
+  <div class="grid-2">
+    <div class="card" style="border-left:4px solid var(--risk-low);">
+      <h4 style="font-size:16px;font-weight:700;color:var(--risk-low);margin-bottom:16px;">Would Reduce Risk</h4>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-low);margin-right:8px;">&#10003;</span> Verified full reopening of Hormuz</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-low);margin-right:8px;">&#10003;</span> Normal commercial traffic without selective passage</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-low);margin-right:8px;">&#10003;</span> War-risk premiums falling materially</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-low);margin-right:8px;">&#10003;</span> Confirmed US-Iran agreement with implementation</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-low);margin-right:8px;">&#10003;</span> Qatari LNG normalisation</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-low);margin-right:8px;">&#10003;</span> TTF/NBP sustained decline on physical flows</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-low);margin-right:8px;">&#10003;</span> Supplier price books reducing, not holding</li>
+        <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-low);margin-right:8px;">&#10003;</span> No further direct strikes over multiple sessions</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:4px solid var(--risk-high);">
+      <h4 style="font-size:16px;font-weight:700;color:var(--risk-high);margin-bottom:16px;">Would Increase Risk</h4>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#10007;</span> Full Hormuz closure</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#10007;</span> Strike on major Iranian oil/gas export facility</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#10007;</span> Houthi reactivation in Red Sea / Bab el-Mandeb</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#10007;</span> Gulf states (Saudi, UAE, Kuwait) drawn into conflict</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#10007;</span> Israeli strike on Iranian nuclear facility</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#10007;</span> Iran attacks Saudi or UAE energy infrastructure</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#10007;</span> European gas storage fails to refill</li>
+        <li style="padding:8px 0;font-size:13px;color:var(--text-offwhite);"><span style="color:var(--risk-high);margin-right:8px;">&#10007;</span> US-Iran talks collapse publicly</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 17: CUSTOMER ACTION -->
+<section class="section" id="action">
+  <h2 class="section-title">Customer Action</h2>
+  <p class="section-subtitle">What UK businesses should consider now</p>
+  <div class="section-accent"></div>
+  <div class="card" style="background:linear-gradient(135deg,rgba(0,211,154,0.1) 0%,rgba(221,64,255,0.1) 100%);border:1px solid var(--glass-border);">
+    <h4 style="font-size:22px;font-weight:700;margin-bottom:20px;color:#fff;text-align:center;">Waiting is Not Neutral</h4>
+    <p style="font-size:16px;color:var(--text-offwhite);line-height:1.8;text-align:center;max-width:800px;margin:0 auto 24px;">It is a bet that the World Bank baseline, current market pricing, unresolved military escalation, shipping risk, supplier price-book lag and the unsettled diplomatic position are all overstating the risk.</p>
+    <div style="max-width:700px;margin:0 auto;">
+      <div style="background:rgba(255,255,255,0.06);border-radius:16px;padding:28px;margin-bottom:20px;">
+        <h4 style="font-size:18px;font-weight:700;color:var(--gold);margin-bottom:16px;text-align:center;">For Customers Within 12 Months of Contract End</h4>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div style="display:flex;align-items:flex-start;gap:12px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--accent-gradient);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;">1</div>
+            <div style="font-size:14px;color:var(--text-offwhite);line-height:1.6;"><strong>Review immediately.</strong> Do not wait for stability or clarity.</div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--accent-gradient);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;">2</div>
+            <div style="font-size:14px;color:var(--text-offwhite);line-height:1.6;"><strong>Test available supplier pricing.</strong> Get live quotes from multiple suppliers.</div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--accent-gradient);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;">3</div>
+            <div style="font-size:14px;color:var(--text-offwhite);line-height:1.6;"><strong>Compare short-term and longer-term options.</strong> Look at 12, 24, 36-month pricing.</div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px;">
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--accent-gradient);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;">4</div>
+            <div style="font-size:14px;color:var(--text-offwhite);line-height:1.6;"><strong>Consider fixing now and fixing longer (36+ months)</strong> where pricing and risk profile support it.</div>
+          </div>
+        </div>
+      </div>
+      <div style="background:rgba(255,71,87,0.08);border-radius:16px;padding:20px;border:1px solid rgba(255,71,87,0.2);">
+        <p style="font-size:14px;color:var(--text-offwhite);line-height:1.7;margin:0;text-align:center;"><strong style="color:#fff;">Cheaper further out does not mean cheaper later.</strong> It means there may be an opportunity now, while that period is still priced as future delivery.</p>
+      </div>
+    </div>
+  </div>
+  <div class="grid-2" style="margin-top:20px;">
+    <div class="callout">
+      <div class="callout-icon">&#128200;</div>
+      <h4>The Futures Market Point</h4>
+      <p>If the customer can currently contract into a cheaper future market, <strong style="color:#fff;">waiting does not protect that price</strong>. Waiting simply moves the customer closer to delivery, where today's risk premium can become tomorrow's contract price.</p>
+    </div>
+    <div class="callout">
+      <div class="callout-icon">&#9200;</div>
+      <h4>Timing Matters</h4>
+      <p>The futures market is only useful while the customer is still able to buy that future delivery period. <strong style="color:#fff;">As time passes, that future period becomes the near-term market</strong>. If the same risks are still present, the cheaper price may disappear.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECTION 18: SOURCE QUALITY AND CONFIDENCE -->
+<section class="section">
+  <h2 class="section-title">Source Quality and Confidence</h2>
+  <p class="section-subtitle">How we assess the reliability of information in this report</p>
+  <div class="section-accent"></div>
+  <div class="grid-3">
+    <div class="card" style="border-top:4px solid var(--risk-low);">
+      <h4 style="font-size:16px;font-weight:700;color:var(--risk-low);margin-bottom:16px;">Highest Confidence</h4>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:12px;color:var(--text-offwhite);"><strong>CENTCOM:</strong> Verified US interception of Iranian drones/missiles and strikes on radar sites. Direct official US military statement.</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:12px;color:var(--text-offwhite);"><strong>Trading Economics:</strong> Verified market prices for Brent, TTF, UK Gas from exchange-linked CFD data.</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:12px;color:var(--text-offwhite);"><strong>World Bank:</strong> Verified April 2026 Commodity Markets Outlook press release with direct quotes.</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:12px;color:var(--text-offwhite);"><strong>EIA:</strong> Verified May 2026 STEO assumptions on Hormuz, production shut-ins, Brent forecast.</li>
+        <li style="padding:8px 0;font-size:12px;color:var(--text-offwhite);"><strong>The Guardian / Al Jazeera:</strong> Verified Iran missiles at Israel, Trump-Netanyahu call, Israeli strikes on Iran.</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:4px solid var(--risk-medium);">
+      <h4 style="font-size:16px;font-weight:700;color:var(--risk-medium);margin-bottom:16px;">Medium Confidence</h4>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:12px;color:var(--text-offwhite);"><strong>Smart Energy UK:</strong> NBP and power spot/forward prices. Secondary reporting, plausible alignment with exchange data.</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:12px;color:var(--text-offwhite);"><strong>Forward curve shape:</strong> Based on verified settlement data (Sum-27, Cal-27, etc.) but interpretation is analyst judgment.</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:12px;color:var(--text-offwhite);"><strong>Iranian casualty claims:</strong> Mehr news agency (semi-official) reported no casualties at Mahshahr. Independent verification limited.</li>
+        <li style="padding:8px 0;font-size:12px;color:var(--text-offwhite);"><strong>Trump-Netanyahu call details:</strong> Confirmed by Trump after media leak. Specific wording may vary by source.</li>
+      </ul>
+    </div>
+    <div class="card" style="border-top:4px solid var(--text-muted);">
+      <h4 style="font-size:16px;font-weight:700;color:var(--text-muted);margin-bottom:16px;">Unconfirmed / Watch Points</h4>
+      <ul style="list-style:none;padding:0;">
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:12px;color:var(--text-offwhite);"><strong>Supplier price-book lag:</strong> Not externally verified. Inferred from normal market behaviour.</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:12px;color:var(--text-offwhite);"><strong>IAEA resolution on Iran:</strong> Not verified from public sources during this research window.</li>
+        <li style="padding:8px 0;border-bottom:1px solid var(--card-border);font-size:12px;color:var(--text-offwhite);"><strong>Yemen/Houthi missile activity:</strong> No verified attack during this specific research window (5-8 June).</li>
+        <li style="padding:8px 0;font-size:12px;color:var(--text-offwhite);"><strong>Gulf-state diplomatic intervention:</strong> Claims from earlier periods not re-verified during this window.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 19: SOURCE LINKS USED -->
+<section class="section" id="sources">
+  <h2 class="section-title">Source Links Used</h2>
+  <p class="section-subtitle">All external sources referenced in this report, grouped by category</p>
+  <div class="section-accent"></div>
+  <div class="source-dir">
+    <div class="source-category">
+      <h4>Market Prices</h4>
+      <a href="https://tradingeconomics.com/commodity/brent-crude-oil" target="_blank" rel="noopener noreferrer" class="source-item">Trading Economics - Brent Crude<small>Current and historical Brent crude oil prices</small></a>
+      <a href="https://tradingeconomics.com/commodity/eu-natural-gas" target="_blank" rel="noopener noreferrer" class="source-item">Trading Economics - EU Natural Gas (TTF)<small>Dutch TTF natural gas benchmark prices</small></a>
+      <a href="https://tradingeconomics.com/commodity/uk-natural-gas" target="_blank" rel="noopener noreferrer" class="source-item">Trading Economics - UK Natural Gas<small>UK NBP natural gas prices</small></a>
+      <a href="https://www.smart-energy.uk/post/daily-energy-market-report" target="_blank" rel="noopener noreferrer" class="source-item">Smart Energy UK - Daily Market Report<small>UK gas and power spot/forward prices</small></a>
+    </div>
+    <div class="source-category">
+      <h4>Forward Curve / Futures Pricing</h4>
+      <a href="https://www.smart-energy.uk/post/daily-energy-market-report" target="_blank" rel="noopener noreferrer" class="source-item">Smart Energy UK - Forward Prices<small>UK gas and power forward settlement data</small></a>
+      <a href="https://www.investing.com/commodities/uk-nbp-natural-gas-quaterly-futures-historical-data" target="_blank" rel="noopener noreferrer" class="source-item">Investing.com - NBP Futures<small>UK NBP natural gas quarterly futures</small></a>
+      <a href="https://www.investing.com/commodities/dutch-ttf-gas-c1-futures-historical-data" target="_blank" rel="noopener noreferrer" class="source-item">Investing.com - TTF Futures<small>Dutch TTF natural gas futures historical data</small></a>
+    </div>
+    <div class="source-category">
+      <h4>Shipping and Security</h4>
+      <a href="https://www.bbc.co.uk/news/articles/c4geg0eeyjeo" target="_blank" rel="noopener noreferrer" class="source-item">BBC News - Hormuz Shipping<small>Strait of Hormuz shipping routes and risk</small></a>
+      <a href="https://www.marinevesseltraffic.com/HORMUZ-STRAIT/ship-traffic-tracker" target="_blank" rel="noopener noreferrer" class="source-item">Marine Vessel Traffic - Hormuz<small>Live Hormuz strait ship traffic tracker</small></a>
+    </div>
+    <div class="source-category">
+      <h4>Geopolitical Developments</h4>
+      <a href="https://www.centcom.mil/MEDIA/PUBLIC-RELEASES/Article/4510668/centcom-forces-defeat-missiles-drones-launched-by-iran/" target="_blank" rel="noopener noreferrer" class="source-item">CENTCOM - June 5 Interceptions<small>Official US military statement on Iran drone/missile interceptions</small></a>
+      <a href="https://www.aljazeera.com/news/2026/6/6/us-intercepts-iranian-attacks-as-israel-continues-to-bomb-lebanon" target="_blank" rel="noopener noreferrer" class="source-item">Al Jazeera - US-Iran June 5 Clash<small>Detailed reporting on Hormuz incident and aftermath</small></a>
+      <a href="https://www.theguardian.com/world/2026/jun/07/israel-escalates-war-hezbollah-airstrikes-beirut" target="_blank" rel="noopener noreferrer" class="source-item">The Guardian - Iran Missiles at Israel<small>Iran launches missiles at Israel, Trump urges restraint</small></a>
+      <a href="https://www.aljazeera.com/news/liveblog/2026/6/8/iran-war-live-trump-urges-restraint-after-iranian-missile-attack-on-israel" target="_blank" rel="noopener noreferrer" class="source-item">Al Jazeera Live - June 8 Updates<small>Israel strikes Iran, energy site hit, second missile wave</small></a>
+    </div>
+    <div class="source-category">
+      <h4>Macro Institutions</h4>
+      <a href="https://www.worldbank.org/en/news/press-release/2026/04/28/commodity-markets-outlook-april-2026-press-release" target="_blank" rel="noopener noreferrer" class="source-item">World Bank - Commodity Markets Outlook<small>April 2026: 24% energy price surge forecast</small></a>
+      <a href="https://www.worldbank.org/en/research/commodity-markets" target="_blank" rel="noopener noreferrer" class="source-item">World Bank - Commodity Markets<small>Main commodity markets research page</small></a>
+      <a href="https://www.eia.gov/outlooks/steo/" target="_blank" rel="noopener noreferrer" class="source-item">EIA - Short-Term Energy Outlook<small>May 2026 STEO: Hormuz, production, Brent forecasts</small></a>
+    </div>
+    <div class="source-category">
+      <h4>UK Energy Context</h4>
+      <a href="https://www.neso.energy/" target="_blank" rel="noopener noreferrer" class="source-item">NESO - National Energy System Operator<small>UK electricity and gas system operator</small></a>
+      <a href="https://www.ofgem.gov.uk/" target="_blank" rel="noopener noreferrer" class="source-item">Ofgem - Energy Regulator<small>UK energy market regulation and data</small></a>
+    </div>
+    <div class="source-category">
+      <h4>Images / Visual Evidence</h4>
+      <a href="https://www.bbc.co.uk/news/articles/c4geg0eeyjeo" target="_blank" rel="noopener noreferrer" class="source-item">BBC - Hormuz Shipping Map<small>Strait of Hormuz shipping route visualisation</small></a>
+      <a href="https://www.britannica.com/video/Overview-tankers-natural-gas/-192447" target="_blank" rel="noopener noreferrer" class="source-item">Britannica - LNG Tanker<small>Liquefied natural gas transportation by sea</small></a>
+      <a href="https://rmi.org/the-energy-infrastructure-reinvestment-opportunity-accelerating-the-transition-of-the-oil-and-gas-sector/" target="_blank" rel="noopener noreferrer" class="source-item">RMI - Oil Refinery<small>Energy infrastructure imagery</small></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer class="footer">
-  <img src="https://switch365.com/assets/img/logos/switch365-energy-comparison-website.svg" alt="Switch 365 Ltd" class="footer-logo">
-  <p class="footer-text">Switch 365 Ltd | Energy Market Intelligence</p>
-  <p class="footer-text">Last Updated: Monday 8 June 2026 | Research Window: Friday 5 June to Monday 8 June 2026</p>
-  <p class="footer-text" style="margin-top:15px;max-width:700px;margin-left:auto;margin-right:auto;">This report is produced by Switch 365 Ltd for internal briefing and customer guidance purposes. It is not financial advice, not a regulated investment recommendation, and not a substitute for independent procurement advice. Every business should assess its own consumption profile, contract status, risk tolerance and budget position before making procurement decisions. Wholesale prices are indicative and subject to change. Past performance is not a reliable indicator of future results.</p>
+  <p><strong>Switch 365 Ltd</strong> - UK Commercial Energy Consultancy</p>
+  <p style="margin-top:8px;">This report is for market intelligence purposes only. It does not constitute financial advice. Verify all prices with live supplier quotes before making procurement decisions.</p>
+  <p style="margin-top:8px;">Report Date: 08/06/2026 | Research Window: 05/06/2026 - 08/06/2026</p>
+  <p style="margin-top:12px;"><a href="https://switch365.com/" target="_blank" rel="noopener noreferrer" style="color:var(--accent-teal);">switch365.com</a></p>
 </footer>
 
-<!-- JavaScript -->
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
 <script>
-  function toggleNav() {
-    document.getElementById('sideNav').classList.toggle('open');
-    document.getElementById('navOverlay').classList.toggle('open');
-  }
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      document.getElementById('sideNav').classList.remove('open');
-      document.getElementById('navOverlay').classList.remove('open');
+// ===== NAVIGATION =====
+function toggleNav() {
+  document.getElementById('navSidebar').classList.toggle('open');
+  document.getElementById('navOverlay').classList.toggle('open');
+}
+
+// ===== SCROLL TOP BUTTON =====
+window.addEventListener('scroll', function() {
+  document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 500);
+});
+
+// ===== CHART.JS CONFIG =====
+Chart.defaults.color = '#a0a0c0';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.08)';
+Chart.defaults.font.family = 'Montserrat';
+
+// Forward Curve Chart
+const forwardCtx = document.getElementById('forwardCurveChart');
+if (forwardCtx) {
+  new Chart(forwardCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Near-Term\n(Jul-26)', '3-Mo\n(Q3-26)', '6-Mo\n(Q4-26)', '12-Mo\n(Q2-27)', '18-Mo\n(Cal-27)', '24-Mo\n(Cal-28)'],
+      datasets: [{
+        label: 'UK Gas Forward (p/th)',
+        data: [117.93, 118.49, 122.16, 118.21, 93.69, 71.97],
+        backgroundColor: [
+          'rgba(255,71,87,0.7)',
+          'rgba(255,165,2,0.7)',
+          'rgba(255,215,0,0.7)',
+          'rgba(0,211,154,0.7)',
+          'rgba(0,211,154,0.5)',
+          'rgba(221,64,255,0.5)'
+        ],
+        borderColor: [
+          'rgba(255,71,87,1)',
+          'rgba(255,165,2,1)',
+          'rgba(255,215,0,1)',
+          'rgba(0,211,154,1)',
+          'rgba(0,211,154,0.8)',
+          'rgba(221,64,255,0.8)'
+        ],
+        borderWidth: 1,
+        borderRadius: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(38,34,98,0.95)',
+          titleColor: '#fff',
+          bodyColor: '#dadada',
+          borderColor: 'rgba(255,255,255,0.15)',
+          borderWidth: 1,
+          padding: 12
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: false,
+          min: 60,
+          title: {
+            display: true,
+            text: 'pence / therm',
+            color: '#a0a0c0',
+            font: { size: 11 }
+          },
+          grid: { color: 'rgba(255,255,255,0.06)' }
+        },
+        x: {
+          grid: { display: false }
+        }
+      }
     }
   });
-  const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, observerOptions);
-  document.querySelectorAll('.fade-in').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-  });
+}
 </script>
-
 </body>
 </html>
