@@ -465,7 +465,9 @@ function toggleNav() {
 
     <div class="card-grid card-grid-2" style="margin-bottom:16px;">
       <div class="card" style="padding:12px;">
-        <img src="price-range-board.png" alt="NBP Offered Gas Price Range chart showing W-26 and S-27 price movements from April to July 2026" style="width:100%;height:auto;border-radius:8px;display:block;">
+        <div class="chart-container chart-container-small">
+          <canvas id="gasChart"></canvas>
+        </div>
         <p style="font-size:11px;color:var(--text-muted);margin-top:10px;text-align:center;">NBP Offered Gas Price Range — internal Switch 365 supplier/broker pricing evidence</p>
       </div>
       <div class="card">
@@ -555,7 +557,9 @@ function toggleNav() {
 
     <div class="card-grid card-grid-2" style="margin-bottom:16px;">
       <div class="card" style="padding:12px;">
-        <img src="price-range-board.png" alt="UK Power Offered Price Range chart showing W-26 and S-27 price movements from April to July 2026" style="width:100%;height:auto;border-radius:8px;display:block;">
+        <div class="chart-container chart-container-small">
+          <canvas id="powerChart"></canvas>
+        </div>
         <p style="font-size:11px;color:var(--text-muted);margin-top:10px;text-align:center;">UK Power Offered Price Range — internal Switch 365 supplier/broker pricing evidence</p>
       </div>
       <div class="card">
@@ -1869,7 +1873,165 @@ const commonOptions = {
   }
 };
 
-// Pricing boards use uploaded image assets — no Chart.js charts needed for offered price range modules
+// NBP GAS CHART
+const gasCtx = document.getElementById('gasChart');
+if (gasCtx) {
+  new Chart(gasCtx, {
+    type: 'line',
+    data: {
+      labels: ['14 Apr', '21 Apr', '28 Apr', '05 May', '12 May', '19 May', '26 May', '02 Jun', '09 Jun', '16 Jun', '23 Jun', '30 Jun', '01 Jul'],
+      datasets: [
+        {
+          label: 'W-26 (Red - Higher Risk)',
+          data: [120.00, 122.00, 125.00, 128.00, 120.00, 115.00, 105.00, 108.00, 112.00, 95.00, 98.00, 109.00, 109.50],
+          borderColor: '#e63946',
+          backgroundColor: 'rgba(230, 57, 70, 0.08)',
+          borderWidth: 2.5,
+          tension: 0.3,
+          fill: true,
+          pointRadius: 3,
+          pointBackgroundColor: '#e63946',
+          pointBorderColor: '#fff',
+          pointBorderWidth: 1,
+        },
+        {
+          label: 'S-27 (Blue - Further Out)',
+          data: [80.00, 80.00, 78.00, 82.00, 80.00, 80.00, 78.00, 79.00, 81.00, 78.00, 79.00, 80.00, 81.00],
+          borderColor: '#0077b6',
+          backgroundColor: 'rgba(0, 119, 182, 0.08)',
+          borderWidth: 2.5,
+          tension: 0.3,
+          fill: true,
+          pointRadius: 3,
+          pointBackgroundColor: '#0077b6',
+          pointBorderColor: '#fff',
+          pointBorderWidth: 1,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        title: {
+          display: true,
+          text: 'NBP Offered Gas Price Range (p/therm)',
+          color: '#ffffff',
+          font: { family: 'Montserrat', size: 13, weight: '600' },
+          padding: { bottom: 12 }
+        },
+        legend: {
+          labels: { color: '#dadada', font: { family: 'Montserrat', size: 11 }, boxWidth: 18, padding: 15 },
+          position: 'top'
+        },
+        tooltip: {
+          backgroundColor: 'rgba(20, 18, 60, 0.95)',
+          titleColor: '#ffffff',
+          bodyColor: '#dadada',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          titleFont: { family: 'Montserrat', size: 12 },
+          bodyFont: { family: 'Montserrat', size: 11 },
+          padding: 10,
+          cornerRadius: 8,
+          callbacks: { label: function(c) { return c.dataset.label + ': ' + c.parsed.y.toFixed(2) + ' p/th'; } }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#a0a0c0', font: { family: 'Montserrat', size: 9 }, maxRotation: 45 },
+          grid: { color: 'rgba(255,255,255,0.04)' }
+        },
+        y: {
+          ticks: { color: '#a0a0c0', font: { family: 'Montserrat', size: 10 } },
+          grid: { color: 'rgba(255,255,255,0.04)' },
+          title: { display: true, text: 'p/therm', color: '#a0a0c0', font: { size: 10 } }
+        }
+      }
+    }
+  });
+}
+
+// UK POWER CHART
+const powerCtx = document.getElementById('powerChart');
+if (powerCtx) {
+  new Chart(powerCtx, {
+    type: 'line',
+    data: {
+      labels: ['14 Apr', '21 Apr', '28 Apr', '05 May', '12 May', '19 May', '26 May', '02 Jun', '09 Jun', '16 Jun', '23 Jun', '30 Jun', '01 Jul'],
+      datasets: [
+        {
+          label: 'W-26 (Red - Higher Risk)',
+          data: [98.00, 95.00, 97.00, 100.00, 102.00, 105.00, 100.00, 103.00, 106.00, 98.00, 97.00, 98.50, 99.00],
+          borderColor: '#e63946',
+          backgroundColor: 'rgba(230, 57, 70, 0.08)',
+          borderWidth: 2.5,
+          tension: 0.3,
+          fill: true,
+          pointRadius: 3,
+          pointBackgroundColor: '#e63946',
+          pointBorderColor: '#fff',
+          pointBorderWidth: 1,
+        },
+        {
+          label: 'S-27 (Blue - Further Out)',
+          data: [78.00, 77.00, 78.00, 80.00, 80.00, 79.00, 78.00, 79.00, 80.00, 77.00, 76.00, 75.75, 76.00],
+          borderColor: '#0077b6',
+          backgroundColor: 'rgba(0, 119, 182, 0.08)',
+          borderWidth: 2.5,
+          tension: 0.3,
+          fill: true,
+          pointRadius: 3,
+          pointBackgroundColor: '#0077b6',
+          pointBorderColor: '#fff',
+          pointBorderWidth: 1,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        title: {
+          display: true,
+          text: 'UK Power Offered Price Range (£/MWh)',
+          color: '#ffffff',
+          font: { family: 'Montserrat', size: 13, weight: '600' },
+          padding: { bottom: 12 }
+        },
+        legend: {
+          labels: { color: '#dadada', font: { family: 'Montserrat', size: 11 }, boxWidth: 18, padding: 15 },
+          position: 'top'
+        },
+        tooltip: {
+          backgroundColor: 'rgba(20, 18, 60, 0.95)',
+          titleColor: '#ffffff',
+          bodyColor: '#dadada',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          titleFont: { family: 'Montserrat', size: 12 },
+          bodyFont: { family: 'Montserrat', size: 11 },
+          padding: 10,
+          cornerRadius: 8,
+          callbacks: { label: function(c) { return c.dataset.label + ': £' + c.parsed.y.toFixed(2) + '/MWh'; } }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#a0a0c0', font: { family: 'Montserrat', size: 9 }, maxRotation: 45 },
+          grid: { color: 'rgba(255,255,255,0.04)' }
+        },
+        y: {
+          ticks: { color: '#a0a0c0', font: { family: 'Montserrat', size: 10 } },
+          grid: { color: 'rgba(255,255,255,0.04)' },
+          title: { display: true, text: '£/MWh', color: '#a0a0c0', font: { size: 10 } }
+        }
+      }
+    }
+  });
+}
 </script>
 
 </body>
