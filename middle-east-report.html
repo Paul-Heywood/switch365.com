@@ -39,20 +39,22 @@ body {
 /* Navigation */
 .nav-sidebar {
   position: fixed;
-  left: 0;
-  top: 0;
-  width: 280px;
-  height: 100vh;
-  background: rgba(15, 15, 45, 0.92);
-  backdrop-filter: blur(24px);
-  border-right: 1px solid var(--card-border);
+  left: 16px;
+  top: 50%;
+  transform: translate(-120%, -50%);
+  width: 320px;
+  max-height: calc(100vh - 48px);
+  background: rgba(15, 15, 45, 0.95);
+  backdrop-filter: blur(28px);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
   z-index: 1002;
-  padding: 56px 20px 24px;
+  padding: 56px 20px 20px;
   overflow-y: auto;
-  transform: translateX(-100%);
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(0,211,154,0.06);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.nav-sidebar.open { transform: translateX(0); }
+.nav-sidebar.open { transform: translate(0, -50%); }
 .nav-close {
   position: absolute;
   top: 14px;
@@ -74,12 +76,12 @@ body {
 .nav-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(10, 10, 30, 0.6);
-  backdrop-filter: blur(4px);
+  background: rgba(10, 10, 30, 0.55);
+  backdrop-filter: blur(6px);
   z-index: 1001;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
 }
 .nav-overlay.open { opacity: 1; visibility: visible; }
 .nav-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--card-border); }
@@ -109,7 +111,7 @@ body {
   box-shadow: 0 4px 16px rgba(0,0,0,0.25);
 }
 .nav-toggle:hover { background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); color: var(--midnight-1); border-color: transparent; transform: scale(1.05); }
-.nav-toggle.open { left: 300px; opacity: 0; pointer-events: none; }
+.nav-toggle.open { opacity: 0; pointer-events: none; }
 
 /* Main Content */
 .main-content { margin-left: 0; min-height: 100vh; }
@@ -117,7 +119,7 @@ body {
 /* Hero */
 .hero {
   position: relative;
-  padding: 60px 40px 50px;
+  padding: 60px 40px 50px 80px;
   background: linear-gradient(135deg, rgba(38,34,98,0.95) 0%, rgba(38,34,127,0.9) 50%, rgba(26,26,94,0.95) 100%);
   border-bottom: 1px solid var(--card-border);
   overflow: hidden;
@@ -157,7 +159,7 @@ body {
 .chip.verified { border-color: rgba(0,211,154,0.3); color: var(--accent-1); }
 
 /* Section Styles */
-.section { padding: 48px 40px; border-bottom: 1px solid var(--card-border); }
+.section { padding: 48px 40px 48px 80px; border-bottom: 1px solid var(--card-border); }
 .section-title {
   font-size: 13px;
   font-weight: 800;
@@ -297,6 +299,10 @@ tr:hover td { background: rgba(255,255,255,0.03); }
   padding: 28px 32px;
   margin-top: 24px;
 }
+.callout, .proc-check, .pricing-module, .driver-card, .scenario-card, .warning-card, .rhetoric-card, .timeline-item, .stat-card, .img-card, .img-card-visual {
+  position: relative;
+  z-index: 1;
+}
 .dark-callout h3 { font-size: 18px; font-weight: 700; margin-bottom: 14px; color: var(--white); }
 .dark-callout p { font-size: 14px; color: var(--off-white); line-height: 1.7; margin-bottom: 10px; }
 
@@ -305,16 +311,16 @@ tr:hover td { background: rgba(255,255,255,0.03); }
   .pricing-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
-  .hero { padding: 60px 20px 30px; }
+  .hero { padding: 60px 20px 30px 68px; }
   .hero h1 { font-size: 28px; }
-  .section { padding: 32px 20px; }
+  .section { padding: 32px 20px 32px 68px; }
   .section-heading { font-size: 22px; }
   .summary-board { grid-template-columns: 1fr; }
   .warning-grid { grid-template-columns: 1fr; }
   .stat-grid { grid-template-columns: repeat(2, 1fr); }
   .source-grid { grid-template-columns: 1fr; }
-  .nav-sidebar { width: 260px; }
-  .nav-toggle.open { left: 280px; }
+  .nav-sidebar { width: 280px; left: 8px; }
+  .nav-toggle.open { opacity: 0; pointer-events: none; }
 }
 
 /* Scrollbar */
@@ -322,6 +328,10 @@ tr:hover td { background: rgba(255,255,255,0.03); }
 ::-webkit-scrollbar-track { background: var(--midnight-1); }
 ::-webkit-scrollbar-thumb { background: var(--midnight-2); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent-1); }
+.nav-sidebar::-webkit-scrollbar { width: 5px; }
+.nav-sidebar::-webkit-scrollbar-track { background: transparent; }
+.nav-sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+.nav-sidebar::-webkit-scrollbar-thumb:hover { background: var(--accent-1); }
 
 /* Image cards */
 .img-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; overflow: hidden; }
@@ -366,7 +376,7 @@ tr:hover td { background: rgba(255,255,255,0.03); }
 
 /* Footer */
 .footer {
-  padding: 40px;
+  padding: 40px 40px 40px 80px;
   text-align: center;
   border-top: 1px solid var(--card-border);
   color: var(--off-white);
@@ -449,7 +459,7 @@ section[id] { scroll-margin-top: 20px; }
     <span>🇬🇧 UK English</span>
   </div>
   <p class="hero-summary">
-    Oil has fallen after indirect US-Iran talks in Doha reduced immediate supply fear, but the talks do not mean the market is safe. The unresolved issue is Hormuz control, shipping access and possible tolls. Shell's LNG warning remains the key gas point: Hormuz is not only an oil route, it is also an LNG route, and LNG disruption can feed directly into TTF, NBP and UK power. UK gas must be checked against the £1 per therm line using current gas data, not inferred from oil. <strong>Oil is calmer after Doha, but Hormuz control and LNG risk keep gas exposed.</strong> For UK business energy buyers, the window is open, but it is fragile. This is a review-now window, not a wait-and-see market.
+    Oil has fallen after indirect US-Iran talks in Doha reduced immediate supply fear, but the talks do not mean the market is safe. The unresolved issue is Hormuz control, shipping access and possible tolls. Shell's LNG warning remains the key gas point: Hormuz is not only an oil route, it is also an LNG route, and LNG disruption can feed directly into TTF, NBP and UK power. <strong>NBP front-month W-26 at 108.25p/th remains above the £1 line, while S-27 forward at 79.00p/th sits below it.</strong> UK gas must be checked against current data, not inferred from oil. <strong>Oil is calmer after Doha, but Hormuz control and LNG risk keep gas exposed.</strong> For UK business energy buyers, the window is open on forward contracts, but it is fragile. This is a review-now window, not a wait-and-see market.
   </p>
   <div class="hero-chips">
     <span class="chip verified">✓ Reuters Energy</span>
@@ -471,13 +481,13 @@ section[id] { scroll-margin-top: 20px; }
   <div class="summary-board">
     <div class="summary-card">
       <h4>UK Gas, NBP</h4>
-      <div class="value">~102p/th</div>
-      <div class="desc">UK gas around £1 per therm. The buying window is open, but the line is fragile. Gas must be checked directly, not inferred from oil. <a href="https://tradingeconomics.com/commodity/uk-natural-gas" target="_blank" style="color:var(--accent-1);text-decoration:none;font-weight:600;font-size:11px;">Trading Economics UK Gas</a></div>
+      <div class="value">108.25p/th</div>
+      <div class="desc">W-26 front at 108.25p/th. S-27 forward at 79.00p/th. Buying window open on forward contracts. Gas must be checked directly, not inferred from oil.</div>
     </div>
     <div class="summary-card">
       <h4>UK Power</h4>
-      <div class="value">~£95/MWh</div>
-      <div class="desc">UK power remains exposed to gas-led generation. Do not assume power has fully followed oil lower unless live pricing confirms it. <a href="https://tradingeconomics.com/united-kingdom/electricity-price" target="_blank" style="color:var(--accent-1);text-decoration:none;font-weight:600;font-size:11px;">Trading Economics UK Power</a></div>
+      <div class="value">£98.00/MWh</div>
+      <div class="desc">W-26 front at £98.00/MWh. S-27 forward at £75.50/MWh. Do not assume power has fully followed oil lower unless live pricing confirms it.</div>
     </div>
     <div class="summary-card">
       <h4>Forward Market</h4>
@@ -514,77 +524,77 @@ section[id] { scroll-margin-top: 20px; }
           <thead>
             <tr>
               <th>Contract</th>
-              <th>Wed 1 Jul</th>
-              <th>Thu 2 Jul</th>
+              <th>Wed 01 Jul AM</th>
+              <th>Thu 02 Jul AM</th>
               <th>Change</th>
-              <th>1 Year Ago</th>
+              <th>1 Year Ago*</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="contract-label">W-26</td>
-              <td>~110p/th</td>
-              <td class="price-current">~109p/th</td>
-              <td class="price-down">-1p</td>
-              <td>~80p/th</td>
+              <td>109.50</td>
+              <td class="price-current">108.25</td>
+              <td class="price-down">-1.25</td>
+              <td>90.25</td>
             </tr>
             <tr>
               <td class="contract-label">S-27</td>
-              <td>~99p/th</td>
-              <td class="price-current">~98p/th</td>
-              <td class="price-down">-1p</td>
-              <td>~72p/th</td>
+              <td>81.00</td>
+              <td class="price-current">79.00</td>
+              <td class="price-down">-2.00</td>
+              <td>74.00</td>
             </tr>
             <tr>
               <td class="contract-label">W-27</td>
-              <td>~128p/th</td>
-              <td class="price-current">~127p/th</td>
-              <td class="price-down">-1p</td>
-              <td>~95p/th</td>
+              <td>81.34</td>
+              <td class="price-current">80.50</td>
+              <td class="price-down">-0.84</td>
+              <td>80.41</td>
             </tr>
             <tr>
               <td class="contract-label">S-28</td>
-              <td>~99p/th</td>
-              <td class="price-current">~98p/th</td>
-              <td class="price-down">-1p</td>
-              <td>~68p/th</td>
+              <td>65.00</td>
+              <td class="price-current">62.75</td>
+              <td class="price-down">-2.25</td>
+              <td>66.81</td>
             </tr>
             <tr>
               <td class="contract-label">W-28</td>
-              <td>~115p/th</td>
-              <td class="price-current">~114p/th</td>
-              <td class="price-down">-1p</td>
-              <td>~85p/th</td>
+              <td>72.00</td>
+              <td class="price-current">71.10</td>
+              <td class="price-down">-0.90</td>
+              <td>75.43</td>
             </tr>
             <tr>
               <td class="contract-label">S-29</td>
-              <td>~94p/th</td>
-              <td class="price-current">~93p/th</td>
-              <td class="price-down">-1p</td>
-              <td>~65p/th</td>
+              <td>58.00</td>
+              <td class="price-current">57.80</td>
+              <td class="price-down">-0.20</td>
+              <td>66.60</td>
             </tr>
             <tr>
               <td class="contract-label">W-29</td>
-              <td>~110p/th</td>
-              <td class="price-current">~109p/th</td>
-              <td class="price-down">-1p</td>
-              <td>~82p/th</td>
+              <td>67.82</td>
+              <td class="price-current">66.83</td>
+              <td class="price-down">-0.99</td>
+              <td>74.75</td>
             </tr>
             <tr>
               <td class="contract-label">S-30</td>
-              <td>~91p/th</td>
-              <td class="price-current">~90p/th</td>
-              <td class="price-down">-1p</td>
-              <td>~63p/th</td>
+              <td>57.56</td>
+              <td class="price-current">57.76</td>
+              <td class="price-up">+0.19</td>
+              <td>65.78</td>
             </tr>
           </tbody>
         </table>
-        <div class="chip" style="margin-top:12px;">Sources: ICE, LSEG, ICIS — NBP forward pricing not fully verified from public sources. Use live broker or supplier data.</div>
+        <div class="chip" style="margin-top:12px;">*1 Year Ago based on same seasonal contract. Sources: Internal supplier/broker pricing evidence.</div>
       </div>
     </div>
     <div class="callout">
       <div class="callout-title">📊 What the Gas Table Means</div>
-      <p>Gas prices are not one single number. The table shows different future delivery periods. If the later periods are cheaper than the near-term contracts, this can support reviewing longer fixed options where the customer's contract start date allows it. <strong>Cheaper gas further out does not mean cheaper gas later. It means there may be an opportunity now, while that period is still priced as future delivery.</strong> If UK gas is around £1 per therm, the buying window is open but fragile. <a href="https://tradingeconomics.com/commodity/uk-natural-gas" target="_blank" style="color:var(--accent-1);text-decoration:none;font-weight:600;font-size:11px;">Trading Economics UK Gas</a></p>
+      <p>Gas prices are not one single number. The table shows different future delivery periods. If the later periods are cheaper than the near-term contracts, this can support reviewing longer fixed options where the customer's contract start date allows it. <strong>Cheaper gas further out does not mean cheaper gas later. It means there may be an opportunity now, while that period is still priced as future delivery.</strong> W-26 at 108.25p/th holds above £1; S-27 at 79.00p/th sits below it. The buying window is open on forward contracts but fragile.</p>
     </div>
   </div>
 
@@ -606,72 +616,72 @@ section[id] { scroll-margin-top: 20px; }
           <thead>
             <tr>
               <th>Contract</th>
-              <th>Wed 1 Jul</th>
-              <th>Thu 2 Jul</th>
+              <th>Wed 01 Jul AM</th>
+              <th>Thu 02 Jul AM</th>
               <th>Change</th>
-              <th>1 Year Ago</th>
+              <th>1 Year Ago*</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="contract-label">W-26</td>
-              <td>~£101/MWh</td>
-              <td class="price-current">~£100/MWh</td>
-              <td class="price-down">-£1</td>
-              <td>~£78/MWh</td>
+              <td>99.00</td>
+              <td class="price-current">98.00</td>
+              <td class="price-down">-1.00</td>
+              <td>80.00</td>
             </tr>
             <tr>
               <td class="contract-label">S-27</td>
-              <td>~£76/MWh</td>
-              <td class="price-current">~£75/MWh</td>
-              <td class="price-down">-£1</td>
-              <td>~£62/MWh</td>
+              <td>76.00</td>
+              <td class="price-current">75.50</td>
+              <td class="price-down">-0.50</td>
+              <td>64.75</td>
             </tr>
             <tr>
               <td class="contract-label">W-27</td>
-              <td>~£82/MWh</td>
-              <td class="price-current">~£81/MWh</td>
-              <td class="price-down">-£1</td>
-              <td>~£68/MWh</td>
+              <td>77.50</td>
+              <td class="price-current">77.25</td>
+              <td class="price-down">-0.25</td>
+              <td>74.75</td>
             </tr>
             <tr>
               <td class="contract-label">S-28</td>
-              <td>~£65/MWh</td>
-              <td class="price-current">~£64/MWh</td>
-              <td class="price-down">-£1</td>
-              <td>~£55/MWh</td>
+              <td>60.80</td>
+              <td class="price-current">60.75</td>
+              <td class="price-down">-0.05</td>
+              <td>63.80</td>
             </tr>
             <tr>
               <td class="contract-label">W-28</td>
-              <td>~£71/MWh</td>
-              <td class="price-current">~£70/MWh</td>
-              <td class="price-down">-£1</td>
-              <td>~£60/MWh</td>
+              <td>70.97</td>
+              <td class="price-current">70.72</td>
+              <td class="price-down">-0.25</td>
+              <td>73.55</td>
             </tr>
             <tr>
               <td class="contract-label">S-29</td>
-              <td>~£62/MWh</td>
-              <td class="price-current">~£61/MWh</td>
-              <td class="price-down">-£1</td>
-              <td>~£52/MWh</td>
+              <td>62.56</td>
+              <td class="price-current">62.31</td>
+              <td class="price-down">-0.25</td>
+              <td>63.80</td>
             </tr>
             <tr>
               <td class="contract-label">W-29</td>
-              <td>~£68/MWh</td>
-              <td class="price-current">~£67/MWh</td>
-              <td class="price-down">-£1</td>
-              <td>~£58/MWh</td>
+              <td>—</td>
+              <td class="price-current">—</td>
+              <td class="price-neutral">—</td>
+              <td>—</td>
             </tr>
             <tr>
               <td class="contract-label">S-30</td>
-              <td>~£60/MWh</td>
-              <td class="price-current">~£59/MWh</td>
-              <td class="price-down">-£1</td>
-              <td>~£50/MWh</td>
+              <td>—</td>
+              <td class="price-current">—</td>
+              <td class="price-neutral">—</td>
+              <td>—</td>
             </tr>
           </tbody>
         </table>
-        <div class="chip" style="margin-top:12px;">Sources: ICE, TradingView, Catalyst Commercial — UK power forward pricing indicative. Use live supplier pricing.</div>
+        <div class="chip" style="margin-top:12px;">*1 Year Ago based on same seasonal contract. Sources: Internal supplier/broker pricing evidence.</div>
       </div>
     </div>
     <div class="callout">
@@ -845,7 +855,7 @@ section[id] { scroll-margin-top: 20px; }
         <tbody>
           <tr>
             <td class="contract-label">NBP Day-Ahead</td>
-            <td>~102 p/th <a href="https://tradingeconomics.com/commodity/uk-natural-gas" target="_blank" style="color:var(--accent-1);text-decoration:none;font-weight:600;font-size:11px;">Trading Economics UK Gas</a></td>
+            <td>108.25 p/th (W-26)<br>79.00 p/th (S-27)</td>
             <td>—</td>
             <td>—</td>
             <td>Around £1</td>
@@ -853,23 +863,23 @@ section[id] { scroll-margin-top: 20px; }
           </tr>
           <tr>
             <td class="contract-label">NBP Front Month</td>
-            <td>~110 p/th <a href="https://www.argusmedia.com/-/media/project/argusmedia/mainsite/english/documents-and-files/sample-reports/argus-european-natural-gas.pdf" target="_blank" style="color:var(--accent-1);text-decoration:none;font-weight:600;font-size:11px;">Argus European Gas</a></td>
-            <td>S-27: ~98p</td>
+            <td>108.25 p/th</td>
+            <td>S-27: 79.00p</td>
             <td>Backwardated</td>
             <td>Elevated</td>
             <td>UK gas around £1 keeps window open but not safe</td>
           </tr>
           <tr>
             <td class="contract-label">NBP Winter Contract</td>
-            <td>~110-128 p/th <a href="https://www.ice.com/products/910/UK-NBP-Natural-Gas-Futures/data" target="_blank" style="color:var(--accent-1);text-decoration:none;font-weight:600;font-size:11px;">ICE NBP Data</a></td>
-            <td>W-27: ~127p</td>
+            <td>108.25 p/th (W-26)</td>
+            <td>W-27: 80.50p<br>S-27: 79.00p</td>
             <td>Backwardated</td>
             <td>Seasonal premium</td>
             <td>Winter risk premium visible. Future periods may support longer fixes</td>
           </tr>
           <tr>
             <td class="contract-label">UK Day-Ahead Power</td>
-            <td>~£95/MWh <a href="https://tradingeconomics.com/united-kingdom/electricity-price" target="_blank" style="color:var(--accent-1);text-decoration:none;font-weight:600;font-size:11px;">Trading Economics UK Power</a></td>
+            <td>£98.00/MWh (W-26)<br>£75.50/MWh (S-27)</td>
             <td>—</td>
             <td>—</td>
             <td>Elevated</td>
@@ -877,8 +887,8 @@ section[id] { scroll-margin-top: 20px; }
           </tr>
           <tr>
             <td class="contract-label">UK Power Summer 27</td>
-            <td>~£75/MWh <a href="https://www.catalyst-commercial.co.uk/wholesale-electricity-prices/" target="_blank" style="color:var(--accent-1);text-decoration:none;font-weight:600;font-size:11px;">Catalyst Commercial</a></td>
-            <td>S-28: ~£64</td>
+            <td>£75.50/MWh</td>
+            <td>S-28: £60.75<br>S-27: £75.50</td>
             <td>Backwardated</td>
             <td>Cheaper forward</td>
             <td>Future power periods may support longer fixes where dates allow</td>
@@ -2109,39 +2119,55 @@ if (nbpCtx) {
   new Chart(nbpCtx, {
     type: 'line',
     data: {
-      labels: ['26 Jun','27 Jun','28 Jun','29 Jun','30 Jun','01 Jul','02 Jul'],
+      labels: ['15 Apr','22 Apr','29 Apr','06 May','13 May','20 May','27 May','03 Jun','10 Jun','17 Jun','24 Jun','01 Jul','02 Jul'],
       datasets: [{
         label: 'W-26 (Near-term)',
-        data: [112,111,113,110,111,110,109],
+        data: [105,102,108,115,120,128,135,125,118,112,110,109.50,108.25],
         borderColor: '#ff4757',
         backgroundColor: 'rgba(255,71,87,0.1)',
         borderWidth: 2.5,
-        tension: 0.3,
-        pointRadius: 4,
+        tension: 0.35,
+        pointRadius: 3,
         pointBackgroundColor: '#ff4757',
+        pointHoverRadius: 5,
         fill: true
       },{
         label: 'S-27 (Forward)',
-        data: [100,99,101,98,99,99,98],
+        data: [78,76,80,83,85,88,90,87,84,82,81,81.00,79.00],
         borderColor: '#2e86de',
         backgroundColor: 'rgba(46,134,222,0.08)',
         borderWidth: 2.5,
-        tension: 0.3,
-        pointRadius: 4,
+        tension: 0.35,
+        pointRadius: 3,
         pointBackgroundColor: '#2e86de',
+        pointHoverRadius: 5,
         fill: true
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
       plugins: {
         title: { display: true, text: 'NBP Offered Gas Price Range (p/therm)', font: { size: 13, weight: '700' }, color: '#fff', padding: { bottom: 16 } },
-        legend: { position: 'top', labels: { usePointStyle: true, padding: 16, font: { size: 11 } } }
+        legend: { position: 'top', labels: { usePointStyle: true, padding: 16, font: { size: 11 } } },
+        tooltip: {
+          backgroundColor: 'rgba(15,15,45,0.95)',
+          titleColor: '#00d39a',
+          bodyColor: '#fff',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          padding: 12,
+          callbacks: {
+            label: function(context) {
+              return context.dataset.label.split(' ')[0] + ': ' + context.parsed.y.toFixed(2) + ' p/th';
+            }
+          }
+        }
       },
       scales: {
-        y: { title: { display: true, text: 'pence / therm', font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.04)' }, min: 85 },
-        x: { grid: { display: false } }
+        y: { title: { display: true, text: 'pence / therm', font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.04)' }, min: 60, max: 150 },
+        x: { grid: { display: false }, ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 } } }
       }
     }
   });
@@ -2153,39 +2179,55 @@ if (powerCtx) {
   new Chart(powerCtx, {
     type: 'line',
     data: {
-      labels: ['26 Jun','27 Jun','28 Jun','29 Jun','30 Jun','01 Jul','02 Jul'],
+      labels: ['02 Apr','09 Apr','16 Apr','23 Apr','30 Apr','07 May','14 May','21 May','28 May','04 Jun','11 Jun','18 Jun','25 Jun','01 Jul','02 Jul'],
       datasets: [{
         label: 'W-26 (Near-term)',
-        data: [103,102,104,101,102,101,100],
+        data: [100,98,95,92,98,102,100,105,103,98,100,99,98,99.00,98.00],
         borderColor: '#ff4757',
         backgroundColor: 'rgba(255,71,87,0.1)',
         borderWidth: 2.5,
-        tension: 0.3,
-        pointRadius: 4,
+        tension: 0.35,
+        pointRadius: 3,
         pointBackgroundColor: '#ff4757',
+        pointHoverRadius: 5,
         fill: true
       },{
         label: 'S-27 (Forward)',
-        data: [77,76,78,75,76,76,75],
+        data: [78,76,74,72,75,78,80,79,77,76,77,76,76,76.00,75.50],
         borderColor: '#2e86de',
         backgroundColor: 'rgba(46,134,222,0.08)',
         borderWidth: 2.5,
-        tension: 0.3,
-        pointRadius: 4,
+        tension: 0.35,
+        pointRadius: 3,
         pointBackgroundColor: '#2e86de',
+        pointHoverRadius: 5,
         fill: true
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
       plugins: {
         title: { display: true, text: 'UK Power Offered Price Range (£/MWh)', font: { size: 13, weight: '700' }, color: '#fff', padding: { bottom: 16 } },
-        legend: { position: 'top', labels: { usePointStyle: true, padding: 16, font: { size: 11 } } }
+        legend: { position: 'top', labels: { usePointStyle: true, padding: 16, font: { size: 11 } } },
+        tooltip: {
+          backgroundColor: 'rgba(15,15,45,0.95)',
+          titleColor: '#00d39a',
+          bodyColor: '#fff',
+          borderColor: 'rgba(255,255,255,0.1)',
+          borderWidth: 1,
+          padding: 12,
+          callbacks: {
+            label: function(context) {
+              return context.dataset.label.split(' ')[0] + ': £' + context.parsed.y.toFixed(2) + '/MWh';
+            }
+          }
+        }
       },
       scales: {
-        y: { title: { display: true, text: '£ / MWh', font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.04)' }, min: 60 },
-        x: { grid: { display: false } }
+        y: { title: { display: true, text: '£ / MWh', font: { size: 11 } }, grid: { color: 'rgba(255,255,255,0.04)' }, min: 55, max: 120 },
+        x: { grid: { display: false }, ticks: { maxRotation: 45, minRotation: 45, font: { size: 9 } } }
       }
     }
   });
