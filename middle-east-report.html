@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 <style>
-:root{--midnight-start:#262262;--midnight-end:#26227f;--candy-start:#00d39a;--candy-end:#dd40ff;--white:#ffffff;--off-white:#dadada;--glass-bg:rgba(255,255,255,0.06);--glass-border:rgba(255,255,255,0.12);--accent-glow:rgba(0,211,154,0.15)}
+:root{--midnight-start:#262262;--midnight-end:#26227f;--candy-start:#00d39a;--candy-end:#dd40ff;--white:#ffffff;--off-white:#dadada;--glass-bg:rgba(255,255,255,0.06);--glass-border:rgba(255,255,255,0.12)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Montserrat',sans-serif;background:linear-gradient(135deg,var(--midnight-start) 0%,var(--midnight-end) 100%);color:var(--white);min-height:100vh;line-height:1.6;overflow-x:hidden}
@@ -18,11 +18,7 @@ body{font-family:'Montserrat',sans-serif;background:linear-gradient(135deg,var(-
 ::-webkit-scrollbar-thumb{background:linear-gradient(var(--candy-start),var(--candy-end));border-radius:4px}
 .glass{background:var(--glass-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--glass-border);border-radius:16px}
 .gradient-accent{background:linear-gradient(135deg,var(--candy-start),var(--candy-end));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.gradient-border{position:relative;border-radius:16px;overflow:hidden}
-.gradient-border::before{content:'';position:absolute;inset:0;padding:1px;border-radius:16px;background:linear-gradient(135deg,var(--candy-start),var(--candy-end));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-.btn-gradient{background:linear-gradient(135deg,var(--candy-start),var(--candy-end));color:#fff;font-weight:600;padding:12px 28px;border-radius:8px;border:none;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s}
-.btn-gradient:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,211,154,0.3)}
-.source-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(0,211,154,0.1);border:1px solid rgba(0,211,154,0.25);border-radius:20px;font-size:11px;color:var(--candy-start);font-weight:500;margin-top:8px}
+.source-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;background:rgba(0,211,154,0.1);border:1px solid rgba(0,211,154,0.25);border-radius:20px;font-size:11px;color:var(--candy-start);font-weight:500;margin-top:8px;margin-right:6px}
 .source-chip a{color:inherit;text-decoration:none}
 .source-chip a:hover{text-decoration:underline}
 .status-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
@@ -60,12 +56,13 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 @media(max-width:768px){.pricing-module{grid-template-columns:1fr}}
 .chart-container{padding:20px;min-height:320px;display:flex;flex-direction:column}
 .chart-container canvas{max-height:280px}
-.futures-table{width:100%;border-collapse:collapse;font-size:13px}
-.futures-table th{padding:10px 8px;text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--off-white);border-bottom:1px solid var(--glass-border);background:rgba(0,0,0,0.1)}
-.futures-table td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,0.04)}
+.futures-table{width:100%;border-collapse:collapse;font-size:12px}
+.futures-table th{padding:10px 6px;text-align:left;font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:0.3px;color:var(--off-white);border-bottom:1px solid var(--glass-border);background:rgba(0,0,0,0.1)}
+.futures-table td{padding:10px 6px;border-bottom:1px solid rgba(255,255,255,0.04)}
 .futures-table tr:hover{background:rgba(255,255,255,0.03)}
 .futures-table .up{color:#f87171;font-weight:600}
 .futures-table .down{color:var(--candy-start);font-weight:600}
+.futures-table .flat{color:#94a3b8;font-weight:600}
 .futures-table .contract{font-weight:600}
 .driver-card{padding:20px;margin-bottom:12px}
 .driver-card h4{font-size:14px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:10px}
@@ -81,8 +78,6 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 .timeline-item .event{font-size:13px;margin-bottom:4px}
 .timeline-item .label{font-size:11px;padding:2px 8px;border-radius:4px;display:inline-block;margin-right:6px}
 .label-verified{background:rgba(0,211,154,0.15);color:var(--candy-start)}
-.label-unconfirmed{background:rgba(234,179,8,0.15);color:#fbbf24}
-.label-stale{background:rgba(148,163,184,0.15);color:#94a3b8}
 .rhetoric-card{padding:16px;margin-bottom:12px}
 .rhetoric-card h4{font-size:14px;font-weight:600;margin-bottom:6px}
 .rhetoric-card p{font-size:13px;color:var(--off-white);line-height:1.6;margin-bottom:4px}
@@ -170,14 +165,14 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <span class="status-badge status-live">Review-Now Market</span>
 </div>
 <div class="hero-summary">
-<p><strong>The market has not normalised.</strong> Hormuz traffic remains severely disrupted, UK gas has pushed above 120p per therm, TTF remains sensitive to LNG risk, and UK power is under heat-related pressure with NESO issuing margin notices. Supplier price-book lag is now the opportunity and the danger: some rates may still be live before suppliers fully reprice, but that window can close quickly. For customers inside 90 days, this is a decision market. For higher-usage customers with later CEDs, the forward curve into 2028 and 2029 must be checked.</p>
+<p><strong>The market has not normalised.</strong> Hormuz traffic remains severely disrupted, UK gas is above &pound;1 per therm at <strong>119.25p</strong>, TTF remains sensitive to LNG risk, and UK power is under heat-related pressure with NESO issuing margin notices. Supplier price-book lag is now the opportunity and the danger: some rates may still be live before suppliers fully reprice, but that window can close quickly. For customers inside 90 days, this is a decision market. For higher-usage customers with later CEDs, the forward curve into 2028 and 2029 must be checked.</p>
 </div>
 <div class="hero-chips">
 <span class="source-chip"><a href="https://www.reuters.com" target="_blank">Reuters Geopolitics</a></span>
 <span class="source-chip"><a href="https://www.reuters.com" target="_blank">Reuters Energy</a></span>
-<span class="source-chip"><a href="https://www.tradingeconomics.com" target="_blank">Trading Economics UK Gas</a></span>
+<span class="source-chip">Switch 365 Internal Pricing</span>
 <span class="source-chip"><a href="https://tradingeconomics.com/commodity/eu-natural-gas" target="_blank">TTF / EU Gas</a></span>
-<span class="source-chip"><a href="#" target="_blank">NESO</a></span>
+<span class="source-chip">NESO</span>
 <span class="source-chip"><a href="https://www.igu.org" target="_blank">IGU LNG Report</a></span>
 <span class="source-chip"><a href="https://www.shell.com" target="_blank">Shell LNG Outlook</a></span>
 </div>
@@ -190,21 +185,21 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="board-grid">
 <div class="board-card glass">
 <h3><span style="color:#f87171;">&#9679;</span> UK Gas / NBP</h3>
-<div class="value" style="color:#f87171;">120.83p</div>
-<p>UK gas is above 120p per therm. The market has already moved again. The buying window is still open, but the market is not safe.</p>
-<span class="source-chip"><a href="https://tradingeconomics.com/commodity/uk-natural-gas" target="_blank">Trading Economics</a></span>
+<div class="value" style="color:#f87171;">119.25p</div>
+<p>UK gas is above &pound;1 per therm at 119.25p (W-26, Fri 10 Jul AM). The buying window is still open, but the market is not safe.</p>
+<span class="source-chip">Switch 365 Internal Pricing</span>
 </div>
 <div class="board-card glass">
 <h3><span style="color:#fbbf24;">&#9679;</span> TTF / European Gas</h3>
 <div class="value" style="color:#fbbf24;">&euro;49.54</div>
-<p>TTF remains elevated at &euro;49.54/MWh, down 1.44% today but still 39% above year-ago levels. LNG and Hormuz risk remain embedded.</p>
+<p>TTF remains elevated at &euro;49.54/MWh. LNG and Hormuz risk remain embedded in European pricing.</p>
 <span class="source-chip"><a href="https://tradingeconomics.com/commodity/eu-natural-gas" target="_blank">Trading Economics TTF</a></span>
 </div>
 <div class="board-card glass">
 <h3><span style="color:#fb923c;">&#9679;</span> UK Power</h3>
-<div class="value" style="color:#fb923c;">&pound;101.48</div>
-<p>UK power spot at &pound;101.48/MWh. NESO issued an Electricity Margin Notice for 9 July evening peak due to extreme temperatures reducing generation availability.</p>
-<span class="source-chip"><a href="https://tradingeconomics.com/united-kingdom/electricity-price" target="_blank">Trading Economics</a></span>
+<div class="value" style="color:#fb923c;">&pound;105.25</div>
+<p>UK power W-26 at &pound;105.25/MWh (Fri 10 Jul AM). NESO issued an Electricity Margin Notice for 9 July evening peak due to extreme temperatures.</p>
+<span class="source-chip">Switch 365 Internal Pricing</span>
 <span class="source-chip"><a href="https://www.renews.biz" target="_blank">RENnews / NESO</a></span>
 </div>
 <div class="board-card glass">
@@ -216,8 +211,8 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="board-card glass">
 <h3><span style="color:var(--candy-start);">&#9679;</span> Forward Curve</h3>
 <div class="value" style="font-size:18px;background:linear-gradient(135deg,#00d39a,#dd40ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Backwardated</div>
-<p>The NBP curve shows clear backwardation. Cal-28 at ~69p, Cal-29 at ~63p &mdash; materially cheaper than near-term. Check 2028 and 2029.</p>
-<span class="source-chip"><a href="https://www.smart-energy.uk" target="_blank">Smart Energy UK</a></span>
+<p>S-28 at 64.00p, S-29 at 57.90p, S-30 at 58.58p &mdash; materially cheaper than W-26 at 119.25p. Check 2028 and 2029.</p>
+<span class="source-chip">Switch 365 Internal Pricing</span>
 </div>
 <div class="board-card glass">
 <h3><span style="color:#f87171;">&#9679;</span> Customer Action</h3>
@@ -231,7 +226,7 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <!-- NBP OFFERED GAS PRICE RANGE -->
 <section class="section" id="gas-range">
 <h2>NBP Offered Gas Price Range</h2>
-<p class="section-subtitle">UK natural gas futures and forward curve</p>
+<p class="section-subtitle">UK natural gas futures and forward curve &mdash; Switch 365 internal pricing</p>
 <div class="pricing-module">
 <div class="chart-container glass">
 <h3 style="font-size:14px;margin-bottom:12px;">NBP Offered Gas Price Range (p/therm)</h3>
@@ -242,31 +237,33 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="table-responsive">
 <table class="futures-table">
 <thead>
-<tr><th>Contract</th><th>Previous</th><th>Latest</th><th>Change</th><th>1 Yr Ago</th></tr>
+<tr><th>Contract</th><th>Thu 09 Jul AM</th><th>Fri 10 Jul AM</th><th>Change</th><th>1 Year Ago</th></tr>
 </thead>
 <tbody>
-<tr><td class="contract">Win-26</td><td>108.80</td><td><strong>~110.97</strong></td><td class="up">+2.0%</td><td>~78</td></tr>
-<tr><td class="contract">Sum-27</td><td>79.39</td><td><strong>~80.21</strong></td><td class="up">+1.0%</td><td>~58</td></tr>
-<tr><td class="contract">Win-27</td><td>81.49</td><td><strong>~81.17</strong></td><td class="down">-0.4%</td><td>~62</td></tr>
-<tr><td class="contract">Cal-28</td><td>68.91</td><td><strong>~69.26</strong></td><td class="up">+0.5%</td><td>~55</td></tr>
-<tr><td class="contract">Cal-29</td><td>62.83</td><td><strong>~63.05</strong></td><td class="up">+0.3%</td><td>~52</td></tr>
-<tr><td class="contract">Cal-30</td><td>Not verified</td><td><strong>Not verified</strong></td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="contract">W-26</td><td>119.25</td><td><strong>119.25</strong></td><td class="flat">0.00</td><td>91.25</td></tr>
+<tr><td class="contract">S-27</td><td>85.00</td><td><strong>85.70</strong></td><td class="up">+0.70</td><td>75.50</td></tr>
+<tr><td class="contract">W-27</td><td>85.50</td><td><strong>86.50</strong></td><td class="up">+1.00</td><td>80.85</td></tr>
+<tr><td class="contract">S-28</td><td>65.00</td><td><strong>64.00</strong></td><td class="down">-1.00</td><td>67.82</td></tr>
+<tr><td class="contract">W-28</td><td>73.00</td><td><strong>72.00</strong></td><td class="down">-1.00</td><td>74.73</td></tr>
+<tr><td class="contract">S-29</td><td>58.00</td><td><strong>57.90</strong></td><td class="down">-0.10</td><td>66.47</td></tr>
+<tr><td class="contract">W-29</td><td>68.76</td><td><strong>67.85</strong></td><td class="down">-0.91</td><td>74.35</td></tr>
+<tr><td class="contract">S-30</td><td>58.55</td><td><strong>58.58</strong></td><td class="up">+0.03</td><td>65.47</td></tr>
 </tbody>
 </table>
 </div>
-<span class="source-chip"><a href="https://www.smart-energy.uk" target="_blank">Smart Energy UK (3 Jul settlement)</a></span>
-<span class="source-chip"><a href="https://www.catalyst-commercial.co.uk" target="_blank">Catalyst Commercial (3 Jul)</a></span>
+<span class="source-chip">Switch 365 Internal Pricing</span>
+<span class="source-chip"><a href="https://www.smart-energy.uk" target="_blank">Smart Energy UK</a></span>
 </div>
 </div>
 <div class="callout">
-<p><strong>What the gas table means:</strong> Gas prices are not one single number. The table shows different future delivery periods. A customer renewing now may be exposed to the expensive front of the curve. A customer with a CED in 2028 or beyond may be buying a blend of cheaper future seasons. <strong>Cheaper gas further out does not mean cheaper gas later. It means there may be an opportunity now, while that period is still priced as future delivery.</strong> If UK gas remains above &pound;1 per therm, the buying window is not closed, but the market is not safe. If UK gas has pushed above 120p per therm, the customer needs to understand that waiting has already cost movement.</p>
+<p><strong>What the gas table means:</strong> Gas prices are not one single number. The table shows different future delivery periods. A customer renewing now may be exposed to the expensive front of the curve (W-26 at 119.25p). A customer with a CED in 2028 or beyond may be buying a blend of cheaper future seasons (S-28 at 64.00p, S-29 at 57.90p). <strong>Cheaper gas further out does not mean cheaper gas later. It means there may be an opportunity now, while that period is still priced as future delivery.</strong> If UK gas remains above &pound;1 per therm, the buying window is not closed, but the market is not safe. The customer&rsquo;s CED decides which part of the curve matters.</p>
 </div>
 </section>
 
 <!-- UK POWER OFFERED PRICE RANGE -->
 <section class="section" id="power-range">
 <h2>UK Power Offered Price Range</h2>
-<p class="section-subtitle">UK baseload power futures and forward curve</p>
+<p class="section-subtitle">UK baseload power futures and forward curve &mdash; Switch 365 internal pricing</p>
 <div class="pricing-module">
 <div class="chart-container glass">
 <h3 style="font-size:14px;margin-bottom:12px;">UK Power Offered Price Range (&pound;/MWh)</h3>
@@ -277,24 +274,24 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="table-responsive">
 <table class="futures-table">
 <thead>
-<tr><th>Contract</th><th>Previous</th><th>Latest</th><th>Change</th><th>1 Yr Ago</th></tr>
+<tr><th>Contract</th><th>Thu 09 Jul AM</th><th>Fri 10 Jul AM</th><th>Change</th><th>1 Year Ago</th></tr>
 </thead>
 <tbody>
-<tr><td class="contract">Win-26</td><td>&pound;98.21</td><td><strong>&pound;99.60</strong></td><td class="up">+1.4%</td><td>&pound;~72</td></tr>
-<tr><td class="contract">Sum-27</td><td>&pound;75.21</td><td><strong>&pound;75.73</strong></td><td class="up">+0.7%</td><td>&pound;~56</td></tr>
-<tr><td class="contract">Win-27</td><td>&pound;77.88</td><td><strong>&pound;77.88</strong></td><td>Flat</td><td>&pound;~60</td></tr>
-<tr><td class="contract">Cal-28</td><td>&pound;67.58</td><td><strong>&pound;67.51</strong></td><td class="down">-0.1%</td><td>&pound;~54</td></tr>
-<tr><td class="contract">Cal-29</td><td>&pound;65.22</td><td><strong>&pound;65.07</strong></td><td class="down">-0.2%</td><td>&pound;~52</td></tr>
-<tr><td class="contract">Cal-30</td><td>Not verified</td><td><strong>Not verified</strong></td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td class="contract">W-26</td><td>105.00</td><td><strong>105.25</strong></td><td class="up">+0.25</td><td>81.45</td></tr>
+<tr><td class="contract">S-27</td><td>77.50</td><td><strong>78.00</strong></td><td class="up">+0.50</td><td>67.65</td></tr>
+<tr><td class="contract">W-27</td><td>79.00</td><td><strong>80.30</strong></td><td class="up">+1.30</td><td>76.30</td></tr>
+<tr><td class="contract">S-28</td><td>61.00</td><td><strong>61.00</strong></td><td class="flat">0.00</td><td>64.55</td></tr>
+<tr><td class="contract">W-28</td><td>71.17</td><td><strong>69.42</strong></td><td class="down">-1.75</td><td>74.05</td></tr>
+<tr><td class="contract">S-29</td><td>63.21</td><td><strong>60.32</strong></td><td class="down">-2.89</td><td>64.55</td></tr>
 </tbody>
 </table>
 </div>
-<span class="source-chip"><a href="https://www.smart-energy.uk" target="_blank">Smart Energy UK (3 Jul settlement)</a></span>
-<span class="source-chip"><a href="https://www.catalyst-commercial.co.uk" target="_blank">Catalyst Commercial (3 Jul)</a></span>
+<span class="source-chip">Switch 365 Internal Pricing</span>
+<span class="source-chip"><a href="https://www.smart-energy.uk" target="_blank">Smart Energy UK</a></span>
 </div>
 </div>
 <div class="callout">
-<p><strong>What the power table means:</strong> Electricity prices are heavily influenced by gas, generation mix, weather, carbon costs, system margins and wider risk premium. The table shows what the market is offering for future power delivery periods, not just today&rsquo;s price. <strong>Cheaper power further out does not mean cheaper power later. It means the customer may be able to access a future delivery period before it becomes the current market.</strong> Do not assume UK power has fully followed oil or gas lower unless live UK power and supplier pricing confirms it.</p>
+<p><strong>What the power table means:</strong> Electricity prices are heavily influenced by gas, generation mix, weather, carbon costs, system margins and wider risk premium. The table shows what the market is offering for future power delivery periods, not just today&rsquo;s price. W-26 power at &pound;105.25/MWh reflects current near-term risk, while S-28 at &pound;61.00/MWh shows cheaper future delivery. <strong>Cheaper power further out does not mean cheaper power later. It means the customer may be able to access a future delivery period before it becomes the current market.</strong> Do not assume UK power has fully followed oil or gas lower unless live UK power and supplier pricing confirms it.</p>
 </div>
 </section>
 
@@ -305,13 +302,13 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="glass" style="padding:24px;margin-bottom:16px;">
 <p style="font-size:14px;line-height:1.7;margin-bottom:16px;">The forward market shows what gas or power is currently priced at for future delivery periods. That means a customer starting a new contract in 2028 may not be buying the same market as a customer renewing in 2026.</p>
 <h3 style="font-size:16px;margin-bottom:10px;">What is Backwardation?</h3>
-<p style="font-size:14px;line-height:1.7;margin-bottom:16px;"><strong>Backwardation means the near-term market is more expensive than the future market.</strong> If 2026 gas is around 110p and summer 2028 is around 69p, the customer can see that the future delivery period is cheaper than the near-term market. <strong>That does not mean wait. It means check whether that cheaper future period can be secured now.</strong></p>
+<p style="font-size:14px;line-height:1.7;margin-bottom:16px;"><strong>Backwardation means the near-term market is more expensive than the future market.</strong> If W-26 gas is 119.25p and S-28 is 64.00p, the customer can see that the future delivery period is cheaper than the near-term market. <strong>That does not mean wait. It means check whether that cheaper future period can be secured now.</strong></p>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:16px 0;">
-<div style="padding:16px;background:rgba(0,211,154,0.06);border-radius:12px;border:1px solid rgba(0,211,154,0.15);">
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;"><strong style="color:var(--candy-start);">Near-term market:</strong><br>Win-26 gas ~110p/therm<br>Win-26 power ~&pound;99/MWh</p>
+<div style="padding:16px;background:rgba(248,113,113,0.06);border-radius:12px;border:1px solid rgba(248,113,113,0.15);">
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;margin:0;"><strong style="color:#f87171;">Near-term market:</strong><br>W-26 gas 119.25p/th<br>W-26 power &pound;105.25/MWh</p>
 </div>
 <div style="padding:16px;background:rgba(0,211,154,0.06);border-radius:12px;border:1px solid rgba(0,211,154,0.15);">
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;"><strong style="color:var(--candy-start);">Future market:</strong><br>Cal-28 gas ~69p/therm<br>Cal-28 power ~&pound;67.51/MWh</p>
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;margin:0;"><strong style="color:var(--candy-start);">Future market:</strong><br>S-28 gas 64.00p/th<br>S-28 power &pound;61.00/MWh</p>
 </div>
 </div>
 <p style="font-size:14px;line-height:1.7;"><strong>The cheaper future price exists because it is still a future delivery period.</strong> Waiting until that period becomes the live market may remove the advantage. <strong>Backwardation is not a reason to wait. It is a reason to check whether the customer can act.</strong> The forward market turns timing into opportunity.</p>
@@ -323,46 +320,47 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <h2>2028 / 2029 / 2030 Forward Value Check</h2>
 <p class="section-subtitle">Look beyond 2027. Check whether cheaper future delivery periods are available now.</p>
 <div class="callout">
-<p><strong>Key question:</strong> If 2028 or 2029 is materially cheaper than the near-term market, customers with later CEDs may have a forward-market opportunity now. Not every customer can access it. Supplier appetite, credit, usage, start date and contract profile all matter. <strong>The correct action is to check, not guess.</strong></p>
+<p><strong>Key question:</strong> If 2028, 2029 or 2030 is materially cheaper than the near-term market, customers with later CEDs may have a forward-market opportunity now. Not every customer can access it. Supplier appetite, credit, usage, start date and contract profile all matter. <strong>The correct action is to check, not guess.</strong></p>
 </div>
 <div class="glass" style="padding:20px;margin-bottom:16px;">
-<h3 style="font-size:14px;margin-bottom:12px;">Gas Forward Curve Summary</h3>
+<h3 style="font-size:14px;margin-bottom:12px;">Gas Forward Curve Summary &mdash; Switch 365 Internal Pricing</h3>
 <div class="table-responsive">
 <table class="forward-table">
 <thead>
-<tr><th>Delivery Period</th><th>Gas Price (p/th)</th><th>vs Near-Term</th><th>Curve Position</th><th>Customer Fit</th><th>Action</th></tr>
+<tr><th>Delivery Period</th><th>Fri 10 Jul AM</th><th>vs W-26</th><th>Curve</th><th>Customer Fit</th><th>Action</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>Win-26</strong></td><td>~110.97</td><td>Baseline</td><td>Front-end risk</td><td>Inside 90 days / 12 months</td><td><strong>Review urgently</strong></td></tr>
-<tr><td><strong>Sum-27</strong></td><td>~80.21</td><td>-28%</td><td>Backwardated</td><td>Inside 12 months</td><td><strong>Review now</strong></td></tr>
-<tr><td><strong>Win-27</strong></td><td>~81.17</td><td>-27%</td><td>Backwardated</td><td>Inside 12 months</td><td><strong>Review now</strong></td></tr>
-<tr><td><strong>Cal-28</strong></td><td>~69.26</td><td>-38%</td><td><strong>Backwardated</strong></td><td>Outside 12 months, high usage</td><td><strong>Check forward curve</strong></td></tr>
-<tr><td><strong>Cal-29</strong></td><td>~63.05</td><td>-43%</td><td><strong>Backwardated</strong></td><td>Outside 12 months, high usage</td><td><strong>Check forward curve</strong></td></tr>
-<tr><td><strong>Cal-30</strong></td><td>Not verified</td><td>&mdash;</td><td>Not verified</td><td>Multi-site / high credit</td><td>Check with supplier</td></tr>
+<tr><td><strong>W-26</strong></td><td>119.25</td><td>Baseline</td><td>Front-end risk</td><td>Inside 90 days / 12 months</td><td><strong>Review urgently</strong></td></tr>
+<tr><td><strong>S-27</strong></td><td>85.70</td><td>-28.1%</td><td>Backwardated</td><td>Inside 12 months</td><td><strong>Review now</strong></td></tr>
+<tr><td><strong>W-27</strong></td><td>86.50</td><td>-27.5%</td><td>Backwardated</td><td>Inside 12 months</td><td><strong>Review now</strong></td></tr>
+<tr><td><strong>S-28</strong></td><td>64.00</td><td>-46.3%</td><td><strong>Backwardated</strong></td><td>Outside 12 months, high usage</td><td><strong>Check forward curve</strong></td></tr>
+<tr><td><strong>W-28</strong></td><td>72.00</td><td>-39.6%</td><td><strong>Backwardated</strong></td><td>Outside 12 months, high usage</td><td><strong>Check forward curve</strong></td></tr>
+<tr><td><strong>S-29</strong></td><td>57.90</td><td>-51.4%</td><td><strong>Backwardated</strong></td><td>Outside 12 months, high usage</td><td><strong>Check forward curve</strong></td></tr>
+<tr><td><strong>W-29</strong></td><td>67.85</td><td>-43.1%</td><td><strong>Backwardated</strong></td><td>Outside 12 months, high usage</td><td><strong>Check forward curve</strong></td></tr>
+<tr><td><strong>S-30</strong></td><td>58.58</td><td>-50.9%</td><td><strong>Backwardated</strong></td><td>Multi-site / high credit</td><td>Check with supplier</td></tr>
 </tbody>
 </table>
 </div>
-<span class="source-chip"><a href="https://www.smart-energy.uk" target="_blank">Smart Energy UK</a></span>
-<span class="source-chip"><a href="https://www.catalyst-commercial.co.uk" target="_blank">Catalyst Commercial</a></span>
+<span class="source-chip">Switch 365 Internal Pricing</span>
 </div>
 <div class="glass" style="padding:20px;margin-bottom:16px;">
-<h3 style="font-size:14px;margin-bottom:12px;">Power Forward Curve Summary</h3>
+<h3 style="font-size:14px;margin-bottom:12px;">Power Forward Curve Summary &mdash; Switch 365 Internal Pricing</h3>
 <div class="table-responsive">
 <table class="forward-table">
 <thead>
-<tr><th>Delivery Period</th><th>Power Price (&pound;/MWh)</th><th>vs Near-Term</th><th>Curve Position</th><th>Customer Fit</th><th>Action</th></tr>
+<tr><th>Delivery Period</th><th>Fri 10 Jul AM</th><th>vs W-26</th><th>Curve</th><th>Customer Fit</th><th>Action</th></tr>
 </thead>
 <tbody>
-<tr><td><strong>Win-26</strong></td><td>~&pound;99.60</td><td>Baseline</td><td>Front-end risk</td><td>Inside 90 days / 12 months</td><td><strong>Review urgently</strong></td></tr>
-<tr><td><strong>Sum-27</strong></td><td>~&pound;75.73</td><td>-24%</td><td>Backwardated</td><td>Inside 12 months</td><td><strong>Review now</strong></td></tr>
-<tr><td><strong>Win-27</strong></td><td>~&pound;77.88</td><td>-22%</td><td>Backwardated</td><td>Inside 12 months</td><td><strong>Review now</strong></td></tr>
-<tr><td><strong>Cal-28</strong></td><td>~&pound;67.51</td><td>-32%</td><td><strong>Backwardated</strong></td><td>Outside 12 months, high usage</td><td><strong>Check forward curve</strong></td></tr>
-<tr><td><strong>Cal-29</strong></td><td>~&pound;65.07</td><td>-35%</td><td><strong>Backwardated</strong></td><td>Outside 12 months, high usage</td><td><strong>Check forward curve</strong></td></tr>
-<tr><td><strong>Cal-30</strong></td><td>Not verified</td><td>&mdash;</td><td>Not verified</td><td>Multi-site / high credit</td><td>Check with supplier</td></tr>
+<tr><td><strong>W-26</strong></td><td>&pound;105.25</td><td>Baseline</td><td>Front-end risk</td><td>Inside 90 days / 12 months</td><td><strong>Review urgently</strong></td></tr>
+<tr><td><strong>S-27</strong></td><td>&pound;78.00</td><td>-25.9%</td><td>Backwardated</td><td>Inside 12 months</td><td><strong>Review now</strong></td></tr>
+<tr><td><strong>W-27</strong></td><td>&pound;80.30</td><td>-23.7%</td><td>Backwardated</td><td>Inside 12 months</td><td><strong>Review now</strong></td></tr>
+<tr><td><strong>S-28</strong></td><td>&pound;61.00</td><td>-42.0%</td><td><strong>Backwardated</strong></td><td>Outside 12 months, high usage</td><td><strong>Check forward curve</strong></td></tr>
+<tr><td><strong>W-28</strong></td><td>&pound;69.42</td><td>-34.0%</td><td><strong>Backwardated</strong></td><td>Outside 12 months, high usage</td><td><strong>Check forward curve</strong></td></tr>
+<tr><td><strong>S-29</strong></td><td>&pound;60.32</td><td>-42.7%</td><td><strong>Backwardated</strong></td><td>Outside 12 months, high usage</td><td><strong>Check forward curve</strong></td></tr>
 </tbody>
 </table>
 </div>
-<span class="source-chip"><a href="https://www.smart-energy.uk" target="_blank">Smart Energy UK</a></span>
+<span class="source-chip">Switch 365 Internal Pricing</span>
 </div>
 <div class="callout">
 <p><strong>Commercial interpretation:</strong> The market is offering cheaper future delivery than near-term delivery. That supports reviewing longer fixed options now, especially for customers whose renewal dates allow future-start pricing. <strong>A cheaper 2028 or 2029 price does not mean the market will be cheaper when the customer gets there. It means the market is currently allowing that future delivery period to be bought at a lower level than the near-term market.</strong></p>
@@ -378,7 +376,7 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <p class="section-subtitle">The connection between forward curves and your contract decision</p>
 <div class="glass" style="padding:24px;">
 <p style="font-size:14px;line-height:1.7;margin-bottom:12px;">The futures market shows the price for energy delivered in future periods. A customer whose contract starts in September 2028 is not only interested in today&rsquo;s price. They are interested in what the market is currently offering for September 2028 onwards.</p>
-<p style="font-size:14px;line-height:1.7;margin-bottom:12px;">If 2028, 2029 or 2030 delivery periods are cheaper than the current market, the customer may be able to use that future pricing now, depending on supplier availability and contract rules.</p>
+<p style="font-size:14px;line-height:1.7;margin-bottom:12px;">If 2028, 2029 or 2030 delivery periods are cheaper than the current market, the customer may be able to use that future pricing now, depending on supplier availability and contract rules. For example, S-28 gas at 64.00p is <strong>46% cheaper</strong> than W-26 at 119.25p. S-28 power at &pound;61.00 is <strong>42% cheaper</strong> than W-26 at &pound;105.25.</p>
 <p style="font-size:14px;line-height:1.7;margin-bottom:12px;">The risk with waiting is that those future periods move closer every day. When they become the near-term market, they can pick up current risk, supplier caution, non-commodity changes, weather pressure or geopolitical premium.</p>
 <div style="padding:16px;background:rgba(0,211,154,0.06);border-radius:12px;border-left:3px solid var(--candy-start);margin:16px 0;">
 <p style="font-size:13px;line-height:1.7;margin:0;"><strong>Cheaper further out does not mean cheaper later.</strong> The future market is only useful while the customer can still buy that future delivery period. Waiting lets the market make the decision for the customer. This is not automatic advice to fix. It is a reason to review live prices now.</p>
@@ -393,22 +391,22 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="board-grid" style="gap:12px;">
 <div class="driver-card glass">
 <h4><span class="driver-icon">1</span> Gas Current Movement</h4>
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;">UK gas must be checked directly. At 120.83p/therm, the market is warning that the window is fragile. <strong>Above &pound;1 per therm is not safe.</strong></p>
-<span class="status-badge status-live">Above 120p</span>
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;">W-26 at 119.25p/th. UK gas is above &pound;1 per therm. The market is warning that the window is fragile. <strong>Above &pound;1 per therm is not safe.</strong></p>
+<span class="status-badge status-live">119.25p</span>
 </div>
 <div class="driver-card glass">
 <h4><span class="driver-icon">2</span> Gas Future Movement</h4>
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;">Check whether 2028 and 2029 gas periods remain cheaper than current delivery. Cal-28 at ~69p, Cal-29 at ~63p shows clear backwardation.</p>
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;">Check whether 2028 and 2029 gas periods remain cheaper than current delivery. S-28 at 64.00p, S-29 at 57.90p shows clear backwardation.</p>
 <span class="status-badge status-caution">Backwardated</span>
 </div>
 <div class="driver-card glass">
 <h4><span class="driver-icon">3</span> Power Current Movement</h4>
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;">Current power reacts through gas, carbon, heat, system margins and wider risk premium. NESO issued EMN for 9 July evening peak.</p>
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;">W-26 at &pound;105.25/MWh. Current power reacts through gas, carbon, heat, system margins and wider risk premium. NESO issued EMN for 9 July evening peak.</p>
 <span class="status-badge status-warning">Heat Pressure</span>
 </div>
 <div class="driver-card glass">
 <h4><span class="driver-icon">4</span> Power Future Movement</h4>
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;">Later power periods may support longer fixes where customer dates allow. Cal-28 power at ~&pound;67.51/MWh.</p>
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;">Later power periods may support longer fixes where customer dates allow. S-28 at &pound;61.00/MWh, S-29 at &pound;60.32/MWh.</p>
 <span class="status-badge status-caution">Check Curve</span>
 </div>
 <div class="driver-card glass">
@@ -450,7 +448,7 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 </div>
 <div class="reality-card glass">
 <h4>Why small forward movements matter</h4>
-<p>Even a small movement in 2028, 2029 or 2030 pricing can make a material difference across a high-usage contract.</p>
+<p>Even a small movement in 2028, 2029 or 2030 pricing can make a material difference across a high-usage contract. S-29 gas at 57.90p vs W-26 at 119.25p is a 51% difference.</p>
 </div>
 <div class="reality-card glass">
 <h4>Why the LOA is only a data check</h4>
@@ -465,7 +463,7 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <p><strong>Outside 12 months usually means monitor. Outside 12 months with high usage means check the forward curve.</strong> Not due yet can actually be the reason to review, not the reason to ignore it. The opportunity may exist because the customer is not renewing into the expensive front of the market.</p>
 </div>
 <div style="padding:20px;background:rgba(0,211,154,0.05);border-radius:12px;border:1px solid rgba(0,211,154,0.15);margin-top:12px;">
-<p style="font-size:14px;line-height:1.7;margin:0;"><strong>Opener-style guidance:</strong> &ldquo;Well, if your contract end date is 2028 or beyond, there may be an opportunity in the market that no one is currently talking about. Gas for the near-term market is currently expensive, while summer 2028 may be materially cheaper. Forward-thinking businesses with later contract dates may be able to access a much cheaper future market now. We do not know whether that applies to you until we check your contract end date, usage and supplier details properly. That is all the LOA allows us to do. It does not switch you, it does not commit you, and it does not agree a contract. Can you see any downside in us doing that exercise for you, so you know whether you can take advantage of the cheaper future market?&rdquo;</p>
+<p style="font-size:14px;line-height:1.7;margin:0;"><strong>Opener-style guidance:</strong> &ldquo;Well, if your contract end date is 2028 or beyond, there may be an opportunity in the market that no one is currently talking about. Gas for the near-term market is currently expensive at around 119p, while summer 2028 may be available at 64p &mdash; that&rsquo;s a significant difference. Forward-thinking businesses with later contract dates may be able to access a much cheaper future market now. We do not know whether that applies to you until we check your contract end date, usage and supplier details properly. That is all the LOA allows us to do. It does not switch you, it does not commit you, and it does not agree a contract. Can you see any downside in us doing that exercise for you, so you know whether you can take advantage of the cheaper future market?&rdquo;</p>
 </div>
 </div>
 </section>
@@ -478,8 +476,8 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="driver-card glass">
 <h4><span class="driver-icon">1</span> Ceasefire / MOU Position</h4>
 <ul>
-<li>Trump announced on 8 July that the interim Iran accord / ceasefire is &ldquo;<strong>over</strong>&rdquo; [^1^][^8^]</li>
-<li>However, Trump said he would not prevent talks from continuing, and a US official reaffirmed commitment to diplomacy [^32^]</li>
+<li>Trump announced on 8 July that the interim Iran accord / ceasefire is &ldquo;<strong>over</strong>&rdquo;</li>
+<li>However, Trump said he would not prevent talks from continuing, and a US official reaffirmed commitment to diplomacy</li>
 <li>The 17 June MOU and 60-day ceasefire framework appears broken but not necessarily irreversible</li>
 </ul>
 <span class="source-chip"><a href="https://en.wikipedia.org/wiki/2026_Iran_war_ceasefire" target="_blank">Wikipedia / Reuters</a></span>
@@ -488,9 +486,9 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="driver-card glass">
 <h4><span class="driver-icon">2</span> US-Iran Military Escalation</h4>
 <ul>
-<li>US forces carried out strikes on Iranian targets on 8-9 July after tanker attacks [^8^][^10^]</li>
-<li>Iran retaliated with missile and drone strikes against US bases in Kuwait, Qatar and Bahrain [^7^]</li>
-<li>Washington revoked Iran&rsquo;s oil sales licence in response to vessel attacks [^8^]</li>
+<li>US forces carried out strikes on Iranian targets on 8-9 July after tanker attacks</li>
+<li>Iran retaliated with missile and drone strikes against US bases in Kuwait, Qatar and Bahrain</li>
+<li>Washington revoked Iran&rsquo;s oil sales licence in response to vessel attacks</li>
 </ul>
 <span class="source-chip"><a href="https://www.reuters.com" target="_blank">Reuters</a></span>
 </div>
@@ -498,9 +496,9 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="driver-card glass">
 <h4><span class="driver-icon">3</span> Hormuz Shipping Risk</h4>
 <ul>
-<li>JMIC raised threat level to <strong>&ldquo;SEVERE&rdquo;</strong> from &ldquo;substantial&rdquo; on 7 July [^8^][^10^]</li>
-<li>Four tankers turned back including LNG carriers Al Ghariya, Duhail and Al Ruwais [^14^][^16^]</li>
-<li>Only 4 tankers transited in early hours of 8 July vs 34 average last week and 125-140 pre-conflict [^8^]</li>
+<li>JMIC raised threat level to <strong>&ldquo;SEVERE&rdquo;</strong> from &ldquo;substantial&rdquo; on 7 July</li>
+<li>Four tankers turned back including LNG carriers Al Ghariya, Duhail and Al Ruwais</li>
+<li>Only 4 tankers transited in early hours of 8 July vs 125-140 pre-conflict daily average</li>
 </ul>
 <span class="source-chip"><a href="https://www.reuters.com" target="_blank">Reuters / JMIC</a></span>
 </div>
@@ -508,9 +506,9 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="driver-card glass">
 <h4><span class="driver-icon">4</span> LNG Market</h4>
 <ul>
-<li>IGU: Global LNG trade hit record 437 million tonnes in 2025, but Middle East conflict clouds 2026 outlook [^24^][^33^]</li>
-<li>Shell: Hormuz disruption has shut in around <strong>one-fifth of global monthly LNG supply</strong> [^28^][^35^]</li>
-<li>QatarEnergy halved 2026 scheduled LNG deliveries to Bangladesh [^46^][^50^]</li>
+<li>IGU: Global LNG trade hit record 437 million tonnes in 2025, but Middle East conflict clouds 2026 outlook</li>
+<li>Shell: Hormuz disruption has shut in around <strong>one-fifth of global monthly LNG supply</strong></li>
+<li>QatarEnergy halved 2026 scheduled LNG deliveries to Bangladesh</li>
 </ul>
 <span class="source-chip"><a href="https://www.igu.org" target="_blank">IGU</a></span>
 <span class="source-chip"><a href="https://www.shell.com" target="_blank">Shell</a></span>
@@ -519,19 +517,19 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="driver-card glass">
 <h4><span class="driver-icon">5</span> NBP Gas Market</h4>
 <ul>
-<li>UK gas at <strong>120.83p/therm</strong> on 9 July, up 3.54% &mdash; above &pound;1 and above 120p [^11^]</li>
-<li>38.61% higher than a year ago; prices supported by Hormuz risk, LNG disruption and heat [^7^][^11^]</li>
-<li>Norwegian maintenance and slower storage injections providing additional support [^73^]</li>
+<li>UK gas W-26 at <strong>119.25p/therm</strong> (Fri 10 Jul AM) &mdash; above &pound;1 per therm</li>
+<li>Near-term contracts (W-26, S-27, W-27) firmer; back-end (S-28 to S-30) softer</li>
+<li>TTF influence, LNG disruption, storage deficits and heat all supporting prices</li>
 </ul>
-<span class="source-chip"><a href="https://tradingeconomics.com/commodity/uk-natural-gas" target="_blank">Trading Economics</a></span>
+<span class="source-chip">Switch 365 Internal Pricing</span>
 </div>
 
 <div class="driver-card glass">
 <h4><span class="driver-icon">6</span> TTF and European Gas</h4>
 <ul>
-<li>TTF at &euro;49.54/MWh on 10 July, down 1.44% but still 39% above year-ago [^32^]</li>
-<li>European gas storage at ~50.88%, below last year and below 5-year average [^53^]</li>
-<li>Asian LNG premium making it harder for Europe to attract spot cargoes [^63^]</li>
+<li>TTF at &euro;49.54/MWh on 10 July &mdash; 39% above year-ago levels</li>
+<li>European gas storage at ~50.88%, below last year and below 5-year average</li>
+<li>Asian LNG premium making it harder for Europe to attract spot cargoes</li>
 </ul>
 <span class="source-chip"><a href="https://tradingeconomics.com/commodity/eu-natural-gas" target="_blank">Trading Economics</a></span>
 <span class="source-chip"><a href="https://www.gie.eu" target="_blank">GIE / AGSI</a></span>
@@ -540,22 +538,22 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="driver-card glass">
 <h4><span class="driver-icon">7</span> UK Power Market</h4>
 <ul>
-<li>UK power spot at &pound;101.48/MWh; forward Win-26 around &pound;99.60/MWh [^75^][^73^]</li>
-<li>NESO issued EMN for 9 July evening peak due to extreme temperatures [^52^][^64^]</li>
-<li>Heatwave boosting air-conditioning demand and gas-fired power generation [^39^]</li>
+<li>UK power W-26 at <strong>&pound;105.25/MWh</strong> (Fri 10 Jul AM)</li>
+<li>NESO issued EMN for 9 July evening peak due to extreme temperatures</li>
+<li>Heatwave boosting air-conditioning demand and gas-fired power generation</li>
 </ul>
-<span class="source-chip"><a href="https://tradingeconomics.com/united-kingdom/electricity-price" target="_blank">Trading Economics</a></span>
+<span class="source-chip">Switch 365 Internal Pricing</span>
 <span class="source-chip"><a href="https://www.renews.biz" target="_blank">RENnews / NESO</a></span>
 </div>
 
 <div class="driver-card glass">
 <h4><span class="driver-icon">8</span> Forward Market</h4>
 <ul>
-<li>NBP curve is <strong>backwardated</strong>: Cal-28 ~69p, Cal-29 ~63p vs Win-26 ~111p [^73^]</li>
-<li>Power curve similarly backwardated: Cal-28 ~&pound;67.51, Cal-29 ~&pound;65.07 [^73^]</li>
+<li>NBP curve is <strong>backwardated</strong>: S-28 at 64.00p, S-29 at 57.90p vs W-26 at 119.25p</li>
+<li>Power curve similarly backwardated: S-28 at &pound;61.00, S-29 at &pound;60.32 vs W-26 at &pound;105.25</li>
 <li>Later-CED customers may access cheaper future delivery periods if suppliers will price</li>
 </ul>
-<span class="source-chip"><a href="https://www.smart-energy.uk" target="_blank">Smart Energy UK</a></span>
+<span class="source-chip">Switch 365 Internal Pricing</span>
 </div>
 
 <div class="driver-card glass">
@@ -576,13 +574,13 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="reality-grid">
 <div class="reality-card glass">
 <h4><span style="color:#f87171;">&#9888;</span> UK Gas &pound;1 Line</h4>
-<p>UK gas at 120.83p/therm is well above the &pound;1 line. This is not a normal market.</p>
-<span class="source-chip"><a href="https://tradingeconomics.com/commodity/uk-natural-gas" target="_blank">Trading Economics</a></span>
+<p>W-26 at 119.25p/therm is well above the &pound;1 line. This is not a normal market.</p>
+<span class="source-chip">Switch 365 Internal Pricing</span>
 </div>
 <div class="reality-card glass">
-<h4><span style="color:#f87171;">&#9888;</span> UK Gas 120p Line</h4>
-<p>At 120.83p, the market has pushed above 120p. Waiting has already cost movement.</p>
-<span class="source-chip"><a href="https://tradingeconomics.com/commodity/uk-natural-gas" target="_blank">Trading Economics</a></span>
+<h4><span style="color:#f87171;">&#9888;</span> W-26 at 119.25p</h4>
+<p>Front-of-curve winter gas at 119.25p reflects elevated near-term risk premium.</p>
+<span class="source-chip">Switch 365 Internal Pricing</span>
 </div>
 <div class="reality-card glass">
 <h4><span style="color:#fbbf24;">&#9888;</span> TTF / NBP Link</h4>
@@ -591,67 +589,67 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 </div>
 <div class="reality-card glass">
 <h4><span style="color:#f87171;">&#9888;</span> IGU LNG Warning</h4>
-<p>IGU warned Middle East conflict could lead to LNG trade contraction in 2026. [^24^]</p>
+<p>IGU warned Middle East conflict could lead to LNG trade contraction in 2026.</p>
 <span class="source-chip"><a href="https://www.igu.org" target="_blank">IGU</a></span>
 </div>
 <div class="reality-card glass">
 <h4><span style="color:#f87171;">&#9888;</span> Shell LNG Warning</h4>
-<p>Shell: Hormuz disruption shut in ~1/5 of global monthly LNG supply since conflict began. [^28^]</p>
+<p>Shell: Hormuz disruption shut in ~1/5 of global monthly LNG supply since conflict began.</p>
 <span class="source-chip"><a href="https://www.shell.com" target="_blank">Shell</a></span>
 </div>
 <div class="reality-card glass">
 <h4><span style="color:#fb923c;">&#9888;</span> QatarEnergy Delivery Cuts</h4>
-<p>QatarEnergy halved 2026 LNG deliveries to Bangladesh due to Hormuz disruption. [^46^]</p>
+<p>QatarEnergy halved 2026 LNG deliveries to Bangladesh due to Hormuz disruption.</p>
 <span class="source-chip"><a href="https://www.reuters.com" target="_blank">Reuters</a></span>
 </div>
 <div class="reality-card glass">
 <h4><span style="color:#f87171;">&#9888;</span> Tankers Turning Back</h4>
-<p>Four tankers including QatarEnergy LNG carriers Al Ghariya, Duhail, Al Ruwais turned back. [^14^]</p>
+<p>Four tankers including QatarEnergy LNG carriers Al Ghariya, Duhail, Al Ruwais turned back.</p>
 <span class="source-chip"><a href="https://www.reuters.com" target="_blank">Reuters</a></span>
 </div>
 <div class="reality-card glass">
 <h4><span style="color:#f87171;">&#9888;</span> Ceasefire / MOU Position</h4>
-<p>Trump said the interim accord is &ldquo;over&rdquo; on 8 July, but talks may continue. [^1^][^32^]</p>
+<p>Trump said the interim accord is &ldquo;over&rdquo; on 8 July, but talks may continue.</p>
 <span class="source-chip"><a href="https://en.wikipedia.org/wiki/2026_Iran_war_ceasefire" target="_blank">Wikipedia / Reuters</a></span>
 </div>
 <div class="reality-card glass">
 <h4><span style="color:#f87171;">&#9888;</span> US-Iran Escalation</h4>
-<p>US strikes on Iran, Iranian retaliation against Gulf bases, oil licence revoked. [^8^]</p>
+<p>US strikes on Iran, Iranian retaliation against Gulf bases, oil licence revoked.</p>
 <span class="source-chip"><a href="https://www.reuters.com" target="_blank">Reuters</a></span>
 </div>
 <div class="reality-card glass">
 <h4><span style="color:#fbbf24;">&#9888;</span> US LNG / Asia Competition</h4>
-<p>Asian demand and Egyptian purchases pulling LNG cargoes away from Europe. [^73^]</p>
+<p>Asian demand and Egyptian purchases pulling LNG cargoes away from Europe.</p>
 <span class="source-chip"><a href="https://www.smart-energy.uk" target="_blank">Smart Energy UK</a></span>
 </div>
 <div class="reality-card glass">
 <h4><span style="color:#fb923c;">&#9888;</span> Storage Refill</h4>
-<p>EU storage at 50.88%, UK at 21.23% &mdash; well below last year and 5-year average. [^53^]</p>
+<p>EU storage at 50.88%, UK at 21.23% &mdash; well below last year and 5-year average.</p>
 <span class="source-chip"><a href="https://www.gie.eu" target="_blank">GIE / AGSI</a></span>
 </div>
 <div class="reality-card glass">
 <h4><span style="color:#fb923c;">&#9888;</span> Heat and Power Demand</h4>
-<p>UK heatwave boosting AC demand. NESO issued EMN. 25 heat-related deaths reported. [^39^][^52^]</p>
+<p>UK heatwave boosting AC demand. NESO issued EMN. 25 heat-related deaths reported.</p>
 <span class="source-chip"><a href="https://en.wikipedia.org/wiki/2026_United_Kingdom_heatwaves" target="_blank">Wikipedia / NESO</a></span>
 </div>
 <div class="reality-card glass">
 <h4><span style="color:#fbbf24;">&#9888;</span> Norway Flow Risk</h4>
-<p>Gassco maintenance ongoing through September. Flows stable but require monitoring. [^60^]</p>
+<p>Gassco maintenance ongoing through September. Flows stable but require monitoring.</p>
 <span class="source-chip"><a href="https://www.gassco.no" target="_blank">Gassco</a></span>
 </div>
 <div class="reality-card glass">
 <h4><span style="color:var(--candy-start);">&#9888;</span> Forward Curve / Backwardation</h4>
-<p>Cal-28 gas ~69p, Cal-29 ~63p. Cheaper future delivery may be available now. [^73^]</p>
-<span class="source-chip"><a href="https://www.smart-energy.uk" target="_blank">Smart Energy UK</a></span>
+<p>S-28 gas 64.00p, S-29 57.90p. Cheaper future delivery may be available now.</p>
+<span class="source-chip">Switch 365 Internal Pricing</span>
 </div>
 <div class="reality-card glass">
 <h4><span style="color:#f87171;">&#9888;</span> Supplier Book Lag</h4>
-<p>Wholesale markets move before supplier books. Short window before repricing. [^73^]</p>
+<p>Wholesale markets move before supplier books. Short window before repricing.</p>
 <span class="source-chip">Switch 365 Guidance</span>
 </div>
 </div>
 <div class="callout" style="margin-top:16px;">
-<p><strong>The headline may be oil. The customer risk is gas, LNG and the forward curve.</strong> Above &pound;1 per therm is not safe. If UK gas is above 120p per therm, the market has already moved again. LNG is the bridge between Hormuz and UK gas. TTF is the European gas benchmark. NBP is the UK gas benchmark. Brent is not the customer&rsquo;s gas quote.</p>
+<p><strong>The headline may be oil. The customer risk is gas, LNG and the forward curve.</strong> Above &pound;1 per therm is not safe. LNG is the bridge between Hormuz and UK gas. TTF is the European gas benchmark. NBP is the UK gas benchmark. Brent is not the customer&rsquo;s gas quote.</p>
 </div>
 </section>
 
@@ -690,22 +688,22 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="board-grid" style="margin-bottom:16px;">
 <div class="board-card glass">
 <h3><span style="color:var(--candy-start);">1</span> IGU World LNG Report 2026</h3>
-<p>Global LNG trade hit a record <strong>437 million tonnes</strong> in 2025 (6.3% growth), but the Middle East conflict clouds the 2026 outlook and could cause contraction. [^24^][^33^]</p>
+<p>Global LNG trade hit a record <strong>437 million tonnes</strong> in 2025 (6.3% growth), but the Middle East conflict clouds the 2026 outlook and could cause contraction.</p>
 <span class="source-chip"><a href="https://www.igu.org/press-releases/world-lng-report-2026" target="_blank">IGU</a></span>
 </div>
 <div class="board-card glass">
 <h3><span style="color:var(--candy-start);">2</span> Shell LNG Outlook 2026</h3>
-<p>Hormuz disruption has shut in around <strong>one-fifth of global monthly LNG supply</strong> since the conflict began. Shell warned global LNG trade could be flat in 2026. [^28^][^35^]</p>
+<p>Hormuz disruption has shut in around <strong>one-fifth of global monthly LNG supply</strong> since the conflict began. Shell warned global LNG trade could be flat in 2026.</p>
 <span class="source-chip"><a href="https://www.shell.com/news-and-insights/newsroom/news-and-media-releases/2026/lng-outlook-2026.html" target="_blank">Shell</a></span>
 </div>
 <div class="board-card glass">
 <h3><span style="color:var(--candy-start);">3</span> QatarEnergy / Bangladesh</h3>
-<p>QatarEnergy <strong>halved</strong> its 2026 scheduled LNG deliveries to Bangladesh, showing LNG disruption is operational, not theoretical. [^46^][^50^]</p>
+<p>QatarEnergy <strong>halved</strong> its 2026 scheduled LNG deliveries to Bangladesh, showing LNG disruption is operational, not theoretical.</p>
 <span class="source-chip"><a href="https://www.reuters.com" target="_blank">Reuters</a></span>
 </div>
 <div class="board-card glass">
 <h3><span style="color:var(--candy-start);">4</span> Tankers Turning Back</h3>
-<p>QatarEnergy-linked LNG tankers <strong>Al Ghariya, Duhail and Al Ruwais</strong> turned back from Hormuz. Al Rekayyat was damaged by projectile. [^14^][^8^]</p>
+<p>QatarEnergy-linked LNG tankers <strong>Al Ghariya, Duhail and Al Ruwais</strong> turned back from Hormuz. Al Rekayyat was damaged by projectile.</p>
 <span class="source-chip"><a href="https://www.reuters.com" target="_blank">Reuters / JMIC</a></span>
 </div>
 </div>
@@ -730,14 +728,14 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 </div>
 
 <div class="warning-card">
-<h4><span class="pulse-dot"></span> 2. UK Gas Above 120p Per Therm</h4>
-<p><strong>New today</strong> &mdash; Verified. UK gas at 120.83p/therm on 9 July, up 3.54%. <strong>Commercially:</strong> Above 120p means the market has already moved again. Waiting has cost movement. <strong>Action:</strong> Do not wait for certainty. <strong>90-day urgency:</strong> Critical &mdash; avoid deemed/rollover. <strong>High-usage outside 12 months:</strong> Check if Cal-28/29 access is available.</p>
-<span class="source-chip"><a href="https://tradingeconomics.com/commodity/uk-natural-gas" target="_blank">Trading Economics</a></span>
+<h4><span class="pulse-dot"></span> 2. UK Gas Above &pound;1 Per Therm at 119.25p</h4>
+<p><strong>Verified</strong> &mdash; Switch 365 internal pricing. W-26 at 119.25p/th (Fri 10 Jul AM). <strong>Commercially:</strong> Above &pound;1 per therm is not safe. The near-term market carries significant risk premium. <strong>Action:</strong> Do not wait for certainty. <strong>90-day urgency:</strong> Critical &mdash; avoid deemed/rollover. <strong>High-usage outside 12 months:</strong> Check if S-28/S-29 access is available.</p>
+<span class="source-chip">Switch 365 Internal Pricing</span>
 </div>
 
 <div class="warning-card">
 <h4><span class="pulse-dot"></span> 3. QatarEnergy-Linked LNG Tankers Turned Back / Al Rekayyat Damaged</h4>
-<p><strong>New today / Still relevant</strong> &mdash; Verified. Al Ghariya, Duhail, Al Ruwais turned back. Al Rekayyat hit by projectile, engine room fire, crew evacuated. Saudi tanker Wedyan also targeted. [^8^][^14^] <strong>Commercially:</strong> Live shipping proof that Hormuz is not safe. <strong>Action:</strong> Treat as active supply risk. <strong>90-day urgency:</strong> High.</p>
+<p><strong>New today / Still relevant</strong> &mdash; Verified. Al Ghariya, Duhail, Al Ruwais turned back. Al Rekayyat hit by projectile, engine room fire, crew evacuated. Saudi tanker Wedyan also targeted. <strong>Commercially:</strong> Live shipping proof that Hormuz is not safe. <strong>Action:</strong> Treat as active supply risk. <strong>90-day urgency:</strong> High.</p>
 <span class="source-chip"><a href="https://www.reuters.com" target="_blank">Reuters</a></span>
 </div>
 
@@ -749,7 +747,7 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 
 <div class="warning-card">
 <h4><span class="pulse-dot"></span> 5. NESO Electricity Margin Notice + UK Heatwave</h4>
-<p><strong>New today / Still relevant</strong> &mdash; Verified. NESO issued EMN for 9 July evening peak. Third summer heatwave with temperatures reaching 37.7&deg;C in June. [^52^][^39^] <strong>Commercially:</strong> Heat boosts gas-for-power demand, supporting gas prices. <strong>Action:</strong> Factor heat-related gas demand into procurement timing. <strong>90-day urgency:</strong> Moderate-High.</p>
+<p><strong>New today / Still relevant</strong> &mdash; Verified. NESO issued EMN for 9 July evening peak. Third summer heatwave with temperatures reaching 37.7&deg;C in June. <strong>Commercially:</strong> Heat boosts gas-for-power demand, supporting gas prices. <strong>Action:</strong> Factor heat-related gas demand into procurement timing. <strong>90-day urgency:</strong> Moderate-High.</p>
 <span class="source-chip"><a href="https://www.renews.biz" target="_blank">RENnews / NESO</a></span>
 </div>
 
@@ -765,49 +763,42 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 
 <div class="timeline-item glass">
 <div class="date">09 July &ndash; 10 July 2026</div>
-<div class="event">Trump announced the interim Iran accord / ceasefire is &ldquo;<strong>over</strong>&rdquo; on 8 July, though he said he would not prevent talks from continuing. A US official reaffirmed Washington&rsquo;s commitment to diplomacy. [^1^][^32^]</div>
+<div class="event">Trump announced the interim Iran accord / ceasefire is &ldquo;<strong>over</strong>&rdquo; on 8 July, though he said he would not prevent talks from continuing. A US official reaffirmed Washington&rsquo;s commitment to diplomacy.</div>
 <span class="label label-verified">Verified</span>
 <span class="source-chip"><a href="https://en.wikipedia.org/wiki/2026_Iran_war_ceasefire" target="_blank">Wikipedia / Reuters</a></span>
 </div>
 
 <div class="timeline-item glass">
-<div class="date">09 July 2026</div>
-<div class="event">UK gas <strong>rose to 120.83p/therm</strong>, up 3.54% from previous day, now above 120p. Prices supported by US-Iran escalation, Hormuz risk and heatwave demand. [^11^]</div>
+<div class="date">10 July 2026 &mdash; Fri AM</div>
+<div class="event"><strong>Switch 365 internal pricing update:</strong> W-26 gas flat at 119.25p. S-27 firmed to 85.70p (+0.70). W-27 firmed to 86.50p (+1.00). Back-end softened: S-28 64.00p (-1.00), W-28 72.00p (-1.00), S-29 57.90p (-0.10), W-29 67.85p (-0.91). Power W-26 firmed to 105.25p (+0.25). S-29 power softened sharply to &pound;60.32 (-2.89).</div>
 <span class="label label-verified">Verified</span>
-<span class="source-chip"><a href="https://tradingeconomics.com/commodity/uk-natural-gas" target="_blank">Trading Economics</a></span>
+<span class="source-chip">Switch 365 Internal Pricing</span>
 </div>
 
 <div class="timeline-item glass">
 <div class="date">09 July 2026</div>
-<div class="event">EU gas / TTF at <strong>&euro;49.54/MWh</strong>, down 1.44% on reports of continued US-Iran negotiations, but still 39% above year-ago levels. [^32^]</div>
-<span class="label label-verified">Verified</span>
-<span class="source-chip"><a href="https://tradingeconomics.com/commodity/eu-natural-gas" target="_blank">Trading Economics</a></span>
-</div>
-
-<div class="timeline-item glass">
-<div class="date">09 July 2026</div>
-<div class="event"><strong>NESO issued an Electricity Margin Notice</strong> for Thursday evening peak (6:30pm &ndash; 10:30pm) due to extreme temperatures across Europe reducing generation availability. Projected 1,000MW shortfall. [^52^][^64^]</div>
+<div class="event"><strong>NESO issued an Electricity Margin Notice</strong> for Thursday evening peak (6:30pm &ndash; 10:30pm) due to extreme temperatures across Europe reducing generation availability. Projected 1,000MW shortfall.</div>
 <span class="label label-verified">Verified</span>
 <span class="source-chip"><a href="https://www.renews.biz" target="_blank">RENnews / NESO</a></span>
 </div>
 
 <div class="timeline-item glass">
 <div class="date">08 July &ndash; 09 July 2026</div>
-<div class="event">Four oil and gas tankers turned back from Hormuz including QatarEnergy LNG carriers <strong>Al Ghariya, Duhail and Al Ruwais</strong>. Qatari LNG tanker <strong>Al Rekayyat</strong> damaged by projectile with engine room fire. Saudi tanker Wedyan and Liberia-flagged Cyprus Prosperity also targeted. [^8^][^14^]</div>
+<div class="event">Four oil and gas tankers turned back from Hormuz including LNG carriers <strong>Al Ghariya, Duhail and Al Ruwais</strong>. Qatari LNG tanker <strong>Al Rekayyat</strong> damaged by projectile with engine room fire. Saudi tanker Wedyan and Liberia-flagged Cyprus Prosperity also targeted.</div>
 <span class="label label-verified">Verified</span>
 <span class="source-chip"><a href="https://www.reuters.com" target="_blank">Reuters / JMIC / Kpler</a></span>
 </div>
 
 <div class="timeline-item glass">
 <div class="date">08 July 2026</div>
-<div class="event">JMIC raised Hormuz transit threat level to <strong>&ldquo;SEVERE&rdquo;</strong> from &ldquo;substantial&rdquo;. Only 4 tankers transited in early hours vs 34 average last week and 125-140 pre-conflict daily average. [^8^][^10^]</div>
+<div class="event">JMIC raised Hormuz transit threat level to <strong>&ldquo;SEVERE&rdquo;</strong> from &ldquo;substantial&rdquo;. Only 4 tankers transited in early hours vs 34 average last week and 125-140 pre-conflict daily average.</div>
 <span class="label label-verified">Verified</span>
 <span class="source-chip"><a href="https://www.reuters.com" target="_blank">Reuters / JMIC</a></span>
 </div>
 
 <div class="timeline-item glass">
 <div class="date">09 July 2026</div>
-<div class="event">Oil edged lower but headed for <strong>weekly gain</strong> as Middle East supply risks persist. Brent around $72, WTI around $69. &ldquo;Prices have backed off mid-week highs, but there is still a substantial risk premium as Hormuz transits are back to a near-standstill.&rdquo; [^3^][^4^]</div>
+<div class="event">Oil edged lower but headed for <strong>weekly gain</strong> as Middle East supply risks persist. Brent around $72, WTI around $69. &ldquo;Prices have backed off mid-week highs, but there is still a substantial risk premium as Hormuz transits are back to a near-standstill.&rdquo;</div>
 <span class="label label-verified">Verified</span>
 <span class="source-chip"><a href="https://finance.yahoo.com" target="_blank">Yahoo Finance / Reuters</a></span>
 </div>
@@ -824,31 +815,31 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 
 <div class="driver-card glass">
 <h4><span class="driver-icon">&#10003;</span> Trump Saying the Iran MOU / Ceasefire Is Over</h4>
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;">Announced 8 July. Still relevant because it affects shipping confidence and supplier risk pricing. [^1^]</p>
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;">Announced 8 July. Still relevant because it affects shipping confidence and supplier risk pricing.</p>
 </div>
 <div class="driver-card glass">
 <h4><span class="driver-icon">&#10003;</span> US-Iran Military Exchange</h4>
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;">US strikes and Iranian retaliation on 8-9 July. Still relevant because further escalation remains possible. [^8^]</p>
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;">US strikes and Iranian retaliation on 8-9 July. Still relevant because further escalation remains possible.</p>
 </div>
 <div class="driver-card glass">
 <h4><span class="driver-icon">&#10003;</span> IGU LNG Warning (7 July)</h4>
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;">IGU warned Middle East conflict could lead to LNG trade contraction in 2026. Still relevant as long as Hormuz is disrupted. [^24^]</p>
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;">IGU warned Middle East conflict could lead to LNG trade contraction in 2026. Still relevant as long as Hormuz is disrupted.</p>
 </div>
 <div class="driver-card glass">
 <h4><span class="driver-icon">&#10003;</span> Shell LNG Warning (30 June)</h4>
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;">Shell warned ~1/5 of global monthly LNG supply shut in due to Hormuz. Still relevant as disruption continues. [^28^]</p>
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;">Shell warned ~1/5 of global monthly LNG supply shut in due to Hormuz. Still relevant as disruption continues.</p>
 </div>
 <div class="driver-card glass">
 <h4><span class="driver-icon">&#10003;</span> QatarEnergy Delivery Cuts to Bangladesh</h4>
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;">Halved 2026 deliveries. Still relevant as operational proof of LNG supply disruption. [^46^]</p>
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;">Halved 2026 deliveries. Still relevant as operational proof of LNG supply disruption.</p>
 </div>
 <div class="driver-card glass">
 <h4><span class="driver-icon">&#10003;</span> European Storage at ~51%, UK at ~21%</h4>
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;">Well below last year and 5-year average. Still relevant as refill risk supports prices. [^53^]</p>
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;">Well below last year and 5-year average. Still relevant as refill risk supports prices.</p>
 </div>
 <div class="driver-card glass">
 <h4><span class="driver-icon">&#10003;</span> Backwardation in Gas and Power Curves</h4>
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;">Cal-28/29 cheaper than near-term. Still relevant for later-CED customer opportunities. [^73^]</p>
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;">S-28/29/30 cheaper than near-term. Still relevant for later-CED customer opportunities.</p>
 </div>
 <div class="driver-card glass">
 <h4><span class="driver-icon">&#10003;</span> 90-Day Out-of-Contract Risk</h4>
@@ -866,7 +857,7 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <p class="section-subtitle">Items no longer leading today&rsquo;s report</p>
 <div class="glass" style="padding:20px;">
 <ul style="list-style:none;padding:0;">
-<li style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px;color:var(--off-white);"><span style="color:#94a3b8;margin-right:8px;">&darr;</span> <strong>Old 3 July gas data</strong> &mdash; superseded by 9-10 July figures showing gas above 120p</li>
+<li style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px;color:var(--off-white);"><span style="color:#94a3b8;margin-right:8px;">&darr;</span> <strong>Old 3 July gas data</strong> &mdash; superseded by Fri 10 Jul AM S-365 pricing figures</li>
 <li style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px;color:var(--off-white);"><span style="color:#94a3b8;margin-right:8px;">&darr;</span> <strong>Old &ldquo;oil calmer&rdquo; framing</strong> &mdash; oil may have eased from highs but still carries risk premium and weekly gain</li>
 <li style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px;color:var(--off-white);"><span style="color:#94a3b8;margin-right:8px;">&darr;</span> <strong>Old Tehran rumours</strong> &mdash; no verified direct strike on Tehran in current window</li>
 <li style="padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:13px;color:var(--off-white);"><span style="color:#94a3b8;margin-right:8px;">&darr;</span> <strong>Unverified &ldquo;Patriot bases&rdquo; claims</strong> &mdash; not used without current credible verification</li>
@@ -884,13 +875,13 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 
 <div class="timeline-item glass">
 <div class="date">Thursday 9 July 2026</div>
-<div class="event">UK gas checked: rose to 120.83p/therm, up 3.54%. TTF checked: &euro;49.54/MWh. NESO issued EMN for evening peak. Brent/WTI checked: ~$72/$69, heading for weekly gain. Hormuz traffic checked: still near-standstill at 4 transits vs 125-140 pre-conflict. Tanker turnbacks verified: Al Ghariya, Duhail, Al Ruwais. Al Rekayyat damage confirmed. Forward curve checked: backwardation persists. Supplier book risk checked.</div>
+<div class="event">Switch 365 internal pricing checked: W-26 gas at 119.25p. Power W-26 at &pound;105.00/MWh. Hormuz traffic checked: still near-standstill at 4 transits vs 125-140 pre-conflict. Tanker turnbacks verified: Al Ghariya, Duhail, Al Ruwais. Al Rekayyat damage confirmed. TTF checked. NESO EMN issued. Brent/WTI checked.</div>
 <span class="label label-verified">Verified</span>
 </div>
 
 <div class="timeline-item glass">
 <div class="date">Friday 10 July 2026</div>
-<div class="event">Trump comments checked: ceasefire &ldquo;over&rdquo; but talks may continue. Hormuz threat level still SEVERE. UK gas latest figure checked: 120.83p on 9 Jul (latest available). EU gas/TTF latest: &euro;49.54. UK power checked: NESO EMN executed. NBP forward curve checked: Cal-28 ~69p, Cal-29 ~63p. UK power forward checked: Cal-28 ~&pound;67.51, Cal-29 ~&pound;65.07. AGSI storage checked: EU ~50.88%, UK ~21.23%. Gassco/Norway checked: maintenance ongoing, flows stable. Red Sea/Suez checked: background only. Supplier book risk updated. Customer action updated to reflect above-120p market.</div>
+<div class="event">Trump comments checked: ceasefire &ldquo;over&rdquo; but talks may continue. Hormuz threat level still SEVERE. Switch 365 pricing updated: W-26 gas flat at 119.25p; near-term firmer, back-end softer. Power W-26 at &pound;105.25. Forward curve checked: S-28 64.00p, S-29 57.90p. AGSI storage checked. Gassco/Norway checked. Supplier book risk updated. Customer action updated.</div>
 <span class="label label-verified">Verified</span>
 </div>
 </section>
@@ -902,56 +893,56 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 
 <div class="rhetoric-card glass">
 <h4>Trump / White House</h4>
-<p><strong>8 July:</strong> &ldquo;The interim agreement&hellip; is over.&rdquo; Also: &ldquo;I&rsquo;m not going to prevent talks from continuing.&rdquo; [^1^][^32^]</p>
+<p><strong>8 July:</strong> &ldquo;The interim agreement&hellip; is over.&rdquo; Also: &ldquo;I&rsquo;m not going to prevent talks from continuing.&rdquo;</p>
 <p style="font-size:12px;color:#94a3b8;">Verdict: Mixed signal. &ldquo;Over&rdquo; is strong; &ldquo;not prevent talks&rdquo; softens. Markets pricing continued risk.</p>
 <span class="source-chip"><a href="https://en.wikipedia.org/wiki/2026_Iran_war_ceasefire" target="_blank">Wikipedia / Reuters</a></span>
 </div>
 
 <div class="rhetoric-card glass">
 <h4>US Official (State Department)</h4>
-<p><strong>10 July:</strong> Reaffirmed Washington&rsquo;s commitment to pursuing a diplomatic resolution with Tehran. [^32^]</p>
+<p><strong>10 July:</strong> Reaffirmed Washington&rsquo;s commitment to pursuing a diplomatic resolution with Tehran.</p>
 <p style="font-size:12px;color:#94a3b8;">Verdict: Diplomatic channel still open. Markets reacted with modest TTF easing. Not enough to declare normalisation.</p>
 <span class="source-chip"><a href="https://tradingeconomics.com/commodity/eu-natural-gas" target="_blank">Trading Economics / Reuters</a></span>
 </div>
 
 <div class="rhetoric-card glass">
 <h4>Iran</h4>
-<p><strong>8-9 July:</strong> Retaliated with missile and drone strikes against US bases in Kuwait, Qatar, Bahrain. Iran warned oil tankers to take permitted routes through Hormuz or face &ldquo;forceful response.&rdquo; [^7^][^8^]</p>
+<p><strong>8-9 July:</strong> Retaliated with missile and drone strikes against US bases in Kuwait, Qatar, Bahrain. Iran warned oil tankers to take permitted routes through Hormuz or face &ldquo;forceful response.&rdquo;</p>
 <p style="font-size:12px;color:#94a3b8;">Verdict: Operational action, not just rhetoric. Directly affects shipping confidence.</p>
 <span class="source-chip"><a href="https://www.reuters.com" target="_blank">Reuters</a></span>
 </div>
 
 <div class="rhetoric-card glass">
 <h4>Reuters / Shipping Evidence</h4>
-<p><strong>8 July:</strong> Four tankers turned back. Al Rekayyat damaged. Kpler data: 14 LNG tankers anchored off Ras Laffan, only 4 transits in early hours. [^8^][^14^]</p>
+<p><strong>8 July:</strong> Four tankers turned back. Al Rekayyat damaged. Kpler data: 14 LNG tankers anchored off Ras Laffan, only 4 transits in early hours.</p>
 <p style="font-size:12px;color:#94a3b8;">Verdict: Physical market evidence. Stronger proof point than political statements.</p>
 <span class="source-chip"><a href="https://www.reuters.com" target="_blank">Reuters / Kpler</a></span>
 </div>
 
 <div class="rhetoric-card glass">
 <h4>JMIC (Joint Maritime Information Center)</h4>
-<p><strong>7 July:</strong> Raised Hormuz threat level to <strong>SEVERE</strong> from &ldquo;substantial.&rdquo; [^8^]</p>
+<p><strong>7 July:</strong> Raised Hormuz threat level to <strong>SEVERE</strong> from &ldquo;substantial.&rdquo;</p>
 <p style="font-size:12px;color:#94a3b8;">Verdict: Official maritime risk assessment. Directly affects insurer and shipowner behaviour.</p>
 <span class="source-chip"><a href="https://www.reuters.com" target="_blank">Reuters / JMIC</a></span>
 </div>
 
 <div class="rhetoric-card glass">
 <h4>IMO (International Maritime Organization)</h4>
-<p><strong>8 July:</strong> &ldquo;Sailings through Hormuz should be avoided as long as the safety and security of crews cannot be assured.&rdquo; [^8^]</p>
+<p><strong>8 July:</strong> &ldquo;Sailings through Hormuz should be avoided as long as the safety and security of crews cannot be assured.&rdquo;</p>
 <p style="font-size:12px;color:#94a3b8;">Verdict: UN agency warning. Supports shipowner caution.</p>
 <span class="source-chip"><a href="https://www.reuters.com" target="_blank">Reuters / IMO</a></span>
 </div>
 
 <div class="rhetoric-card glass">
 <h4>Qatar / QatarEnergy</h4>
-<p><strong>8 July:</strong> Qatar foreign ministry said Iran bore &ldquo;full legal responsibility&rdquo; for Al Rekayyat attack, summoned Iranian ambassador. QatarEnergy halved Bangladesh deliveries (reported 6 July). [^8^][^46^]</p>
+<p><strong>8 July:</strong> Qatar foreign ministry said Iran bore &ldquo;full legal responsibility&rdquo; for Al Rekayyat attack, summoned Iranian ambassador. QatarEnergy halved Bangladesh deliveries (reported 6 July).</p>
 <p style="font-size:12px;color:#94a3b8;">Verdict: Operational and diplomatic response. Shows LNG supply chain is affected.</p>
 <span class="source-chip"><a href="https://www.reuters.com" target="_blank">Reuters</a></span>
 </div>
 
 <div class="rhetoric-card glass">
 <h4>IGU / Shell</h4>
-<p><strong>7 July (IGU):</strong> Middle East conflict clouds 2026 LNG outlook. <strong>30 June (Shell):</strong> ~1/5 global monthly LNG supply shut in. [^24^][^28^]</p>
+<p><strong>7 July (IGU):</strong> Middle East conflict clouds 2026 LNG outlook. <strong>30 June (Shell):</strong> ~1/5 global monthly LNG supply shut in.</p>
 <p style="font-size:12px;color:#94a3b8;">Verdict: Industry authority warnings. Remain valid while Hormuz is disrupted.</p>
 <span class="source-chip"><a href="https://www.igu.org" target="_blank">IGU</a></span>
 <span class="source-chip"><a href="https://www.shell.com" target="_blank">Shell</a></span>
@@ -977,7 +968,7 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <p style="font-size:14px;line-height:1.7;margin-bottom:12px;"><strong>Talks being alive is better than collapse, but no breakthrough is not implementation.</strong> Implementation matters more than political wording. Shipping confidence matters more than social media claims. Lower oil prices are no longer today&rsquo;s lead if gas remains above &pound;1 per therm and Hormuz is not normal.</p>
 
 <div class="callout">
-<p><strong>Hormuz improving is not the same as Hormuz normal.</strong> If UK gas remains above &pound;1 per therm, the gas market is warning that relief is fragile. No major escalation overnight is not the same as real de-escalation. If the ceasefire framework is over, supplier caution can return quickly.</p>
+<p><strong>Hormuz improving is not the same as Hormuz normal.</strong> If UK gas remains above &pound;1 per therm at 119.25p, the gas market is warning that relief is fragile. No major escalation overnight is not the same as real de-escalation. If the ceasefire framework is over, supplier caution can return quickly.</p>
 </div>
 </div>
 </section>
@@ -1012,8 +1003,8 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 </div>
 </div>
 
-<p style="font-size:14px;line-height:1.7;margin-bottom:12px;">The <strong>Al Rekayyat</strong> (Qatari LNG tanker) was hit by a projectile on its port side overnight 7-8 July, causing an engine room fire. All crew evacuated safely. LNG cargo tanks intact. The vessel awaits salvage off Oman. <strong>Saudi tanker Wedyan</strong> and <strong>Liberia-flagged Cyprus Prosperity</strong> were also targeted. [^8^][^10^]</p>
-<p style="font-size:14px;line-height:1.7;margin-bottom:12px;">QatarEnergy-linked LNG tankers <strong>Al Ghariya, Duhail and Al Ruwais</strong> &mdash; all empty and heading to Ras Laffan to load &mdash; turned back late on 7 July. [^14^][^16^]</p>
+<p style="font-size:14px;line-height:1.7;margin-bottom:12px;">The <strong>Al Rekayyat</strong> (Qatari LNG tanker) was hit by a projectile on its port side overnight 7-8 July, causing an engine room fire. All crew evacuated safely. LNG cargo tanks intact. The vessel awaits salvage off Oman. <strong>Saudi tanker Wedyan</strong> and <strong>Liberia-flagged Cyprus Prosperity</strong> were also targeted.</p>
+<p style="font-size:14px;line-height:1.7;margin-bottom:12px;">QatarEnergy-linked LNG tankers <strong>Al Ghariya, Duhail and Al Ruwais</strong> &mdash; all empty and heading to Ras Laffan to load &mdash; turned back late on 7 July.</p>
 
 <h3 style="font-size:16px;margin:20px 0 12px;">Red Sea / Bab el-Mandeb</h3>
 <p style="font-size:14px;line-height:1.7;margin-bottom:12px;">Red Sea / Suez routing has shown some improvement, but this is <strong>background only</strong> and does not change Hormuz or LNG risk today. The Houthi threat in the Red Sea remains a separate risk factor. Do not let Red Sea improvements be used as an all-clear for Hormuz.</p>
@@ -1031,78 +1022,78 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 
 <div class="stat-grid">
 <div class="stat-card glass">
-<div class="stat-value">120.83p</div>
-<div class="stat-label">UK Gas / NBP (9 Jul)</div>
-<div class="stat-date">Trading Economics [^11^] &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
+<div class="stat-value">119.25p</div>
+<div class="stat-label">UK Gas W-26 (Fri 10 Jul AM)</div>
+<div class="stat-date">Switch 365 Internal &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
+</div>
+<div class="stat-card glass">
+<div class="stat-value">85.70p</div>
+<div class="stat-label">UK Gas S-27 (Fri 10 Jul AM)</div>
+<div class="stat-date">Switch 365 Internal &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
+</div>
+<div class="stat-card glass">
+<div class="stat-value">64.00p</div>
+<div class="stat-label">UK Gas S-28 (Fri 10 Jul AM)</div>
+<div class="stat-date">Switch 365 Internal &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
+</div>
+<div class="stat-card glass">
+<div class="stat-value">57.90p</div>
+<div class="stat-label">UK Gas S-29 (Fri 10 Jul AM)</div>
+<div class="stat-date">Switch 365 Internal &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
 </div>
 <div class="stat-card glass">
 <div class="stat-value">&euro;49.54</div>
 <div class="stat-label">TTF / EU Gas (10 Jul)</div>
-<div class="stat-date">Trading Economics [^32^] &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
+<div class="stat-date">Trading Economics &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
 </div>
 <div class="stat-card glass">
-<div class="stat-value">&pound;101.48</div>
-<div class="stat-label">UK Power Spot</div>
-<div class="stat-date">Trading Economics [^75^] &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
+<div class="stat-value">&pound;105.25</div>
+<div class="stat-label">UK Power W-26 (Fri 10 Jul AM)</div>
+<div class="stat-date">Switch 365 Internal &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
+</div>
+<div class="stat-card glass">
+<div class="stat-value">&pound;61.00</div>
+<div class="stat-label">UK Power S-28 (Fri 10 Jul AM)</div>
+<div class="stat-date">Switch 365 Internal &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
 </div>
 <div class="stat-card glass">
 <div class="stat-value">~$72</div>
 <div class="stat-label">Brent Crude</div>
-<div class="stat-date">Vantage/Catalyst [^55^][^74^] &mdash; <span style="color:#fbbf24;">Medium confidence</span></div>
-</div>
-<div class="stat-card glass">
-<div class="stat-value">~$69</div>
-<div class="stat-label">WTI Crude</div>
-<div class="stat-date">Vantage [^55^] &mdash; <span style="color:#fbbf24;">Medium confidence</span></div>
+<div class="stat-date">Vantage/Catalyst &mdash; <span style="color:#fbbf24;">Medium confidence</span></div>
 </div>
 <div class="stat-card glass">
 <div class="stat-value">50.88%</div>
 <div class="stat-label">EU Gas Storage (8 Jul)</div>
-<div class="stat-date">GIE / AGSI [^53^] &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
+<div class="stat-date">GIE / AGSI &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
 </div>
 <div class="stat-card glass">
 <div class="stat-value">21.23%</div>
 <div class="stat-label">UK Gas Storage (8 Jul)</div>
-<div class="stat-date">GIE / AGSI [^53^] &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
+<div class="stat-date">GIE / AGSI &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
 </div>
 <div class="stat-card glass">
 <div class="stat-value">437M</div>
 <div class="stat-label">Global LNG Trade 2025 (tonnes)</div>
-<div class="stat-date">IGU [^24^] &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
-</div>
-<div class="stat-card glass">
-<div class="stat-value">~1/5</div>
-<div class="stat-label">Global Monthly LNG Supply Shut In</div>
-<div class="stat-date">Shell [^28^] &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
-</div>
-<div class="stat-card glass">
-<div class="stat-value">50%</div>
-<div class="stat-label">QatarEnergy Bangladesh Delivery Cut</div>
-<div class="stat-date">Reuters [^46^] &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
+<div class="stat-date">IGU &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
 </div>
 <div class="stat-card glass">
 <div class="stat-value">SEVERE</div>
 <div class="stat-label">Hormuz Threat Level</div>
-<div class="stat-date">JMIC [^8^] &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
-</div>
-<div class="stat-card glass">
-<div class="stat-value">4</div>
-<div class="stat-label">Tankers Turned Back (8 Jul)</div>
-<div class="stat-date">Reuters / Kpler [^14^] &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
+<div class="stat-date">JMIC &mdash; <span style="color:var(--candy-start);">High confidence</span></div>
 </div>
 </div>
 
 <div class="glass" style="padding:20px;margin-top:16px;">
 <h3 style="font-size:14px;margin-bottom:12px;">Additional Verified Stats</h3>
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px;">
-<div style="font-size:13px;color:var(--off-white);"><strong>UK gas YoY:</strong> +38.61%</div>
-<div style="font-size:13px;color:var(--off-white);"><strong>TTF YoY:</strong> +39.32%</div>
+<div style="font-size:13px;color:var(--off-white);"><strong>NBP gas 1yr ago (W-26):</strong> 91.25p</div>
+<div style="font-size:13px;color:var(--off-white);"><strong>Power 1yr ago (W-26):</strong> &pound;81.45/MWh</div>
 <div style="font-size:13px;color:var(--off-white);"><strong>EU storage vs target:</strong> ~50.88% (target 80% by 1 Nov)</div>
 <div style="font-size:13px;color:var(--off-white);"><strong>UK storage vs last year:</strong> Well below 2025 levels</div>
 <div style="font-size:13px;color:var(--off-white);"><strong>NESO EMN:</strong> Issued 9 July evening peak</div>
 <div style="font-size:13px;color:var(--off-white);"><strong>UK peak temp 2026:</strong> 37.7&deg;C (26 June, Norfolk)</div>
 <div style="font-size:13px;color:var(--off-white);"><strong>Norway flows:</strong> Stable, maintenance ongoing through Sep</div>
-<div style="font-size:13px;color:var(--off-white);"><strong>Asian LNG spot:</strong> ~$15.35/mmBtu (near 4-month low)</div>
+<div style="font-size:13px;color:var(--off-white);"><strong>Gas backwardation (S-28 vs W-26):</strong> -46.3%</div>
 </div>
 </div>
 </section>
@@ -1112,9 +1103,9 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <h2>World Bank vs EIA</h2>
 <p class="section-subtitle">Institutional baselines and current relevance</p>
 <div class="glass" style="padding:24px;">
-<p style="font-size:14px;line-height:1.7;margin-bottom:12px;"><strong>World Bank Commodity Markets Outlook (April 2026):</strong> The World Bank baseline assumed gradual oil price normalisation as Hormuz disruptions ease. Current prices (~$72 Brent) are broadly in line with that baseline, but the gas market has diverged: UK gas above 120p and TTF near &euro;50 reflect supply risk that the baseline did not fully capture.</p>
+<p style="font-size:14px;line-height:1.7;margin-bottom:12px;"><strong>World Bank Commodity Markets Outlook (April 2026):</strong> The World Bank baseline assumed gradual oil price normalisation as Hormuz disruptions ease. Current prices (~$72 Brent) are broadly in line with that baseline, but the gas market has diverged: W-26 at 119.25p and S-28 at 64.00p reflect near-term supply risk that the baseline did not fully capture, while also showing significant backwardation opportunity further out.</p>
 <p style="font-size:14px;line-height:1.7;margin-bottom:12px;"><strong>EIA Short-Term Energy Outlook:</strong> No new EIA update verified during this research window. The EIA has flagged a well-supplied second half of 2026 as Gulf output recovers, but this assumes Hormuz normalisation &mdash; which has not happened.</p>
-<p style="font-size:14px;line-height:1.7;margin-bottom:12px;"><strong>Current relevance assessment:</strong> UK gas above &pound;1 supports caution. Shipping disruption makes scenario risk more relevant. Forward markets are pricing near-term risk differently from long-term risk (backwardation). The baseline assumptions may understate gas and LNG risk while being roughly fair for oil.</p>
+<p style="font-size:14px;line-height:1.7;margin-bottom:12px;"><strong>Current relevance assessment:</strong> UK gas above &pound;1 at 119.25p supports caution. The backwardation (S-28 at 64.00p, 46% below W-26) creates a forward-market opportunity that institutional baselines typically do not highlight. Shipping disruption makes scenario risk more relevant. Forward markets are pricing near-term risk very differently from long-term risk.</p>
 <div class="callout">
 <p>No new EIA update verified during this research window. Use live supplier or broker pricing before making customer recommendations.</p>
 </div>
@@ -1130,7 +1121,7 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:16px 0;">
 <div style="padding:16px;background:rgba(0,211,154,0.06);border-radius:12px;border:1px solid rgba(0,211,154,0.15);">
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;margin:0;"><strong style="color:var(--candy-start);">The Opportunity:</strong><br>Some rates may still be live before suppliers fully reprice. Customers may access pricing that does not yet reflect the full wholesale move.</p>
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;margin:0;"><strong style="color:var(--candy-start);">The Opportunity:</strong><br>Some rates may still be live before suppliers fully reprice. Customers may access pricing that does not yet reflect the full wholesale move at 119.25p.</p>
 </div>
 <div style="padding:16px;background:rgba(220,38,38,0.06);border-radius:12px;border:1px solid rgba(220,38,38,0.15);">
 <p style="font-size:13px;color:var(--off-white);line-height:1.6;margin:0;"><strong style="color:#f87171;">The Danger:</strong><br>That window may close this morning, later today, tomorrow, or without notice. Once suppliers withdraw rates, customers cannot go back and buy yesterday&rsquo;s price.</p>
@@ -1155,16 +1146,16 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="glass" style="padding:24px;">
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:16px;">
 <div style="padding:16px;background:rgba(0,0,0,0.1);border-radius:12px;">
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;margin:0;"><strong style="color:#f87171;">Oil (Brent ~$72)</strong><br>Pricing OPEC+ supply increases, some Hormuz relief, but still carrying a geopolitical risk premium. Weekly gain shows risk persists.</p>
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;margin:0;"><strong style="color:#f87171;">Oil (Brent ~$72)</strong><br>Pricing OPEC+ supply increases, some Hormuz relief, but still carrying geopolitical risk premium. Weekly gain shows risk persists.</p>
 </div>
 <div style="padding:16px;background:rgba(0,0,0,0.1);border-radius:12px;">
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;margin:0;"><strong style="color:#fbbf24;">Gas (NBP ~121p)</strong><br>Pricing Hormuz LNG disruption, European storage deficit, heat-related demand, Norway maintenance, and supplier caution.</p>
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;margin:0;"><strong style="color:#fbbf24;">Gas (NBP W-26 119.25p)</strong><br>Pricing Hormuz LNG disruption, European storage deficit, heat-related demand, Norway maintenance, and supplier caution.</p>
 </div>
 <div style="padding:16px;background:rgba(0,0,0,0.1);border-radius:12px;">
 <p style="font-size:13px;color:var(--off-white);line-height:1.6;margin:0;"><strong style="color:#fb923c;">TTF (~&euro;50)</strong><br>Pricing LNG cargo competition between Europe and Asia, storage refill risk, and Hormuz supply uncertainty.</p>
 </div>
 <div style="padding:16px;background:rgba(0,0,0,0.1);border-radius:12px;">
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;margin:0;"><strong style="color:var(--candy-start);">UK Power (~&pound;101)</strong><br>Pricing gas-fired generation, heat demand, NESO system margin notices, carbon, and renewable intermittency.</p>
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;margin:0;"><strong style="color:var(--candy-start);">UK Power (W-26 &pound;105.25)</strong><br>Pricing gas-fired generation, heat demand, NESO system margin notices, carbon, and renewable intermittency.</p>
 </div>
 </div>
 
@@ -1211,7 +1202,7 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <p style="font-size:13px;color:var(--off-white);line-height:1.6;margin:0;"><strong style="color:#fbbf24;">Inside 12 months:</strong><br>Review now. Test live pricing. Compare short and longer-term options. Consider fixing before books move further.</p>
 </div>
 <div style="padding:16px;background:rgba(0,211,154,0.06);border-radius:12px;border:1px solid rgba(0,211,154,0.15);">
-<p style="font-size:13px;color:var(--off-white);line-height:1.6;margin:0;"><strong style="color:var(--candy-start);">Outside 12 months, high usage:</strong><br>Check the forward curve. Cal-28 and Cal-29 may be materially cheaper. The LOA only checks data &mdash; it does not commit.</p>
+<p style="font-size:13px;color:var(--off-white);line-height:1.6;margin:0;"><strong style="color:var(--candy-start);">Outside 12 months, high usage:</strong><br>Check the forward curve. S-28 at 64.00p and S-29 at 57.90p may be materially cheaper than W-26 at 119.25p. The LOA only checks data &mdash; it does not commit.</p>
 </div>
 </div>
 
@@ -1229,26 +1220,26 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="scenario-card glass">
 <h4><span style="color:var(--candy-start);">Scenario 1:</span> Shipping Disruption and Military Escalation Ease Quickly</h4>
 <p style="margin-bottom:8px;"><strong>Path:</strong> Talks resume, Hormuz threat level reduced, tankers resume normal transit within weeks, no further military exchange.</p>
-<p style="margin-bottom:8px;"><strong>Implications:</strong> Brent could ease toward $65-68. TTF could soften toward &euro;40-42. NBP could retreat toward 95-105p. UK power would follow gas lower. Supplier books would reprice down. Forward value in 2028/2029 might narrow but still exist. <strong>Customer action:</strong> Customers who fixed before the disruption would be protected; those who waited might benefit but risked the window.</p>
+<p style="margin-bottom:8px;"><strong>Implications:</strong> Brent could ease toward $65-68. TTF could soften toward &euro;40-42. NBP W-26 could retreat toward 95-105p. S-28/S-29 may narrow their discount. UK power would follow gas lower. Supplier books would reprice down. <strong>Customer action:</strong> Customers who fixed before the disruption would be protected; those who waited might benefit but risked the window.</p>
 <p style="font-size:12px;color:#94a3b8;">Probability assessment: Low-medium. Requires durable diplomatic breakthrough.</p>
 </div>
 
 <div class="scenario-card glass">
 <h4><span style="color:#fbbf24;">Scenario 2:</span> Stop-Start Hormuz Traffic and US-Iran Risk Continue for 1-3 Months</h4>
 <p style="margin-bottom:8px;"><strong>Path:</strong> Intermittent tanker attacks, threat level remains elevated, talks stall and restart, no full normalisation or full war.</p>
-<p style="margin-bottom:8px;"><strong>Implications:</strong> Brent holds $70-78 range. TTF stays &euro;45-55. NBP remains 105-125p. UK power stays elevated. Supplier books volatile with frequent repricing. Forward curve backwardation persists. Storage refill remains challenged. <strong>Customer action:</strong> This is the &ldquo;review now&rdquo; scenario. Customers inside 90 days must act. High-usage outside 12 months should check forward curve.</p>
+<p style="margin-bottom:8px;"><strong>Implications:</strong> Brent holds $70-78 range. TTF stays &euro;45-55. NBP W-26 remains 110-125p. S-28/S-29 remain at significant discount. UK power stays elevated. Supplier books volatile with frequent repricing. Storage refill remains challenged. <strong>Customer action:</strong> This is the &ldquo;review now&rdquo; scenario. Customers inside 90 days must act. High-usage outside 12 months should check forward curve for S-28/S-29 access.</p>
 <p style="font-size:12px;color:#94a3b8;">Probability assessment: Medium. Consistent with current pattern.</p>
 </div>
 
 <div class="scenario-card glass">
 <h4><span style="color:#f87171;">Scenario 3:</span> LNG Disruption Worsens and Gas Fundamentals Tighten</h4>
 <p style="margin-bottom:8px;"><strong>Path:</strong> Major escalation (e.g., Ras Laffan facility damaged, wider Gulf attacks, Iran fully closes Hormuz), combined with weak storage refill and extended heat.</p>
-<p style="margin-bottom:8px;"><strong>Implications:</strong> Brent spikes above $80-85. TTF jumps above &euro;60-70. NBP could exceed 130-150p. UK power surges. Supplier books repriced sharply higher. Quote validity shortened dramatically. Deemed/rollover exposure becomes very costly. Forward curve may invert or backwardation may narrow as risk premium spreads. <strong>Customer action:</strong> Customers without contracts face severe pricing. Those who reviewed early are protected.</p>
+<p style="margin-bottom:8px;"><strong>Implications:</strong> Brent spikes above $80-85. TTF jumps above &euro;60-70. NBP W-26 could exceed 130-150p. Backwardation may narrow as risk premium spreads along the curve. UK power surges. Supplier books repriced sharply higher. Quote validity shortened dramatically. Deemed/rollover exposure becomes very costly. <strong>Customer action:</strong> Customers without contracts face severe pricing. Those who reviewed early are protected.</p>
 <p style="font-size:12px;color:#94a3b8;">Probability assessment: Low-medium but high impact. Tail risk.</p>
 </div>
 
 <div class="callout">
-<p><strong>Verified fact vs interpretation:</strong> Current prices, shipping data, and storage levels are verified facts. Scenario probabilities are analytical interpretation based on current evidence. Use live supplier pricing before making recommendations.</p>
+<p><strong>Verified fact vs interpretation:</strong> Current Switch 365 pricing, shipping data, and storage levels are verified facts. Scenario probabilities are analytical interpretation based on current evidence. Use live supplier pricing before making recommendations.</p>
 </div>
 </section>
 
@@ -1288,7 +1279,7 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="glass" style="padding:28px;">
 
 <div class="callout" style="margin-bottom:20px;">
-<p style="font-size:15px;line-height:1.8;margin:0;"><strong>The market has not normalised.</strong> Hormuz risk remains live. LNG risk remains visible in shipping behaviour. UK gas is above 120p per therm. TTF remains elevated. UK power is under heat-related pressure. IGU and Shell warnings remain valid. QatarEnergy-linked LNG tankers turning back is strong proof that this is not theoretical. Brent is not the customer&rsquo;s gas quote. NBP and TTF matter. UK power can follow gas, heat and system-margin pressure. Supplier books can move quickly.</p>
+<p style="font-size:15px;line-height:1.8;margin:0;"><strong>The market has not normalised.</strong> Hormuz risk remains live. LNG risk remains visible in shipping behaviour. UK gas is above &pound;1 per therm at 119.25p (W-26, Fri 10 Jul AM). TTF remains elevated. UK power is under heat-related pressure. IGU and Shell warnings remain valid. QatarEnergy-linked LNG tankers turning back is strong proof that this is not theoretical. Brent is not the customer&rsquo;s gas quote. NBP and TTF matter. UK power can follow gas, heat and system-margin pressure. Supplier books can move quickly.</p>
 </div>
 
 <h3 style="font-size:16px;margin-bottom:12px;color:#f87171;">For Customers Inside 90 Days</h3>
@@ -1298,7 +1289,7 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <p style="font-size:14px;line-height:1.7;margin-bottom:16px;">The commercially sensible step is to <strong>review immediately</strong>, test available supplier pricing, compare short-term and longer-term pricing, and, where pricing and risk profile support it, consider fixing now and fixing longer before supplier books move further. The market has not normalised. The buying window is still open, but it is more fragile than yesterday.</p>
 
 <h3 style="font-size:16px;margin-bottom:12px;color:var(--candy-start);">For Customers Outside 12 Months With High Usage</h3>
-<p style="font-size:14px;line-height:1.7;margin-bottom:16px;">You should not automatically be ignored because you are &ldquo;not due yet.&rdquo; If the forward curve is cheaper in 2028, 2029 or 2030, and suppliers are willing to price it, you may have a chance to secure a cheaper future delivery period now. A 2028 to 2031 contract is not priced from one single number. It is usually built from a blend of forward seasons covering the delivery period. <strong>Outside 12 months usually means monitor. Outside 12 months with high usage means check the forward curve.</strong></p>
+<p style="font-size:14px;line-height:1.7;margin-bottom:16px;">You should not automatically be ignored because you are &ldquo;not due yet.&rdquo; If the forward curve is cheaper in 2028, 2029 or 2030, and suppliers are willing to price it, you may have a chance to secure a cheaper future delivery period now. S-28 gas at 64.00p is <strong>46% cheaper</strong> than W-26 at 119.25p. S-28 power at &pound;61.00 is <strong>42% cheaper</strong> than W-26 at &pound;105.25. A 2028 to 2031 contract is not priced from one single number. It is usually built from a blend of forward seasons covering the delivery period. <strong>Outside 12 months usually means monitor. Outside 12 months with high usage means check the forward curve.</strong></p>
 
 <div style="padding:20px;background:rgba(0,211,154,0.06);border-radius:12px;border:1px solid rgba(0,211,154,0.2);margin:20px 0;">
 <p style="font-size:14px;line-height:1.8;margin:0;"><strong>Key principles to remember:</strong></p>
@@ -1328,18 +1319,18 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="glass" style="padding:24px;margin-bottom:16px;">
 <h3 style="font-size:15px;color:var(--candy-start);margin-bottom:12px;">Highest Confidence</h3>
 <ul style="font-size:13px;color:var(--off-white);line-height:1.8;padding-left:20px;">
-<li>Reuters reporting on oil / Hormuz / Middle East risk [^3^][^4^][^8^][^14^]</li>
-<li>Reuters reporting on tankers turning back and tanker damage [^8^][^10^][^14^]</li>
-<li>Trading Economics UK gas and EU gas public secondary data [^11^][^32^]</li>
-<li>JMIC &ldquo;SEVERE&rdquo; threat level declaration [^8^]</li>
-<li>Trump &ldquo;ceasefire is over&rdquo; statement (Wikipedia sourced from Reuters/AP) [^1^]</li>
-<li>NESO Electricity Margin Notice [^52^][^64^]</li>
-<li>IGU World LNG Report 2026 [^24^][^33^]</li>
-<li>Shell LNG Outlook 2026 [^28^][^35^]</li>
-<li>QatarEnergy / Bangladesh delivery cuts [^46^][^50^]</li>
-<li>AGSI / GIE European gas storage data [^53^]</li>
-<li>Gassco Norway maintenance schedule [^60^]</li>
-<li>Smart Energy UK / Catalyst Commercial forward curve data [^73^][^74^]</li>
+<li><strong>Switch 365 internal pricing</strong> &mdash; NBP gas and UK power futures tables (Thu 09 Jul / Fri 10 Jul AM)</li>
+<li>Reuters reporting on oil / Hormuz / Middle East risk</li>
+<li>Reuters reporting on tankers turning back and tanker damage</li>
+<li>Trading Economics EU gas / TTF public secondary data</li>
+<li>JMIC &ldquo;SEVERE&rdquo; threat level declaration</li>
+<li>Trump &ldquo;ceasefire is over&rdquo; statement (Wikipedia sourced from Reuters/AP)</li>
+<li>NESO Electricity Margin Notice</li>
+<li>IGU World LNG Report 2026</li>
+<li>Shell LNG Outlook 2026</li>
+<li>QatarEnergy / Bangladesh delivery cuts</li>
+<li>AGSI / GIE European gas storage data</li>
+<li>Gassco Norway maintenance schedule</li>
 </ul>
 </div>
 
@@ -1352,7 +1343,7 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <li>Exact Brent/WTI figure at time of reading (markets move)</li>
 <li>Whether 2028 and 2029 value remains available (supplier-dependent)</li>
 <li>Whether future-start supplier appetite remains strong</li>
-<li>Exact shape of forward curve beyond Cal-29</li>
+<li>Chart data points between dated settlement points (interpolated from visual)</li>
 </ul>
 </div>
 
@@ -1371,7 +1362,7 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="glass" style="padding:24px;">
 <h3 style="font-size:15px;color:#94a3b8;margin-bottom:12px;">Stale / Not Leading Today</h3>
 <ul style="font-size:13px;color:var(--off-white);line-height:1.8;padding-left:20px;">
-<li>Old 3 July gas figures (superseded by above-120p data)</li>
+<li>Old 3 July gas figures (superseded by Fri 10 Jul AM S-365 pricing)</li>
 <li>Old &ldquo;oil calmer&rdquo; headlines (risk premium persists)</li>
 <li>Old expected-talks language (overtaken by &ldquo;ceasefire over&rdquo;)</li>
 <li>Old Shell warning as &ldquo;breaking news&rdquo; (now established context)</li>
@@ -1386,28 +1377,28 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <p class="section-subtitle">External sources referenced in this report</p>
 <div class="sources-grid">
 <div class="sources-group glass">
+<h4>Switch 365 Internal Pricing</h4>
+<a href="#" target="_blank">Switch 365 Ltd &mdash; NBP Gas Futures (Thu 09 / Fri 10 Jul AM)</a>
+<a href="#" target="_blank">Switch 365 Ltd &mdash; UK Power Futures (Thu 09 / Fri 10 Jul AM)</a>
+</div>
+<div class="sources-group glass">
 <h4>Market Prices</h4>
-<a href="https://tradingeconomics.com/commodity/uk-natural-gas" target="_blank">Trading Economics &mdash; UK Natural Gas</a>
 <a href="https://tradingeconomics.com/commodity/eu-natural-gas" target="_blank">Trading Economics &mdash; EU Natural Gas (TTF)</a>
-<a href="https://tradingeconomics.com/united-kingdom/electricity-price" target="_blank">Trading Economics &mdash; UK Electricity Price</a>
 <a href="https://tradingeconomics.com/commodity/brent-crude-oil" target="_blank">Trading Economics &mdash; Brent Crude Oil</a>
 </div>
 <div class="sources-group glass">
 <h4>UK NBP / Gas Futures</h4>
-<a href="https://www.smart-energy.uk/post/daily-energy-market-report" target="_blank">Smart Energy UK &mdash; Daily Energy Market Report (3 Jul)</a>
-<a href="https://www.catalyst-commercial.co.uk/works/uk-energy-market-report-06-july-2026/" target="_blank">Catalyst Commercial &mdash; UK Energy Market Report (6 Jul)</a>
-<a href="https://www.barchart.com/futures/quotes/NF*0/futures-prices" target="_blank">Barchart &mdash; UK Natural Gas Futures</a>
+<a href="https://www.smart-energy.uk/post/daily-energy-market-report" target="_blank">Smart Energy UK &mdash; Daily Energy Market Report</a>
+<a href="https://www.catalyst-commercial.co.uk/works/uk-energy-market-report-06-july-2026/" target="_blank">Catalyst Commercial &mdash; UK Energy Market Report</a>
 </div>
 <div class="sources-group glass">
 <h4>TTF / European Gas</h4>
 <a href="https://www.gie.eu/" target="_blank">Gas Infrastructure Europe (GIE) &mdash; AGSI+ Storage</a>
-<a href="https://agpu.org.ua/en/analytics/gas-prices/gas-prices-2026-updating" target="_blank">AGPU &mdash; European Hub Prices</a>
 </div>
 <div class="sources-group glass">
 <h4>UK Power / NESO</h4>
 <a href="https://www.renews.biz/other-news/heatwave-prompts-neso-electricity-margin-notice/" target="_blank">RENnews &mdash; NESO Electricity Margin Notice (9 Jul)</a>
 <a href="https://www.osborneclarke.com/insights/energy-transition-neso-issues-first-ever-summer-electricity-margin-notice" target="_blank">Osborne Clarke &mdash; NESO Summer EMN Analysis</a>
-<a href="https://www.independent.co.uk/news/uk/home-news/uk-heatwave-weather-power-electricity-neso-b3011733.html" target="_blank">The Independent &mdash; UK Heatwave Power Warning</a>
 </div>
 <div class="sources-group glass">
 <h4>LNG / QatarEnergy</h4>
@@ -1431,25 +1422,17 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <h4>Oil / OPEC+</h4>
 <a href="https://finance.yahoo.com/news/oil-edges-lower-heads-weekly-013333926.html" target="_blank">Yahoo Finance / Reuters &mdash; Oil Weekly Gain (10 Jul)</a>
 <a href="https://money.usnews.com/investing/news/articles/2026-07-09/oil-edges-lower-but-heads-for-weekly-gain-as-middle-east-supply-risks-persist" target="_blank">US News / Reuters &mdash; Middle East Supply Risks</a>
-<a href="https://www.vantagemarkets.com/market-analysis/brent-crude-oil-price-wti-opec-output-usousd-usousd-july-6-10-2026/" target="_blank">Vantage Markets &mdash; Brent/WTI Analysis</a>
 </div>
 <div class="sources-group glass">
 <h4>Heat / UK Weather</h4>
 <a href="https://en.wikipedia.org/wiki/2026_United_Kingdom_heatwaves" target="_blank">Wikipedia &mdash; 2026 UK Heatwaves</a>
-<a href="https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-july-and-30-september-2026" target="_blank">Ofgem &mdash; Energy Price Cap (Jul-Sep 2026)</a>
 </div>
 <div class="sources-group glass">
 <h4>Norway / Gassco</h4>
 <a href="https://kommunikasjon.ntb.no/pressemelding/18851427/norway-starts-annual-offshore-maintenance?publisherId=17846748&lang=en" target="_blank">Gassco &mdash; Norway Annual Maintenance 2026</a>
-<a href="https://montelnews.com/news/2ff1d081-6823-40d6-8bd1-73fa6be41874/norway-tso-expects-stable-gas-supply-on-low-summer-maintenance" target="_blank">Montel &mdash; Norway TSO Stable Supply</a>
 </div>
 <div class="sources-group glass">
 <h4>Institutional Reports</h4>
-<a href="https://www.iea.org/topics/the-middle-east-and-global-energy-markets" target="_blank">IEA &mdash; Middle East and Global Energy Markets</a>
-<a href="https://www.acer.europa.eu/sites/default/files/documents/Publications/2026-ACER-Gas-Key-Developments-winter.pdf" target="_blank">ACER &mdash; Gas Winter Season 2025-2026</a>
-</div>
-<div class="sources-group glass">
-<h4>IEA / Energy Security</h4>
 <a href="https://www.iea.org/topics/the-middle-east-and-global-energy-markets" target="_blank">IEA &mdash; Middle East and Global Energy Markets</a>
 </div>
 </div>
@@ -1459,7 +1442,7 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <div class="footer">
 <p>Middle East Energy Risk Update | Prepared by Switch 365 Ltd</p>
 <p>Report Date: 10 July 2026 | Research Window: 09/07/2026 &ndash; 10/07/2026</p>
-<p style="margin-top:8px;font-size:11px;max-width:700px;margin-left:auto;margin-right:auto;">This report is for commercial guidance purposes only. All market data is sourced from publicly available third-party sources. Switch 365 Ltd does not guarantee the accuracy of external data. Customers should verify current pricing with their supplier or broker before making procurement decisions. Past performance is not indicative of future results.</p>
+<p style="margin-top:8px;font-size:11px;max-width:700px;margin-left:auto;margin-right:auto;">This report is for commercial guidance purposes only. All market data is sourced from publicly available third-party sources and Switch 365 internal pricing. Switch 365 Ltd does not guarantee the accuracy of external data. Customers should verify current pricing with their supplier or broker before making procurement decisions. Past performance is not indicative of future results.</p>
 </div>
 
 </main>
@@ -1467,15 +1450,16 @@ main{max-width:1200px;margin:0 auto;padding:24px 20px 60px}
 <script>
 function toggleNav(){var nav=document.getElementById('sideNav');var overlay=document.getElementById('navOverlay');nav.classList.toggle('open');overlay.classList.toggle('open')}
 
-// Gas Chart
+// Gas Chart - NBP Offered Gas Price Range (23 Apr to 10 Jul 2026)
+// W-26 (red) and S-27 (blue) from Switch 365 internal data
 var gasCtx=document.getElementById('gasChart').getContext('2d');
 var gasChart=new Chart(gasCtx,{
   type:'line',
   data:{
-    labels:['3 Jul','6 Jul','7 Jul','8 Jul','9 Jul'],
+    labels:['23 Apr','30 Apr','07 May','14 May','21 May','28 May','04 Jun','11 Jun','18 Jun','25 Jun','02 Jul','10 Jul'],
     datasets:[
-      {label:'Win-26 (near-term)',data:[108.80,109.20,110.20,110.60,110.97],borderColor:'#f87171',backgroundColor:'rgba(248,113,113,0.1)',tension:0.3,fill:true,pointRadius:4,pointBackgroundColor:'#f87171'},
-      {label:'Cal-28 (future)',data:[68.91,68.93,69.10,69.20,69.26],borderColor:'#60a5fa',backgroundColor:'rgba(96,165,250,0.1)',tension:0.3,fill:true,pointRadius:4,pointBackgroundColor:'#60a5fa'}
+      {label:'W-26 (near-term)',data:[112.5,114.2,119.5,118.0,116.5,114.0,110.5,107.0,103.5,100.5,108.0,119.25],borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,0.08)',tension:0.25,fill:true,pointRadius:3,pointBackgroundColor:'#dc2626',borderWidth:2.5},
+      {label:'S-27 (future)',data:[88.0,88.5,89.2,89.0,88.3,87.5,86.0,84.5,83.0,82.5,84.0,85.70],borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,0.08)',tension:0.25,fill:true,pointRadius:3,pointBackgroundColor:'#2563eb',borderWidth:2.5}
     ]
   },
   options:{
@@ -1483,20 +1467,21 @@ var gasChart=new Chart(gasCtx,{
     plugins:{legend:{labels:{color:'#dadada',font:{family:'Montserrat',size:11},boxWidth:12}},title:{display:false}},
     scales:{
       y:{grid:{color:'rgba(255,255,255,0.06)'},ticks:{color:'#dadada',font:{family:'Montserrat',size:10},callback:function(v){return v+'p'}},title:{display:true,text:'pence per therm',color:'#dadada',font:{size:10}}},
-      x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#dadada',font:{family:'Montserrat',size:10}}}
+      x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#dadada',font:{family:'Montserrat',size:9},maxRotation:45}}
     }
   }
 });
 
-// Power Chart
+// Power Chart - UK Power Offered Price Range (14 Apr to 10 Jul 2026)
+// W-26 (red) and S-27 (blue) from Switch 365 internal data
 var powerCtx=document.getElementById('powerChart').getContext('2d');
 var powerChart=new Chart(powerCtx,{
   type:'line',
   data:{
-    labels:['3 Jul','6 Jul','7 Jul','8 Jul','9 Jul'],
+    labels:['14 Apr','21 Apr','28 Apr','05 May','12 May','19 May','26 May','02 Jun','09 Jun','16 Jun','23 Jun','30 Jun','10 Jul'],
     datasets:[
-      {label:'Win-26 (near-term)',data:[98.21,98.50,99.20,99.40,99.60],borderColor:'#f87171',backgroundColor:'rgba(248,113,113,0.1)',tension:0.3,fill:true,pointRadius:4,pointBackgroundColor:'#f87171'},
-      {label:'Cal-28 (future)',data:[67.58,67.55,67.52,67.50,67.51],borderColor:'#60a5fa',backgroundColor:'rgba(96,165,250,0.1)',tension:0.3,fill:true,pointRadius:4,pointBackgroundColor:'#60a5fa'}
+      {label:'W-26 (near-term)',data:[94.0,96.5,99.0,102.0,104.0,103.0,101.0,98.0,95.5,93.5,94.0,99.5,105.25],borderColor:'#dc2626',backgroundColor:'rgba(220,38,38,0.08)',tension:0.25,fill:true,pointRadius:3,pointBackgroundColor:'#dc2626',borderWidth:2.5},
+      {label:'S-27 (future)',data:[71.0,72.0,73.0,73.5,73.0,72.0,72.5,73.5,74.5,75.0,74.0,75.5,78.00],borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,0.08)',tension:0.25,fill:true,pointRadius:3,pointBackgroundColor:'#2563eb',borderWidth:2.5}
     ]
   },
   options:{
@@ -1504,7 +1489,7 @@ var powerChart=new Chart(powerCtx,{
     plugins:{legend:{labels:{color:'#dadada',font:{family:'Montserrat',size:11},boxWidth:12}},title:{display:false}},
     scales:{
       y:{grid:{color:'rgba(255,255,255,0.06)'},ticks:{color:'#dadada',font:{family:'Montserrat',size:10},callback:function(v){return '\u00a3'+v}},title:{display:true,text:'\u00a3 / MWh',color:'#dadada',font:{size:10}}},
-      x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#dadada',font:{family:'Montserrat',size:10}}}
+      x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#dadada',font:{family:'Montserrat',size:9},maxRotation:45}}
     }
   }
 });
