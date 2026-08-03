@@ -3,1068 +3,1274 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Switch 365 Ltd — Middle East Energy Risk Update — 31 July 2026</title>
+<title>Middle East Energy Market Intelligence — 03/08/2026 | Switch 365 Ltd</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 <style>
   :root{
-    --bg1:#262262; --bg2:#26227f;
-    --acc1:#00d39a; --acc2:#dd40ff;
-    --txt:#ffffff; --txt2:#dadada;
-    --glass:rgba(255,255,255,0.055); --glass2:rgba(255,255,255,0.09);
-    --line:rgba(255,255,255,0.14);
-    --up:#ff5f6d; --down:#00d39a; --amber:#ffc857;
+    --bg1:#262262;
+    --bg2:#26227f;
+    --teal:#00d39a;
+    --purple:#dd40ff;
+    --ink:#ffffff;
+    --ink2:#dadada;
+    --muted:#9fa3c7;
+    --card:rgba(255,255,255,0.045);
+    --card2:rgba(255,255,255,0.07);
+    --line:rgba(255,255,255,0.10);
+    --up:#00d39a;
+    --down:#ff6b81;
+    --amber:#ffc857;
   }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
   body{
     font-family:'Montserrat',sans-serif;
-    background:linear-gradient(140deg,var(--bg1) 0%,var(--bg2) 55%,#1c1a52 100%);
+    background:linear-gradient(160deg,var(--bg1) 0%,var(--bg2) 60%,#1d1b52 100%);
     background-attachment:fixed;
-    color:var(--txt); line-height:1.6; font-size:15px;
+    color:var(--ink2);
+    line-height:1.65;
+    font-size:15.5px;
+    min-height:100vh;
   }
-  .wrap{max-width:1180px;margin:0 auto;padding:0 20px 80px;}
-  a{color:var(--acc1);text-decoration:none;}
-  a:hover{text-decoration:underline;}
-
-  /* ---------- NAV ---------- */
-  #navToggle{
-    position:fixed;top:18px;left:18px;z-index:1001;
-    width:52px;height:52px;border-radius:14px;border:1px solid var(--line);
-    background:linear-gradient(135deg,rgba(0,211,154,.25),rgba(221,64,255,.25));
-    backdrop-filter:blur(12px);cursor:pointer;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
-    box-shadow:0 8px 28px rgba(0,0,0,.35);transition:transform .2s;
+  .accent-text{
+    background:linear-gradient(90deg,var(--teal),var(--purple));
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;
   }
-  #navToggle:hover{transform:scale(1.06);}
-  #navToggle span{display:block;width:24px;height:3px;border-radius:2px;background:#fff;}
-  #sideNav{
-    position:fixed;top:0;left:-320px;width:300px;height:100vh;z-index:1000;
-    background:rgba(24,22,72,.92);backdrop-filter:blur(18px);
-    border-right:1px solid var(--line);padding:90px 22px 30px;
-    overflow-y:auto;transition:left .32s ease;
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+  section{padding:46px 0 10px;scroll-margin-top:30px}
+  h1,h2,h3,h4{color:var(--ink);font-weight:700;line-height:1.25}
+  h2{font-size:1.55rem;margin-bottom:18px;display:flex;align-items:center;gap:12px}
+  h2 .num{
+    flex:0 0 auto;width:34px;height:34px;border-radius:10px;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-size:.85rem;font-weight:800;color:#101035;
+    background:linear-gradient(135deg,var(--teal),var(--purple));
   }
-  #sideNav.open{left:0;}
-  #sideNav h3{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--acc1);margin-bottom:14px;}
-  #sideNav a{
-    display:block;color:var(--txt2);padding:8px 12px;border-radius:9px;
-    font-size:13.5px;font-weight:500;border-left:3px solid transparent;transition:all .18s;
-  }
-  #sideNav a:hover{background:var(--glass2);color:#fff;border-left-color:var(--acc1);text-decoration:none;}
-  #navOverlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999;opacity:0;pointer-events:none;transition:opacity .3s;}
-  #navOverlay.show{opacity:1;pointer-events:auto;}
-
-  /* ---------- HERO ---------- */
-  header.hero{padding:90px 0 34px;text-align:center;}
-  .logo-box{display:inline-flex;align-items:center;justify-content:center;padding:14px 30px;border-radius:16px;
-    background:rgba(255,255,255,.08);border:1px solid var(--line);backdrop-filter:blur(10px);margin-bottom:26px;}
-  .logo-box img{height:44px;display:block;}
-  .logo-fallback{font-weight:800;font-size:22px;letter-spacing:1px;display:none;}
-  .badge{
-    display:inline-block;padding:7px 20px;border-radius:999px;font-size:12px;font-weight:700;
-    letter-spacing:1.5px;text-transform:uppercase;color:#08131f;
-    background:linear-gradient(90deg,var(--acc1),var(--acc2));margin-bottom:18px;
-  }
-  .badge.red{background:linear-gradient(90deg,#ff5f6d,#ffc857);}
-  h1{font-size:clamp(28px,4.4vw,46px);font-weight:800;line-height:1.15;margin-bottom:10px;}
-  h1 .grad{background:linear-gradient(90deg,var(--acc1),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent;}
-  .subtitle{font-size:clamp(15px,2vw,19px);color:var(--txt2);font-weight:500;margin-bottom:8px;}
-  .meta-line{font-size:12.5px;color:#b9b9d6;margin-bottom:22px;}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0 0;}
-  .chip{font-size:11px;font-weight:600;padding:5px 12px;border-radius:999px;border:1px solid var(--line);
-    background:var(--glass);color:var(--txt2);letter-spacing:.4px;}
-  .chip.hot{border-color:rgba(255,95,109,.55);color:#ffb3ba;}
-  .chip.ok{border-color:rgba(0,211,154,.5);color:#8af0d2;}
-  .chip.warn{border-color:rgba(255,200,87,.5);color:#ffe1a1;}
-
-  /* ---------- SECTIONS ---------- */
-  section{margin-top:56px;scroll-margin-top:30px;}
-  .sec-head{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
-  .sec-num{min-width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;
-    font-weight:800;font-size:15px;color:#08131f;background:linear-gradient(135deg,var(--acc1),var(--acc2));}
-  h2{font-size:clamp(20px,2.6vw,27px);font-weight:800;}
-  .sec-sub{color:var(--txt2);font-size:13.5px;margin:-10px 0 18px 52px;}
+  h3{font-size:1.08rem;margin:26px 0 10px}
+  p{margin-bottom:14px}
+  a{color:var(--teal);text-decoration:none}
+  a:hover{text-decoration:underline}
   .card{
-    background:var(--glass);border:1px solid var(--line);border-radius:18px;
-    padding:24px;backdrop-filter:blur(12px);box-shadow:0 14px 40px rgba(0,0,0,.22);margin-bottom:18px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:22px 24px;
+    margin-bottom:18px;
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
   }
-  .card h3{font-size:16px;font-weight:700;margin-bottom:12px;}
-  .card h4{font-size:14px;font-weight:700;margin:16px 0 8px;color:var(--acc1);}
-  p{margin-bottom:12px;color:var(--txt2);}
-  p strong, li strong{color:#fff;}
-  .lead{font-size:16px;color:#fff;font-weight:500;}
-  ul.clean{list-style:none;margin:8px 0 14px;}
-  ul.clean li{padding:7px 0 7px 26px;position:relative;color:var(--txt2);}
-  ul.clean li::before{content:"";position:absolute;left:2px;top:14px;width:9px;height:9px;border-radius:3px;
-    background:linear-gradient(135deg,var(--acc1),var(--acc2));}
-  .quote{
-    border-left:4px solid;border-image:linear-gradient(180deg,var(--acc1),var(--acc2)) 1;
-    padding:10px 18px;margin:14px 0;background:rgba(255,255,255,.04);border-radius:0 12px 12px 0;
-    color:#fff;font-weight:600;font-size:14.5px;
+  .card.tight{padding:16px 18px}
+  .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  @media(max-width:980px){.grid4{grid-template-columns:repeat(2,1fr)}.grid3{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:680px){.grid2,.grid3,.grid4{grid-template-columns:1fr}}
+  .kpi{font-size:1.5rem;font-weight:800;color:var(--ink)}
+  .kpi-sub{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .tag{
+    display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:3px 10px;border-radius:999px;margin-bottom:10px;
+    border:1px solid var(--line);color:var(--ink2);background:rgba(255,255,255,0.05);
   }
-  .grid{display:grid;gap:16px;}
-  .g2{grid-template-columns:repeat(2,1fr);}
-  .g3{grid-template-columns:repeat(3,1fr);}
-  .g4{grid-template-columns:repeat(4,1fr);}
-  @media(max-width:960px){.g4{grid-template-columns:repeat(2,1fr);}.g3{grid-template-columns:repeat(2,1fr);}}
-  @media(max-width:640px){.g2,.g3,.g4{grid-template-columns:1fr;}}
-
-  .mini-card{background:var(--glass);border:1px solid var(--line);border-radius:15px;padding:17px 18px;backdrop-filter:blur(10px);}
-  .mini-card .k{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#a9a9cf;font-weight:700;margin-bottom:6px;}
-  .mini-card .v{font-size:20px;font-weight:800;margin-bottom:4px;}
-  .mini-card .d{font-size:12.5px;color:var(--txt2);}
-  .up{color:var(--up);} .down{color:var(--down);} .amber{color:var(--amber);}
-  .dir-up{color:var(--up);font-weight:700;} .dir-down{color:var(--down);font-weight:700;} .dir-flat{color:var(--amber);font-weight:700;}
-
-  /* ---------- TABLES ---------- */
-  .tbl-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--line);margin:14px 0;}
-  table{width:100%;border-collapse:collapse;font-size:13px;min-width:640px;}
+  .tag.internal{color:#0e2b22;background:linear-gradient(90deg,var(--teal),#7ff0cd);border:none}
+  .tag.public{color:#2a1440;background:linear-gradient(90deg,#e9a5ff,var(--purple));border:none}
+  .tag.warn{color:#3a2b00;background:linear-gradient(90deg,#ffd97a,var(--amber));border:none}
+  .chip-up{color:var(--up);font-weight:700}
+  .chip-down{color:var(--down);font-weight:700}
+  .note{
+    font-size:.82rem;color:var(--muted);border-left:3px solid var(--purple);
+    padding:8px 14px;margin:14px 0;background:rgba(221,64,255,0.06);border-radius:0 10px 10px 0;
+  }
+  .note.teal{border-color:var(--teal);background:rgba(0,211,154,0.06)}
+  .note.amber{border-color:var(--amber);background:rgba(255,200,87,0.07)}
+  .table-scroll{overflow-x:auto;border-radius:14px;border:1px solid var(--line)}
+  table{width:100%;border-collapse:collapse;font-size:.86rem;min-width:760px}
   thead th{
-    background:linear-gradient(90deg,rgba(0,211,154,.16),rgba(221,64,255,.16));
-    color:#fff;font-weight:700;text-align:left;padding:11px 13px;font-size:12px;
-    letter-spacing:.5px;text-transform:uppercase;white-space:nowrap;
+    text-align:left;padding:12px 14px;color:var(--ink);font-weight:700;font-size:.74rem;
+    letter-spacing:.07em;text-transform:uppercase;
+    background:linear-gradient(90deg,rgba(0,211,154,0.16),rgba(221,64,255,0.16));
+    border-bottom:1px solid var(--line);white-space:nowrap;
   }
-  tbody td{padding:10px 13px;border-top:1px solid rgba(255,255,255,.07);color:var(--txt2);white-space:nowrap;}
-  tbody tr:hover{background:rgba(255,255,255,.045);}
-  tbody td:first-child{color:#fff;font-weight:700;}
-  .num{font-variant-numeric:tabular-nums;text-align:right;}
-
-  /* ---------- CHARTS ---------- */
-  .chart-card{background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:22px;backdrop-filter:blur(12px);margin-bottom:18px;}
-  .chart-title{font-size:16px;font-weight:800;}
-  .chart-sub{font-size:12.5px;color:#a9a9cf;margin-bottom:10px;}
-  .chart-box{position:relative;height:360px;width:100%;}
-  @media(max-width:640px){.chart-box{height:300px;}}
-  .src-chip{display:inline-block;margin-top:12px;font-size:10.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
-    padding:4px 11px;border-radius:999px;border:1px solid rgba(0,211,154,.4);color:#8af0d2;background:rgba(0,211,154,.08);}
-  .toggle-row{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 12px;}
-  .tg-btn{cursor:pointer;font-family:'Montserrat',sans-serif;font-size:11.5px;font-weight:700;padding:6px 14px;border-radius:999px;
-    border:1px solid var(--line);background:var(--glass2);color:#fff;transition:all .15s;}
-  .tg-btn.off{opacity:.4;text-decoration:line-through;}
-
-  .note{font-size:12px;color:#9d9dc4;font-style:italic;margin-top:10px;}
-  .interp{background:rgba(0,211,154,.06);border:1px solid rgba(0,211,154,.22);border-radius:14px;padding:16px 18px;margin-top:14px;}
-  .interp p{font-size:13.5px;margin-bottom:8px;}
-  .interp p:last-child{margin-bottom:0;}
-
-  /* warning signs */
-  .warn-row{display:flex;gap:14px;align-items:flex-start;background:var(--glass);border:1px solid var(--line);
-    border-radius:14px;padding:16px 18px;margin-bottom:12px;}
-  .warn-rank{min-width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;
-    font-weight:800;color:#08131f;background:linear-gradient(135deg,#ff5f6d,#ffc857);flex-shrink:0;}
-  .warn-row .t{font-weight:700;color:#fff;margin-bottom:3px;}
-  .warn-row .b{font-size:13px;color:var(--txt2);}
-
-  /* timeline */
-  .tl{border-left:3px solid rgba(221,64,255,.4);margin-left:8px;padding-left:24px;}
-  .tl-item{position:relative;margin-bottom:22px;}
-  .tl-item::before{content:"";position:absolute;left:-31.5px;top:5px;width:12px;height:12px;border-radius:50%;
-    background:linear-gradient(135deg,var(--acc1),var(--acc2));box-shadow:0 0 12px rgba(221,64,255,.6);}
-  .tl-date{font-size:11.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--acc1);}
-  .tl-item .t{font-weight:700;margin:2px 0;}
-  .tl-item .b{font-size:13px;color:var(--txt2);}
-
-  /* action cards */
-  .action-card{background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:20px;position:relative;overflow:hidden;}
-  .action-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--acc1),var(--acc2));}
-  .action-card .who{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--acc1);font-weight:800;margin-bottom:8px;}
-  .action-card .act{font-size:15px;font-weight:700;margin-bottom:8px;}
-  .action-card p{font-size:13px;margin-bottom:0;}
-
-  footer.takeaway{margin-top:60px;background:linear-gradient(135deg,rgba(0,211,154,.14),rgba(221,64,255,.14));
-    border:1px solid var(--line);border-radius:20px;padding:34px;}
-  footer.takeaway h2{margin-bottom:16px;}
-  .disclaimer{margin-top:40px;font-size:11.5px;color:#9d9dc4;text-align:center;}
+  tbody td{padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.06);white-space:nowrap}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:rgba(255,255,255,0.04)}
+  td.label,th.label{font-weight:700;color:var(--ink)}
+  .chart-box{position:relative;height:380px;margin:8px 0 6px}
+  @media(max-width:680px){.chart-box{height:300px}}
+  .cite{
+    font-size:.68rem;font-weight:700;vertical-align:super;color:var(--teal);
+    padding:0 2px;letter-spacing:.02em;
+  }
+  ul.clean{list-style:none;margin:6px 0 14px}
+  ul.clean li{padding:7px 0 7px 26px;position:relative;border-bottom:1px dashed rgba(255,255,255,0.07)}
+  ul.clean li:last-child{border-bottom:none}
+  ul.clean li::before{
+    content:"";position:absolute;left:4px;top:15px;width:8px;height:8px;border-radius:50%;
+    background:linear-gradient(135deg,var(--teal),var(--purple));
+  }
+  ol.numbered{margin:6px 0 14px 20px}
+  ol.numbered li{padding:6px 0 6px 6px;border-bottom:1px dashed rgba(255,255,255,0.07)}
+  ol.numbered li:last-child{border-bottom:none}
+  .verdict{
+    font-size:1.02rem;font-weight:600;color:var(--ink);
+    border:1px solid rgba(0,211,154,0.35);
+    background:linear-gradient(90deg,rgba(0,211,154,0.10),rgba(221,64,255,0.10));
+    border-radius:14px;padding:16px 20px;margin:16px 0;
+  }
+  /* header */
+  header.hero{
+    padding:56px 0 34px;border-bottom:1px solid var(--line);
+    background:radial-gradient(1100px 420px at 18% -10%,rgba(0,211,154,0.14),transparent 60%),
+               radial-gradient(900px 420px at 88% -12%,rgba(221,64,255,0.16),transparent 60%);
+  }
+  .logo-row{display:flex;align-items:center;gap:16px;margin-bottom:26px;flex-wrap:wrap}
+  .logo-row img{height:44px;width:auto;filter:drop-shadow(0 2px 10px rgba(0,0,0,0.35))}
+  .logo-fallback{
+    display:none;font-weight:800;font-size:1.3rem;color:var(--ink);
+    padding:8px 16px;border:1px solid var(--line);border-radius:12px;background:var(--card2);
+  }
+  .hero h1{font-size:clamp(1.7rem,4vw,2.6rem);max-width:900px}
+  .hero .strap{font-size:1.05rem;margin-top:14px;max-width:820px;color:var(--ink2)}
+  .meta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+  .meta-pill{
+    font-size:.75rem;font-weight:600;padding:7px 14px;border-radius:999px;
+    border:1px solid var(--line);background:rgba(255,255,255,0.05);color:var(--ink2);
+  }
+  /* left pop-out nav */
+  #navToggle{
+    position:fixed;left:18px;top:18px;z-index:1200;width:48px;height:48px;border-radius:14px;
+    border:1px solid var(--line);cursor:pointer;
+    background:linear-gradient(135deg,rgba(0,211,154,0.9),rgba(221,64,255,0.9));
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.4);
+  }
+  #navToggle span{display:block;width:20px;height:2px;background:#101035;border-radius:2px;transition:.25s}
+  #navToggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  #navToggle.open span:nth-child(2){opacity:0}
+  #navToggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  #sideNav{
+    position:fixed;left:0;top:0;height:100vh;width:300px;z-index:1100;
+    background:rgba(24,23,66,0.97);border-right:1px solid var(--line);
+    transform:translateX(-105%);transition:transform .32s ease;
+    padding:82px 20px 30px;overflow-y:auto;backdrop-filter:blur(14px);
+  }
+  #sideNav.open{transform:translateX(0)}
+  #sideNav .nav-title{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  #sideNav a{
+    display:block;padding:8px 12px;border-radius:10px;color:var(--ink2);font-size:.83rem;font-weight:500;
+  }
+  #sideNav a:hover{background:rgba(255,255,255,0.07);color:var(--ink);text-decoration:none}
+  #sideNav a .n{color:var(--teal);font-weight:700;margin-right:8px;font-size:.72rem}
+  #navOverlay{
+    position:fixed;inset:0;background:rgba(10,10,35,0.55);z-index:1050;opacity:0;pointer-events:none;transition:.3s;
+  }
+  #navOverlay.show{opacity:1;pointer-events:auto}
+  footer{
+    margin-top:56px;border-top:1px solid var(--line);padding:30px 0 46px;font-size:.8rem;color:var(--muted);
+  }
+  .source-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  @media(max-width:680px){.source-grid{grid-template-columns:1fr}}
+  .source-item{
+    font-size:.8rem;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,0.03);
+    word-break:break-word;
+  }
+  .source-item b{color:var(--teal);margin-right:6px}
+  .timeline-item{position:relative;padding:0 0 20px 30px;border-left:2px solid rgba(255,255,255,0.12);margin-left:8px}
+  .timeline-item::before{
+    content:"";position:absolute;left:-8px;top:4px;width:14px;height:14px;border-radius:50%;
+    background:linear-gradient(135deg,var(--teal),var(--purple));box-shadow:0 0 0 4px rgba(0,211,154,0.15);
+  }
+  .timeline-item .t-date{font-weight:700;color:var(--ink);font-size:.9rem}
+  .rhetoric-quote{
+    font-style:italic;color:var(--ink);border-left:3px solid var(--teal);padding:6px 14px;margin:8px 0 12px;
+    background:rgba(0,211,154,0.05);border-radius:0 10px 10px 0;font-size:.92rem;
+  }
+  .back-top{position:fixed;right:18px;bottom:18px;z-index:1200}
+  .back-top a{
+    display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:14px;
+    border:1px solid var(--line);background:rgba(24,23,66,0.9);color:var(--teal);font-weight:800;font-size:1.1rem;
+  }
+  .back-top a:hover{text-decoration:none;background:rgba(38,34,110,0.95)}
 </style>
 </head>
 <body>
 
 <button id="navToggle" aria-label="Open navigation"><span></span><span></span><span></span></button>
 <div id="navOverlay"></div>
-<nav id="sideNav">
-  <h3>Report Navigation</h3>
-  <a href="#summary">1 · Summary</a>
-  <a href="#conditions">2 · Current Conditions</a>
-  <a href="#gas-range">3 · Gas Offered Range</a>
-  <a href="#power-range">4 · Power Offered Range</a>
-  <a href="#futures">5 · Futures Market Explained</a>
-  <a href="#forward-value">6 · Forward Value Check</a>
-  <a href="#procurement">7 · Procurement Window</a>
-  <a href="#british-gas">8 · British Gas 18-Month Window</a>
-  <a href="#drivers">9 · Market Drivers</a>
-  <a href="#warnings">10 · Warning Signs</a>
-  <a href="#whatchanged">11 · What Changed</a>
-  <a href="#timeline">12 · Timeline</a>
-  <a href="#rhetoric">13 · Rhetoric Tracker</a>
-  <a href="#ceasefire">14 · Ceasefire Reality Check</a>
-  <a href="#shipping">15 · Shipping Risk</a>
-  <a href="#stats">16 · Market Stats</a>
-  <a href="#supplier-lag">17 · Supplier Price-Book Lag</a>
-  <a href="#customer-action">18 · Customer Action</a>
-  <a href="#source-quality">19 · Source Quality</a>
-  <a href="#source-links">20 · Source Links</a>
+<nav id="sideNav" aria-label="Report sections">
+  <div class="nav-title">Report Sections</div>
+  <a href="#summary"><span class="n">01</span>Summary</a>
+  <a href="#current-conditions"><span class="n">02</span>Current Conditions</a>
+  <a href="#gas-offered"><span class="n">03</span>Gas Offered Range</a>
+  <a href="#power-offered"><span class="n">04</span>Power Offered Range</a>
+  <a href="#futures-explained"><span class="n">05</span>Futures Market Explained</a>
+  <a href="#forward-value"><span class="n">06</span>2027–2030 Forward Value Check</a>
+  <a href="#procurement-window"><span class="n">07</span>Procurement Window</a>
+  <a href="#british-gas-window"><span class="n">08</span>British Gas 18-Month Window</a>
+  <a href="#market-drivers"><span class="n">09</span>Market Drivers</a>
+  <a href="#warning-signs"><span class="n">10</span>Top Five Warning Signs</a>
+  <a href="#what-changed"><span class="n">11</span>What Changed</a>
+  <a href="#timeline"><span class="n">12</span>Timeline</a>
+  <a href="#rhetoric-tracker"><span class="n">13</span>Rhetoric Tracker</a>
+  <a href="#ceasefire-check"><span class="n">14</span>Ceasefire Reality Check</a>
+  <a href="#shipping-risk"><span class="n">15</span>Shipping Risk</a>
+  <a href="#market-stats"><span class="n">16</span>Market Stats</a>
+  <a href="#supplier-lag"><span class="n">17</span>Supplier Price-Book Lag</a>
+  <a href="#customer-action"><span class="n">18</span>Customer Action</a>
+  <a href="#source-quality"><span class="n">19</span>Source Quality</a>
+  <a href="#source-links"><span class="n">20</span>Source Links</a>
 </nav>
 
-<div class="wrap">
-
-<!-- ============ 1. SUMMARY ============ -->
-<header class="hero" id="summary">
-  <div class="logo-box">
-    <img src="https://switch365.com/assets/img/logos/switch365-energy-comparison-website.svg" alt="Switch 365 Ltd" onerror="this.style.display='none';document.getElementById('logoFallback').style.display='block';">
-    <span class="logo-fallback" id="logoFallback">Switch 365 Ltd</span>
-  </div>
-  <div><span class="badge red">Elevated Risk — Review-Now Window</span></div>
-  <h1>Middle East Energy <span class="grad">Risk Update</span></h1>
-  <div class="subtitle">UK Gas, UK Power, Futures Market and Procurement Position</div>
-  <div class="meta-line">Report date: <strong style="color:#fff">31 July 2026</strong> · Primary research window: 30–31 July 2026 · Extended verification window: 24–31 July 2026</div>
-  <div class="chips">
-    <span class="chip hot">Kataib Hezbollah 7-day deadline</span>
-    <span class="chip hot">Iraq sovereignty pressure</span>
-    <span class="chip hot">Saudi energy risk</span>
-    <span class="chip warn">Hormuz unresolved</span>
-    <span class="chip warn">Bab el-Mandeb open but risky</span>
-    <span class="chip warn">Egypt / Suez risk</span>
-    <span class="chip ok">Supplier lag = opportunity</span>
-    <span class="chip ok">Forward-value gap live</span>
+<header class="hero">
+  <div class="wrap">
+    <div class="logo-row">
+      <img src="https://switch365.com/assets/img/logos/switch365-energy-comparison-website.svg"
+           alt="Switch 365 Ltd"
+           onerror="this.style.display='none';document.getElementById('logoFallback').style.display='inline-block';">
+      <span id="logoFallback" class="logo-fallback">Switch 365 Ltd</span>
+    </div>
+    <h1>Middle East Energy Market Intelligence <span class="accent-text">— Daily Update</span></h1>
+    <p class="strap"><strong style="color:#fff">Talks are back on, but the risk is not off.</strong> The weekend gave the market relief pricing, not safety. Diplomacy headlines can pull prices down while route risk through Hormuz and Bab el-Mandeb remains unresolved. This is a review-now window, not a wait-and-see market.</p>
+    <div class="meta-row">
+      <span class="meta-pill">Report date: <strong style="color:#fff">03/08/2026</strong></span>
+      <span class="meta-pill">Primary research window: 31/07/2026 – 03/08/2026</span>
+      <span class="meta-pill">Extended verification window: 27/07/2026 – 03/08/2026</span>
+      <span class="meta-pill">Prepared by Switch 365 Ltd</span>
+    </div>
   </div>
 </header>
 
-<section>
+<main class="wrap">
+
+<!-- 01 SUMMARY -->
+<section id="summary">
+  <h2><span class="num">01</span>Summary</h2>
+  <div class="verdict">Talks between the US and Iran are expected to resume today, and the White House has held off fresh strikes — but no final deal is confirmed, tanker incidents around Hormuz continued through the weekend, and Kataib Hezbollah's 06/08 deadline is still live. The market is pricing relief, not resolution.<a class="cite" href="#s10">[S10]</a><a class="cite" href="#s12">[S12]</a><a class="cite" href="#s15">[S15]</a><a class="cite" href="#s21">[S21]</a></div>
+  <div class="grid3">
+    <div class="card tight">
+      <div class="kpi-sub">Diplomacy</div>
+      <div class="kpi" style="font-size:1.1rem">Talks resume — no deal</div>
+      <p style="margin:8px 0 0;font-size:.86rem">US–Iran talks are expected back on track today after President Trump held off further strikes. An interim framework exists, but nothing final has been signed and earlier pauses have already broken down once.<a class="cite" href="#s10">[S10]</a><a class="cite" href="#s12">[S12]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">Oil</div>
+      <div class="kpi" style="font-size:1.1rem">Relief, then a rebound</div>
+      <p style="margin:8px 0 0;font-size:.86rem">Brent slid from $96.78 (24 Jul) to $84.09 (28 Jul) on diplomacy hopes, then recovered to settle at $90.12 on 31 Jul — its strongest month since March. Relief pricing, not safety.<a class="cite" href="#s8">[S8]</a><a class="cite" href="#s14">[S14]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">Shipping</div>
+      <div class="kpi" style="font-size:1.1rem">Moving, not normal</div>
+      <p style="margin:8px 0 0;font-size:.86rem">Hormuz traffic is moving but remains reduced and incident-prone: UKMTO/JMIC logged tanker attacks off Oman across 31 Jul–1 Aug, with a further incident reported into the weekend.<a class="cite" href="#s15">[S15]</a><a class="cite" href="#s16">[S16]</a><a class="cite" href="#s18">[S18]</a></p>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <span class="tag internal">Internal broker / supplier evidence</span>
+      <h3 style="margin-top:4px">Your supplied curves: the commercial story</h3>
+      <p>The updated internal book shows diplomacy relief arriving at the front — and its limit. Between <strong style="color:#fff">Thu 30 Jul AM</strong> and <strong style="color:#fff">Fri 31 Jul AM</strong>, W-26 gas eased <span class="chip-down">-0.75 p/therm</span> to <strong style="color:#fff">142.75</strong> and S-27 dropped <span class="chip-down">-2.75</span> to 93.75, while the far curve quietly firmed (S-28 <span class="chip-up">+0.50</span>, W-28 <span class="chip-up">+0.50</span>, W-29 <span class="chip-up">+1.10</span>, S-30 <span class="chip-up">+0.73</span>). Power softened almost everywhere: W-26 <span class="chip-down">-1.50 £/MWh</span> to <strong style="color:#fff">122.50</strong>, with only S-29 edging up <span class="chip-up">+0.50</span>. The curve remains steeply backwardated: S-27 gas sits <strong style="color:#fff">34.3%</strong> below W-26, and the 2029/2030 seasons are less than half the front-winter price.</p>
+      <p style="margin-bottom:0">That shape is the story: the front is exhaling on diplomacy while the back of the curve is already creeping up. Later delivery years are still priced as if the world calms down — if the conflict re-escalates, those back years reprice upwards first, and supplier price books lag in both directions.</p>
+    </div>
+    <div class="card">
+      <span class="tag public">Public market context</span>
+      <h3 style="margin-top:4px">Why the relief is fragile</h3>
+      <ul class="clean" style="margin-bottom:0">
+        <li>OPEC+ approved a further <strong style="color:#fff">188,000 bpd</strong> quota increase for September — adding supply just as diplomacy hopes soften prices.<a class="cite" href="#s46">[S46]</a><a class="cite" href="#s47">[S47]</a></li>
+        <li>Saudi Arabia launched a 13-country maritime defence coalition for Bab el-Mandeb; the Houthi leader answered with a vow of "full escalation".<a class="cite" href="#s24">[S24]</a><a class="cite" href="#s25">[S25]</a><a class="cite" href="#s26">[S26]</a></li>
+        <li>EU gas storage is roughly <strong style="color:#fff">55% full</strong>, about 12 percentage points below the five-year seasonal norm, with the refill pace only just on track for the relaxed 80% November target.<a class="cite" href="#s29">[S29]</a><a class="cite" href="#s31">[S31]</a></li>
+        <li>Kazakhstan's CPC export route halted again on 30 Jul after two more tanker attacks near Novorossiysk — a separate supply-risk theatre.<a class="cite" href="#s28">[S28]</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="note teal"><strong style="color:#fff">Bottom line for customers:</strong> do not read falling headlines as falling risk. The internal forward curve still offers material value in 2027–2030 delivery years. Review positions now, while diplomacy is suppressing prices and supplier books have not yet caught up in either direction.</div>
+</section>
+
+<!-- 02 CURRENT CONDITIONS -->
+<section id="current-conditions">
+  <h2><span class="num">02</span>Current Conditions</h2>
+  <div class="grid4">
+    <div class="card tight">
+      <div class="kpi-sub">US–Iran talks</div>
+      <div class="kpi" style="font-size:1.05rem">Expected today</div>
+      <p style="margin:8px 0 0;font-size:.84rem">Talks expected to resume 03/08. Strikes paused; interim deal strained; no final agreement confirmed.<a class="cite" href="#s10">[S10]</a><a class="cite" href="#s12">[S12]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">Brent crude</div>
+      <div class="kpi" style="font-size:1.05rem">$90.12/bbl</div>
+      <p style="margin:8px 0 0;font-size:.84rem">Settled +1.2% on 31 Jul after falling more than $4 early in the week; strongest month since March.<a class="cite" href="#s8">[S8]</a><a class="cite" href="#s14">[S14]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">EU gas storage</div>
+      <div class="kpi" style="font-size:1.05rem">~55% full</div>
+      <p style="margin:8px 0 0;font-size:.84rem">≈55.35% on 26 Jul (GIE AGSI+ read), ~12pp below the five-year norm; Germany 46.8% on 31 Jul.<a class="cite" href="#s29">[S29]</a><a class="cite" href="#s30">[S30]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">UK power (public indication)</div>
+      <div class="kpi" style="font-size:1.05rem">c.£119/MWh</div>
+      <p style="margin:8px 0 0;font-size:.84rem">Trading Economics GB spot benchmark 118.68 £/MWh, accessed 03/08. Reference only — internal offered rates remain the pricing basis for this report.<a class="cite" href="#s48">[S48]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">Strait of Hormuz</div>
+      <div class="kpi" style="font-size:1.05rem">Reduced traffic</div>
+      <p style="margin:8px 0 0;font-size:.84rem">Tanker crossings recently hit their lowest since May; weekend attacks off Oman under UKMTO warnings 101-26 and 102-26.<a class="cite" href="#s15">[S15]</a><a class="cite" href="#s16">[S16]</a><a class="cite" href="#s17">[S17]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">Bab el-Mandeb</div>
+      <div class="kpi" style="font-size:1.05rem">Open, risky</div>
+      <p style="margin:8px 0 0;font-size:.84rem">Route remains open but is a live conflict corridor; Saudi-led 13-nation coalition announced 30–31 Jul; Houthi "full escalation" threat.<a class="cite" href="#s24">[S24]</a><a class="cite" href="#s25">[S25]</a><a class="cite" href="#s26">[S26]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">Iraq / 06 Aug deadline</div>
+      <div class="kpi" style="font-size:1.05rem">Live</div>
+      <p style="margin:8px 0 0;font-size:.84rem">US–Saudi strikes on Iran-backed militias in Iraq; PMF reported 20 killed. Kataib Hezbollah promised an "inevitable" response and set a 06/08 sovereignty deadline.<a class="cite" href="#s20">[S20]</a><a class="cite" href="#s21">[S21]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">UK system margin</div>
+      <div class="kpi" style="font-size:1.05rem">Watch summer peaks</div>
+      <p style="margin:8px 0 0;font-size:.84rem">NESO issued its first-ever summer Electricity Margin Notice in June and another on 8–9 Jul (~1,000 MW); both withdrawn. No current notice verified.<a class="cite" href="#s34">[S34]</a><a class="cite" href="#s36">[S36]</a></p>
+    </div>
+  </div>
+  <div class="note amber">Public quotes above are wider market context only. The gas and power offered ranges in Sections 03 and 04 are <strong style="color:#fff">internal broker / supplier evidence supplied by Switch365</strong> and are not replaced by public prices.</div>
+</section>
+
+<!-- 03 GAS OFFERED RANGE -->
+<section id="gas-offered">
+  <h2><span class="num">03</span>Gas Offered Range</h2>
   <div class="card">
-    <h3>Daily Brief — What the Sales Team Needs to Know</h3>
-    <p class="lead"><strong>Kataib Hezbollah's 7-day deadline is today's biggest fresh energy-risk trigger.</strong> The Iran-aligned Iraqi group has given Baghdad until <strong>6 August</strong> to prove it can defend Iraq's sovereignty, after joint US-Saudi strikes on 29 July killed at least 20 PMF members and four IRGC advisers. The group says a response is "inevitable" and has warned it could target US "tools" in Saudi Arabia.</p>
-    <p>The market may be getting short-term relief from some vessel movement — 37 commodity ships transited Bab el-Mandeb on Tuesday, the highest in over a week — <strong>but the risk map has widened</strong>. Reuters reports that Yemen's Houthis attacked Saudi Arabia this week from Iraqi territory in coordination with Iraqi armed groups, with strikes on oil facilities in the kingdom's Eastern Province. That turns Iraq into a potential launch platform against Saudi energy infrastructure, while Hormuz, the Red Sea, Bab el-Mandeb and Egypt / Suez remain live route risks.</p>
-    <p><strong>Markets do not like countdowns, deadlines or revenge language.</strong> Things are spreading out geographically, and that is a bad sign for energy risk. Brent has swung from $100.69 (23 Jul) down to $84.09 (28 Jul) and back to ~$89 — relief pricing on flow data, followed by repricing on escalation. UK gas remains sharply elevated: NBP is up ~40% month-on-month and ~64% year-on-year.</p>
-    <p><strong>Customers should not read lower oil as lower business energy automatically.</strong> The energy bill conversation is about NBP, TTF, UK power, supplier books, contract end date and forward delivery period. The supplied forward curve still shows deep backwardation — S-29 gas is <strong>-56.8%</strong> vs W-26 and S-29 power is <strong>-47.6%</strong> vs W-26 — and the far end of the curve (S-29, W-29, S-30 gas; S-28, W-28, S-29 power) is still priced <em>below</em> last year, even though the front and mid-curve have moved well above their 1 Year Ago levels. The forward-value opportunity still exists — and on the far curve it is now cheaper than it was a year ago.</p>
-    <div class="quote">Quick read for sales: "The window is still open, but it is more fragile than before the spike. Review now. Compare future-start options. Decide before the market moves again."</div>
-  </div>
-</section>
-
-<!-- ============ 2. CURRENT CONDITIONS ============ -->
-<section id="conditions">
-  <div class="sec-head"><div class="sec-num">2</div><h2>Current Conditions</h2></div>
-  <p class="sec-sub">Status board as at the morning of 31 July 2026 · internal rates as supplied Wed 29 Jul AM (refresh expected later today)</p>
-  <div class="grid g4">
-    <div class="mini-card">
-      <div class="k">UK Gas / NBP</div>
-      <div class="v">142.47 <span style="font-size:12px;font-weight:600">p/th</span> <span class="dir-down" style="font-size:13px">▼ 3.9%</span></div>
-      <div class="d">CFD benchmark 30 Jul; +40.1% MoM, +64.1% YoY. Supplied W-26 offered range: <strong style="color:#fff">142.50 p/th</strong> (Wed 29 Jul AM).</div>
-      <span class="src-chip">Trading Economics · Internal evidence</span>
-    </div>
-    <div class="mini-card">
-      <div class="k">UK Power</div>
-      <div class="v">£123.87 <span style="font-size:12px;font-weight:600">/MWh</span></div>
-      <div class="d">GB day-ahead baseload auction, 30 Jul. Supplied W-26 offered range: <strong style="color:#fff">£121.50/MWh</strong> (Wed 29 Jul AM).</div>
-      <span class="src-chip">EPEX SPOT · Internal evidence</span>
-    </div>
-    <div class="mini-card">
-      <div class="k">Forward Market</div>
-      <div class="v dir-down">Backwardation</div>
-      <div class="d">S-28 gas -51.8%, S-29 gas -56.8% vs W-26. Front and mid-curve above 1 Year Ago; far end still below last year.</div>
-      <span class="src-chip">Internal broker / supplier evidence</span>
-    </div>
-    <div class="mini-card">
-      <div class="k">Supplier Book Risk</div>
-      <div class="v dir-flat">Lag risk live</div>
-      <div class="d">Wholesale moved first. Supplier books may still follow the move that has already happened.</div>
-      <span class="src-chip">Switch365 assessment</span>
-    </div>
-    <div class="mini-card">
-      <div class="k">Customer Action</div>
-      <div class="v">Review now</div>
-      <div class="d">This is a review-now window, not a wait-and-see market. Test future-start options while backwardation holds.</div>
-      <span class="src-chip">Switch365 guidance</span>
-    </div>
-    <div class="mini-card">
-      <div class="k">Brent / Oil</div>
-      <div class="v">~$89 <span style="font-size:12px;font-weight:600">/bbl</span> <span class="dir-up" style="font-size:13px">▲ wk</span></div>
-      <div class="d">$100.69 (23 Jul) → $84.09 (28 Jul) → $89.03 close (30 Jul). Easing on flows, then repricing on Iraq / Jordan escalation.</div>
-      <span class="src-chip">Yahoo Finance · Fortune</span>
-    </div>
-    <div class="mini-card">
-      <div class="k">TTF / European Gas</div>
-      <div class="v">€58–60 <span style="font-size:12px;font-weight:600">/MWh</span></div>
-      <div class="d">Front month €60.42 (29 Jul close), easing toward €58 on 30 Jul. Roughly +65% vs ~€35 a year ago.</div>
-      <span class="src-chip">Yahoo Finance · ICE</span>
-    </div>
-    <div class="mini-card">
-      <div class="k">Shipping Risk</div>
-      <div class="v dir-flat">Routes open, not clean</div>
-      <div class="d">Hormuz: 5 commodity ships Tuesday. Bab el-Mandeb: 37 — best in a week, but no VLCCs or LNG tankers. Damietta drone strike unclaimed.</div>
-      <span class="src-chip">Kpler via Reuters · Riviera</span>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 3. GAS OFFERED RANGE ============ -->
-<section id="gas-range">
-  <div class="sec-head"><div class="sec-num">3</div><h2>Gas Offered Range</h2></div>
-  <p class="sec-sub">NBP Offered Gas Price Range · p/therm · internal broker / supplier evidence as supplied (refresh expected later today)</p>
-  <div class="chart-card">
-    <div class="chart-title">NBP Offered Gas Price Range</div>
-    <div class="chart-sub">Delivery periods W-26 to S-30 · latest vs previous vs 1 Year Ago · pence per therm</div>
+    <span class="tag internal">Internal broker / supplier evidence</span>
+    <p style="margin-top:6px">NBP seasonal offered range, pence per therm. Previous = <strong style="color:#fff">Thu 30 Jul AM</strong>; Latest = <strong style="color:#fff">Fri 31 Jul AM</strong>; 1 Year Ago as supplied. These are the figures you provided — they are shown unchanged and are the working basis of this report. The latest snapshot is Friday morning, ahead of the weekend's shipping incidents and today's expected talks.</p>
     <div class="chart-box"><canvas id="gasChart"></canvas></div>
-    <span class="src-chip">Internal broker / supplier evidence</span>
-    <div class="interp">
-      <p><strong>Commercial read:</strong> The front and mid-curve (W-26 through W-28) sit above their 1 Year Ago levels — that is where the war premium has landed — while the far end (S-29, W-29, S-30) is still priced below last year. W-26 at 142.50 p/th is the decision point for near-term renewals; every later season is materially cheaper, with S-29 at -56.8% vs W-26.</p>
-      <p><strong>The 1 Year Ago line shows whether today's forward curve is cheaper, similar or more expensive than the same delivery period was priced last year.</strong> Use the 1 Year Ago line as context, not as the customer's available price. Today's latest price is the decision point. The 1 Year Ago line shows how the market has changed.</p>
-      <p>If today's future periods are still materially below W-26 but higher than 1 Year Ago, the message is: <strong>the forward-value opportunity still exists, but the market has already moved.</strong> Do not use 1 Year Ago pricing as if the customer can still buy it.</p>
-    </div>
   </div>
-  <div class="card">
-    <h3>NBP Offered Gas Price Range — Daily Rates</h3>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr>
-          <th>Contract</th><th class="num">Tue 28 Jul AM</th><th class="num">Wed 29 Jul AM</th><th class="num">Change</th><th class="num">1 Year Ago</th><th class="num">% vs W-26</th>
-        </tr></thead>
-        <tbody>
-          <tr><td>W-26</td><td class="num">137.00</td><td class="num">142.50</td><td class="num up">+5.50</td><td class="num">91.25</td><td class="num">— (front)</td></tr>
-          <tr><td>S-27</td><td class="num">93.75</td><td class="num">94.25</td><td class="num up">+0.50</td><td class="num">75.00</td><td class="num down">-33.9%</td></tr>
-          <tr><td>W-27</td><td class="num">94.00</td><td class="num">94.25</td><td class="num up">+0.25</td><td class="num">81.65</td><td class="num down">-33.9%</td></tr>
-          <tr><td>S-28</td><td class="num">68.50</td><td class="num">68.75</td><td class="num up">+0.25</td><td class="num">67.57</td><td class="num down">-51.8%</td></tr>
-          <tr><td>W-28</td><td class="num">76.00</td><td class="num">77.00</td><td class="num up">+1.00</td><td class="num">75.32</td><td class="num down">-46.0%</td></tr>
-          <tr><td>S-29</td><td class="num">60.50</td><td class="num">61.50</td><td class="num up">+1.00</td><td class="num">66.05</td><td class="num down">-56.8%</td></tr>
-          <tr><td>W-29</td><td class="num">70.59</td><td class="num">72.46</td><td class="num up">+1.88</td><td class="num">74.42</td><td class="num down">-49.2%</td></tr>
-          <tr><td>S-30</td><td class="num">60.70</td><td class="num">61.99</td><td class="num up">+1.29</td><td class="num">66.26</td><td class="num down">-56.5%</td></tr>
-        </tbody>
-      </table>
+  <div class="table-scroll">
+    <table id="gasTable">
+      <thead>
+        <tr>
+          <th class="label">Contract</th>
+          <th>Previous — Thu 30 Jul AM (p/th)</th>
+          <th>Latest — Fri 31 Jul AM (p/th)</th>
+          <th>Change (p/th)</th>
+          <th>1 Year Ago (p/th)</th>
+          <th>Latest vs 1yr ago</th>
+          <th>% vs W-26</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="note">Change = Latest − Previous, rounded to two decimals. Your supplied sheet shows gas W-29 as +1.10; the rounded display values (70.77 → 71.88) imply +1.11. Both refer to the same move — the table shows the computed value. % vs W-26 uses gas W-26 (142.75) as the benchmark for gas rows only.</div>
+  <div class="grid2">
+    <div class="card tight">
+      <h3 style="margin-top:0">What the gas curve says</h3>
+      <p style="margin-bottom:0;font-size:.9rem">The two-day move shows relief at the front and quiet firming at the back: W-26 eased -0.75 to 142.75 p/th and S-27 fell -2.75 to 93.75, while S-28, W-28, W-29 and S-30 all ticked up. W-26 still carries the conflict premium — 56.2% above its 1 Year Ago level (91.40) — while S-30 at 63.08 remains <em>below</em> last year (66.65). The stress is concentrated at the front, and it is the front that diplomacy is deflating first.</p>
     </div>
-    <p class="note">Units: pence per therm (p/therm). Change = Wed 29 Jul AM − Tue 28 Jul AM. Positive change (red) = price risen; negative change (green) = price fallen. % vs W-26 calculated from the latest (Wed 29 Jul AM) column against latest W-26 gas (142.50).</p>
-    <div class="interp">
-      <p><strong>The % vs W-26 column shows how much cheaper or more expensive each gas delivery period is compared with the latest W-26 gas price.</strong> A negative percentage does not mean the market will be cheaper later. It means that future delivery period is currently cheaper than the front of the curve.</p>
-      <p><strong>The bigger the negative % vs W-26 number, the stronger the current forward-value gap.</strong> Cheaper further out does not mean cheaper later. It means there may be an opportunity now, while that period is still priced as future delivery. The customer mistake is thinking a cheaper future period means they should wait. It does not. It means we should check whether that future period can be secured now.</p>
-      <p><strong>The 1 Year Ago line shows how today's curve compares with the same delivery periods last year.</strong> Note the shape shift: W-26 is +56% above last year, but S-29 (61.50 vs 66.05), W-29 (72.46 vs 74.42) and S-30 (61.99 vs 66.26) are still <em>below</em> their own 1 Year Ago marks — the curve has steepened, and the far value is cheaper than a year ago. Context, not available price.</p>
+    <div class="card tight">
+      <h3 style="margin-top:0">Commercial read</h3>
+      <p style="margin-bottom:0;font-size:.9rem">Backwardation this steep rewards acting on later years early: customers renewing for 2027–2029 starts can secure seasons priced 34–56% under today's front winter. The risk is symmetrical — one failed talks round or a fresh Hormuz incident lifts the whole curve, and the cheap back years move first and fastest.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ 4. POWER OFFERED RANGE ============ -->
-<section id="power-range">
-  <div class="sec-head"><div class="sec-num">4</div><h2>Power Offered Range</h2></div>
-  <p class="sec-sub">UK Power Offered Price Range · £/MWh · internal broker / supplier evidence as supplied (refresh expected later today)</p>
-  <div class="chart-card">
-    <div class="chart-title">UK Power Offered Price Range</div>
-    <div class="chart-sub">Delivery periods W-26 to S-29 · latest vs previous vs 1 Year Ago · £ per MWh</div>
+<!-- 04 POWER OFFERED RANGE -->
+<section id="power-offered">
+  <h2><span class="num">04</span>Power Offered Range</h2>
+  <div class="card">
+    <span class="tag internal">Internal broker / supplier evidence</span>
+    <p style="margin-top:6px">UK power seasonal offered range, £/MWh. Previous = <strong style="color:#fff">Thu 30 Jul AM</strong>; Latest = <strong style="color:#fff">Fri 31 Jul AM</strong>; 1 Year Ago as supplied. W-29 and S-30 power were not supplied and are shown as such — not estimated.</p>
     <div class="chart-box"><canvas id="powerChart"></canvas></div>
-    <span class="src-chip">Internal broker / supplier evidence</span>
-    <div class="interp">
-      <p><strong>Commercial read:</strong> Power mirrors gas — the front season carries the risk premium while 2027–2029 delivery trades well below. S-27, W-27 and S-28 all eased day-on-day even as W-26 rose £3.50, deepening the backwardation gap. S-29 at £63.63 is -47.6% vs W-26.</p>
-      <p><strong>The 1 Year Ago line shows whether today's forward curve is cheaper, similar or more expensive than the same delivery period was priced last year.</strong> Use the 1 Year Ago line as context, not as the customer's available price. Today's latest price is the decision point. The 1 Year Ago line shows how the market has changed.</p>
-      <p>If today's future periods are still materially below W-26 but higher than 1 Year Ago, the message is: <strong>the forward-value opportunity still exists, but the market has already moved.</strong> Do not use 1 Year Ago pricing as if the customer can still buy it.</p>
-    </div>
   </div>
-  <div class="card">
-    <h3>UK Power Offered Price Range — Daily Rates</h3>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr>
-          <th>Contract</th><th class="num">Tue 28 Jul AM</th><th class="num">Wed 29 Jul AM</th><th class="num">Change</th><th class="num">1 Year Ago</th><th class="num">% vs W-26</th>
-        </tr></thead>
-        <tbody>
-          <tr><td>W-26</td><td class="num">118.00</td><td class="num">121.50</td><td class="num up">+3.50</td><td class="num">83.35</td><td class="num">— (front)</td></tr>
-          <tr><td>S-27</td><td class="num">85.00</td><td class="num">84.50</td><td class="num down">-0.50</td><td class="num">69.00</td><td class="num down">-30.5%</td></tr>
-          <tr><td>W-27</td><td class="num">86.50</td><td class="num">86.25</td><td class="num down">-0.25</td><td class="num">78.00</td><td class="num down">-29.0%</td></tr>
-          <tr><td>S-28</td><td class="num">66.00</td><td class="num">65.00</td><td class="num down">-1.00</td><td class="num">66.50</td><td class="num down">-46.5%</td></tr>
-          <tr><td>W-28</td><td class="num">71.30</td><td class="num">73.75</td><td class="num up">+2.45</td><td class="num">77.00</td><td class="num down">-39.3%</td></tr>
-          <tr><td>S-29</td><td class="num">62.05</td><td class="num">63.63</td><td class="num up">+1.58</td><td class="num">66.50</td><td class="num down">-47.6%</td></tr>
-        </tbody>
-      </table>
+  <div class="table-scroll">
+    <table id="powerTable">
+      <thead>
+        <tr>
+          <th class="label">Contract</th>
+          <th>Previous — Thu 30 Jul AM (£/MWh)</th>
+          <th>Latest — Fri 31 Jul AM (£/MWh)</th>
+          <th>Change (£/MWh)</th>
+          <th>1 Year Ago (£/MWh)</th>
+          <th>Latest vs 1yr ago</th>
+          <th>% vs W-26</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="note">Change = Latest − Previous. % vs W-26 uses power W-26 (122.50) as the benchmark for power rows only — power periods are never compared against gas W-26, and vice versa.</div>
+  <div class="grid2">
+    <div class="card tight">
+      <h3 style="margin-top:0">What the power curve says</h3>
+      <p style="margin-bottom:0;font-size:.9rem">Power softened across almost the whole curve on the diplomacy track: W-26 fell <span class="chip-down">-1.50</span> to 122.50 £/MWh, S-27 <span class="chip-down">-0.25</span>, W-27 <span class="chip-down">-0.50</span>, S-28 <span class="chip-down">-0.25</span> and W-28 <span class="chip-down">-0.05</span> — only S-29 firmed, up <span class="chip-up">+0.50</span> to 62.25. Gas remains the price-setting fuel in GB, so power follows the gas shape, softened further by summer renewables.</p>
     </div>
-    <p class="note">Units: £ per megawatt-hour (£/MWh). Change = Wed 29 Jul AM − Tue 28 Jul AM. W-28 and S-29 rose; S-27, W-27, S-28 eased. % vs W-26 calculated from the latest (Wed 29 Jul AM) column against latest W-26 power (£121.50). S-28 (65.00 vs 66.50), W-28 (73.75 vs 77.00) and S-29 (63.63 vs 66.50) all remain below their own 1 Year Ago marks, while W-26, S-27 and W-27 sit above theirs.</p>
-    <div class="interp">
-      <p><strong>The % vs W-26 column shows how much cheaper or more expensive each power delivery period is compared with the latest W-26 power price.</strong> A negative percentage does not mean the market will be cheaper later. It means that future delivery period is currently cheaper than the front of the curve.</p>
-      <p>Cheaper further out does not mean cheaper later. It means there may be an opportunity now, while that period is still priced as future delivery. <strong>The customer mistake is thinking a cheaper future period means they should wait. It does not. It means we should check whether that future period can be secured now.</strong></p>
-      <p><strong>The 1 Year Ago line shows how today's curve compares with the same delivery periods last year.</strong> W-26 power is +45.8% above its 1 Year Ago level — the war premium sits at the front, which is exactly why the forward periods matter for 2027+ renewals.</p>
+    <div class="card tight">
+      <h3 style="margin-top:0">Commercial read</h3>
+      <p style="margin-bottom:0;font-size:.9rem">S-28 at 64.75 £/MWh is the cheapest supplied season and 47.1% under the front winter — and it is <em>below</em> its own 1 Year Ago level (65.60). For customers with 2028 starts, that is genuine forward value available now. W-26 power is 47.9% above last year: anyone riding the front winter is still paying the conflict premium in full, even after this week's relief.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ 5. FUTURES MARKET EXPLAINED ============ -->
-<section id="futures">
-  <div class="sec-head"><div class="sec-num">5</div><h2>Futures Market Explained</h2></div>
-  <p class="sec-sub">Why the delivery period matters more than today's headline price</p>
+<!-- 05 FUTURES MARKET EXPLAINED -->
+<section id="futures-explained">
+  <h2><span class="num">05</span>Futures Market Explained</h2>
   <div class="card">
-    <p class="lead">The futures market shows the price for energy delivered in future periods. A customer renewing from 2027, 2028, 2029 or 2030 is not only interested in today's price. <strong>They should look at what the market is currently offering for their actual delivery period.</strong></p>
-    <ul class="clean">
-      <li><strong>Cheaper further out does not mean cheaper later.</strong> It means that period is priced as future delivery today — and that pricing can be secured while it is still available.</li>
-      <li><strong>The future market is only useful while the customer can still buy that future delivery period.</strong> Access depends on contract end date and the supplier's renewal window.</li>
-      <li><strong>Waiting lets the market make the decision for the customer.</strong> As time passes, that future period becomes the near-term market and can absorb the same risk premium.</li>
-      <li><strong>The 1 Year Ago line is context. The latest line is the customer's decision point.</strong> A year ago W-26 gas was ~91 p/th; today it is 142.50 — waiting through escalation is what that move looks like in practice.</li>
-    </ul>
-    <div class="quote">Backwardation does not mean wait. It means the cheaper part of the curve may be available now — and waiting gives the market more time to take it away.</div>
+    <h3 style="margin-top:0">Why "futures" prices matter to a business energy bill</h3>
+    <p>Suppliers buy the gas and electricity for your contract in advance, in seasonal blocks — Winter 2026 (W-26), Summer 2027 (S-27) and so on. The prices in Sections 03 and 04 are the offered levels for those blocks. When you fix a contract starting in October 2027, the supplier's cost is anchored to the W-27 season, not to today's spot price.</p>
+    <p><strong style="color:#fff">Backwardation</strong> is when nearer delivery periods cost more than later ones. Your supplied curve is strongly backwardated: W-26 gas at 142.75 p/th versus S-30 at 63.08 p/th. The market is charging a heavy premium for energy delivered through this coming winter — the conflict premium — and progressively less for each later year.</p>
+    <p><strong style="color:#fff">The two ways this resolves:</strong> either the front falls towards the back (peace, restored shipping, full storage), or the back rises towards the front (renewed escalation, route closures, cold winter on thin storage). Today's cheaper 2027–2030 seasons are not a promise that energy will be cheap then — they are a price you can <em>secure now</em>. If escalation returns, those seasons reprice upwards before the front does, because that is where the open risk sits.</p>
   </div>
+  <div class="grid3">
+    <div class="card tight">
+      <div class="kpi-sub">Backwardation — gas</div>
+      <div class="kpi">-55.8%</div>
+      <p style="margin:8px 0 0;font-size:.84rem">S-30 gas (63.08) vs W-26 (142.75). Front winter carries the risk premium; far curve prices normalisation.</p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">Backwardation — power</div>
+      <div class="kpi">-49.2%</div>
+      <p style="margin:8px 0 0;font-size:.84rem">S-29 power (62.25) vs W-26 (122.50). Power mirrors gas, softened in summers by renewables output.</p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">1 Year Ago comparison</div>
+      <div class="kpi">+56.2%</div>
+      <p style="margin:8px 0 0;font-size:.84rem">Gas W-26 vs its 1 Year Ago level (142.75 vs 91.40). The premium sits at the front — S-30 is below last year. 1 Year Ago prices are history, not availability: they cannot be bought today.</p>
+    </div>
+  </div>
+  <div class="note teal"><strong style="color:#fff">Negative % vs W-26 means the future delivery period is currently cheaper than W-26.</strong> It does not mean the market will necessarily be cheaper later — it is the price securable today for that future period.</div>
 </section>
 
-<!-- ============ 6. FORWARD VALUE CHECK ============ -->
+<!-- 06 FORWARD VALUE CHECK -->
 <section id="forward-value">
-  <div class="sec-head"><div class="sec-num">6</div><h2>2027 / 2028 / 2029 / 2030 Forward Value Check</h2></div>
-  <p class="sec-sub">Dual-axis forward curve · gas (p/therm, left) vs power (£/MWh, right) · optional 1 Year Ago reference lines</p>
-  <div class="chart-card">
-    <div class="chart-title">Forward Value Check — Gas &amp; Power Forward Curves</div>
-    <div class="chart-sub">Latest supplied rates (Wed 29 Jul AM) · toggle 1 Year Ago comparison lines</div>
-    <div class="toggle-row">
-      <button class="tg-btn" id="tgGasYr" onclick="toggleFwd(2,this)">Gas · 1 Year Ago</button>
-      <button class="tg-btn" id="tgPowYr" onclick="toggleFwd(3,this)">Power · 1 Year Ago</button>
-    </div>
-    <div class="chart-box" style="height:400px;"><canvas id="forwardChart"></canvas></div>
-    <span class="src-chip">Internal broker / supplier evidence</span>
-    <div class="interp">
-      <p><strong>2027 matters because it shows whether value starts before the longer-dated 2028 / 2029 / 2030 opportunity.</strong> 2028, 2029 and 2030 matter because they show whether the future market still offers a lower-cost delivery opportunity.</p>
-      <p><strong>The % vs W-26 comparison is the proof of backwardation and forward-value opportunity.</strong> Where future periods are materially cheaper than W-26, the customer conversation should focus on whether that future delivery period can be secured now.</p>
-      <p><strong>The 1 Year Ago reference line shows how far the curve has moved compared with last year, but it is not the customer's available price today.</strong> Cheaper further out does not mean cheaper later. It means there may be an opportunity now, while that period is still priced as future delivery.</p>
-      <p>The mistake customers make is thinking cheaper 2027 / 2028 / 2029 pricing means they can wait. It does not. <strong>It means the cheaper part of the curve may be available now, and waiting gives the market more time to take it away.</strong></p>
-    </div>
-  </div>
+  <h2><span class="num">06</span>2027 / 2028 / 2029 / 2030 Forward Value Check</h2>
   <div class="card">
-    <h3>Forward Value Table — Gas &amp; Power vs W-26 Benchmark</h3>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr>
-          <th>Delivery Period</th><th class="num">Gas Latest (p/th)</th><th class="num">Gas 1 Yr Ago</th><th class="num">Gas % vs W-26</th><th class="num">Power Latest (£/MWh)</th><th class="num">Power 1 Yr Ago</th><th class="num">Power % vs W-26</th><th>Curve Position</th><th>Customer Fit</th>
-        </tr></thead>
-        <tbody>
-          <tr><td>W-26</td><td class="num">142.50</td><td class="num">91.25</td><td class="num">— (front)</td><td class="num">121.50</td><td class="num">83.35</td><td class="num">— (front)</td><td>Front — war premium</td><td>2026 renewal — urgent review</td></tr>
-          <tr><td>S-27</td><td class="num">94.25</td><td class="num">75.00</td><td class="num down">-33.9%</td><td class="num">84.50</td><td class="num">69.00</td><td class="num down">-30.5%</td><td>First value step-down</td><td>Early-2027 CED</td></tr>
-          <tr><td>W-27</td><td class="num">94.25</td><td class="num">81.65</td><td class="num down">-33.9%</td><td class="num">86.25</td><td class="num">78.00</td><td class="num down">-29.0%</td><td>Flat vs S-27</td><td>Winter-2027 CED</td></tr>
-          <tr><td>S-28</td><td class="num">68.75</td><td class="num">67.57</td><td class="num down">-51.8%</td><td class="num">65.00</td><td class="num">66.50</td><td class="num down">-46.5%</td><td>Deep value zone</td><td>2028 CED — strongest gas gap</td></tr>
-          <tr><td>W-28</td><td class="num">77.00</td><td class="num">75.32</td><td class="num down">-46.0%</td><td class="num">73.75</td><td class="num">77.00</td><td class="num down">-39.3%</td><td>Winter uplift, still cheap</td><td>Winter-2028 CED</td></tr>
-          <tr><td>S-29</td><td class="num">61.50</td><td class="num">66.05</td><td class="num down">-56.8%</td><td class="num">63.63</td><td class="num">66.50</td><td class="num down">-47.6%</td><td>Deepest gas discount</td><td>2029 CED — max gas value</td></tr>
-          <tr><td>W-29</td><td class="num">72.46</td><td class="num">74.42</td><td class="num down">-49.2%</td><td class="num">Not supplied</td><td class="num">—</td><td class="num">—</td><td>Winter-2029</td><td>Gas only (power not supplied)</td></tr>
-          <tr><td>S-30</td><td class="num">61.99</td><td class="num">66.26</td><td class="num down">-56.5%</td><td class="num">Not supplied</td><td class="num">—</td><td class="num">—</td><td>2030 value zone</td><td>Gas only (power not supplied)</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="note">Gas benchmark = latest W-26 gas 142.50 p/th. Power benchmark = latest W-26 power £121.50/MWh. % vs W-26 = ((latest contract − latest W-26) / latest W-26) × 100. Gas benchmarked against gas W-26 only; power against power W-26 only. Power W-29 / S-30 not supplied — not invented.</p>
-    <div class="interp">
-      <p><strong>Commercial interpretation:</strong> S-28 through S-30 gas trades roughly half the W-26 price — the strongest forward-value gap on the board. Power shows the same shape at -29% to -47.6%. The forward-value gap is useful only if the customer can access that delivery period through their contract end date and supplier window.</p>
-    </div>
+    <span class="tag internal">Internal broker / supplier evidence</span>
+    <p style="margin-top:6px">Dual-axis view of the supplied curves: gas in p/therm (left axis) and power in £/MWh (right axis), latest versus 1 Year Ago (dashed). Calendar-year values in the table below average the two supplied seasons within each year (e.g. 2027 = S-27 + W-27); 2030 gas uses S-30 only as W-30 was not supplied, and 2029/2030 power uses the supplied seasons only.</p>
+    <div class="chart-box" style="height:420px"><canvas id="forwardChart"></canvas></div>
   </div>
-  <div class="chart-card">
-    <div class="chart-title">Market Movement — Brent Crude, July 2026</div>
-    <div class="chart-sub">Daily settlement, $/bbl · relief pricing into 28 July, escalation repricing since · 31 July is intraday</div>
-    <div class="chart-box" style="height:330px;"><canvas id="brentChart"></canvas></div>
-    <span class="src-chip">Yahoo Finance BZ=F · verified closes</span>
-    <div class="interp">
-      <p><strong>Commercial read:</strong> Brent ran from ~$72 to $100.69 (23 Jul), fell to $84.09 (28 Jul) as flows moved and pause headlines landed, then repriced back toward ~$89 on the Jordan intercept, the US-Saudi strikes in Iraq and the Kataib Hezbollah deadline. <strong>The market can ease on flow data and still remain exposed to escalation risk.</strong> Relief pricing is not the same as route normalisation.</p>
-    </div>
+  <div class="table-scroll">
+    <table id="forwardTable">
+      <thead>
+        <tr>
+          <th class="label">Contract</th>
+          <th>Gas latest (p/th)</th>
+          <th>Gas 1yr ago (p/th)</th>
+          <th>Gas % vs W-26</th>
+          <th>Power latest (£/MWh)</th>
+          <th>Power 1yr ago (£/MWh)</th>
+          <th>Power % vs W-26</th>
+          <th>Curve position</th>
+          <th>Customer fit</th>
+          <th>Commercial interpretation</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
   </div>
-</section>
-
-<!-- ============ 7. PROCUREMENT WINDOW ============ -->
-<section id="procurement">
-  <div class="sec-head"><div class="sec-num">7</div><h2>Procurement Window</h2></div>
-  <p class="sec-sub">Procurement window check — what is open, what is fragile, what to do</p>
-  <div class="card">
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>Factor</th><th>Status</th><th>Procurement Meaning</th></tr></thead>
-        <tbody>
-          <tr><td>Gas current movement</td><td><span class="dir-up">Elevated</span></td><td>W-26 +5.50 on the day; NBP benchmark ~142 p/th. Front of curve carries war premium.</td></tr>
-          <tr><td>Gas future movement</td><td><span class="dir-down">Backwardated</span></td><td>S-28 -51.8%, S-29 -56.8% vs W-26. Forward value available to test now.</td></tr>
-          <tr><td>Gas year-on-year curve movement</td><td><span class="dir-flat">Steepened</span></td><td>W-26 to W-28 above 1 Year Ago; S-29, W-29 and S-30 still below last year — far-curve value is cheaper YoY.</td></tr>
-          <tr><td>Power current movement</td><td><span class="dir-up">Elevated</span></td><td>W-26 +£3.50 on the day; W-26 is +45.8% vs 1 Year Ago.</td></tr>
-          <tr><td>Power future movement</td><td><span class="dir-down">Backwardated</span></td><td>S-27 to S-29 between -29.0% and -47.6% vs W-26; three periods eased day-on-day.</td></tr>
-          <tr><td>Power year-on-year curve movement</td><td><span class="dir-flat">Steepened</span></td><td>W-26, S-27 and W-27 above 1 Year Ago; S-28, W-28 and S-29 still below last year — far-curve value is cheaper YoY.</td></tr>
-          <tr><td>Brent movement</td><td><span class="dir-flat">Volatile</span></td><td>$100.69 → $84.09 → ~$89 inside a week. Relief then repricing; still on track for a strong monthly gain.</td></tr>
-          <tr><td>TTF movement</td><td><span class="dir-flat">High, easing</span></td><td>~€60.42 (29 Jul) → ~€58 (30 Jul); ~+65% year-on-year. European risk premium intact.</td></tr>
-          <tr><td>Hormuz movement</td><td><span class="dir-up">Thin</span></td><td>Only 5 commodity ships Tuesday; IRGC claims strikes on three tankers; US "steel wall" blockade active.</td></tr>
-          <tr><td>Iraq / Kataib Hezbollah deadline</td><td><span class="dir-up">Countdown live</span></td><td>7-day deadline to 6 August; response declared "inevitable". Biggest fresh trigger.</td></tr>
-          <tr><td>Saudi energy infrastructure risk</td><td><span class="dir-up">Elevated</span></td><td>Reuters: attacks on Eastern Province oil facilities involved Iraq-based activity; more strikes possible.</td></tr>
-          <tr><td>Bab el-Mandeb movement</td><td><span class="dir-flat">Open, risky</span></td><td>37 transits Tuesday (best in a week) but no VLCCs or LNG; Houthi blockade declared on Saudi-linked shipping.</td></tr>
-          <tr><td>Red Sea shipping coalition</td><td><span class="dir-flat">Forming</span></td><td>Saudi met ~50 countries; 14 affirmed support. Coalition signals risk, not resolution.</td></tr>
-          <tr><td>Egypt / Suez gas-vessel risk</td><td><span class="dir-up">New risk point</span></td><td>Drone strike on FSRU Energos Winter and LNG carrier Gaslog Salem at Damietta; unclaimed.</td></tr>
-          <tr><td>Kazakhstan / CPC</td><td><span class="dir-down">Resumed</span></td><td>CPC loadings restarted 27 Jul after Black Sea drone-attack suspension. Secondary issue, still fragile.</td></tr>
-          <tr><td>Diplomacy status</td><td><span class="dir-flat">Talks, not delivery</span></td><td>Oman / Pakistan channels active; Iran rejected 50-50 Hormuz plan; "good talks" claims vs "breach of commitments".</td></tr>
-          <tr><td>Supplier books</td><td><span class="dir-up">Lag risk</span></td><td>Wholesale moved first. Supplier books may still follow the move already made.</td></tr>
-          <tr><td>Quote validity</td><td><span class="dir-flat">Short</span></td><td>Expect shortened validity and rapid withdrawals while headlines are live. Secure same-day where pricing works.</td></tr>
-          <tr><td>Best action</td><td><span class="dir-down">Review now</span></td><td>Compare future-start options and decide before the market moves again.</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="quote">The window is still open, but it is more fragile than before the spike. Review now. Compare future-start options. Decide before the market moves again.</div>
-  </div>
-</section>
-
-<!-- ============ 8. BRITISH GAS 18-MONTH WINDOW ============ -->
-<section id="british-gas">
-  <div class="sec-head"><div class="sec-num">8</div><h2>British Gas 18-Month Window</h2></div>
-  <p class="sec-sub">Renewal-window verification status — checked within the extended verification window</p>
-  <div class="card">
-    <h3>Verification Result — 31 July 2026 research run</h3>
-    <p><span class="badge" style="background:linear-gradient(90deg,#ffc857,#ff5f6d);color:#08131f;">Not verified in this research run</span></p>
-    <p>We could <strong>not</strong> verify, from a credible current source inside the 24–31 July verification window, that British Gas has extended its business energy renewal window from 12 months to 18 months. British Gas's own published guidance currently states it will provide a renewal quote <strong>up to 12 months before</strong> the contract end date, with the formal renewal offer around 60 days before the contract finishes.</p>
-    <p><strong>How to use this section today:</strong> if your British Gas renewal window is confirmed on account documentation or by a Switch365 supplier contact at 18 months, treat it as live for that customer and apply the standard wording below. Until independently confirmed, present the window as <strong>up to 12 months</strong> in customer conversations.</p>
-    <h4>Standard wording once eligibility is confirmed for a customer</h4>
-    <ul class="clean">
-      <li><strong>The extended renewal window matters because it turns the forward market into a practical customer action.</strong> Your new contract would not start today. It would begin when your current agreement ends.</li>
-      <li><strong>Waiting is not neutral.</strong> If the market moves or British Gas withdraws rates, customers cannot go back and secure today's pricing later.</li>
-      <li><strong>Cheaper further out does not mean cheaper later.</strong> It means check whether the future period can be secured now.</li>
-    </ul>
-    <p class="note">Source: British Gas business renewal guidance (britishgas.co.uk) — states renewal quote availability up to 12 months ahead. The 18-month extension remains internal Switch365 evidence only until a current public source confirms it.</p>
-  </div>
-</section>
-
-<!-- ============ 9. MARKET DRIVERS ============ -->
-<section id="drivers">
-  <div class="sec-head"><div class="sec-num">9</div><h2>Market Drivers</h2></div>
-  <p class="sec-sub">The forces actually setting your customers' prices this morning</p>
-  <div class="grid g3">
-    <div class="mini-card"><div class="k">⚡ NBP Gas Market</div><div class="d">
-      • Benchmark ~142 p/th (30 Jul), -3.9% on the day but +40.1% MoM and +64.1% YoY.<br>
-      • Supplied W-26 offered range: 142.50 p/th.<br>
-      • Deep backwardation: S-29 at -56.8% vs W-26.<br>
-      <strong style="color:#fff">Meaning: front premium is geopolitical; value sits in 2027–2030 delivery.</strong></div></div>
-    <div class="mini-card"><div class="k">🔌 UK Power Market</div><div class="d">
-      • GB day-ahead baseload £123.87/MWh (30 Jul).<br>
-      • Supplied W-26: £121.50, +45.8% vs 1 Year Ago.<br>
-      • Gas sets the marginal power price — the curves move together.<br>
-      <strong style="color:#fff">Meaning: power renewals inherit the gas war premium.</strong></div></div>
-    <div class="mini-card"><div class="k">🛢️ Brent / Oil</div><div class="d">
-      • ~$89/bbl after swinging $100.69 → $84.09 → ~$89 in a week.<br>
-      • Easing on observed flows, repricing on escalation.<br>
-      • Still ~+21% year-on-year; strong monthly gain on track.<br>
-      <strong style="color:#fff">Meaning: lower oil ≠ lower business energy automatically.</strong></div></div>
-    <div class="mini-card"><div class="k">🇪🇺 TTF / European Gas</div><div class="d">
-      • Front month ~€58–60/MWh; ~+65% year-on-year.<br>
-      • EU storage 56.4% full (637 TWh, 30 Jul) — behind the 5-year norm.<br>
-      • Relaxed 80% Nov-1 target still not secure on current pace.<br>
-      <strong style="color:#fff">Meaning: Europe keeps a floor under UK gas.</strong></div></div>
-    <div class="mini-card"><div class="k">📉 Futures / Forward Curve</div><div class="d">
-      • Backwardation across both fuels.<br>
-      • S-28/S-29 gas roughly half the W-26 price.<br>
-      • Front/mid above 1 Year Ago; far end still below last year.<br>
-      <strong style="color:#fff">Meaning: forward value exists — and the far curve is cheaper than a year ago.</strong></div></div>
-    <div class="mini-card"><div class="k">📅 1 Year Ago Comparison</div><div class="d">
-      • W-26 gas 142.50 vs 91.25 a year ago (+56%).<br>
-      • W-26 power £121.50 vs £83.35 (+45.8%).<br>
-      • Every "wait and see" month this year has cost money.<br>
-      <strong style="color:#fff">Meaning: context for urgency, not a buyable price.</strong></div></div>
-    <div class="mini-card"><div class="k">📕 Supplier Pricing Pressure</div><div class="d">
-      • Wholesale moved first; supplier books follow.<br>
-      • Expect shortened quote validity in live headline periods.<br>
-      • Withdrawn rates cannot be re-bought.<br>
-      <strong style="color:#fff">Meaning: the lag is the opportunity and the danger.</strong></div></div>
-    <div class="mini-card"><div class="k">⏳ Kataib Hezbollah 7-Day Deadline</div><div class="d">
-      • Baghdad given until 6 August to prove sovereignty defence.<br>
-      • Response to US-Saudi strikes declared "inevitable".<br>
-      • US "tools" in Saudi Arabia named as potential targets.<br>
-      <strong style="color:#fff">Meaning: a dated countdown suppliers can price immediately.</strong></div></div>
-    <div class="mini-card"><div class="k">🇮🇶 Iraq Sovereignty Pressure</div><div class="d">
-      • National Security Council: strikes a "flagrant violation of sovereignty".<br>
-      • PM al-Zaidi's Riyadh visit postponed; security plan approved.<br>
-      • State position ≠ militia position — keep them separate.<br>
-      <strong style="color:#fff">Meaning: Baghdad is squeezed between Washington, Riyadh and Tehran.</strong></div></div>
-    <div class="mini-card"><div class="k">🎯 Saudi Energy Infrastructure Risk</div><div class="d">
-      • Reuters: Houthis attacked Saudi from Iraqi territory with Iraqi groups.<br>
-      • Eastern Province oil facilities — the main crude hub — among targets.<br>
-      • Assessments point to IRGC supervision; not officially confirmed.<br>
-      <strong style="color:#fff">Meaning: Iraq is now a potential launch platform, not just a strike location.</strong></div></div>
-    <div class="mini-card"><div class="k">🌊 Hormuz</div><div class="d">
-      • ~1/5 of global crude and LNG normally transits.<br>
-      • Only 5 commodity ships Tuesday; IRGC claims 3 tankers struck.<br>
-      • Iran rejected Oman's 50-50 lane plan; US "steel wall" blockade active.<br>
-      <strong style="color:#fff">Meaning: biggest structural risk for LNG confidence.</strong></div></div>
-    <div class="mini-card"><div class="k">🚢 Bab el-Mandeb / Red Sea</div><div class="d">
-      • 37 transits Tuesday — best since 19 Jul — but Monday saw 11, a months-low.<br>
-      • Houthi naval blockade declared on Saudi-linked shipping.<br>
-      • Saudi building coalition; 14 nations affirmed support.<br>
-      <strong style="color:#fff">Meaning: open, but still a route-risk market.</strong></div></div>
-    <div class="mini-card"><div class="k">🇪🇬 Egypt / Suez Gas-Vessel Risk</div><div class="d">
-      • Drone hit FSRU Energos Winter and LNG carrier Gaslog Salem at Damietta (29 Jul).<br>
-      • Fires during discharge; crews safe; vessels moved outside port.<br>
-      • Unclaimed — attribution must be treated carefully.<br>
-      <strong style="color:#fff">Meaning: first strike on Egypt's Mediterranean LNG infrastructure this conflict.</strong></div></div>
-    <div class="mini-card"><div class="k">🕊️ Diplomacy / Pause Fractured</div><div class="d">
-      • Fragile US-Iran ceasefire collapsed earlier in July; daily strikes resumed.<br>
-      • Brief ~25 Jul pause shattered by the Jordan intercept and Iraq strikes.<br>
-      • Oman / Pakistan channels active; Qatar, Egypt, Turkey in mediation effort.<br>
-      <strong style="color:#fff">Meaning: diplomacy discussed ≠ de-escalation delivered.</strong></div></div>
-    <div class="mini-card"><div class="k">💰 War-Cost / Funding Signal</div><div class="d">
-      • Hegseth: war cost $37.5bn so far, incl. projected costs through 30 Sep.<br>
-      • Reuters: nearly $90bn additional funding requested, mostly Iran-related; Pentagon sought $67.1bn.<br>
-      • AP: wider $95bn GOP package moving through Congress.<br>
-      <strong style="color:#fff">Meaning: funding scale signals duration risk, not an ending war.</strong></div></div>
-  </div>
-</section>
-
-<!-- ============ 10. TOP FIVE WARNING SIGNS ============ -->
-<section id="warnings">
-  <div class="sec-head"><div class="sec-num">10</div><h2>Top Five Warning Signs</h2></div>
-  <p class="sec-sub">Ranked by fresh impact on UK business energy risk — 31 July 2026</p>
-  <div class="warn-row"><div class="warn-rank">1</div><div>
-    <div class="t">Kataib Hezbollah has created a 7-day countdown risk</div>
-    <div class="b">The biggest fresh warning sign is the Iraq countdown risk. A deadline to 6 August with an "inevitable" response promised is exactly the type of risk suppliers can price quickly — before anything physical happens.</div></div></div>
-  <div class="warn-row"><div class="warn-rank">2</div><div>
-    <div class="t">Iraq may become a retaliation platform after US-Saudi strikes</div>
-    <div class="b">20 PMF dead, 32 wounded, four IRGC advisers killed. Reuters assesses Iraq-based coordination in the attacks on Saudi oil facilities. Things are spreading out geographically, and that is a bad sign for energy risk.</div></div></div>
-  <div class="warn-row"><div class="warn-rank">3</div><div>
-    <div class="t">Saudi oil infrastructure could be targeted again from Iraq or Yemen</div>
-    <div class="b">Eastern Province facilities — the kingdom's main crude hub — were among this week's targets. Riyadh has warned of further military action if attacks continue. A sustained hit on Saudi export capacity is a global price event, not a regional one.</div></div></div>
-  <div class="warn-row"><div class="warn-rank">4</div><div>
-    <div class="t">Hormuz remains unresolved and LNG movement is not normal</div>
-    <div class="b">Five commodity ships on Tuesday. IRGC claims tanker strikes; Iran rejected Oman's 50-50 lane plan; the US "steel wall" blockade has redirected 18 commercial vessels. Hormuz may be moving, but moving is not the same as normal — and LNG confidence is what UK winter pricing leans on.</div></div></div>
-  <div class="warn-row"><div class="warn-rank">5</div><div>
-    <div class="t">Egypt / Suez gas-vessel risk widens the route and insurance map</div>
-    <div class="b">The unclaimed Damietta drone strike on two LNG vessels adds a third theatre to Hormuz and Bab el-Mandeb. Canal-area strikes raise war-risk premiums and supplier caution even without a closure.</div></div></div>
-  <div class="card">
-    <div class="quote">Lower oil does not remove the warning signs. Relief pricing is not the same as route normalisation. Supplier books may still catch up with recent wholesale movement — and the forward-value gap versus W-26 can disappear faster than it arrived.</div>
-  </div>
-</section>
-
-<!-- ============ 11. WHAT CHANGED ============ -->
-<section id="whatchanged">
-  <div class="sec-head"><div class="sec-num">11</div><h2>What Changed</h2></div>
-  <p class="sec-sub">How the market story moved across the research window</p>
-  <div class="grid g2">
-    <div class="card">
-      <h3>Earlier in the Week — Flow Relief</h3>
-      <ul class="clean">
-        <li>Oil eased hard from the 23 July peak ($100.69) to $84.09 (28 Jul) as more supplies were observed moving through chokepoints and a brief pause took hold around 25 July.</li>
-        <li>Gas and TTF gave back part of the spike — NBP fell 3.9% on 30 July — but stayed sharply up month-on-month and year-on-year.</li>
-        <li>The customer risk through the dip remained supplier lag: books do not fall as fast as wholesale.</li>
+  <div class="grid2">
+    <div class="card tight">
+      <h3 style="margin-top:0">Where the value sits</h3>
+      <ul class="clean" style="margin-bottom:0;font-size:.9rem">
+        <li><strong style="color:#fff">2027 gas</strong> (avg S-27/W-27): 93.38 p/th — 34.6% under W-26, but still ~19% above 1 Year Ago. Value, not a bargain.</li>
+        <li><strong style="color:#fff">2028 gas</strong> (avg S-28/W-28): 72.00 p/th — the pivot year, roughly half the front winter and essentially level with last year.</li>
+        <li><strong style="color:#fff">2029–2030 gas</strong>: 61.80–71.88 p/th, with S-30 below its 1 Year Ago print — the deepest value on the board.</li>
+        <li><strong style="color:#fff">Power S-28</strong> at 64.75 £/MWh is below its own year-ago level — the standout power season.</li>
       </ul>
     </div>
-    <div class="card">
-      <h3>Overnight / 29–30 July — Iraq Countdown Risk</h3>
-      <ul class="clean">
-        <li>Iranian ballistic missiles targeted at US bases in Jordan were intercepted; Trump vowed to hit Iran "hard"; the US launched a heavy wave of strikes across Iran.</li>
-        <li>Joint US-Saudi strikes hit PMF sites across seven Iraqi provinces: at least 20 killed, 32 wounded; four IRGC advisers among the dead.</li>
-        <li>Kataib Hezbollah gave Baghdad until 6 August to prove it can defend Iraq's sovereignty and called a response "inevitable".</li>
-        <li>Iraq's National Security Council condemned the strikes as a "flagrant violation of sovereignty" — the state's position and the militias' position are not the same thing.</li>
-        <li>Reuters: Yemen's Houthis attacked Saudi Arabia from Iraqi territory in coordination with Iraqi armed groups — assessments differ from official accounts.</li>
+    <div class="card tight">
+      <h3 style="margin-top:0">How to use it</h3>
+      <p style="font-size:.9rem">A customer renewing an October 2026 start has no choice but to pay the W-26 premium. A customer renewing for April 2027 or October 2028 starts can lock seasons priced a third to a half below that premium. Blending terms — a shorter fix for the front, longer cover for 2028–2030 — captures the backwardation rather than suffering it.</p>
+      <p style="margin-bottom:0;font-size:.9rem">The 1 Year Ago line is context only. It shows how far the front has been dragged up by the conflict; those prices are gone and cannot be recovered by waiting for them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 07 PROCUREMENT WINDOW -->
+<section id="procurement-window">
+  <h2><span class="num">07</span>Procurement Window</h2>
+  <p>Different renewal dates face very different curves. The window judgement below uses the supplied internal seasons plus the verified market backdrop — diplomacy headlines are suppressing prices while route risk, storage tightness and the 06/08 deadline keep upside risk alive.</p>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th class="label">Renewal position</th><th>Curve exposure</th><th>Window judgement</th><th>Recommended stance</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label">Out of contract / deemed rates</td>
+          <td>Immediate exposure to the most expensive part of the market</td>
+          <td><span class="chip-down">Act now</span></td>
+          <td>Deemed and variable rates sit above any fixed season on the board. Move to a fixed contract immediately; even W-26 beats unpriced exposure in an incident-driven market.</td>
+        </tr>
+        <tr>
+          <td class="label">Renewing Oct 2026 – Mar 2027 (W-26)</td>
+          <td>Front winter: 142.75 p/th gas, 122.50 £/MWh power</td>
+          <td><span class="chip-down">Short fuse</span></td>
+          <td>You are buying the conflict premium. Consider a shorter front fix and avoid locking the premium for longer than necessary — but do not float into winter unhedged while Hormuz incidents continue.</td>
+        </tr>
+        <tr>
+          <td class="label">Renewing Apr – Sep 2027 (S-27)</td>
+          <td>93.75 p/th gas (-34.3% vs W-26); 84.00 £/MWh power (-31.4%)</td>
+          <td><span class="chip-up">Open now</span></td>
+          <td>Strong relative value versus the front. Secure while diplomacy suppresses prices — this season reprices fast on any talks failure.</td>
+        </tr>
+        <tr>
+          <td class="label">Renewing Oct 2027 – 2028 (W-27 / S-28 / W-28)</td>
+          <td>Gas 68.00–93.00 p/th; power 64.75–85.50 £/MWh</td>
+          <td><span class="chip-up">Best window</span></td>
+          <td>The sweet spot: roughly half the front-winter premium, near or below year-ago levels. Candidates for 2–3 year fixes that sweep up 2028 value.</td>
+        </tr>
+        <tr>
+          <td class="label">Renewing 2029 – 2030 starts</td>
+          <td>Gas 61.80–71.88 p/th; power S-29 62.25 £/MWh (W-29/S-30 power not supplied)</td>
+          <td><span class="chip-up">Strategic layer</span></td>
+          <td>For larger or budget-certain portfolios, layering 2029–2030 now locks seasons priced below their own year-ago prints — insurance against a multi-year risk premium.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note amber"><strong style="color:#fff">Timing risk is asymmetric.</strong> A signed final deal would soften the front most and the far curve least. A failed talks round or a fresh tanker strike lifts the far curve fastest. Waiting carries more downside than acting carries regret.</div>
+</section>
+
+<!-- 08 BRITISH GAS WINDOW -->
+<section id="british-gas-window">
+  <h2><span class="num">08</span>British Gas 18-Month Window</h2>
+  <div class="card">
+    <span class="tag warn">Verification note</span>
+    <p style="margin-top:6px"><strong style="color:#fff">The 18-month renewal window could not be verified in this research run and should not be quoted to customers as fact.</strong> British Gas's official business renewal guidance currently states that renewal quotes are available <strong style="color:#fff">up to 12 months</strong> ahead, with a formal renewal offer issued around 60–70 days before contract end.<a class="cite" href="#s42">[S42]</a></p>
+    <p>Until internal confirmation of an 18-month arrangement is on file, treat any 18-month British Gas quoting ability as unverified. If your channel has bespoke evidence of an 18-month window, supply it and this section will be updated to reflect it.</p>
+  </div>
+  <div class="grid2">
+    <div class="card tight">
+      <h3 style="margin-top:0">What is verified (official source)</h3>
+      <ul class="clean" style="margin-bottom:0;font-size:.9rem">
+        <li>Business renewal quotes available up to 12 months before contract end.<a class="cite" href="#s42">[S42]</a></li>
+        <li>Formal renewal offer typically arrives ~60–70 days before the end date.<a class="cite" href="#s42">[S42]</a></li>
+        <li>Renewal pricing reflects the supplier's forward purchasing — it moves with the curve, with a lag.</li>
       </ul>
     </div>
-    <div class="card">
-      <h3>This Morning — Risk Map Widens</h3>
-      <ul class="clean">
-        <li>Hormuz remains the structural risk: thin traffic, IRGC tanker-strike claims, no agreed lane mechanism.</li>
-        <li>Bab el-Mandeb is open but risky: 37 transits Tuesday, none of them VLCCs or LNG tankers; a Houthi blockade on Saudi-linked shipping is declared.</li>
-        <li>Egypt / Suez is now a live gas-vessel risk after the Damietta drone strike.</li>
-        <li>Saudi energy infrastructure is a key target set — and Saudi is assembling a 14-nation-backed Red Sea coalition in response.</li>
-        <li>Supplier books may still reprice on all of the above.</li>
+    <div class="card tight">
+      <h3 style="margin-top:0">Why it matters this week</h3>
+      <p style="margin-bottom:0;font-size:.9rem">A 12-month-ahead renewal window from today reaches into <strong style="color:#fff">S-27 / W-27</strong> — exactly the seasons offering 30–35% value versus the front winter on your supplied curve. Even the verified window is wide enough to capture the backwardation. Customers with British Gas contracts ending within 12 months should request renewal quotes now and compare them against the live offered range rather than waiting for the 60-day letter.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 09 MARKET DRIVERS -->
+<section id="market-drivers">
+  <h2><span class="num">09</span>Market Drivers</h2>
+  <div class="grid3">
+    <div class="card tight">
+      <div class="kpi-sub">Diplomacy vs escalation</div>
+      <p style="font-size:.88rem;margin-bottom:0">Talks resume today with strikes paused, but the interim framework is strained and previous pauses have broken down. Every headline moves the front of the curve first.<a class="cite" href="#s10">[S10]</a><a class="cite" href="#s11">[S11]</a><a class="cite" href="#s12">[S12]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">Hormuz route risk</div>
+      <p style="font-size:.88rem;margin-bottom:0">Around a fifth of traded oil and LNG normally transits the strait. Traffic is moving but reduced, and UKMTO logged fresh tanker attacks across 31 Jul–1 Aug.<a class="cite" href="#s15">[S15]</a><a class="cite" href="#s16">[S16]</a><a class="cite" href="#s17">[S17]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">Bab el-Mandeb militarisation</div>
+      <p style="font-size:.88rem;margin-bottom:0">A Saudi-led 13-nation maritime coalition is forming for the Red Sea corridor; the Houthis threaten "full escalation" and have struck Saudi energy assets directly.<a class="cite" href="#s25">[S25]</a><a class="cite" href="#s26">[S26]</a><a class="cite" href="#s19">[S19]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">Iraq spillover &amp; 06/08 deadline</div>
+      <p style="font-size:.88rem;margin-bottom:0">US–Saudi strikes on Iran-backed militias in Iraq (PMF: 20 killed) triggered Kataib Hezbollah's "inevitable response" pledge and a 06/08 sovereignty deadline.<a class="cite" href="#s20">[S20]</a><a class="cite" href="#s21">[S21]</a><a class="cite" href="#s22">[S22]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">OPEC+ supply response</div>
+      <p style="font-size:.88rem;margin-bottom:0">A 188,000 bpd September quota increase adds barrels into a nervous market — bearish for oil, but it does nothing for LNG transit risk.<a class="cite" href="#s46">[S46]</a><a class="cite" href="#s47">[S47]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">European storage position</div>
+      <p style="font-size:.88rem;margin-bottom:0">EU storage ~55% full, ~12pp below seasonal norm; refill pace only just on track for the relaxed 80% November target. ACER says hitting target needs LNG imports up ~13% on 2025 — exposed to Hormuz/Qatar flows.<a class="cite" href="#s29">[S29]</a><a class="cite" href="#s31">[S31]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">Second supply-risk theatre: CPC</div>
+      <p style="font-size:.88rem;margin-bottom:0">Kazakhstan's CPC route — over 80% of its crude exports — halted again on 30 Jul after renewed tanker attacks near Novorossiysk, days after resuming.<a class="cite" href="#s27">[S27]</a><a class="cite" href="#s28">[S28]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">Damietta LNG incident</div>
+      <p style="font-size:.88rem;margin-bottom:0">Drone strikes hit a US-owned LNG tanker at Egypt's Damietta port; no responsibility claimed. Eastern Mediterranean LNG infrastructure is now inside the risk map.<a class="cite" href="#s23">[S23]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">UK system &amp; retail backdrop</div>
+      <p style="font-size:.88rem;margin-bottom:0">NESO's first summer margin notices (Jun/Jul, withdrawn) show a tighter peak system; the domestic price cap rose 13% in July on wholesale gas costs — the conflict is already in UK bills.<a class="cite" href="#s32">[S32]</a><a class="cite" href="#s34">[S34]</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 WARNING SIGNS -->
+<section id="warning-signs">
+  <h2><span class="num">10</span>Top Five Warning Signs</h2>
+  <div class="card">
+    <ol class="numbered" style="margin-bottom:0">
+      <li><strong style="color:#fff">Talks fail or slip.</strong> Today's expected round is the market's relief valve. A collapse, walkout or return to strikes reverses the week's oil softness and re-bids the whole gas curve within hours.<a class="cite" href="#s10">[S10]</a></li>
+      <li><strong style="color:#fff">The 06/08 Kataib Hezbollah deadline passes with action.</strong> An "inevitable" response against US/Saudi-linked targets in Iraq or against Gulf energy assets would reopen the escalation ladder three days from now.<a class="cite" href="#s21">[S21]</a><a class="cite" href="#s22">[S22]</a></li>
+      <li><strong style="color:#fff">Another Hormuz or Oman-coast tanker strike.</strong> Two UKMTO warnings in 24 hours across 31 Jul–1 Aug, with Reuters reporting a third attack since Saturday. One casualty event or an LNG carrier hit changes insurance and routing economics immediately.<a class="cite" href="#s15">[S15]</a><a class="cite" href="#s18">[S18]</a></li>
+      <li><strong style="color:#fff">Bab el-Mandeb escalation.</strong> The Houthi "full escalation" vow against the new Saudi-led coalition puts the Red Sea route — and Saudi energy infrastructure — back in the line of fire.<a class="cite" href="#s26">[S26]</a><a class="cite" href="#s19">[S19]</a></li>
+      <li><strong style="color:#fff">Storage refill stalls into autumn.</strong> At ~55% full and ~12pp below norm, Europe has little slack. A hot August, weak LNG arrivals or a Norwegian outage sequence would tighten winter balances with the relaxed 80% target already at the edge of reach.<a class="cite" href="#s29">[S29]</a><a class="cite" href="#s31">[S31]</a></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 11 WHAT CHANGED -->
+<section id="what-changed">
+  <h2><span class="num">11</span>What Changed</h2>
+  <p>Measured against the previous update and the start of the extended verification window (27/07/2026).</p>
+  <div class="grid2">
+    <div class="card tight">
+      <h3 style="margin-top:0">Market prices</h3>
+      <ul class="clean" style="margin-bottom:0;font-size:.9rem">
+        <li><strong style="color:#fff">Internal gas curve:</strong> front eased on diplomacy while the far curve firmed — W-26 <span class="chip-down">-0.75</span> to 142.75 p/th, S-27 <span class="chip-down">-2.75</span> to 93.75, while W-29 rose <span class="chip-up">+1.10</span> to 71.88 and S-30 <span class="chip-up">+0.73</span> to 63.08 (Thu 30 Jul AM → Fri 31 Jul AM).</li>
+        <li><strong style="color:#fff">Internal power curve:</strong> softened almost across the board — W-26 <span class="chip-down">-1.50</span> to 122.50, W-27 <span class="chip-down">-0.50</span>, W-28 <span class="chip-down">-0.05</span>; only S-29 firmed <span class="chip-up">+0.50</span> £/MWh.</li>
+        <li><strong style="color:#fff">Brent:</strong> fell more than $4 early in the week on diplomacy (96.78 → 84.09), then settled 31 Jul at $90.12 — strongest month since March.<a class="cite" href="#s8">[S8]</a><a class="cite" href="#s14">[S14]</a></li>
+        <li><strong style="color:#fff">OPEC+:</strong> approved a 188,000 bpd September quota increase.<a class="cite" href="#s46">[S46]</a></li>
       </ul>
     </div>
-    <div class="card">
-      <h3>Customer Impact</h3>
-      <ul class="clean">
-        <li>Do not treat short-term price relief as safety — the story changed, but the risk did not disappear.</li>
-        <li>Forward-value gaps against W-26 should be checked while available: S-29 gas at -56.8%, S-29 power at -47.6%.</li>
-        <li>The 1 Year Ago lines show the curve has already moved compared with last year — waiting has a documented cost.</li>
-        <li>The market can ease on flow data and still remain exposed to escalation risk.</li>
+    <div class="card tight">
+      <h3 style="margin-top:0">Geopolitics &amp; shipping</h3>
+      <ul class="clean" style="margin-bottom:0;font-size:.9rem">
+        <li><strong style="color:#fff">Talks back on:</strong> US–Iran talks expected to resume today; Trump held off fresh strikes. No final deal.<a class="cite" href="#s10">[S10]</a><a class="cite" href="#s12">[S12]</a></li>
+        <li><strong style="color:#fff">Weekend tanker attacks:</strong> UKMTO warnings 101-26 and 102-26 (31 Jul–1 Aug, off Oman); JMIC Update 079 issued; a further incident reported into the weekend.<a class="cite" href="#s15">[S15]</a><a class="cite" href="#s18">[S18]</a></li>
+        <li><strong style="color:#fff">Red Sea coalition:</strong> Saudi Arabia and 13 states announced a Bab el-Mandeb maritime defence coalition; Houthis vowed "full escalation".<a class="cite" href="#s25">[S25]</a><a class="cite" href="#s26">[S26]</a></li>
+        <li><strong style="color:#fff">Iraq escalation:</strong> US–Saudi strikes on Tehran-backed militias; PMF reported 20 killed, 32 wounded; Kataib Hezbollah set a 06/08 deadline.<a class="cite" href="#s20">[S20]</a><a class="cite" href="#s21">[S21]</a></li>
+        <li><strong style="color:#fff">CPC halted again:</strong> loadings suspended 30 Jul after two more tanker attacks — three days after resuming.<a class="cite" href="#s28">[S28]</a></li>
       </ul>
     </div>
   </div>
 </section>
 
-<!-- ============ 12. TIMELINE ============ -->
+<!-- 12 TIMELINE -->
 <section id="timeline">
-  <div class="sec-head"><div class="sec-num">12</div><h2>Timeline</h2></div>
-  <p class="sec-sub">Key events inside the extended verification window (24–31 July 2026)</p>
+  <h2><span class="num">12</span>Timeline</h2>
   <div class="card">
-    <div class="tl">
-      <div class="tl-item"><div class="tl-date">23 July</div><div class="t">Brent peaks at $100.69; Houthis strike two Saudi tankers</div>
-        <div class="b">Oil tops $100 as Red Sea risk escalates. <strong>Why it mattered:</strong> set the week's high-water mark for the war premium. <strong>Commercial:</strong> the spike is what supplier books anchor on.</div></div>
-      <div class="tl-item"><div class="tl-date">24–25 July</div><div class="t">Brief pause takes hold; oil starts falling</div>
-        <div class="b">US and Iran pause direct strikes around 25 Jul; Brent slides to $96.78 (24 Jul). <strong>Why it mattered:</strong> markets priced clean de-escalation. <strong>Commercial:</strong> relief pricing — temporary by design.</div></div>
-      <div class="tl-item"><div class="tl-date">27 July</div><div class="t">Attacks on Saudi oil fields; CPC resumes loadings</div>
-        <div class="b">Saudi oil facilities attacked — later assessed as involving Iraq-based activity. Kazakhstan restarts CPC loadings at Novorossiysk after the Black Sea suspension. <strong>Commercial:</strong> one supply risk eases, a bigger one ignites.</div></div>
-      <div class="tl-item"><div class="tl-date">28 July</div><div class="t">Iranian missiles intercepted over Jordan; Hormuz at 5 ships; Bab el-Mandeb at 37</div>
-        <div class="b">Five Iranian missiles aimed at US forces in Jordan intercepted; IRGC claims strikes on three Hormuz tankers; Iran rejects Oman's 50-50 lane plan. Brent bottoms at $84.09. <strong>Commercial:</strong> the pause cracked — the market could no longer price it as clean de-escalation.</div></div>
-      <div class="tl-item"><div class="tl-date">29 July</div><div class="t">US-Saudi strikes in Iraq; Kataib Hezbollah sets 6 August deadline; Damietta drone strike</div>
-        <div class="b">20 PMF killed, 32 wounded, four IRGC advisers dead across seven provinces; Iraq condemns "flagrant violation of sovereignty"; drone hits FSRU Energos Winter and LNG carrier Gaslog Salem at Damietta — unclaimed. Brent rebounds to $90.74. <strong>Commercial:</strong> countdown risk created; route risk widened to the Mediterranean.</div></div>
-      <div class="tl-item"><div class="tl-date">30 July</div><div class="t">Reuters exclusive: Houthis attacking Saudi from Iraq; Saudi builds Red Sea coalition</div>
-        <div class="b">Regional assessments tie Iraq-based activity to the Eastern Province attacks under IRGC supervision; Saudi MoD meets ~50 countries, 14 affirm support for a maritime coalition. NBP settles ~142 p/th, TTF eases toward €58. <strong>Commercial:</strong> escalation and relief signals coexist — suppliers read the escalation.</div></div>
-      <div class="tl-item"><div class="tl-date">31 July</div><div class="t">Report morning: countdown live, curve backwardated, window open but fragile</div>
-        <div class="b">Supplied internal rates (Wed 29 Jul AM) hold deep backwardation: S-29 gas -56.8%, S-29 power -47.6% vs W-26. <strong>Commercial:</strong> review-now window — test future-start pricing before the 6 August deadline reprices the curve.</div></div>
+    <div class="timeline-item">
+      <div class="t-date">Mon 27 Jul</div>
+      Kazakhstan resumed CPC crude exports after a week-long Black Sea shutdown; the US–Iran strike pause held into its third day. Brent settled $88.36.<a class="cite" href="#s27">[S27]</a><a class="cite" href="#s8">[S8]</a>
+    </div>
+    <div class="timeline-item">
+      <div class="t-date">Tue 28 Jul</div>
+      Oil slid to $84.09 as diplomacy hopes built — the week's relief-pricing low.<a class="cite" href="#s8">[S8]</a>
+    </div>
+    <div class="timeline-item">
+      <div class="t-date">Wed 29 Jul</div>
+      US and Saudi forces struck Iran-backed militia targets in Iraq. Brent recovered to $90.74.<a class="cite" href="#s20">[S20]</a><a class="cite" href="#s8">[S8]</a>
+    </div>
+    <div class="timeline-item">
+      <div class="t-date">Thu 30 Jul</div>
+      Saudi Arabia announced a 13-country maritime defence coalition for Bab el-Mandeb. Kataib Hezbollah promised an "inevitable" response and set its 06/08 deadline. CPC halted loadings again after two more tanker attacks near Novorossiysk. <strong style="color:#fff">Internal market table: "Thu 30 Jul AM"</strong> snapshot taken (previous column in Sections 03/04).<a class="cite" href="#s25">[S25]</a><a class="cite" href="#s21">[S21]</a><a class="cite" href="#s28">[S28]</a>
+    </div>
+    <div class="timeline-item">
+      <div class="t-date">Fri 31 Jul</div>
+      Houthi leader Abdul-Malik al-Houthi threatened "full escalation" against Saudi Arabia. UKMTO warning 101-26: tanker struck by an unknown projectile off Lima, Oman, engine-room damage. <strong style="color:#fff">Internal market table: "Fri 31 Jul AM"</strong> snapshot (latest column) — the front winter eased on the diplomacy track while the far curve firmed. Brent settled $90.12, +1.2%, capping oil's strongest month since March.<a class="cite" href="#s26">[S26]</a><a class="cite" href="#s16">[S16]</a><a class="cite" href="#s14">[S14]</a>
+    </div>
+    <div class="timeline-item">
+      <div class="t-date">Sat 1 Aug</div>
+      UKMTO warning 102-26: second tanker incident in the Oman approaches. OPEC+ approved the 188,000 bpd September increase over the weekend.<a class="cite" href="#s17">[S17]</a><a class="cite" href="#s46">[S46]</a><a class="cite" href="#s47">[S47]</a>
+    </div>
+    <div class="timeline-item">
+      <div class="t-date">Sun 2 Aug</div>
+      JMIC published Update 079 covering the weekend's Hormuz-area incidents; Reuters reported UKMTO had logged three tanker attacks since Saturday, with a further strike shown on UKMTO's channel.<a class="cite" href="#s15">[S15]</a><a class="cite" href="#s18">[S18]</a>
+    </div>
+    <div class="timeline-item">
+      <div class="t-date">Mon 3 Aug — today</div>
+      US–Iran talks expected to resume. No final deal confirmed at publication. Kataib Hezbollah's 06/08 deadline three days away.<a class="cite" href="#s10">[S10]</a><a class="cite" href="#s12">[S12]</a>
     </div>
   </div>
 </section>
 
-<!-- ============ 13. RHETORIC TRACKER ============ -->
-<section id="rhetoric">
-  <div class="sec-head"><div class="sec-num">13</div><h2>Rhetoric Tracker</h2></div>
-  <p class="sec-sub">Current statements only — statement vs verified fact vs commercial meaning</p>
-  <div class="card">
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>Actor</th><th>Statement</th><th>Verification Status</th><th>Commercial Meaning</th></tr></thead>
-        <tbody>
-          <tr><td>Kataib Hezbollah</td><td>Gives government until 6 Aug to prove sovereignty defence; response "inevitable"; could target US "tools" in Saudi Arabia.</td><td>Verified — group statement reported by Al Jazeera / AFP and others.</td><td>Dated countdown = priced immediately.</td></tr>
-          <tr><td>Iraq National Security Council</td><td>Strikes a "flagrant violation of sovereignty"; "any transgression... will not be tolerated"; approves comprehensive security plan.</td><td>Verified — official statement via Iraqi News Agency / PMO.</td><td>State-level escalation language without military retaliation — for now.</td></tr>
-          <tr><td>PMF</td><td>At least 20 members killed, 32 wounded; headquarters hit.</td><td>Verified casualty figures via PMF sources to AFP/AP; AP reports Iraq under pressure to bring armed groups under state control.</td><td>Pressure to disarm rises; powerful factions refuse.</td></tr>
-          <tr><td>Islamic Resistance in Iraq</td><td>Denies role in attacks on Saudi Arabia; calls claims "fabrications"; warns of "harsh response".</td><td>Statement only — conflicts with Reuters-sourced regional assessments.</td><td>Denial does not remove launch-platform risk.</td></tr>
-          <tr><td>Trump / White House</td><td>US will hit Iran "hard"; "they're going to get a beating"; also claims "good talks" and a chance of agreement.</td><td>Verified statements (Fox News interview; press remarks).</td><td>Escalation and negotiation in the same breath — volatility fuel.</td></tr>
-          <tr><td>CENTCOM</td><td>Strikes hit "multiple terrorist logistics and weapons sites across eastern Iraq" in response to "over 30 IRGC-directed aerial drone attacks in the last 72 hours"; "steel wall" blockade has redirected 18 vessels, disabled 2, boarded 2.</td><td>Verified — official CENTCOM statements.</td><td>US framing: defensive, targeted — but sustained.</td></tr>
-          <tr><td>Hegseth / Pentagon</td><td>War cost $37.5bn so far incl. projected costs through 30 Sep; requests $67.1bn more; $1.5tn 2027 budget defended.</td><td>Verified — Senate Appropriations testimony, 21 Jul.</td><td>Funding scale signals duration risk.</td></tr>
-          <tr><td>Iran / IRGC</td><td>Foreign ministry condemns Iraq strikes as "gross violation"; IRGC claims strikes on three tankers that "ignored warnings"; Khatam al-Anbiya commander: one American "sent to hell" per Iranian killed.</td><td>Statements verified; tanker-strike claim is IRGC-sourced — treat as claim until independently confirmed.</td><td>Revenge language keeps the premium bid.</td></tr>
-          <tr><td>Houthis</td><td>Claim attacks on Saudi Arabia; declare naval blockade on Saudi-linked shipping through Bab el-Mandeb; claim ballistic-missile fire at a Saudi oil tanker.</td><td>Claims verified as made; Saudi confirms interceptions and one vessel (NCC Masa) with minor damage.</td><td>Red Sea stays a route-risk market.</td></tr>
-          <tr><td>Saudi Arabia</td><td>Strikes were self-defence under Article 51 after drones "launched from Iraqi territory"; warns of further action; MoD hosts ~50 nations for coalition, 14 affirm support.</td><td>Verified — Saudi MoD statements and embassy posts.</td><td>Riyadh is building the architecture for a longer fight.</td></tr>
-          <tr><td>Jordan</td><td>Army announces intercepting five missiles; target was US forces in Jordan — not "Iran attacking Jordan".</td><td>Verified — Jordanian army statement.</td><td>Precision matters in customer conversations.</td></tr>
-          <tr><td>Egypt</td><td>PM's Office confirms drone caused Damietta fires; no party has claimed responsibility; investigations continue.</td><td>Verified — official statement.</td><td>Unclaimed = premium without attribution.</td></tr>
-          <tr><td>Oman / Pakistan / Qatar</td><td>Oman proposed joint Hormuz management with voluntary fees (rejected by Iran); Pakistan exploring restart of US-Iran talks after China's push; Omani delegation in Tehran.</td><td>Verified reporting (Reuters / Iran International).</td><td>Channels open; delivery absent.</td></tr>
-        </tbody>
-      </table>
+<!-- 13 RHETORIC TRACKER -->
+<section id="rhetoric-tracker">
+  <h2><span class="num">13</span>Rhetoric Tracker</h2>
+  <p>What key actors are saying versus what the market is doing. Statements are reported positions, not verified intentions.</p>
+  <div class="grid2">
+    <div class="card tight">
+      <div class="kpi-sub">United States</div>
+      <div class="rhetoric-quote">"All options remain on the table" — while holding off fresh strikes and pushing the talks track.</div>
+      <p style="font-size:.86rem;margin-bottom:0">Reported posture: diplomacy-first this week, with the cancelled-strike decision framed as deal-seeking rather than de-escalation.<a class="cite" href="#s10">[S10]</a><a class="cite" href="#s11">[S11]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">Iran</div>
+      <div class="rhetoric-quote">Approved-route messaging: only transit through Tehran's sanctioned channel is "safe".</div>
+      <p style="font-size:.86rem;margin-bottom:0">Iranian state media commentary around the Oman-coast tanker incidents maintained the route-control narrative without formally claiming the attacks.<a class="cite" href="#s15">[S15]</a><a class="cite" href="#s18">[S18]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">Houthis (Ansar Allah)</div>
+      <div class="rhetoric-quote">"We will respond to its full escalation with full escalation."</div>
+      <p style="font-size:.86rem;margin-bottom:0">Abdul-Malik al-Houthi, 31 Jul, responding to Saudi Arabia's coalition announcement. Denied acting as an Iranian proxy while threatening Saudi assets and Turkish-supplied aircraft.<a class="cite" href="#s26">[S26]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">Kataib Hezbollah (Iraq)</div>
+      <div class="rhetoric-quote">Response to the US–Saudi strikes is "inevitable"; 06/08 set as a sovereignty deadline.</div>
+      <p style="font-size:.86rem;margin-bottom:0">A Kataib Hezbollah position — not verified as the position of the wider Popular Mobilisation Forces. Distinct from Lebanese Hezbollah.<a class="cite" href="#s21">[S21]</a><a class="cite" href="#s22">[S22]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">Saudi Arabia</div>
+      <div class="rhetoric-quote">Coalition-builder: 13-nation maritime defence alliance for Bab el-Mandeb with a permanent HQ.</div>
+      <p style="font-size:.86rem;margin-bottom:0">Riyadh is simultaneously striking Tehran-backed militias in Iraq (with the US) and organising Red Sea convoy protection — an active, not neutral, posture.<a class="cite" href="#s24">[S24]</a><a class="cite" href="#s25">[S25]</a></p>
+    </div>
+    <div class="card tight">
+      <div class="kpi-sub">OPEC+</div>
+      <div class="rhetoric-quote">Supply reassurance: 188,000 bpd September quota increase.</div>
+      <p style="font-size:.86rem;margin-bottom:0">The producer group is leaning against conflict-driven price strength with incremental supply — bearish crude, but silent on LNG transit risk.<a class="cite" href="#s46">[S46]</a><a class="cite" href="#s47">[S47]</a></p>
     </div>
   </div>
 </section>
 
-<!-- ============ 14. CEASEFIRE REALITY CHECK ============ -->
-<section id="ceasefire">
-  <div class="sec-head"><div class="sec-num">14</div><h2>Ceasefire Reality Check</h2></div>
-  <p class="sec-sub">Diplomacy discussed is not de-escalation delivered</p>
+<!-- 14 CEASEFIRE REALITY CHECK -->
+<section id="ceasefire-check">
+  <h2><span class="num">14</span>Ceasefire Reality Check</h2>
   <div class="card">
-    <p class="lead">The fragile US-Iran ceasefire collapsed earlier this month, and both sides have been carrying out daily strikes. The brief pause around 25 July was shattered within days by the Jordan intercept, the US-Saudi strikes in Iraq and the Damietta drone attack.</p>
+    <h3 style="margin-top:0">What is actually in place</h3>
     <ul class="clean">
-      <li><strong>The pause has cracked, but that does not mean diplomacy is dead.</strong> It means the market can no longer price the pause as clean de-escalation.</li>
-      <li><strong>Fresh countdown risk in Iraq means the market has to price renewed uncertainty, even if talks continue in the background.</strong></li>
-      <li><strong>Talks being alive is better than collapse, but no breakthrough is not implementation.</strong> Oman, Pakistan and Qatar channels are active; Iran rejected the 50-50 Hormuz lane plan and tabled its own proposal instead.</li>
-      <li><strong>Oil can move on mediation headlines, but shipping confidence is what matters for supplier pricing.</strong> Route normalisation matters more than political optimism.</li>
-      <li><strong>Do not confuse diplomacy being discussed with de-escalation being delivered.</strong> Trump's "good talks" claim and Araghchi's "breach of commitments" accusation were made in the same week.</li>
+      <li>A <strong style="color:#fff">pause on direct US–Iran strikes</strong>, in place since late July and described in reporting as fragile and conditional — not a ceasefire treaty.<a class="cite" href="#s10">[S10]</a><a class="cite" href="#s29">[S29]</a></li>
+      <li>An <strong style="color:#fff">interim framework</strong> under strain: the US previously revoked the temporary Iranian-oil sanctions waiver after tanker attacks, and talks have already been suspended and resumed more than once.<a class="cite" href="#s11">[S11]</a></li>
+      <li><strong style="color:#fff">Talks expected to resume today (03/08)</strong> with the White House holding off further strikes to give the track a chance.<a class="cite" href="#s10">[S10]</a><a class="cite" href="#s12">[S12]</a></li>
+    </ul>
+    <h3>What is not in place</h3>
+    <ul class="clean">
+      <li><strong style="color:#fff">No final deal.</strong> Nothing signed, no verified text, no implementation timeline. Any claim of a done deal is unverified at publication.<a class="cite" href="#s12">[S12]</a></li>
+      <li><strong style="color:#fff">No proxy pause.</strong> The strike pause covers US–Iran direct exchanges. It did not stop US–Saudi strikes in Iraq, Houthi threats, or weekend tanker incidents.<a class="cite" href="#s20">[S20]</a><a class="cite" href="#s26">[S26]</a></li>
+      <li><strong style="color:#fff">No normalisation of Hormuz.</strong> Traffic is moving but reduced and under active UKMTO warnings; Iran's approved-route regime still stands.<a class="cite" href="#s15">[S15]</a></li>
     </ul>
   </div>
+  <div class="verdict">Reality check: the market is trading a pause as if it were a settlement. A pause removes today's escalation; it does not remove the route risk, the proxy risk, or the 06/08 deadline. Relief pricing is reversible in a single session.</div>
 </section>
 
-<!-- ============ 15. SHIPPING RISK ============ -->
-<section id="shipping">
-  <div class="sec-head"><div class="sec-num">15</div><h2>Shipping Risk</h2></div>
-  <p class="sec-sub">Chokepoint-by-chokepoint status as at 31 July 2026</p>
-  <div class="card">
-    <h3>Strait of Hormuz</h3>
-    <p>Hormuz normally carries around one fifth of global crude oil and LNG shipments. On Tuesday only <strong>five commodity ships</strong> transited (three in, two out; one was the empty VLCC Nissos Kea). The IRGC claims its naval forces struck three oil tankers that "ignored warnings" — treat as a claim pending independent confirmation. Iran has rejected Oman's 50-50 lane-management plan and proposed routing one lane entirely through its own territorial waters. Meanwhile the US "steel wall blockade" had redirected 18 commercial vessels, disabled two and boarded two as of 28 July, and the US and UK are planning a Hormuz protection coalition.</p>
-    <div class="quote">Hormuz may be moving, but moving is not the same as normal. One LNG tanker moving does not mean LNG movement has normalised.</div>
-    <h3>Bab el-Mandeb / Red Sea</h3>
-    <p>Thirty-seven commodity ships transited on Tuesday — the highest since 19 July — but <strong>none were VLCCs or LNG tankers</strong>, and Monday saw just 11, the lowest in months. The Houthis have declared a naval blockade on Saudi-linked shipping, claimed ballistic-missile fire at a Saudi oil tanker, and struck two Saudi tankers on 23 July; the Saudi vessel NCC Masa took minor hull damage. Saudi Arabia's defence ministry met nearly 50 countries in Riyadh; 14 — including Turkey, Egypt, Pakistan and Nigeria — affirmed support for a maritime defence coalition covering Bab el-Mandeb, the Red Sea and the Gulf of Aden.</p>
-    <div class="quote">Bab el-Mandeb is not fully closed, but it is still a route-risk market. The Red Sea route is open, but it is not clean.</div>
-    <h3>Egypt / Suez / SUMED / Yanbu</h3>
-    <p>A drone struck the US-owned FSRU <em>Energos Winter</em> and the Greek-owned LNG carrier <em>Gaslog Salem</em> at Damietta on 29 July during cargo discharge; fires were brought under control, crews are safe, and both vessels were moved outside the port. Operations at unaffected berths were expected to resume overnight. No party has claimed responsibility and Egyptian authorities have not determined attribution — <strong>Egypt / Damietta attribution must be treated carefully unless a responsible actor is confirmed.</strong> Analysts note this is the first strike affecting Egypt's Mediterranean LNG infrastructure since the conflict intensified, and canal-area strikes could raise war-risk premiums for Suez transits.</p>
-    <div class="quote">Suez can help, but it is not a magic fix. Fully laden VLCCs are not a simple Suez solution. The workaround adds friction, and friction gets priced.</div>
-    <h3>Kazakhstan / CPC / Black Sea</h3>
-    <p>Kazakhstan resumed CPC loadings at Novorossiysk on 27 July after a suspension triggered by drone attacks on civilian vessels in the Black Sea. This is now a secondary supply-route issue — resumed, but explicitly conditional on the security situation.</p>
-    <h3>War-Risk Insurance</h3>
-    <p>With declared blockades, tanker strikes, a coalition in formation and an unclaimed drone attack on LNG infrastructure, war-risk premiums and freight costs remain elevated across the Gulf, Red Sea and now the Eastern Mediterranean. Insurance reprices faster than physical supply returns.</p>
+<!-- 15 SHIPPING RISK -->
+<section id="shipping-risk">
+  <h2><span class="num">15</span>Shipping Risk</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th class="label">Route</th><th>Status</th><th>Latest verified picture</th><th>Energy-market relevance</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label">Strait of Hormuz</td>
+          <td><span class="chip-down">Moving, not normal</span></td>
+          <td>Tanker crossings recently at their lowest since May; UKMTO warnings 101-26 and 102-26 across 31 Jul–1 Aug off Oman; JMIC Update 079 issued 02 Aug; a further incident reported into the weekend. Iran's approved-route regime remains in force.<a class="cite" href="#s15">[S15]</a><a class="cite" href="#s16">[S16]</a><a class="cite" href="#s17">[S17]</a><a class="cite" href="#s18">[S18]</a></td>
+          <td>~A fifth of traded oil and LNG transits in peacetime, including Qatar's LNG — Europe's marginal winter supply. Sustained attacks re-bid freight, insurance and the TTF/NBP front.</td>
+        </tr>
+        <tr>
+          <td class="label">Bab el-Mandeb / Red Sea</td>
+          <td><span class="chip-down">Open, route-risk market</span></td>
+          <td>Corridor remains open but militarised: Saudi-led 13-nation coalition announced 30–31 Jul; Houthis vow "full escalation"; Reuters reports Houthi attacks on Saudi Arabia launched from Iraqi territory in coordination with Iraqi groups (regional-official assessments).<a class="cite" href="#s25">[S25]</a><a class="cite" href="#s26">[S26]</a><a class="cite" href="#s19">[S19]</a></td>
+          <td>Suez-route LNG and container traffic reroutes around the Cape when risk spikes — longer voyages, higher delivered-LNG costs into Europe.</td>
+        </tr>
+        <tr>
+          <td class="label">Eastern Mediterranean (Damietta)</td>
+          <td><span class="chip-down">New incident zone</span></td>
+          <td>Drone strikes hit a US-owned LNG tanker at Egypt's Damietta port; UKMTO advisories 099-26/100-26; no responsibility claimed and attribution unverified.<a class="cite" href="#s23">[S23]</a></td>
+          <td>Expands the risk map beyond the two chokepoints to LNG liquefaction/export infrastructure itself.</td>
+        </tr>
+        <tr>
+          <td class="label">Black Sea (CPC / Novorossiysk)</td>
+          <td><span class="chip-down">Repeatedly interrupted</span></td>
+          <td>Separate theatre: CPC resumed 27 Jul after a week-long shutdown, then halted again 30 Jul after two more tanker attacks; Kazakh output roughly halved at the low point.<a class="cite" href="#s27">[S27]</a><a class="cite" href="#s28">[S28]</a></td>
+          <td>Over 80% of Kazakhstan's crude exports; >1m bpd was briefly removed — a parallel supply shock competing with Hormuz for market attention.</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+  <div class="note">War-risk insurance and freight assessments: elevated across the Gulf and Red Sea corridors — treat specific premium figures as market assessments unless sourced from a named broker circular; none was verified to a citable standard in this run.</div>
 </section>
 
-<!-- ============ 16. MARKET STATS ============ -->
-<section id="stats">
-  <div class="sec-head"><div class="sec-num">16</div><h2>Market Stats</h2></div>
-  <p class="sec-sub">Wholesale snapshot — verified public levels and supplied internal rates · 30–31 July 2026</p>
-  <div class="card">
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>Commodity / Market</th><th>Current Level</th><th>Forward Level</th><th>1 Year Ago</th><th>Condition</th><th>Commercial Comment</th></tr></thead>
-        <tbody>
-          <tr><td>NBP Day-Ahead Gas</td><td class="num">~142–146 p/th</td><td class="num">—</td><td class="num">~87 p/th (est.)</td><td>High, easing</td><td>+40.1% MoM, +64.1% YoY (TE benchmark 142.47, 30 Jul); ICE Aug-26 at 146.00 (29 Jul).</td></tr>
-          <tr><td>NBP Winter 2026 (supplied)</td><td class="num">142.50 p/th</td><td class="num">142.50</td><td class="num">91.25</td><td>War premium</td><td>Internal broker / supplier evidence — front season carries the risk premium.</td></tr>
-          <tr><td>NBP Summer 2027 (supplied)</td><td class="num">94.25 p/th</td><td class="num">94.25</td><td class="num">75.00</td><td>Backwardated</td><td>-33.9% vs W-26 — first value step-down.</td></tr>
-          <tr><td>NBP Summer 2028 (supplied)</td><td class="num">68.75 p/th</td><td class="num">68.75</td><td class="num">67.57</td><td>Deep value</td><td>-51.8% vs W-26; roughly flat vs 1 Year Ago.</td></tr>
-          <tr><td>NBP Summer 2029 (supplied)</td><td class="num">61.50 p/th</td><td class="num">61.50</td><td class="num">66.05</td><td>Deepest discount</td><td>-56.8% vs W-26 — strongest gas forward-value gap.</td></tr>
-          <tr><td>NBP Summer 2030 (supplied)</td><td class="num">61.99 p/th</td><td class="num">61.99</td><td class="num">66.26</td><td>Deep value</td><td>-56.5% vs W-26; 2030 delivery still priced as future.</td></tr>
-          <tr><td>UK Day-Ahead Power</td><td class="num">£123.87/MWh</td><td class="num">—</td><td class="num">Not verified</td><td>Elevated</td><td>EPEX GB baseload auction, 30 Jul.</td></tr>
-          <tr><td>UK Power Winter 2026 (supplied)</td><td class="num">£121.50/MWh</td><td class="num">121.50</td><td class="num">83.35</td><td>War premium</td><td>+45.8% vs 1 Year Ago — front season.</td></tr>
-          <tr><td>UK Power Summer 2027 (supplied)</td><td class="num">£84.50/MWh</td><td class="num">84.50</td><td class="num">69.00</td><td>Backwardated</td><td>-30.5% vs W-26; eased £0.50 on the day.</td></tr>
-          <tr><td>UK Power Summer 2028 (supplied)</td><td class="num">£65.00/MWh</td><td class="num">65.00</td><td class="num">66.50</td><td>Deep value</td><td>-46.5% vs W-26; below its own 1 Year Ago mark.</td></tr>
-          <tr><td>TTF Gas (front month)</td><td class="num">~€58–60/MWh</td><td class="num">Winter-26 €57.04</td><td class="num">~€35.3</td><td>High, easing</td><td>~+65% YoY; ICE Winter26 strip €57.035 (30 Jul).</td></tr>
-          <tr><td>Brent Crude</td><td class="num">~$87.8–89.0/bbl</td><td class="num">Backwardated strip</td><td class="num">$72.53</td><td>Volatile</td><td>From $100.69 (23 Jul) to $84.09 (28 Jul) and back; strong monthly gain on track.</td></tr>
-          <tr><td>WTI Crude</td><td class="num">~$82–84.6/bbl</td><td class="num">Dec-26 $77.69</td><td class="num">Not verified</td><td>Volatile</td><td>Front month $82.09 late 30 Jul; Sep-26 settled $84.60 (29 Jul).</td></tr>
-          <tr><td>European Gas Storage</td><td class="num">56.4% full</td><td class="num">637.4 TWh</td><td class="num">Not verified</td><td>Behind norm</td><td>GIE AGSI, 30 Jul; pace short of relaxed 80% Nov-1 target.</td></tr>
-          <tr><td>Norway Flows</td><td class="num">Reduced</td><td class="num">-5.4 mcm/d</td><td class="num">—</td><td>Outage</td><td>Unplanned Dvalin field outage (Gassco, 22 Jul).</td></tr>
-          <tr><td>LNG Movement</td><td class="num">Thin</td><td class="num">—</td><td class="num">—</td><td>Not normal</td><td>No LNG tankers in Tuesday's Bab el-Mandeb transits; Hormuz LNG flow minimal.</td></tr>
-          <tr><td>Hormuz Traffic</td><td class="num">5 ships (Tue)</td><td class="num">—</td><td class="num">—</td><td>Thin / risky</td><td>Kpler via Reuters; IRGC tanker-strike claims unconfirmed.</td></tr>
-          <tr><td>Bab el-Mandeb Status</td><td class="num">37 ships (Tue)</td><td class="num">—</td><td class="num">—</td><td>Open, risky</td><td>Best since 19 Jul; no VLCCs or LNG; Houthi blockade declared.</td></tr>
-          <tr><td>Kataib Hezbollah 7-Day Deadline</td><td class="num">Live → 6 Aug</td><td class="num">—</td><td class="num">—</td><td>Countdown</td><td>Biggest fresh energy-risk trigger.</td></tr>
-          <tr><td>Iraq Sovereignty Pressure</td><td class="num">High</td><td class="num">—</td><td class="num">—</td><td>Escalated</td><td>NSC condemnation; PM's Riyadh visit postponed; security plan approved.</td></tr>
-          <tr><td>Saudi Energy Infrastructure Risk</td><td class="num">Elevated</td><td class="num">—</td><td class="num">—</td><td>Targeted</td><td>Eastern Province attacks; Iraq-based activity assessed by Reuters sources.</td></tr>
-          <tr><td>Egypt / Suez Gas-Vessel Risk</td><td class="num">New</td><td class="num">—</td><td class="num">—</td><td>Unclaimed strike</td><td>Damietta FSRU + LNG carrier hit by drone; attribution open.</td></tr>
-          <tr><td>Kazakhstan / CPC</td><td class="num">Resumed</td><td class="num">—</td><td class="num">—</td><td>Fragile</td><td>Loadings restarted 27 Jul; secondary issue.</td></tr>
-          <tr><td>Supplier Pricing Pressure</td><td class="num">High</td><td class="num">—</td><td class="num">—</td><td>Lag risk</td><td>Books may still follow wholesale; expect short quote validity.</td></tr>
-          <tr><td>British Gas 18-Month Window</td><td class="num">Not verified</td><td class="num">—</td><td class="num">—</td><td>Unconfirmed</td><td>Published guidance shows up to 12 months; treat 18 months as internal evidence only.</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="note">"Supplied" rows are internal broker / supplier evidence and take precedence over public indications. Public levels from Trading Economics, ICE, EPEX, Yahoo Finance, MarketWatch, GIE AGSI and Kpler via Reuters, as dated. Where a value could not be verified in this run it is marked rather than invented.</p>
+<!-- 16 MARKET STATS -->
+<section id="market-stats">
+  <h2><span class="num">16</span>Market Stats</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th class="label">Indicator</th><th>Latest verified level</th><th>As of</th><th>Source tier</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="label">Internal gas W-26 (offered)</td>
+          <td><strong style="color:#fff">142.75 p/th</strong> (-0.75 d/d)</td>
+          <td>Fri 31 Jul AM</td>
+          <td><span class="tag internal" style="margin:0">Internal evidence</span></td>
+        </tr>
+        <tr>
+          <td class="label">Internal power W-26 (offered)</td>
+          <td><strong style="color:#fff">122.50 £/MWh</strong> (-1.50 d/d)</td>
+          <td>Fri 31 Jul AM</td>
+          <td><span class="tag internal" style="margin:0">Internal evidence</span></td>
+        </tr>
+        <tr>
+          <td class="label">Brent crude</td>
+          <td>$90.12/bbl settle (+1.2%); week range $84.09–$90.74</td>
+          <td>31 Jul 2026</td>
+          <td>Public — Yahoo Finance BZ=F history / Reuters<a class="cite" href="#s8">[S8]</a><a class="cite" href="#s14">[S14]</a></td>
+        </tr>
+        <tr>
+          <td class="label">WTI crude</td>
+          <td>Public reference only — level not verified to citation standard this run</td>
+          <td>—</td>
+          <td>Public references<a class="cite" href="#s7">[S7]</a></td>
+        </tr>
+        <tr>
+          <td class="label">UK power (public spot benchmark)</td>
+          <td>118.68 £/MWh — reference indication only, not a trading price</td>
+          <td>Accessed 03 Aug 2026</td>
+          <td>Public — Trading Economics<a class="cite" href="#s48">[S48]</a></td>
+        </tr>
+        <tr>
+          <td class="label">EU-27 gas storage</td>
+          <td>≈55.35% full; ~12pp below 5-yr seasonal norm; pace ≈ on track for relaxed 80% Nov-1 target</td>
+          <td>26 Jul 2026</td>
+          <td>Public — GIE AGSI+ via GEF<a class="cite" href="#s29">[S29]</a><a class="cite" href="#s31">[S31]</a></td>
+        </tr>
+        <tr>
+          <td class="label">Germany gas storage</td>
+          <td>46.77% full (Poland 84.9%, Spain 72.3%, Denmark 63.6%)</td>
+          <td>31 Jul 2026</td>
+          <td>Public — GIE AGSI via MacroMicro<a class="cite" href="#s30">[S30]</a></td>
+        </tr>
+        <tr>
+          <td class="label">OPEC+ September quotas</td>
+          <td>+188,000 bpd approved</td>
+          <td>Weekend 1–2 Aug 2026</td>
+          <td>Public — Saudi Gazette / TASS<a class="cite" href="#s46">[S46]</a><a class="cite" href="#s47">[S47]</a></td>
+        </tr>
+        <tr>
+          <td class="label">UK electricity margin</td>
+          <td>Summer EMNs issued 23–24 Jun and 8–9 Jul (~1,000 MW shortfall); both withdrawn; none live at publication</td>
+          <td>Jun–Jul 2026</td>
+          <td>Public — NESO / Osborne Clarke / ECIU<a class="cite" href="#s34">[S34]</a><a class="cite" href="#s35">[S35]</a><a class="cite" href="#s36">[S36]</a></td>
+        </tr>
+        <tr>
+          <td class="label">Domestic price cap (context)</td>
+          <td>£1,663/yr typical dual-fuel, +13% QoQ; gas 7.33p/kWh, electricity 26.11p/kWh</td>
+          <td>1 Jul – 30 Sep 2026</td>
+          <td>Official — Ofgem<a class="cite" href="#s32">[S32]</a></td>
+        </tr>
+        <tr>
+          <td class="label">US war cost (Pentagon)</td>
+          <td>$37.5bn so far, including some projected costs through 30 Sep</td>
+          <td>Reported 22 Jul 2026</td>
+          <td>Reuters via Internazionale / PBS<a class="cite" href="#s43">[S43]</a><a class="cite" href="#s44">[S44]</a></td>
+        </tr>
+        <tr>
+          <td class="label">Additional US funding requests</td>
+          <td>Reuters: nearly $90bn requested, mostly Iran-related. AP: an $87.6bn supplemental and/or wider $95bn package. Distinct figures — not additive</td>
+          <td>Jul 2026</td>
+          <td>Reuters / AP via WRAL; CSIS analysis<a class="cite" href="#s43">[S43]</a><a class="cite" href="#s44">[S44]</a><a class="cite" href="#s45">[S45]</a></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+  <div class="note">Funding figures are deliberately kept separate: $37.5bn spent/committed so far (Pentagon), nearly $90bn requested (Reuters), and $87.6bn supplemental / $95bn wider package (AP) are different measures from different reports. No credible source verified any "another $150bn" figure — it is excluded.</div>
 </section>
 
-<!-- ============ 17. SUPPLIER PRICE-BOOK LAG ============ -->
+<!-- 17 SUPPLIER PRICE-BOOK LAG -->
 <section id="supplier-lag">
-  <div class="sec-head"><div class="sec-num">17</div><h2>Supplier Price-Book Lag</h2></div>
-  <p class="sec-sub">The opportunity and the danger — in one mechanism</p>
+  <h2><span class="num">17</span>Supplier Price-Book Lag</h2>
   <div class="card">
-    <p class="lead"><strong>Supplier price-book lag is the opportunity and the danger.</strong> Wholesale markets move first. Supplier books often follow.</p>
+    <p>Suppliers do not reprice business contracts tick-by-tick. They update price books periodically and can withdraw them entirely when volatility spikes. That lag cuts both ways — and this year has already shown both edges:</p>
     <ul class="clean">
-      <li><strong>Waiting for certainty can mean missing the price movement.</strong> Once a supplier withdraws a rate, the customer cannot go back and buy yesterday's price.</li>
-      <li><strong>Even if oil has fallen from the highs, supplier books may still react to the move that has already happened.</strong> Wholesale moved first. Supplier books may still follow.</li>
-      <li><strong>Suppliers do not need a full closure of Hormuz or Bab el-Mandeb before they reprice.</strong> They also do not need diplomacy to fail completely before they price renewed conflict risk.</li>
-      <li><strong>When conflict spreads geographically, suppliers can price the increased probability of disruption before physical closure happens.</strong> An Iraq countdown, a Saudi targeting assessment and an unclaimed strike at Damietta are exactly that kind of input.</li>
-      <li><strong>1 Year Ago prices are useful context, but they do not protect the customer today.</strong> The latest line is the decision point.</li>
+      <li><strong style="color:#fff">Downside of the lag (March evidence):</strong> when the conflict escalated in late February/March, UK suppliers pulled or repriced fixed tariffs at speed — 57 tariffs removed or repriced in days in one analysis, with the FT and Utility Week documenting withdrawals across the market. Customers waiting for "a better day" lost whole products, not just price points.<a class="cite" href="#s37">[S37]</a><a class="cite" href="#s38">[S38]</a><a class="cite" href="#s39">[S39]</a></li>
+      <li><strong style="color:#fff">Upside of the lag (May evidence):</strong> as volatility cooled into May, suppliers returned to quoting — but pricing stayed cautious and "can change quickly". Books reopened behind the market, giving well-timed buyers a brief window of stale, cheaper pricing.<a class="cite" href="#s40">[S40]</a></li>
+      <li><strong style="color:#fff">Why it matters:</strong> wholesale is roughly 40% of a business electricity bill and about 60% of a gas bill (Ofgem). The lag between the traded curve and the printed book is where brokers add value — buying the curve before the book catches up.<a class="cite" href="#s41">[S41]</a></li>
     </ul>
-    <div class="quote">Wholesale moved first. Supplier books may still follow. Once suppliers withdraw rates, customers cannot go back and secure previous pricing.</div>
+  </div>
+  <div class="grid2">
+    <div class="card tight">
+      <h3 style="margin-top:0">The opportunity</h3>
+      <p style="margin-bottom:0;font-size:.9rem">Diplomacy headlines have softened traded prices this week. Price books revised <em>after</em> a relief move — but <em>before</em> any talks failure — can briefly offer 2027/2028 seasons cheaper than the live curve justifies. Quoting now, with same-day acceptance readiness, is how that window gets captured.</p>
+    </div>
+    <div class="card tight">
+      <h3 style="margin-top:0">The danger</h3>
+      <p style="margin-bottom:0;font-size:.9rem">The same lag means quotes can be withdrawn or repriced intraday when headlines turn — as March proved. A quote in hand this week has a shelf life measured in days, not weeks. Treat every competitive offer against the 2027–2029 seasons as perishable.</p>
+    </div>
   </div>
 </section>
 
-<!-- ============ 18. CUSTOMER ACTION ============ -->
+<!-- 18 CUSTOMER ACTION -->
 <section id="customer-action">
-  <div class="sec-head"><div class="sec-num">18</div><h2>Customer Action</h2></div>
-  <p class="sec-sub">Who to call first and what to say — mapped to contract end date (CED)</p>
-  <div class="grid g3">
-    <div class="action-card"><div class="who">Inside 90 days</div><div class="act">Urgent review — secure if live pricing works</div>
-      <p>Front-of-curve exposure is immediate. W-26 gas is +5.50 on the day and the 6 August countdown is live. Get same-day quotes, compare, and lock where the numbers work.</p></div>
-    <div class="action-card"><div class="who">Inside 12 months</div><div class="act">Review live pricing now — do not wait for renewal panic</div>
-      <p>Winter-2026 delivery carries the war premium. Reviewing early costs nothing; waiting through a countdown deadline can.</p></div>
-    <div class="action-card"><div class="who">British Gas customers</div><div class="act">Check eligibility under the renewal window</div>
-      <p>Published guidance supports renewal quotes up to 12 months ahead; if an 18-month window is confirmed on the account, use it to test future-start pricing now. Confirm the window before quoting it.</p></div>
-    <div class="action-card"><div class="who">High usage outside 12 months</div><div class="act">Check the forward curve and future-start options</div>
-      <p>S-27 gas is -33.9% and S-27 power -30.5% vs W-26. Larger volumes make the backwardation gap materially valuable — if the delivery period is accessible.</p></div>
-    <div class="action-card"><div class="who">2027 / 2028 / 2029 / 2030 CED</div><div class="act">Test whether cheaper future delivery can be secured now</div>
-      <p>S-29 gas at -56.8% and S-29 power at -47.6% vs W-26 is the forward-value proof. Backwardation does not mean wait — it means test access to that delivery period today.</p></div>
-    <div class="action-card"><div class="who">Everyone</div><div class="act">Waiting is not neutral</div>
-      <p>Cheaper further out does not mean cheaper later. The % vs W-26 column shows the current forward-value gap; the 1 Year Ago line shows how much the market has moved. This is a review-now window, not a wait-and-see market.</p></div>
+  <h2><span class="num">18</span>Customer Action</h2>
+  <div class="verdict">This is a review-now window. Diplomacy is holding prices off their highs while nothing structural has been resolved. Use it.</div>
+  <div class="grid2">
+    <div class="card">
+      <h3 style="margin-top:0">Do this week</h3>
+      <ol class="numbered" style="margin-bottom:0;font-size:.92rem">
+        <li><strong style="color:#fff">Check your contract end date and notice window.</strong> Many business contracts need termination notice months ahead — missing it rolls you onto deemed or rollover rates, the most expensive position in this market.</li>
+        <li><strong style="color:#fff">Get MPRN/MPAN and consumption data ready</strong> so quotes can be accepted the same day they land — books can be pulled intraday.</li>
+        <li><strong style="color:#fff">Request quotes across multiple terms</strong> (1, 2 and 3 years) and compare them against the internal offered ranges in Sections 03–04, not against last year's bill.</li>
+        <li><strong style="color:#fff">Prioritise 2027–2029 start coverage</strong> where the curve offers 30–56% value versus the front winter.</li>
+        <li><strong style="color:#fff">Diarise 06/08.</strong> Kataib Hezbollah's deadline is the nearest dated catalyst. Decide your action level <em>before</em> it arrives, not after.</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">By customer type</h3>
+      <ul class="clean" style="margin-bottom:0;font-size:.92rem">
+        <li><strong style="color:#fff">Out of contract / deemed:</strong> fix immediately. Every week unhedged is a bet on headlines.</li>
+        <li><strong style="color:#fff">Renewing this winter:</strong> you will pay a premium whatever you do; minimise term on the front and revisit in spring — but do not float.</li>
+        <li><strong style="color:#fff">Renewing 2027–2028:</strong> the best-positioned group on the board. Lock value now; consider 2–3 year terms to sweep up backwardated seasons.</li>
+        <li><strong style="color:#fff">Large / multi-site portfolios:</strong> layer purchases — secure a front-season tranche for certainty and add 2029–2030 tranches while they trade below year-ago levels.</li>
+        <li><strong style="color:#fff">Budget-setters for FY27/28:</strong> use the supplied forward table (Section 06) as the budget anchor, with an escalation scenario at front-winter levels.</li>
+      </ul>
+    </div>
   </div>
+  <div class="note teal">Switch365 can benchmark any renewal offer against the internal offered range the same day. The figures in this report are your supplied market evidence — send updated sheets and the report refreshes around them.</div>
 </section>
 
-<!-- ============ 19. SOURCE QUALITY ============ -->
+<!-- 19 SOURCE QUALITY -->
 <section id="source-quality">
-  <div class="sec-head"><div class="sec-num">19</div><h2>Source Quality</h2></div>
-  <p class="sec-sub">Confidence panel — what we trust, what we treat carefully, what we corrected</p>
-  <div class="grid g3">
-    <div class="mini-card"><div class="k" style="color:#8af0d2">Highest Confidence</div><div class="d">
-      • User-provided internal market rates and 1 Year Ago prices<br>
-      • Exchange and auction data (ICE, EPEX)<br>
-      • Reuters / AP reporting<br>
-      • Official statements (CENTCOM, Saudi MoD, Iraq NSC, Egypt PM's Office)<br>
-      • Kpler ship-tracking via Reuters · GIE AGSI storage · Gassco via Montel</div></div>
-    <div class="mini-card"><div class="k" style="color:#ffe1a1">Medium Confidence</div><div class="d">
-      • Iranian state media and IRGC claims (e.g. three tankers struck)<br>
-      • Houthi claims of attacks and blockade enforcement<br>
-      • Intelligence assessments reported by media but not officially confirmed (IRGC supervision of Iraq-based attacks)<br>
-      • Mediation details where only one side confirms<br>
-      • Single-source shipping incident detail</div></div>
-    <div class="mini-card"><div class="k" style="color:#ffb3ba">Unconfirmed / Not Used</div><div class="d">
-      • IRGC tanker claims unless independently verified<br>
-      • Egypt gas-vessel attribution unless confirmed<br>
-      • Hormuz closure claims unless independent data verifies<br>
-      • Claimed damage to Saudi infrastructure unless independently confirmed<br>
-      • Any "another $150bn" claim — <strong style="color:#fff">no credible current source verifies this figure; not used in this report</strong><br>
-      • British Gas 18-month window extension — not verified in this run</div></div>
+  <h2><span class="num">19</span>Source Quality</h2>
+  <div class="grid3">
+    <div class="card tight">
+      <span class="tag internal">Highest confidence</span>
+      <ul class="clean" style="margin:10px 0 0;font-size:.86rem">
+        <li><strong style="color:#fff">Your supplied market tables</strong> — internal broker/supplier evidence; the pricing basis of this report, shown unchanged.</li>
+        <li><strong style="color:#fff">Official notices:</strong> UKMTO warnings 101-26/102-26, JMIC Update 079, NESO margin notices, Ofgem, British Gas renewal guidance.</li>
+        <li><strong style="color:#fff">Exchange/aggregator data:</strong> Yahoo Finance Brent history, GIE AGSI+ storage reads, Trading Economics benchmarks.</li>
+      </ul>
+    </div>
+    <div class="card tight">
+      <span class="tag public">High confidence — reported</span>
+      <ul class="clean" style="margin:10px 0 0;font-size:.86rem">
+        <li>Reuters and AP reporting on talks, strikes, Iraq, OPEC+ and war funding (including syndicated versions).</li>
+        <li>FT / Euronews / Anadolu on the Saudi-led Red Sea coalition; Times of Central Asia / OGJ / Astana Times on CPC.</li>
+        <li>Oxford Institute for Energy Studies and ACER analysis on European storage refill.</li>
+      </ul>
+    </div>
+    <div class="card tight">
+      <span class="tag warn">Assessment / unconfirmed</span>
+      <ul class="clean" style="margin:10px 0 0;font-size:.86rem">
+        <li>Houthi–Iraqi coordination claims are regional-official assessments reported by Reuters — labelled as such, not established fact.<a class="cite" href="#s19">[S19]</a></li>
+        <li>Damietta drone-strike attribution: unclaimed; no actor blamed in this report.<a class="cite" href="#s23">[S23]</a></li>
+        <li>Any "final deal" claim: unverified — excluded. Any "another $150bn" funding figure: unverified — excluded. British Gas 18-month window: unverified — flagged in Section 08.</li>
+      </ul>
+    </div>
   </div>
-  <div class="card">
-    <h3>Corrected Claims — applied in this report</h3>
-    <ul class="clean">
-      <li>The 7-day deadline is from <strong>Kataib Hezbollah</strong>, not the whole PMF — reported as such throughout.</li>
-      <li>Iraq's government position and militia positions are <strong>not treated as identical</strong>.</li>
-      <li>Iraq is described as a <strong>potential</strong> launch platform based on Reuters-sourced assessments — not as confirmed fact.</li>
-      <li>The Jordan incident is described as missiles <strong>aimed at US forces in Jordan</strong> — not "Iran attacking Jordan".</li>
-      <li>No actor is blamed for the Damietta drone strike — <strong>unclaimed, investigation open</strong>.</li>
-      <li>Bab el-Mandeb is open (37 transits Tuesday) — <strong>not described as closed</strong>; Hormuz is thin — <strong>not described as normal</strong>.</li>
-      <li>War funding kept separate: <strong>$37.5bn</strong> cost so far (incl. projected costs through 30 Sep); <strong>nearly $90bn</strong> additional request (Reuters, mostly Iran-related); <strong>$67.1bn</strong> Pentagon supplemental; <strong>$95bn</strong> wider GOP package (AP). Not merged. "Another $150bn" not used.</li>
-      <li>% vs W-26 calculated only from latest prices against the same fuel's latest W-26 — never from 1 Year Ago, previous day, or cross-fuel.</li>
-      <li>1 Year Ago prices presented as context, never as currently available prices.</li>
-    </ul>
-  </div>
+  <div class="note">Method: claims were checked across the primary window (31/07–03/08/2026) with an extended verification window to 27/07/2026. Where a draft claim could not be verified, this report says so rather than repeating it. Public prices are context only and never overwrite your supplied internal rates.</div>
 </section>
 
-<!-- ============ 20. SOURCE LINKS ============ -->
+<!-- 20 SOURCE LINKS -->
 <section id="source-links">
-  <div class="sec-head"><div class="sec-num">20</div><h2>Source Links</h2></div>
-  <p class="sec-sub">Sources actually used in this report — grouped by topic</p>
-  <div class="card">
-    <h4>Internal Evidence</h4>
-    <ul class="clean">
-      <li><strong>User-provided internal market rates</strong> — NBP offered gas range and UK power offered range, Tue 28 Jul AM / Wed 29 Jul AM, incl. 1 Year Ago columns (internal broker / supplier evidence).</li>
-    </ul>
-    <h4>Market Prices — NBP · TTF · UK Power · Brent / WTI · Storage · Norway</h4>
-    <ul class="clean">
-      <li>Trading Economics — UK Natural Gas (142.47 GBp/thm, 30 Jul; +40.1% MoM, +64.1% YoY): <a href="https://tradingeconomics.com/commodity/uk-natural-gas" target="_blank" rel="noopener">tradingeconomics.com/commodity/uk-natural-gas</a></li>
-      <li>ICE — UK NBP Natural Gas Futures (Aug-26 146.00, 29 Jul): <a href="https://www.ice.com/products/910/UK-NBP-Natural-Gas-Futures/data" target="_blank" rel="noopener">ice.com/products/910</a></li>
-      <li>ICE — Dutch TTF Natural Gas Futures (Winter-26 €57.035, 30 Jul): <a href="https://www.ice.com/products/27996665/Dutch-TTF-Natural-Gas-Futures/data?marketId=6164787" target="_blank" rel="noopener">ice.com/products/27996665</a></li>
-      <li>Yahoo Finance — Dutch TTF calendar history (€60.42 close 29 Jul; ~€35.28 a year ago): <a href="https://finance.yahoo.com/quote/TTF%3DF/history/" target="_blank" rel="noopener">finance.yahoo.com/quote/TTF=F/history</a></li>
-      <li>Yahoo Finance — Brent BZ=F daily history (23–31 Jul): <a href="https://finance.yahoo.com/quote/BZ=F/history/" target="_blank" rel="noopener">finance.yahoo.com/quote/BZ=F/history</a></li>
-      <li>MarketWatch — WTI front month ($82.09, 30 Jul; curve to Dec-26): <a href="https://www.marketwatch.com/investing/future/cl.1" target="_blank" rel="noopener">marketwatch.com/investing/future/cl.1</a></li>
-      <li>Fortune — Price of oil, 30 July 2026 (Brent $89.53, +25.8% YoY): <a href="https://fortune.com/article/price-of-oil-07-30-2026/" target="_blank" rel="noopener">fortune.com/article/price-of-oil-07-30-2026</a></li>
-      <li>EPEX SPOT — GB day-ahead auction, 30 Jul (£123.87/MWh baseload): <a href="https://www.epexspot.com/en" target="_blank" rel="noopener">epexspot.com</a></li>
-      <li>GIE AGSI — EU gas storage 56.4% / 637.38 TWh (30 Jul): <a href="https://www.gie.eu/" target="_blank" rel="noopener">gie.eu</a></li>
-      <li>Montel — Unplanned Dvalin outage cuts Norwegian flows 5.4 mcm/d (22 Jul): <a href="https://montelnews.com/news/03dfeda5-66fd-401b-9585-d2a0fabeab8a" target="_blank" rel="noopener">montelnews.com</a></li>
-    </ul>
-    <h4>Kataib Hezbollah 7-Day Deadline · Iraq Sovereignty · PMF</h4>
-    <ul class="clean">
-      <li>Dawn / Al Jazeera — Kataib Hezbollah gives government until 6 August: <a href="https://www.dawn.com/news/2019275/iraqi-paramilitary-group-kataib-hezbollah-urges-government-to-defend-sovereignty" target="_blank" rel="noopener">dawn.com/news/2019275</a></li>
-      <li>Ynet / AFP — Retaliation "inevitable"; 20 killed incl. Iranian advisers: <a href="https://www.ynetnews.com/article/hye6mcprzg" target="_blank" rel="noopener">ynetnews.com/article/hye6mcprzg</a></li>
-      <li>Firstpost — Iraq NSC: "flagrant violation of sovereignty"; 20 PMF + 4 IRGC killed: <a href="https://www.firstpost.com/world/iraq-calls-us-saudi-strikes-flagrant-violation-of-sovereignty-as-attacks-kill-20-pmf-and-4-irgc-members-14034774.html" target="_blank" rel="noopener">firstpost.com</a></li>
-      <li>Anadolu Agency — Iraq condemns strikes, unveils security plan: <a href="https://www.aa.com.tr/en/americas/iraq-condemns-us-saudi-strikes-unveils-security-measures-to-prevent-threats-from-its-territory/4012788" target="_blank" rel="noopener">aa.com.tr</a></li>
-      <li>Türkiye Today — Iraq vows to defend sovereignty; Zaidi's Saudi visit postponed; CENTCOM framing: <a href="https://www.turkiyetoday.com/region/iraq-vows-to-defend-sovereignty-after-deadly-us-saudi-strikes-3224944" target="_blank" rel="noopener">turkiyetoday.com</a></li>
-    </ul>
-    <h4>Saudi Energy Infrastructure Risk · Iraq-Linked Houthi Activity</h4>
-    <ul class="clean">
-      <li>Reuters (via US News) — EXCLUSIVE: Yemen's Houthis attacking Saudi Arabia from Iraq, sources say (30 Jul): <a href="https://www.usnews.com/news/world/articles/2026-07-30/exclusive-yemens-houthis-are-attacking-saudi-arabia-from-iraq-sources-say" target="_blank" rel="noopener">usnews.com (Reuters)</a></li>
-      <li>NYT — What to know about Iraq's militias (30 Jul): <a href="https://www.nytimes.com/2026/07/29/world/middleeast/iraq-popular-mobilization-forces-iran.html" target="_blank" rel="noopener">nytimes.com</a></li>
-    </ul>
-    <h4>Hormuz · Bab el-Mandeb · Red Sea · Saudi Coalition · Suez / Damietta · LNG</h4>
-    <ul class="clean">
-      <li>Reuters (via Jerusalem Post) — Bab el-Mandeb transits at weekly high (37); Hormuz at 5; Oman proposal (29 Jul): <a href="https://www.jpost.com/middle-east/article-903964" target="_blank" rel="noopener">jpost.com/middle-east/article-903964</a></li>
-      <li>The Hill (via AOL) — Saudi Arabia forms Red Sea defence coalition; 14 nations affirm support (31 Jul): <a href="https://www.aol.com/articles/saudi-arabia-forms-red-sea-004644000.html" target="_blank" rel="noopener">aol.com (The Hill)</a></li>
-      <li>NYT — Saudi Arabia aims to deter Red Sea attacks with coalition (30 Jul): <a href="https://www.nytimes.com/2026/07/30/world/middleeast/saudi-arabia-red-sea-houthis.html" target="_blank" rel="noopener">nytimes.com</a></li>
-      <li>Riviera Maritime Media — Egypt confirms drone strike on FSRU and LNG carrier in Damietta (30 Jul): <a href="https://www.rivieramm.com/news-content-hub/fsru-and-lng-carrier-reportedly-hit-in-strikes-in-egypt-89531" target="_blank" rel="noopener">rivieramm.com</a></li>
-      <li>Iran International — Iran rejects Oman's 50-50 Hormuz plan; mediation channels; CENTCOM blockade figures (29 Jul): <a href="https://www.iranintl.com/en/202607284373" target="_blank" rel="noopener">iranintl.com/en/202607284373</a></li>
-    </ul>
-    <h4>Jordan · US / Trump · CENTCOM</h4>
-    <ul class="clean">
-      <li>NewsCord aggregation — Trump vows to hit Iran "hard" after missile attack on US assets in Jordan (29 Jul; BBC / Guardian / Independent / Al Jazeera accounts): <a href="https://newscord.org/article/trump-vows-to-hit-iran-hard-after-missile-attack-on-us-assets-in-jordan--Story_20260729_TrumpsaysUStodeliverca5d2445" target="_blank" rel="noopener">newscord.org</a></li>
-    </ul>
-    <h4>War Cost / Funding · Pentagon / Hegseth</h4>
-    <ul class="clean">
-      <li>Reuters (via Al-Monitor) — War in Iran has cost US $37.5bn so far; nearly $90bn requested last month; ceasefire collapse (21 Jul): <a href="https://www.al-monitor.com/originals/2026/07/war-iran-has-cost-us-375-billion-so-far-pentagon-says" target="_blank" rel="noopener">al-monitor.com (Reuters)</a></li>
-      <li>Military Times — Cost rises to $37.5bn; Pentagon requests $67.1bn more (21 Jul): <a href="https://www.militarytimes.com/news/pentagon-congress/2026/07/21/cost-of-iran-war-rises-to-375-billion-pentagon-requests-671-billion-more/" target="_blank" rel="noopener">militarytimes.com</a></li>
-      <li>AP (via MPR News) — Hegseth defends funding request; $95bn GOP package detail (22 Jul): <a href="https://www.mprnews.org/story/2026/07/22/hegseth-estimates-iran-war-has-cost-375-billion-defends-funding-request-fiery-hearing" target="_blank" rel="noopener">mprnews.org (AP)</a></li>
-    </ul>
-    <h4>Kazakhstan / CPC</h4>
-    <ul class="clean">
-      <li>Astana Times — Kazakhstan resumes CPC oil exports as marine terminal reopens (27 Jul): <a href="https://astanatimes.com/2026/07/kazakhstan-resumes-cpc-oil-exports-as-marine-terminal-reopens/" target="_blank" rel="noopener">astanatimes.com</a></li>
-    </ul>
-    <h4>British Gas Renewal Window</h4>
-    <ul class="clean">
-      <li>British Gas — Renew your business energy plan (renewal quote up to 12 months ahead): <a href="https://www.britishgas.co.uk/business/gas-and-electricity/renew-energy-contract" target="_blank" rel="noopener">britishgas.co.uk/business</a></li>
-    </ul>
+  <h2><span class="num">20</span>Source Links</h2>
+  <p>Only sources actually used in this report are listed. Internal market tables (gas and power offered ranges, 30–31 July) were supplied directly by Switch365 and are not linked.</p>
+  <div class="source-grid">
+    <div class="source-item" id="s1"><b>S1</b>Switch365 — US–Iran conflict &amp; UK energy (brand/context): <a href="https://switch365.com/content-hub/business-utilities/energy-market-trends/us-iran-conflict-affecting-uk-energy/">switch365.com</a></div>
+    <div class="source-item" id="s2"><b>S2</b>Trading Economics — UK Natural Gas (public context): <a href="https://tradingeconomics.com/commodity/uk-natural-gas">tradingeconomics.com</a></div>
+    <div class="source-item" id="s3"><b>S3</b>ICE — UK NBP Natural Gas Futures: <a href="https://www.ice.com/products/910/UK-NBP-Natural-Gas-Futures/data">ice.com</a></div>
+    <div class="source-item" id="s4"><b>S4</b>Trading Economics — EU Natural Gas / TTF: <a href="https://tradingeconomics.com/commodity/eu-natural-gas">tradingeconomics.com</a></div>
+    <div class="source-item" id="s5"><b>S5</b>ICE — Dutch TTF Natural Gas Futures: <a href="https://www.ice.com/products/27996665/Dutch-TTF-Natural-Gas-Futures/data">ice.com</a></div>
+    <div class="source-item" id="s6"><b>S6</b>Trading Economics — Brent Crude Oil: <a href="https://tradingeconomics.com/commodity/brent-crude-oil">tradingeconomics.com</a></div>
+    <div class="source-item" id="s7"><b>S7</b>Trading Economics — WTI Crude Oil: <a href="https://tradingeconomics.com/commodity/crude-oil">tradingeconomics.com</a> · FRED WTI series: <a href="https://fred.stlouisfed.org/series/DCOILWTICO">fred.stlouisfed.org</a></div>
+    <div class="source-item" id="s8"><b>S8</b>Yahoo Finance — Brent (BZ=F) daily history, settles 24–31 Jul 2026: <a href="https://finance.yahoo.com/quote/BZ=F/history/">finance.yahoo.com</a> · EIA spot prices: <a href="https://www.eia.gov/dnav/pet/pet_pri_spt_s1_d.htm">eia.gov</a></div>
+    <div class="source-item" id="s10"><b>S10</b>Reuters (via The Hindu) — Iran–US talks, Hormuz, live page: <a href="https://www.thehindu.com/news/international/iran-us-war-live-updates-donald-trump-on-iran-us-talk-strait-of-hormuz-ceasefire-deal/article71299723.ece">thehindu.com</a></div>
+    <div class="source-item" id="s11"><b>S11</b>AP — Trump / Iran war &amp; cancelled strikes timeline: <a href="https://apnews.com/article/trump-iran-war-us-canceled-strikes-670f077d2cf5de7614cfce4ad40e4aaa">apnews.com</a></div>
+    <div class="source-item" id="s12"><b>S12</b>AP — US–Iran proposal &amp; current diplomacy: <a href="https://apnews.com/article/trump-iran-strait-hormuz-israel-gaza-mideast-f4c225f6667d9fd171616304701825a0">apnews.com</a></div>
+    <div class="source-item" id="s13"><b>S13</b>Reuters (via Zawya) — oil, OPEC and shipping: <a href="https://www.zawya.com/en/business/oil-tumbles-as-trump-cancels-attack-on-iran-to-reach-nuclear-deal-418395">zawya.com</a></div>
+    <div class="source-item" id="s14"><b>S14</b>Reuters (via EnergyNow) — Brent settles $90.12 on 31 Jul, strongest month since March: <a href="https://energynow.com/2026/08/oil-price-rises-after-iran-says-it-stops-ships-in-hormuz/">energynow.com</a></div>
+    <div class="source-item" id="s15"><b>S15</b>UKMTO / JMIC — Update 079 advisory note (02 Aug): <a href="https://www.ukmto.org/-/media/ukmto/products/update-079-jmic-advisory-note-02-august-1.pdf?rev=aa782729b9164a74b4da43d7be1ecf26">ukmto.org (PDF)</a> · Update 078: <a href="https://www.ukmto.org/-/media/ukmto/products/update-078-jmic-advisory-note-30-july.pdf?rev=8abb62f8745940a5a0878d4b039489b3">ukmto.org (PDF)</a></div>
+    <div class="source-item" id="s16"><b>S16</b>UKMTO — Warning 101-26, attack off Lima, Oman (31 Jul/1 Aug): <a href="https://www.ukmto.org/-/media/ukmto/products/20260801-ukmto_warning_101_26_attack.pdf">ukmto.org (PDF)</a></div>
+    <div class="source-item" id="s17"><b>S17</b>UKMTO — Warning 102-26, attack (1 Aug): <a href="https://www.ukmto.org/-/media/ukmto/products/20260801-ukmto_warning_102_26_attack.pdf?rev=2f84168b439746d4812728fea6c07283">ukmto.org (PDF)</a></div>
+    <div class="source-item" id="s18"><b>S18</b>Reuters (via AOL) — tanker struck by projectile off Oman; UKMTO weekend incidents: <a href="https://www.aol.com/articles/tanker-struck-projectile-off-oman-032909000.html">aol.com</a></div>
+    <div class="source-item" id="s19"><b>S19</b>Reuters exclusive (via Internazionale) — Houthis attacking Saudi Arabia from Iraq (regional assessments): <a href="https://www.internazionale.it/ultime-notizie-reuters/2026/07/30/exclusive-yemen-s-houthis-are-attacking-saudi-arabia-from-iraq-sources-say">internazionale.it</a></div>
+    <div class="source-item" id="s20"><b>S20</b>AP (via PBS) — US &amp; Saudi strikes on Tehran-backed militias in Iraq; PMF casualties: <a href="https://www.pbs.org/newshour/world/iran-resumes-missile-attacks-as-u-s-and-saudis-strike-tehran-backed-militias-in-iraq">pbs.org</a></div>
+    <div class="source-item" id="s21"><b>S21</b>Iran International — Kataib Hezbollah "inevitable" response &amp; 06/08 deadline: <a href="https://www.iranintl.com/en/202607297686">iranintl.com</a></div>
+    <div class="source-item" id="s22"><b>S22</b>Dawn — Kataib Hezbollah deadline reporting: <a href="https://www.dawn.com/news/2019275">dawn.com</a></div>
+    <div class="source-item" id="s23"><b>S23</b>The Media Line — drone strikes on US-owned LNG tanker at Damietta: <a href="https://themedialine.org/headlines/drone-strikes-us-owned-lng-tanker-at-egypts-damietta-port/">themedialine.org</a></div>
+    <div class="source-item" id="s24"><b>S24</b>Financial Times — Saudi maritime defence coalition announcement: <a href="https://www.ft.com/content/926bad8a-55e0-4d1d-8612-7ebd0aaef4ee">ft.com</a></div>
+    <div class="source-item" id="s25"><b>S25</b>Anadolu — Saudi Arabia &amp; 13 states establish Bab al-Mandab coalition: <a href="https://www.aa.com.tr/en/middle-east/saudi-arabia-13-countries-establish-multinational-maritime-defense-coalition-for-bab-al-mandab/4014268">aa.com.tr</a></div>
+    <div class="source-item" id="s26"><b>S26</b>Euronews — Houthis vow "full escalation" as coalition launches: <a href="https://www.euronews.com/2026/07/31/houthis-vow-full-escalation-as-saudi-arabia-launches-red-sea-coalition">euronews.com</a></div>
+    <div class="source-item" id="s27"><b>S27</b>Oil &amp; Gas Journal — Kazakhstan resumes CPC exports (27 Jul): <a href="https://www.ogj.com/general-interest/economics-markets/news/55394033/kazakhstan-resumes-cpc-oil-exports">ogj.com</a> · Astana Times: <a href="https://astanatimes.com/2026/07/kazakhstan-resumes-cpc-oil-exports-as-marine-terminal-reopens/">astanatimes.com</a></div>
+    <div class="source-item" id="s28"><b>S28</b>Times of Central Asia — CPC halts loadings again after 30 Jul tanker attacks: <a href="https://timesca.com/attacks-on-cpc-and-kazakhstan-oil-exports/">timesca.com</a></div>
+    <div class="source-item" id="s29"><b>S29</b>Global Energy Flow — EU storage ~55.35% (GIE AGSI+ read, 26 Jul) &amp; refill trajectory: <a href="https://global-energy-flow.com/storage/trajectory/">global-energy-flow.com</a> · OIES — European Storage Refill Summer 2026: <a href="https://www.oxfordenergy.org/wpcms/wp-content/uploads/2026/07/European-Storage-Refill-in-Summer-2026.pdf">oxfordenergy.org (PDF)</a></div>
+    <div class="source-item" id="s30"><b>S30</b>MacroMicro — GIE AGSI country storage levels (31 Jul): <a href="https://en.macromicro.me/charts/57402/eu-european-countries-natural-gas-storage-percent-full">macromicro.me</a></div>
+    <div class="source-item" id="s31"><b>S31</b>Euronews — ACER: EU storage 28% at season start; LNG imports must rise ~13%: <a href="https://www.euronews.com/my-europe/2026/07/08/eu-faces-tougher-gas-storage-refill-task-as-winter-looms-and-high-prices-bite">euronews.com</a></div>
+    <div class="source-item" id="s32"><b>S32</b>Ofgem — price cap changes, 1 Jul–30 Sep 2026: <a href="https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-july-and-30-september-2026">ofgem.gov.uk</a> · Uswitch cap predictions: <a href="https://www.uswitch.com/gas-electricity/guides/price-cap/">uswitch.com</a></div>
+    <div class="source-item" id="s34"><b>S34</b>NESO — Electricity Margin Notice 24.06.26 explainer: <a href="https://www.neso.energy/news/energy-explained-blog-electricity-margin-notice-240626">neso.energy</a></div>
+    <div class="source-item" id="s35"><b>S35</b>Osborne Clarke — first-ever summer EMN (23–24 Jun): <a href="https://www.osborneclarke.com/insights/energy-transition-neso-issues-first-ever-summer-electricity-margin-notice-gb">osborneclarke.com</a></div>
+    <div class="source-item" id="s36"><b>S36</b>ECIU — 9 Jul EMN comment (~1,000 MW heatwave shortfall): <a href="https://eciu.net/media/press-releases/neso-electricity-margin-notice-comment">eciu.net</a></div>
+    <div class="source-item" id="s37"><b>S37</b>Utility Week — suppliers remove fixed tariffs amid Iran conflict: <a href="https://utilityweek.co.uk/energy-suppliers-remove-fixed-tariffs-in-response-to-iran-conflict/">utilityweek.co.uk</a></div>
+    <div class="source-item" id="s38"><b>S38</b>Financial Times — UK suppliers pull fixed-tariff deals: <a href="https://www.ft.com/content/37765985-dc30-4de3-ab17-9a58dad2049e">ft.com</a></div>
+    <div class="source-item" id="s39"><b>S39</b>MoneySuperMarket analysis (via Yahoo) — 57 tariffs removed/repriced: <a href="https://finance.yahoo.com/news/experts-tell-uk-households-fix-130542293.html">finance.yahoo.com</a></div>
+    <div class="source-item" id="s40"><b>S40</b>wesave — May 2026 business energy: suppliers returned, pricing cautious: <a href="https://www.wesave.co.uk/guides-and-insights/business-energy-prices-may-2026/">wesave.co.uk</a></div>
+    <div class="source-item" id="s41"><b>S41</b>Ofgem — managing business energy costs (wholesale share of bills): <a href="https://www.ofgem.gov.uk/blog/managing-business-energy-costs-uncertain-market">ofgem.gov.uk</a></div>
+    <div class="source-item" id="s42"><b>S42</b>British Gas — official business renewal guidance (quotes up to 12 months): <a href="https://www.britishgas.co.uk/business/gas-and-electricity/renew-energy-contract">britishgas.co.uk</a></div>
+    <div class="source-item" id="s43"><b>S43</b>Reuters (via Internazionale) — Pentagon: $37.5bn war cost so far: <a href="https://www.internazionale.it/ultime-notizie-reuters/2026/07/22/us-war-in-iran-has-cost-37-5-billion-so-far-pentagon-says">internazionale.it</a></div>
+    <div class="source-item" id="s44"><b>S44</b>PBS — $37.5bn cost &amp; $67bn restock request: <a href="https://www.pbs.org/newshour/show/hegseth-says-iran-war-has-cost-37-5b-so-far-and-pentagon-needs-67b-to-restock-arms">pbs.org</a> · AP via WRAL — supplemental reporting: <a href="https://www.wral.com/news/ap/08d07-the-latest-as-the-bombing-resumes-with-no-exit-in-sight-republicans-face-more-trouble/">wral.com</a></div>
+    <div class="source-item" id="s45"><b>S45</b>CSIS — analysis of the $87.6bn supplemental request: <a href="https://www.csis.org/analysis/war-costs-make-third-876-billion-supplemental-request">csis.org</a></div>
+    <div class="source-item" id="s46"><b>S46</b>Saudi Gazette — OPEC+ approves 188,000 bpd September increase: <a href="https://saudigazette.com.sa/article/663419">saudigazette.com.sa</a></div>
+    <div class="source-item" id="s47"><b>S47</b>TASS — OPEC+ September output decision: <a href="https://tass.com/emergencies/2168137">tass.com</a></div>
+    <div class="source-item" id="s48"><b>S48</b>Trading Economics — UK electricity price benchmark (118.68 £/MWh, accessed 03/08): <a href="https://tradingeconomics.com/united-kingdom/electricity-price">tradingeconomics.com</a> · EPEX SPOT GB: <a href="https://www.epexspot.com/en">epexspot.com</a> · ICE UK Base Electricity: <a href="https://www.ice.com/products/20788778/UK-Base-Electricity-Future-Gregorian/expiry">ice.com</a></div>
   </div>
 </section>
 
-<!-- ============ FINAL COMMERCIAL TAKEAWAY ============ -->
-<footer class="takeaway">
-  <h2>Final Commercial Takeaway</h2>
-  <ul class="clean">
-    <li><strong>Kataib Hezbollah's 7-day deadline is today's biggest fresh energy-risk trigger.</strong></li>
-    <li><strong>The market may be getting short-term relief from some vessel movement, but the risk map has widened.</strong> Iraq is now a countdown risk, not just a place where strikes happened.</li>
-    <li><strong>If Iraq-linked groups retaliate against US assets, Saudi infrastructure or Gulf routes, the market can price that risk quickly.</strong></li>
-    <li><strong>Hormuz remains the biggest structural risk for LNG confidence.</strong> Bab el-Mandeb is open, but it is still a route-risk market. Egypt / Suez gas-vessel risk adds another route and insurance warning point.</li>
-    <li><strong>Things are spreading out geographically, and that is a bad sign for energy risk.</strong> Markets do not like countdowns, deadlines or revenge language.</li>
-    <li><strong>Customers should not read lower oil as lower business energy automatically.</strong> The energy bill conversation is about NBP, TTF, UK power, supplier books, contract end date and forward delivery period.</li>
-    <li><strong>The 1 Year Ago line shows how far the curve has moved. The % vs W-26 column shows the forward-value gap.</strong> A negative % vs W-26 means that future delivery period is currently cheaper than the W-26 front period.</li>
-    <li><strong>Cheaper further out does not mean cheaper later.</strong> Supplier price-book lag is the opportunity and the danger. Suppliers do not need a full closure before repricing.</li>
-    <li><strong>Customers waiting because oil came off the highs are missing the point.</strong> This is a review-now window, not a wait-and-see market.</li>
-  </ul>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong style="color:#fff">Switch 365 Ltd — Middle East Energy Market Intelligence</strong> · Report date 03/08/2026 · UK English.</p>
+    <p>Internal broker / supplier evidence (gas and power offered ranges, 30–31 July) was supplied by Switch365 and is reproduced unchanged; it will be refreshed when updated figures are provided. Public market data and geopolitical reporting are context only and do not override the supplied internal rates. Nothing in this report is financial advice; figures marked "Not supplied" or "Not verified in this research run" are intentionally blank rather than estimated.</p>
+    <p>Change = Latest − Previous (two decimals). % vs W-26 = ((Latest contract − Latest W-26) / Latest W-26) × 100 (one decimal), benchmarked within each fuel only. 1 Year Ago values are historical context and cannot be purchased.</p>
+  </div>
 </footer>
 
-<p class="disclaimer">Switch 365 Ltd — Energy Market Intelligence · Report date 31 July 2026 · Internal rates are broker / supplier evidence as supplied and will be refreshed when new figures are provided. Public market levels and geopolitical reporting verified against the sources listed above within the 24–31 July 2026 window. This page is for general informational and sales-support purposes only and does not constitute financial, legal or procurement advice. Prices change intraday; always confirm live quotes before contracting.</p>
-
-</div><!-- /wrap -->
+<div class="back-top"><a href="#summary" aria-label="Back to top">↑</a></div>
 
 <script>
-/* ---------- NAV ---------- */
-const sideNav=document.getElementById('sideNav'),overlay=document.getElementById('navOverlay');
-document.getElementById('navToggle').addEventListener('click',()=>{sideNav.classList.toggle('open');overlay.classList.toggle('show');});
-overlay.addEventListener('click',()=>{sideNav.classList.remove('open');overlay.classList.remove('show');});
-sideNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{sideNav.classList.remove('open');overlay.classList.remove('show');}));
+/* ============================================================
+   Supplied internal market data — Internal broker / supplier evidence
+   Previous = Thu 30 Jul AM | Latest = Fri 31 Jul AM | 1 Year Ago as supplied
+   ============================================================ */
+const contractLabels = ['W-26','S-27','W-27','S-28','W-28','S-29','W-29','S-30'];
+const powerLabels    = ['W-26','S-27','W-27','S-28','W-28','S-29']; // W-29 / S-30 power not supplied
 
-/* ---------- CHART DEFAULTS ---------- */
-Chart.defaults.font.family="'Montserrat',sans-serif";
-Chart.defaults.color='#cfcfe8';
-Chart.defaults.borderColor='rgba(255,255,255,0.08)';
+const gasPrevious = [143.50, 96.50, 94.00, 67.50, 75.50, 62.00, 70.77, 62.35];
+const gasLatest   = [142.75, 93.75, 93.00, 68.00, 76.00, 61.80, 71.88, 63.08];
+const gasYearAgo  = [ 91.40, 75.50, 81.65, 67.67, 75.68, 66.45, 74.54, 66.65];
 
-const gridCol='rgba(255,255,255,0.07)';
-function baseScales(yTitle){
-  return {
-    x:{grid:{color:gridCol},ticks:{color:'#cfcfe8',font:{size:11,weight:'600'}}},
-    y:{grid:{color:gridCol},ticks:{color:'#cfcfe8',font:{size:11}},
-       title:{display:true,text:yTitle,color:'#9d9dc4',font:{size:11,weight:'700'}}}
+const powerPrevious = [124.00, 84.25, 86.00, 65.00, 73.20, 61.75];
+const powerLatest   = [122.50, 84.00, 85.50, 64.75, 73.15, 62.25];
+const powerYearAgo  = [ 82.85, 68.45, 77.55, 65.60, 76.85, 65.60];
+
+const GAS_W26 = gasLatest[0];     // 142.75 — gas benchmark only
+const POWER_W26 = powerLatest[0]; // 122.50 — power benchmark only
+
+/* ---------- formatting helpers ---------- */
+function fmtChange(v){
+  if(v === null || v === undefined) return 'Not supplied';
+  const r = Math.round(v * 100) / 100;
+  if(r === 0) return '0.00';
+  return (r > 0 ? '+' : '') + r.toFixed(2);
+}
+function changeClass(v){
+  if(v === null || v === undefined || v === 0) return '';
+  return v > 0 ? 'chip-up' : 'chip-down';
+}
+function pctVsW26(latest, benchmark){ return ((latest - benchmark) / benchmark) * 100; }
+function fmtPct(v){
+  if(v === null || v === undefined || isNaN(v)) return 'Not supplied';
+  const r = Math.round(v * 10) / 10;
+  if(r === 0) return '0.0%';
+  return (r > 0 ? '+' : '') + r.toFixed(1) + '%';
+}
+function fmtNum(v, suffix){
+  return (v === null || v === undefined) ? 'Not supplied' : v.toFixed(2) + (suffix || '');
+}
+
+/* ---------- gas table ---------- */
+(function renderGasTable(){
+  const tbody = document.querySelector('#gasTable tbody');
+  contractLabels.forEach((label, i) => {
+    const change = gasLatest[i] - gasPrevious[i]; // mandatory: Latest - Previous
+    const vsYr = (gasLatest[i] - gasYearAgo[i]) / gasYearAgo[i] * 100;
+    const pct = i === 0 ? null : pctVsW26(gasLatest[i], GAS_W26);
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      `<td class="label">${label}</td>` +
+      `<td>${gasPrevious[i].toFixed(2)}</td>` +
+      `<td><strong style="color:#fff">${gasLatest[i].toFixed(2)}</strong></td>` +
+      `<td class="${changeClass(change)}">${fmtChange(change)}</td>` +
+      `<td>${gasYearAgo[i].toFixed(2)}</td>` +
+      `<td class="${vsYr >= 0 ? 'chip-up' : 'chip-down'}">${fmtPct(vsYr)}</td>` +
+      `<td>${i === 0 ? '— (front)' : fmtPct(pct)}</td>`;
+    tbody.appendChild(tr);
+  });
+})();
+
+/* ---------- power table ---------- */
+(function renderPowerTable(){
+  const tbody = document.querySelector('#powerTable tbody');
+  powerLabels.forEach((label, i) => {
+    const change = powerLatest[i] - powerPrevious[i];
+    const vsYr = (powerLatest[i] - powerYearAgo[i]) / powerYearAgo[i] * 100;
+    const pct = i === 0 ? null : pctVsW26(powerLatest[i], POWER_W26);
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      `<td class="label">${label}</td>` +
+      `<td>${powerPrevious[i].toFixed(2)}</td>` +
+      `<td><strong style="color:#fff">${powerLatest[i].toFixed(2)}</strong></td>` +
+      `<td class="${changeClass(change)}">${fmtChange(change)}</td>` +
+      `<td>${powerYearAgo[i].toFixed(2)}</td>` +
+      `<td class="${vsYr >= 0 ? 'chip-up' : 'chip-down'}">${fmtPct(vsYr)}</td>` +
+      `<td>${i === 0 ? '— (front)' : fmtPct(pct)}</td>`;
+    tbody.appendChild(tr);
+  });
+})();
+
+/* ---------- forward value table ---------- */
+(function renderForwardTable(){
+  const meta = {
+    'W-26': ['Front premium', 'Winter 26/27 renewals', 'The conflict premium in full. Fix short if you must cover it — never float into it.'],
+    'S-27': ['-34.3% under front (gas)', 'Apr–Sep 2027 starts', 'First value season. Reprices fastest if talks fail — secure while diplomacy suppresses it.'],
+    'W-27': ['-34.9% under front (gas)', 'Oct 2027–Mar 2028 starts', 'Winter 27/28 at a third under this winter. Prime lock candidate for 2-year terms.'],
+    'S-28': ['Around half the front', 'Summer 2028 starts', 'Gas at 68.00 p/th; power 64.75 £/MWh is below its own year-ago level — standout season.'],
+    'W-28': ['-46.8% under front (gas)', 'Winter 28/29 starts', 'Core of the 2–3 year value block. Gas firmed +0.50 in the latest move while power held broadly flat.'],
+    'S-29': ['-56.7% under front (gas)', 'Summer 2029 starts', 'Deep backwardation. Gas below its 1 Year Ago print — cheaper than history, securable now.'],
+    'W-29': ['-49.6% under front (gas)', 'Winter 29/30 starts', 'Strategic layer for budget-certain portfolios. Supplied change read +1.10 (+1.11 computed).'],
+    'S-30': ['-55.8% under front (gas)', 'Summer 2030 starts', 'Deepest season on the board. Gas below last year; power not supplied for this season.']
   };
-}
-function basePlugins(unit){
-  return {
-    legend:{labels:{color:'#fff',usePointStyle:true,pointStyle:'line',font:{size:11.5,weight:'600'},padding:16}},
-    tooltip:{backgroundColor:'rgba(20,18,60,.95)',borderColor:'rgba(255,255,255,.2)',borderWidth:1,
-      titleColor:'#fff',bodyColor:'#dadada',padding:12,cornerRadius:10,
-      callbacks:{label:(c)=>' '+c.dataset.label+': '+c.parsed.y.toFixed(2)+' '+unit}}
-  };
-}
-const pt=(c,r)=>({pointBackgroundColor:c,pointBorderColor:c,pointRadius:r,pointHoverRadius:r+2});
+  const tbody = document.querySelector('#forwardTable tbody');
+  contractLabels.forEach((label, i) => {
+    const pIdx = powerLabels.indexOf(label);
+    const gPct = i === 0 ? null : pctVsW26(gasLatest[i], GAS_W26);
+    const pPct = (pIdx > 0) ? pctVsW26(powerLatest[pIdx], POWER_W26) : null;
+    const m = meta[label];
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      `<td class="label">${label}</td>` +
+      `<td><strong style="color:#fff">${gasLatest[i].toFixed(2)}</strong></td>` +
+      `<td>${gasYearAgo[i].toFixed(2)}</td>` +
+      `<td>${i === 0 ? '— (front)' : fmtPct(gPct)}</td>` +
+      `<td>${pIdx >= 0 ? '<strong style="color:#fff">' + powerLatest[pIdx].toFixed(2) + '</strong>' : 'Not supplied'}</td>` +
+      `<td>${pIdx >= 0 ? powerYearAgo[pIdx].toFixed(2) : 'Not supplied'}</td>` +
+      `<td>${pIdx < 0 ? 'Not supplied' : (pIdx === 0 ? '— (front)' : fmtPct(pPct))}</td>` +
+      `<td style="white-space:normal">${m[0]}</td>` +
+      `<td style="white-space:normal">${m[1]}</td>` +
+      `<td style="white-space:normal">${m[2]}</td>`;
+    tbody.appendChild(tr);
+  });
+})();
 
-/* ---------- 1. GAS OFFERED RANGE ---------- */
-const gasLabels=['W-26','S-27','W-27','S-28','W-28','S-29','W-29','S-30'];
-new Chart(document.getElementById('gasChart'),{
-  type:'line',
-  data:{labels:gasLabels,datasets:[
-    {label:'Wed 29 Jul AM (latest)',data:[142.50,94.25,94.25,68.75,77.00,61.50,72.46,61.99],
-     borderColor:'#00d39a',backgroundColor:'rgba(0,211,154,0.10)',borderWidth:4,tension:0.35,fill:true,...pt('#00d39a',4)},
-    {label:'Tue 28 Jul AM (previous)',data:[137.00,93.75,94.00,68.50,76.00,60.50,70.59,60.70],
-     borderColor:'rgba(218,218,218,0.85)',backgroundColor:'transparent',borderWidth:2.5,tension:0.35,...pt('rgba(218,218,218,0.85)',3)},
-    {label:'1 Year Ago',data:[91.25,75.00,81.65,67.57,75.32,66.05,74.42,66.26],
-     borderColor:'rgba(221,64,255,0.55)',backgroundColor:'transparent',borderWidth:2,borderDash:[6,6],tension:0.35,...pt('rgba(221,64,255,0.6)',3)}
-  ]},
-  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
-    plugins:basePlugins('p/therm'),scales:baseScales('p/therm')}
-});
+/* ============================================================
+   Charts — Chart.js, Switch365 dark styling
+   ============================================================ */
+Chart.defaults.font.family = "'Montserrat', sans-serif";
+Chart.defaults.color = '#b9bdd6';
+Chart.defaults.borderColor = 'rgba(255,255,255,0.08)';
 
-/* ---------- 2. POWER OFFERED RANGE ---------- */
-const powLabels=['W-26','S-27','W-27','S-28','W-28','S-29'];
-new Chart(document.getElementById('powerChart'),{
-  type:'line',
-  data:{labels:powLabels,datasets:[
-    {label:'Wed 29 Jul AM (latest)',data:[121.50,84.50,86.25,65.00,73.75,63.63],
-     borderColor:'#00d39a',backgroundColor:'rgba(0,211,154,0.10)',borderWidth:4,tension:0.35,fill:true,...pt('#00d39a',4)},
-    {label:'Tue 28 Jul AM (previous)',data:[118.00,85.00,86.50,66.00,71.30,62.05],
-     borderColor:'rgba(218,218,218,0.85)',backgroundColor:'transparent',borderWidth:2.5,tension:0.35,...pt('rgba(218,218,218,0.85)',3)},
-    {label:'1 Year Ago',data:[83.35,69.00,78.00,66.50,77.00,66.50],
-     borderColor:'rgba(221,64,255,0.55)',backgroundColor:'transparent',borderWidth:2,borderDash:[6,6],tension:0.35,...pt('rgba(221,64,255,0.6)',3)}
-  ]},
-  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
-    plugins:basePlugins('£/MWh'),scales:baseScales('£/MWh')}
-});
+const TEAL = '#00d39a';
+const PURPLE = '#dd40ff';
+const PREV = '#8f9bd8';
 
-/* ---------- 3. FORWARD VALUE (DUAL AXIS) ---------- */
-const fwdChart=new Chart(document.getElementById('forwardChart'),{
-  type:'line',
-  data:{labels:gasLabels,datasets:[
-    {label:'Gas — latest (p/therm)',data:[142.50,94.25,94.25,68.75,77.00,61.50,72.46,61.99],yAxisID:'yGas',
-     borderColor:'#dd40ff',backgroundColor:'rgba(221,64,255,0.12)',borderWidth:4,tension:0.38,fill:true,...pt('#dd40ff',4)},
-    {label:'Power — latest (£/MWh)',data:[121.50,84.50,86.25,65.00,73.75,63.63,null,null],yAxisID:'yPow',
-     borderColor:'#00d39a',backgroundColor:'rgba(0,211,154,0.12)',borderWidth:4,tension:0.38,fill:true,spanGaps:false,...pt('#00d39a',4)},
-    {label:'Gas — 1 Year Ago',data:[91.25,75.00,81.65,67.57,75.32,66.05,74.42,66.26],yAxisID:'yGas',
-     borderColor:'rgba(221,64,255,0.45)',backgroundColor:'transparent',borderWidth:2,borderDash:[6,6],tension:0.38,...pt('rgba(221,64,255,0.55)',3)},
-    {label:'Power — 1 Year Ago',data:[83.35,69.00,78.00,66.50,77.00,66.50,null,null],yAxisID:'yPow',
-     borderColor:'rgba(0,211,154,0.45)',backgroundColor:'transparent',borderWidth:2,borderDash:[6,6],tension:0.38,spanGaps:false,...pt('rgba(0,211,154,0.55)',3)}
-  ]},
-  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
-    plugins:{legend:{labels:{color:'#fff',usePointStyle:true,pointStyle:'line',font:{size:11.5,weight:'600'},padding:16}},
-      tooltip:{backgroundColor:'rgba(20,18,60,.95)',borderColor:'rgba(255,255,255,.2)',borderWidth:1,titleColor:'#fff',bodyColor:'#dadada',padding:12,cornerRadius:10,
-        callbacks:{label:(c)=>c.parsed.y==null?null:' '+c.dataset.label+': '+c.parsed.y.toFixed(2)}}},
-    scales:{
-      x:{grid:{color:gridCol},ticks:{color:'#cfcfe8',font:{size:11,weight:'600'}}},
-      yGas:{position:'left',grid:{color:gridCol},ticks:{color:'#e0a6f5',font:{size:11}},
-        title:{display:true,text:'Gas · p/therm',color:'#dd40ff',font:{size:11,weight:'700'}}},
-      yPow:{position:'right',grid:{drawOnChartArea:false},ticks:{color:'#8af0d2',font:{size:11}},
-        title:{display:true,text:'Power · £/MWh',color:'#00d39a',font:{size:11,weight:'700'}}}
-    }}
-});
-function toggleFwd(idx,btn){
-  const meta=fwdChart.getDatasetMeta(idx);
-  meta.hidden=!meta.hidden;
-  btn.classList.toggle('off');
-  fwdChart.update();
+const gridOpts = { color: 'rgba(255,255,255,0.07)' };
+const legendOpts = {
+  labels: { color: '#dadada', usePointStyle: true, pointStyle: 'line', padding: 16, font: { size: 12, weight: 600 } }
+};
+const tooltipBase = {
+  backgroundColor: 'rgba(20,19,58,0.95)',
+  titleColor: '#ffffff',
+  bodyColor: '#dadada',
+  borderColor: 'rgba(0,211,154,0.4)',
+  borderWidth: 1,
+  padding: 12,
+  titleFont: { weight: 700 }
+};
+
+function makeLine(ctx, labels, datasets, yTitle){
+  return new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: legendOpts,
+        tooltip: Object.assign({}, tooltipBase, {
+          callbacks: { label: (c) => ` ${c.dataset.label}: ${Number(c.parsed.y).toFixed(2)} ${yTitle}` }
+        })
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: '#dadada', font: { weight: 600 } } },
+        y: {
+          grid: gridOpts,
+          ticks: { color: '#b9bdd6' },
+          title: { display: true, text: yTitle, color: '#9fa3c7', font: { size: 11, weight: 700 } }
+        }
+      }
+    }
+  });
 }
 
-/* ---------- 4. BRENT MARKET MOVEMENT ---------- */
-const brentDates=['6 Jul','7 Jul','8 Jul','9 Jul','10 Jul','13 Jul','14 Jul','15 Jul','16 Jul','17 Jul','20 Jul','21 Jul','22 Jul','23 Jul','24 Jul','27 Jul','28 Jul','29 Jul','30 Jul','31 Jul*'];
-const brentVals=[71.99,74.16,78.02,76.30,76.01,83.30,84.73,84.95,84.23,88.10,89.22,91.01,94.07,100.69,96.78,88.36,84.09,90.74,89.03,87.80];
-new Chart(document.getElementById('brentChart'),{
-  type:'line',
-  data:{labels:brentDates,datasets:[
-    {label:'Brent crude ($/bbl)',data:brentVals,
-     borderColor:'#ffc857',backgroundColor:'rgba(255,200,87,0.10)',borderWidth:3.5,tension:0.32,fill:true,
-     pointBackgroundColor:brentVals.map((v,i)=>i===13?'#ff5f6d':'#ffc857'),
-     pointBorderColor:brentVals.map((v,i)=>i===13?'#ff5f6d':'#ffc857'),
-     pointRadius:brentVals.map((v,i)=>(i===13||i===19)?5:3),pointHoverRadius:7}
-  ]},
-  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
-    plugins:{legend:{labels:{color:'#fff',usePointStyle:true,pointStyle:'line',font:{size:11.5,weight:'600'},padding:16}},
-      tooltip:{backgroundColor:'rgba(20,18,60,.95)',borderColor:'rgba(255,255,255,.2)',borderWidth:1,titleColor:'#fff',bodyColor:'#dadada',padding:12,cornerRadius:10,
-        callbacks:{label:(c)=>' Brent: $'+c.parsed.y.toFixed(2)+'/bbl'+(c.dataIndex===19?' (intraday)':'')}}},
-    scales:{x:{grid:{color:gridCol},ticks:{color:'#cfcfe8',font:{size:10},maxRotation:45}},
-      y:{grid:{color:gridCol},ticks:{color:'#cfcfe8',font:{size:11},callback:(v)=>'$'+v},
-        title:{display:true,text:'$/bbl',color:'#9d9dc4',font:{size:11,weight:'700'}}}}}
+/* Gas chart */
+makeLine(document.getElementById('gasChart'), contractLabels, [
+  { label: 'Latest — Fri 31 Jul AM', data: gasLatest, borderColor: TEAL, backgroundColor: 'rgba(0,211,154,0.12)',
+    fill: true, tension: 0.3, borderWidth: 3, pointRadius: 4, pointBackgroundColor: TEAL },
+  { label: 'Previous — Thu 30 Jul AM', data: gasPrevious, borderColor: PREV, backgroundColor: 'transparent',
+    tension: 0.3, borderWidth: 2, pointRadius: 3, pointBackgroundColor: PREV },
+  { label: '1 Year Ago', data: gasYearAgo, borderColor: PURPLE, backgroundColor: 'transparent',
+    borderDash: [7, 5], tension: 0.3, borderWidth: 2, pointRadius: 3, pointBackgroundColor: PURPLE }
+], 'p/therm');
+
+/* Power chart */
+makeLine(document.getElementById('powerChart'), powerLabels, [
+  { label: 'Latest — Fri 31 Jul AM', data: powerLatest, borderColor: TEAL, backgroundColor: 'rgba(0,211,154,0.12)',
+    fill: true, tension: 0.3, borderWidth: 3, pointRadius: 4, pointBackgroundColor: TEAL },
+  { label: 'Previous — Thu 30 Jul AM', data: powerPrevious, borderColor: PREV, backgroundColor: 'transparent',
+    tension: 0.3, borderWidth: 2, pointRadius: 3, pointBackgroundColor: PREV },
+  { label: '1 Year Ago', data: powerYearAgo, borderColor: PURPLE, backgroundColor: 'transparent',
+    borderDash: [7, 5], tension: 0.3, borderWidth: 2, pointRadius: 3, pointBackgroundColor: PURPLE }
+], '£/MWh');
+
+/* Dual-axis forward value chart (W-29 / S-30 power not supplied -> nulls) */
+const powerLatestFull  = powerLatest.concat([null, null]);
+const powerYearAgoFull = powerYearAgo.concat([null, null]);
+
+new Chart(document.getElementById('forwardChart'), {
+  type: 'line',
+  data: {
+    labels: contractLabels,
+    datasets: [
+      { label: 'Gas latest (p/th)', data: gasLatest, yAxisID: 'yGas',
+        borderColor: TEAL, backgroundColor: 'rgba(0,211,154,0.10)', fill: true,
+        tension: 0.3, borderWidth: 3, pointRadius: 4, pointBackgroundColor: TEAL },
+      { label: 'Gas 1 Year Ago (p/th)', data: gasYearAgo, yAxisID: 'yGas',
+        borderColor: TEAL, borderDash: [7, 5], backgroundColor: 'transparent',
+        tension: 0.3, borderWidth: 2, pointRadius: 3, pointBackgroundColor: TEAL },
+      { label: 'Power latest (£/MWh)', data: powerLatestFull, yAxisID: 'yPower', spanGaps: false,
+        borderColor: PURPLE, backgroundColor: 'transparent',
+        tension: 0.3, borderWidth: 3, pointRadius: 4, pointBackgroundColor: PURPLE },
+      { label: 'Power 1 Year Ago (£/MWh)', data: powerYearAgoFull, yAxisID: 'yPower', spanGaps: false,
+        borderColor: PURPLE, borderDash: [7, 5], backgroundColor: 'transparent',
+        tension: 0.3, borderWidth: 2, pointRadius: 3, pointBackgroundColor: PURPLE }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: legendOpts,
+      tooltip: Object.assign({}, tooltipBase, {
+        callbacks: {
+          label: (c) => c.parsed.y === null
+            ? ` ${c.dataset.label}: Not supplied`
+            : ` ${c.dataset.label}: ${Number(c.parsed.y).toFixed(2)}`
+        }
+      })
+    },
+    scales: {
+      x: { grid: { display: false }, ticks: { color: '#dadada', font: { weight: 600 } } },
+      yGas: {
+        position: 'left', grid: gridOpts,
+        ticks: { color: TEAL },
+        title: { display: true, text: 'Gas — p/therm', color: TEAL, font: { size: 11, weight: 700 } }
+      },
+      yPower: {
+        position: 'right', grid: { drawOnChartArea: false },
+        ticks: { color: PURPLE },
+        title: { display: true, text: 'Power — £/MWh', color: PURPLE, font: { size: 11, weight: 700 } }
+      }
+    }
+  }
 });
+
+/* ============================================================
+   Left pop-out navigation
+   ============================================================ */
+(function initNav(){
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+  function closeNav(){
+    nav.classList.remove('open');
+    toggle.classList.remove('open');
+    overlay.classList.remove('show');
+  }
+  toggle.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    toggle.classList.toggle('open', open);
+    overlay.classList.toggle('show', open);
+  });
+  overlay.addEventListener('click', closeNav);
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeNav(); });
+})();
 </script>
 </body>
 </html>
