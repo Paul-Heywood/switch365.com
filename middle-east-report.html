@@ -186,6 +186,21 @@ tr.front-row td:first-child{color:#E89BFF;}
 .divider-flow .node{background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.16); padding:6px 12px; border-radius:10px; color:#fff;}
 .divider-flow .arr{color:#00D39A; font-size:14px;}
 footer{margin-top:60px; padding-top:24px; border-top:1px solid rgba(255,255,255,0.1); text-align:center; color:#8F8FB0; font-size:11.5px;}
+/* expand button for wide-table cards */
+.expand-btn{
+  display:inline-flex; align-items:center; gap:6px; margin:0 0 14px; cursor:pointer;
+  background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.2); color:#DADADA;
+  font-family:'Montserrat',sans-serif; font-size:10px; font-weight:800; letter-spacing:1.5px;
+  text-transform:uppercase; padding:7px 14px; border-radius:10px; transition:all .2s;
+}
+.expand-btn:hover{background:rgba(0,211,154,0.16); border-color:#00D39A; color:#00D39A;}
+.expand-btn svg{width:13px; height:13px; flex:none;}
+.card.expanded{
+  position:fixed; inset:2.5%; z-index:1200; overflow:auto; margin:0;
+  background:rgba(24,23,70,0.99); backdrop-filter:blur(18px);
+  box-shadow:0 30px 80px rgba(0,0,0,0.6);
+}
+.card.expanded .expand-btn{background:rgba(221,64,255,0.16); border-color:#DD40FF; color:#E89BFF;}
 .duration-bar{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:18px;}
 .dur-box{flex:1; min-width:200px; max-width:300px; background:var(--card); border:1px solid var(--card-border); border-radius:14px; padding:14px; text-align:center;}
 .dur-box .t{font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#B9B9D0; font-weight:800;}
@@ -208,26 +223,26 @@ footer{margin-top:60px; padding-top:24px; border-top:1px solid rgba(255,255,255,
 <div class="backdrop" id="backdrop" onclick="toggleNav()"></div>
 <nav class="drawer" id="drawer">
   <h4>Report Sections</h4>
-  <a href="#summary" onclick="toggleNav()">Summary</a>
-  <a href="#current" onclick="toggleNav()">Current Conditions</a>
-  <a href="#gas" onclick="toggleNav()">Gas Offered Range</a>
-  <a href="#power" onclick="toggleNav()">Power Offered Range</a>
-  <a href="#futures" onclick="toggleNav()">Futures Market Explained</a>
-  <a href="#forward" onclick="toggleNav()">Forward Value Check</a>
-  <a href="#procurement" onclick="toggleNav()">Procurement Window</a>
-  <a href="#britishgas" onclick="toggleNav()">British Gas 18-Month Window</a>
-  <a href="#drivers" onclick="toggleNav()">Market Drivers</a>
-  <a href="#warnings" onclick="toggleNav()">Warning Signs</a>
-  <a href="#changed" onclick="toggleNav()">What Changed</a>
-  <a href="#timeline" onclick="toggleNav()">Timeline</a>
-  <a href="#rhetoric" onclick="toggleNav()">Rhetoric Tracker</a>
-  <a href="#ceasefire" onclick="toggleNav()">Ceasefire Reality Check</a>
-  <a href="#shipping" onclick="toggleNav()">Shipping Risk</a>
-  <a href="#stats" onclick="toggleNav()">Market Stats</a>
-  <a href="#lag" onclick="toggleNav()">Supplier Price-Book Lag</a>
-  <a href="#action" onclick="toggleNav()">Customer Action</a>
-  <a href="#quality" onclick="toggleNav()">Source Quality</a>
-  <a href="#links" onclick="toggleNav()">Source Links</a>
+  <a href="#summary" onclick="goTo(event,'summary')">Summary</a>
+  <a href="#current" onclick="goTo(event,'current')">Current Conditions</a>
+  <a href="#gas" onclick="goTo(event,'gas')">Gas Offered Range</a>
+  <a href="#power" onclick="goTo(event,'power')">Power Offered Range</a>
+  <a href="#futures" onclick="goTo(event,'futures')">Futures Market Explained</a>
+  <a href="#forward" onclick="goTo(event,'forward')">Forward Value Check</a>
+  <a href="#procurement" onclick="goTo(event,'procurement')">Procurement Window</a>
+  <a href="#britishgas" onclick="goTo(event,'britishgas')">British Gas 18-Month Window</a>
+  <a href="#drivers" onclick="goTo(event,'drivers')">Market Drivers</a>
+  <a href="#warnings" onclick="goTo(event,'warnings')">Warning Signs</a>
+  <a href="#changed" onclick="goTo(event,'changed')">What Changed</a>
+  <a href="#timeline" onclick="goTo(event,'timeline')">Timeline</a>
+  <a href="#rhetoric" onclick="goTo(event,'rhetoric')">Rhetoric Tracker</a>
+  <a href="#ceasefire" onclick="goTo(event,'ceasefire')">Ceasefire Reality Check</a>
+  <a href="#shipping" onclick="goTo(event,'shipping')">Shipping Risk</a>
+  <a href="#stats" onclick="goTo(event,'stats')">Market Stats</a>
+  <a href="#lag" onclick="goTo(event,'lag')">Supplier Price-Book Lag</a>
+  <a href="#action" onclick="goTo(event,'action')">Customer Action</a>
+  <a href="#quality" onclick="goTo(event,'quality')">Source Quality</a>
+  <a href="#links" onclick="goTo(event,'links')">Source Links</a>
 </nav>
 
 <div class="wrap">
@@ -300,6 +315,7 @@ footer{margin-top:60px; padding-top:24px; border-top:1px solid rgba(255,255,255,
   <div class="card">
     <h3>NBP Offered Gas Price Range (p/therm)</h3>
     <p class="muted">Internal broker / supplier evidence. Latest snapshot Wed 26 Aug AM versus previous snapshot Tue 25 Aug AM. Internal supplier offers remain the primary actionable customer price; public NBP and TTF provide context only.</p>
+    <button class="expand-btn" onclick="toggleExpand(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>Expand</button>
     <div class="chart-card"><h4>Graph 1: NBP Offered Gas Price Range</h4><div class="chart-box"><canvas id="gasChart"></canvas></div></div>
     <div class="table-wrap">
       <table>
@@ -330,6 +346,7 @@ footer{margin-top:60px; padding-top:24px; border-top:1px solid rgba(255,255,255,
   <div class="card">
     <h3>UK Power Offered Price Range (&pound;/MWh)</h3>
     <p class="muted">Internal broker / supplier evidence. Latest snapshot Wed 26 Aug AM versus previous snapshot Tue 25 Aug AM.</p>
+    <button class="expand-btn" onclick="toggleExpand(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>Expand</button>
     <div class="chart-card"><h4>Graph 2: UK Power Offered Price Range</h4><div class="chart-box"><canvas id="powerChart"></canvas></div></div>
     <div class="table-wrap">
       <table>
@@ -377,6 +394,7 @@ footer{margin-top:60px; padding-top:24px; border-top:1px solid rgba(255,255,255,
 <section id="forward">
   <div class="section-head"><div class="section-num">6</div><h2>2027 / 2028 / 2029 / 2030 Forward Value Check</h2></div>
   <div class="card">
+    <button class="expand-btn" onclick="toggleExpand(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>Expand</button>
     <div class="chart-card"><h4>Graph 3: Forward Value Check (latest offered vs 1 year ago)</h4><div class="chart-box"><canvas id="forwardChart"></canvas></div></div>
     <div class="table-wrap">
       <table>
@@ -545,6 +563,7 @@ footer{margin-top:60px; padding-top:24px; border-top:1px solid rgba(255,255,255,
 <section id="rhetoric">
   <div class="section-head"><div class="section-num">13</div><h2>Rhetoric Tracker</h2></div>
   <div class="card">
+    <button class="expand-btn" onclick="toggleExpand(this)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>Expand</button>
     <p class="muted">Physical flows are the reality check. Statements below are separated into fresh versus old, and claims versus confirmed facts.</p>
     <div class="table-wrap">
       <table class="rhet">
@@ -794,6 +813,32 @@ function toggleNav(){
   document.getElementById('burger').classList.toggle('open');
   document.getElementById('backdrop').classList.toggle('show');
 }
+function goTo(e, id){
+  e.preventDefault();
+  var el = document.getElementById(id);
+  if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+  var d = document.getElementById('drawer');
+  if(d && d.classList.contains('open')){ toggleNav(); }
+  if(history.replaceState){ history.replaceState(null, '', '#'+id); }
+}
+var EXPAND_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M16 3h3a2 2 0 0 1 2 2v3"/><path d="M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>';
+var COLLAPSE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8V5a2 2 0 0 1 2-2h3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M21 16v3a2 2 0 0 1-2 2h-3"/></svg>';
+function toggleExpand(btn){
+  var card = btn.closest('.card');
+  var open = card.classList.toggle('expanded');
+  btn.innerHTML = (open ? COLLAPSE_ICON : EXPAND_ICON) + (open ? 'Close' : 'Expand');
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){
+    document.querySelectorAll('.card.expanded').forEach(function(c){
+      c.classList.remove('expanded');
+      var b = c.querySelector('.expand-btn');
+      if(b){ b.innerHTML = EXPAND_ICON + 'Expand'; }
+    });
+    document.body.style.overflow = '';
+  }
+});
 </script>
 <script>
 const gridCol = 'rgba(255,255,255,0.08)';
