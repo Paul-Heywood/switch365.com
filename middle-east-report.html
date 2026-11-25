@@ -1,696 +1,587 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Switch365 Daily UK Business Energy Market Intelligence | Tuesday 24 November 2026</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Switch365 Live Energy Intelligence | Wednesday 25 November 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
 :root{
-  --navy:#262262; --deep:#26227F; --magenta:#DD40FF; --teal:#00D39A;
-  --white:#FFFFFF; --muted:#DADADA; --amber:#FFB020; --red:#FF5D7A;
-  --card:rgba(255,255,255,0.055); --card-brd:rgba(255,255,255,0.12);
+  --navy:#262262; --navy2:#26227F; --green:#00D39A; --pink:#DD40FF;
+  --white:#FFFFFF; --grey:#DADADA; --amber:#FFB547; --red:#FF5C7A; --teal:#27E0C8;
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'Montserrat',sans-serif;background:linear-gradient(160deg,#262262 0%,#26227F 55%,#1c1a52 100%);color:var(--white);line-height:1.6;min-height:100vh;}
-a{color:var(--teal);text-decoration:none;} a:hover{text-decoration:underline;}
-.wrap{max-width:1180px;margin:0 auto;padding:0 20px;}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',Arial,sans-serif;background:linear-gradient(160deg,#262262 0%,#26227F 55%,#1B1A4E 100%);color:#fff;min-height:100vh;line-height:1.6}
+a{color:var(--green);text-decoration:none}
+a:hover{text-decoration:underline}
+img{max-width:100%}
 /* top bar */
-.topbar{position:sticky;top:0;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(28,26,82,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--card-brd);}
-.topbar .meta{text-align:right;font-size:12px;color:var(--muted);letter-spacing:.4px;}
-.topbar .meta strong{display:block;color:var(--white);font-size:13px;font-weight:700;}
-.badge-live{display:inline-block;margin-top:3px;padding:2px 10px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:1.2px;color:#06281f;background:linear-gradient(90deg,var(--teal),#7ef0cd);}
-.hamburger{width:44px;height:44px;border-radius:12px;border:1px solid var(--card-brd);background:var(--card);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;}
-.hamburger span{display:block;width:20px;height:2px;background:var(--white);border-radius:2px;transition:.25s;}
+.topbar{position:sticky;top:0;z-index:900;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 20px;background:rgba(27,27,78,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+.burger{width:46px;height:46px;border:1px solid rgba(255,255,255,.25);border-radius:12px;background:rgba(255,255,255,.06);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;flex:0 0 auto}
+.burger span{display:block;width:22px;height:2.5px;background:#fff;border-radius:2px;transition:.25s}
+.burger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+.topmeta{text-align:right;font-size:12px;color:var(--grey);letter-spacing:.4px}
+.topmeta strong{display:block;color:#fff;font-size:13px;font-weight:700}
+.topmeta .badge-mini{display:inline-block;margin-top:4px;padding:2px 10px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:1.2px;background:linear-gradient(90deg,#00D39A,#DD40FF);color:#1B1A4E}
 /* drawer */
-.backdrop{position:fixed;inset:0;background:rgba(10,8,40,0.6);z-index:950;opacity:0;pointer-events:none;transition:.25s;}
-.backdrop.open{opacity:1;pointer-events:auto;}
-.drawer{position:fixed;top:0;left:0;bottom:0;width:300px;max-width:84vw;z-index:960;background:linear-gradient(180deg,#262262,#1c1a52);border-right:1px solid var(--card-brd);transform:translateX(-105%);transition:transform .3s ease;overflow-y:auto;padding:22px 18px;}
-.drawer.open{transform:translateX(0);}
-.drawer h3{font-size:12px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;}
-.drawer a{display:block;color:var(--white);font-size:13.5px;font-weight:600;padding:9px 10px;border-radius:10px;margin-bottom:2px;}
-.drawer a:hover{background:rgba(255,255,255,0.08);text-decoration:none;color:var(--teal);}
-.drawer a .num{color:var(--magenta);font-weight:800;margin-right:8px;font-size:11px;}
+.drawer{position:fixed;top:0;left:0;height:100%;width:300px;max-width:85vw;background:rgba(24,23,70,.98);backdrop-filter:blur(14px);z-index:950;transform:translateX(-105%);transition:transform .3s ease;padding:26px 20px;overflow-y:auto;border-right:1px solid rgba(255,255,255,.1)}
+.drawer.open{transform:translateX(0)}
+.drawer h3{font-size:12px;letter-spacing:2px;color:var(--teal);margin-bottom:14px;text-transform:uppercase}
+.drawer a{display:block;color:var(--grey);font-size:13.5px;font-weight:600;padding:8px 10px;border-radius:8px}
+.drawer a:hover{background:rgba(0,211,154,.12);color:#fff;text-decoration:none}
+.backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:940;opacity:0;pointer-events:none;transition:opacity .3s}
+.backdrop.show{opacity:1;pointer-events:auto}
+/* layout */
+.wrap{max-width:1080px;margin:0 auto;padding:0 18px 60px}
 /* hero */
-.hero{padding:34px 0 8px;text-align:center;}
-.hero-logo{display:block;margin:0 auto 18px;height:64px;filter:drop-shadow(0 6px 18px rgba(0,0,0,.35));}
-.hero-eyebrow{text-align:center;font-size:12px;font-weight:800;letter-spacing:2.4px;color:var(--teal);text-transform:uppercase;}
-.hero-badge{display:block;width:fit-content;margin:10px auto 18px;padding:5px 16px;border-radius:999px;border:1px solid rgba(221,64,255,.5);color:var(--magenta);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;}
-.hero h1{font-size:clamp(24px,4vw,40px);font-weight:900;line-height:1.22;margin:6px 0 14px;background:linear-gradient(90deg,#fff,#e9d9ff);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.hero .deck{font-size:16px;color:var(--muted);font-weight:500;margin:0 auto 18px;max-width:980px;}
-.hero p.body{color:#efefff;font-size:15px;margin:0 auto 14px;max-width:1020px;}
-.hero .close-line{margin:18px 0 6px;font-weight:800;font-size:16px;color:var(--teal);}
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 4px;justify-content:center;}
-.chip{background:var(--card);border:1px solid var(--card-brd);border-radius:14px;padding:10px 14px;font-size:12px;backdrop-filter:blur(8px);}
-.chip b{display:block;font-size:15px;font-weight:800;}
-.chip .lbl{color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:1px;font-weight:700;}
-.down{color:var(--teal);font-weight:800;} .up{color:var(--red);font-weight:800;} .warn{color:var(--amber);font-weight:800;}
+.hero{text-align:center;padding:44px 10px 26px}
+.hero .logo{width:230px;max-width:60vw;margin:0 auto 22px;display:block;filter:drop-shadow(0 6px 18px rgba(0,0,0,.35))}
+.hero .live{display:inline-block;padding:7px 20px;border-radius:999px;background:linear-gradient(90deg,#00D39A,#DD40FF);color:#1B1A4E;font-weight:800;font-size:11.5px;letter-spacing:2px;margin-bottom:20px}
+.hero .eyebrow{font-size:12px;letter-spacing:2.5px;color:var(--teal);font-weight:700;text-transform:uppercase;margin-bottom:14px}
+.hero h1{font-size:clamp(24px,4.4vw,42px);line-height:1.18;font-weight:900;max-width:920px;margin:0 auto 16px;background:linear-gradient(90deg,#fff,#CFCBFF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .deck{font-size:15.5px;color:var(--grey);max-width:820px;margin:0 auto 26px;font-weight:500}
+.hero p.body{text-align:left;max-width:860px;margin:0 auto 16px;font-size:15px;color:#EFEEFF}
+.hero .close-line{max-width:860px;margin:22px auto 0;text-align:left;font-weight:800;font-size:16px;background:linear-gradient(90deg,#00D39A,#DD40FF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:26px auto 0;max-width:860px}
+.pill{padding:8px 16px;border-radius:999px;font-size:11.5px;font-weight:800;letter-spacing:1px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06)}
+.pill.red{color:var(--red);border-color:rgba(255,92,122,.5)}
+.pill.amber{color:var(--amber);border-color:rgba(255,181,71,.5)}
+.pill.green{color:var(--green);border-color:rgba(0,211,154,.5)}
 /* sections */
-section{margin:34px 0;}
-.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px;}
-.sec-head .n{font-size:13px;font-weight:900;color:var(--magenta);letter-spacing:1px;}
-.sec-head h2{font-size:clamp(20px,2.6vw,27px);font-weight:800;}
-.sec-sub{color:var(--muted);font-size:13px;margin-bottom:16px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;}
-.card{background:var(--card);border:1px solid var(--card-brd);border-radius:18px;padding:22px;backdrop-filter:blur(10px);box-shadow:0 14px 34px rgba(0,0,0,.25);margin-bottom:14px;}
-.card h3{font-size:16px;font-weight:800;margin-bottom:10px;}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-@media(max-width:900px){.grid2,.grid3{grid-template-columns:1fr;}}
-/* mandatory stacked pricing layout: chart above table, every viewport */
-.pricing-section-stack{display:flex;flex-direction:column;gap:14px;width:100%;}
-.pricing-chart-card,.pricing-table-card{display:block;width:100%;max-width:100%;}
-.pricing-section-stack > .pricing-chart-card{order:1;}
-.pricing-section-stack > .pricing-table-card{order:2;}
+section{margin-top:54px}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:18px;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:12px}
+.sec-num{font-size:13px;font-weight:800;color:var(--pink);letter-spacing:1px}
+.sec-head h2{font-size:clamp(20px,3vw,27px);font-weight:800}
+.sec-sub{color:var(--grey);font-size:13px;margin:-10px 0 18px}
+.card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:22px;backdrop-filter:blur(8px);box-shadow:0 10px 30px rgba(0,0,0,.25);margin-bottom:18px}
+.card h3{font-size:16px;font-weight:800;margin-bottom:10px;color:#fff}
+.card p,.card li{font-size:14px;color:#E9E8FB}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.stat{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:18px}
+.stat .k{font-size:11px;letter-spacing:1.5px;color:var(--grey);text-transform:uppercase;font-weight:700}
+.stat .v{font-size:26px;font-weight:800;margin:6px 0 2px}
+.stat .d{font-size:12.5px;font-weight:700}
+.stat .s{font-size:11.5px;color:var(--grey);margin-top:6px}
+.down{color:var(--green)} .up{color:var(--red)} .flat{color:var(--grey)} .warn{color:var(--amber)}
+.chartbox{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:18px;margin-bottom:18px}
+.chartbox .ctitle{font-size:13px;font-weight:800;letter-spacing:.6px;margin-bottom:4px}
+.chartbox .cnote{font-size:11.5px;color:var(--grey);margin-bottom:10px}
+.chartwrap{position:relative;width:100%;height:433px}
+.chartwrap canvas{width:100%!important;height:100%!important;display:block}
+@media(max-width:640px){.chartwrap{height:360px}}
 /* tables */
-table{width:100%;border-collapse:collapse;font-size:13.5px;}
-th,td{padding:10px 12px;text-align:right;border-bottom:1px solid rgba(255,255,255,0.08);}
-th:first-child,td:first-child{text-align:left;}
-th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px;font-weight:800;}
-tr:hover td{background:rgba(255,255,255,0.04);}
-.tbl-scroll{overflow-x:auto;}
-.note{font-size:12.5px;color:var(--muted);margin-top:10px;}
-.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:10.5px;font-weight:800;letter-spacing:.8px;}
-.pill.t{background:rgba(0,211,154,.14);color:var(--teal);border:1px solid rgba(0,211,154,.4);}
-.pill.a{background:rgba(255,176,32,.13);color:var(--amber);border:1px solid rgba(255,176,32,.4);}
-.pill.r{background:rgba(255,93,122,.13);color:var(--red);border:1px solid rgba(255,93,122,.4);}
-.pill.m{background:rgba(221,64,255,.13);color:var(--magenta);border:1px solid rgba(221,64,255,.4);}
-ul.tight{padding-left:20px;} ul.tight li{margin-bottom:8px;font-size:14px;color:#efefff;}
-.kv{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:13.5px;}
-.kv span:first-child{color:var(--muted);}
-/* ladder */
-.ladder{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0;}
-.rung{flex:1;min-width:130px;border-radius:14px;padding:12px;border:1px solid var(--card-brd);background:rgba(255,255,255,.04);font-size:11.5px;}
-.rung b{display:block;font-size:12px;margin-bottom:4px;}
-.rung.hit{background:rgba(255,176,32,.12);border-color:rgba(255,176,32,.5);}
-.rung .tag{font-size:9.5px;font-weight:800;letter-spacing:1px;color:var(--muted);text-transform:uppercase;}
-/* flow bars */
-.fbar{margin:12px 0;}
-.fbar .lbl{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:4px;}
-.fbar .track{height:16px;border-radius:8px;background:rgba(255,255,255,.07);overflow:hidden;}
-.fbar .fill{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--teal),var(--magenta));}
-footer{margin:40px 0 30px;color:var(--muted);font-size:12px;text-align:center;}
-.src-list li{margin-bottom:10px;font-size:13px;color:#efefff;}
-.ev{font-size:10px;font-weight:800;letter-spacing:1px;padding:2px 8px;border-radius:6px;background:rgba(255,255,255,.1);color:var(--muted);text-transform:uppercase;}
-.chart-wrap{position:relative;height:433px;width:100%;}
+.tablewrap{overflow-x:auto;border-radius:16px;border:1px solid rgba(255,255,255,.1)}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:rgba(255,255,255,.04)}
+th{background:rgba(0,211,154,.14);color:#fff;text-align:left;padding:12px 14px;font-size:11.5px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
+td{padding:11px 14px;border-top:1px solid rgba(255,255,255,.07);color:#EFEEFF;white-space:nowrap}
+tr:first-child td{font-weight:700;background:rgba(221,64,255,.07)}
+td.neg{color:var(--green);font-weight:700}
+td.pos{color:var(--red);font-weight:700}
+.callout{border-left:4px solid var(--pink);background:rgba(221,64,255,.1);border-radius:0 14px 14px 0;padding:16px 18px;margin:16px 0;font-size:14px}
+.callout.teal{border-color:var(--teal);background:rgba(39,224,200,.09)}
+.callout.amber{border-color:var(--amber);background:rgba(255,181,71,.09)}
+.callout strong{color:#fff}
+.tag{display:inline-block;padding:2px 9px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:1px;margin-left:6px;vertical-align:middle}
+.tag.int{background:rgba(221,64,255,.25);color:#F2C8FF}
+.tag.mod{background:rgba(255,181,71,.22);color:#FFD9A0}
+.tag.ver{background:rgba(0,211,154,.2);color:#9DF2DC}
+ul.tick{list-style:none;padding-left:0}
+ul.tick li{padding:7px 0 7px 26px;position:relative}
+ul.tick li:before{content:"";position:absolute;left:2px;top:13px;width:12px;height:12px;border-radius:3px;background:linear-gradient(135deg,#00D39A,#DD40FF)}
+ol.num{padding-left:22px}
+ol.num li{padding:6px 0}
+.mandate{font-style:italic;color:var(--teal);font-weight:600}
+footer{margin-top:60px;padding:26px 0;border-top:1px solid rgba(255,255,255,.1);font-size:12px;color:var(--grey);text-align:center}
+@media(max-width:640px){.hero .logo{width:190px}.stat .v{font-size:22px}td,th{padding:9px 10px}}
 </style>
 <base target="_blank">
 </head>
 <body>
-<div class="topbar">
-  <button class="hamburger" id="navToggle" aria-label="Open navigation"><span></span><span></span><span></span></button>
-  <div class="meta"><strong>Tuesday 24 November 2026</strong>Europe/London (GMT) · Research window: Mon 23 PM to Tue 24 AM<span class="badge-live">Live Intelligence</span></div>
-</div>
-<div class="backdrop" id="backdrop"></div>
+<header class="topbar">
+  <button class="burger" id="burger" aria-label="Open navigation"><span></span><span></span><span></span></button>
+  <div class="topmeta">
+    <strong>Wednesday 25 November 2026</strong>
+    Europe/London (GMT) · Research window: Tue 24 Nov PM to Wed 25 Nov AM
+    <span class="badge-mini">LIVE INTELLIGENCE</span>
+  </div>
+</header>
 <nav class="drawer" id="drawer">
   <h3>Report Sections</h3>
-  <a href="#summary"><span class="num">01</span>Summary</a>
-  <a href="#current"><span class="num">02</span>Current Conditions</a>
-  <a href="#gas"><span class="num">03</span>Gas Offered Range</a>
-  <a href="#power"><span class="num">04</span>Power Offered Range</a>
-  <a href="#futures"><span class="num">05</span>Futures Explained</a>
-  <a href="#forward"><span class="num">06</span>Forward Value</a>
-  <a href="#procurement"><span class="num">07</span>Procurement Window</a>
-  <a href="#britishgas"><span class="num">08</span>British Gas 18-Month Window</a>
-  <a href="#drivers"><span class="num">09</span>Market Drivers</a>
-  <a href="#warnings"><span class="num">10</span>Warning Signs</a>
-  <a href="#changed"><span class="num">11</span>What Changed</a>
-  <a href="#timeline"><span class="num">12</span>Timeline</a>
-  <a href="#rhetoric"><span class="num">13</span>Rhetoric Tracker</a>
-  <a href="#ceasefire"><span class="num">14</span>Ceasefire Reality</a>
-  <a href="#shipping"><span class="num">15</span>Shipping Risk</a>
-  <a href="#stats"><span class="num">16</span>Market Stats</a>
-  <a href="#lag"><span class="num">17</span>Supplier Price-Book Lag</a>
-  <a href="#action"><span class="num">18</span>Customer Action</a>
-  <a href="#quality"><span class="num">19</span>Source Quality</a>
-  <a href="#links"><span class="num">20</span>Sources</a>
+  <a href="#summary">1 · Summary</a>
+  <a href="#current">2 · Current Conditions</a>
+  <a href="#gas">3 · Gas Offered Range</a>
+  <a href="#power">4 · Power Offered Range</a>
+  <a href="#futures">5 · Futures Explained</a>
+  <a href="#forward">6 · Forward Value</a>
+  <a href="#procurement">7 · Procurement Window</a>
+  <a href="#britishgas">8 · British Gas 18-Month Window</a>
+  <a href="#drivers">9 · Market Drivers</a>
+  <a href="#warnings">10 · Warning Signs</a>
+  <a href="#changed">11 · What Changed</a>
+  <a href="#timeline">12 · Timeline</a>
+  <a href="#rhetoric">13 · Rhetoric Tracker</a>
+  <a href="#ceasefire">14 · Ceasefire Reality</a>
+  <a href="#shipping">15 · Shipping Risk</a>
+  <a href="#stats">16 · Market Stats</a>
+  <a href="#lag">17 · Supplier Price-Book Lag</a>
+  <a href="#action">18 · Customer Action</a>
+  <a href="#quality">19 · Source Quality</a>
+  <a href="#links">20 · Sources</a>
 </nav>
-<div class="wrap">
+<div class="backdrop" id="backdrop"></div>
+<main class="wrap">
 
-<!-- ============ SECTION 1: SUMMARY ============ -->
 <section id="summary">
   <div class="hero">
-    <img class="hero-logo" src="https://switch365.com/assets/img/logos/switch365-energy-comparison-website.svg" alt="Switch365">
-    <div class="hero-eyebrow">Switch365 Energy Intelligence | Tuesday 24 November 2026</div>
-    <span class="hero-badge">Live Intelligence</span>
-    <h1>TANKER THREATS MULTIPLY, BUT GAS PRICES FALL. WHAT IS THE MARKET SEEING THAT THE HEADLINES ARE MISSING?</h1>
-    <p class="deck">Threats to tankers are mounting, yet the latest W-26 gas reference and the full Tuesday offered-season sheet have slipped. The market is pricing expected supply and demand, not every reported threat as a confirmed loss of energy.</p>
-    <p class="body">The tanker headlines look bullish for energy. The United States is investigating suspected cyber incidents involving as many as 50 oil, LPG and chemical carriers, with Iran the primary suspect according to the Wall Street Journal account Reuters could not independently verify, while Iran's Revolutionary Guards claim three oil tankers struck mines in the Strait of Hormuz on Monday. Neither report establishes a fresh LNG production shutdown or an independently verified cargo loss. Yet Switch365's W-26 gas working reference has eased from 227.030p to 225.100p/therm, down 0.85% since Monday, and Dutch TTF futures gave back most of Monday's intraday spike by the close.</p>
-    <p class="body">Markets price expected supply and demand, not danger alone. Brent settled at a three-month low of $89.37 a barrel on Monday, down 3.46%, as Libyan Sharara pipeline flows restarted and Middle East crude movements increased. Diplomacy can also reduce a geopolitical risk premium without making Hormuz safe. But oil is not LNG, and none of this proves additional gas has reached Britain. QatarEnergy's force majeure now runs to the end of December, European storage is below 69% and winter demand is building. A verified new LNG interruption could quickly reverse prices.</p>
-    <p class="body">For UK businesses, the difference between a falling wholesale indicator and an executable supplier quotation is decisive. Today's full Switch365 season sheet, supplied Tuesday morning, shows all eight offered gas seasons and all six offered power seasons easing versus Monday, the first across-the-board daily decline on this dataset. That is a genuine improvement in the offered range, but it is still an indicator, not a rate a supplier has promised to honour. Review live future-start prices, full contract costs, renewal dates and quote validity before advising. A broad one-day decline does not tell us the market bottom. The opportunity is a genuinely available price, not a prediction.</p>
-    <p class="close-line">Threats grab headlines; physical supply and valid supplier quotes determine what a UK business actually pays.</p>
-    <div class="chips">
-      <div class="chip"><span class="lbl">Tue W-26 Gas (working ref)</span><b>225.100p <span class="down">-0.85%</span></b>Mon 23 &rarr; Tue 24</div>
-      <div class="chip"><span class="lbl">Tue W-26 Power (modelled)</span><b>&pound;174.38 <span class="down">-0.77%</span></b>Mon 23 &rarr; Tue 24</div>
-      <div class="chip"><span class="lbl">Full Tue Season Sheet</span><b class="down">Gas 8/8 down · Power 6/6 down</b>New Tuesday supplier data</div>
-      <div class="chip"><span class="lbl">Brent (Mon settle)</span><b class="down">$89.37 · -3.46%</b>Three-month low</div>
-      <div class="chip"><span class="lbl">EU Storage (GIE)</span><b class="warn">68.9% · DE 56.5%</b>Status 23 Nov, withdrawal season</div>
-      <div class="chip"><span class="lbl">Cyber / Mine Claims</span><b class="warn">Unverified</b>Attribution and losses not established</div>
+    <img class="logo" src="https://switch365.com/assets/img/logos/switch365-energy-comparison-website.svg" alt="Switch365">
+    <span class="live">LIVE INTELLIGENCE</span>
+    <div class="eyebrow">Switch365 Live Energy Intelligence | Wednesday 25 November 2026</div>
+    <h1>Europe's gas reserves are shrinking. Colder weather and low wind could make matters worse.</h1>
+    <p class="deck">Europe's winter buffer is already unusually thin. A sustained cold spell, especially if accompanied by weaker wind generation, could increase competition for gas just as the forward market is offering lower prices.</p>
+    <p class="body">Europe enters the latest cold spell with less gas in reserve than normal. Official GIE data show EU underground storage at 68.41%, with Germany only 55.90%, for the 23 November gas day. The latest Met Office forecast confirms cold conditions and overnight frost risk across parts of Britain. Lower temperatures tend to increase heating demand, forcing Europe to rely more heavily on withdrawals from storage and continuing pipeline and LNG imports.</p>
+    <p class="body">Electricity adds a second possible pressure point. If wind generation weakens, gas-fired power stations may have to produce more electricity, increasing gas demand just when heating requirements are higher. But this is a conditional risk, not a claim that British wind output has collapsed today: current NESO/Elexon generation and forecast data must be checked, along with nuclear availability, imports and demand. Meanwhile Qatar LNG export constraints and persistent maritime risks reduce some flexibility, although a threat is not the same as lost supply.</p>
+    <p class="body">The striking commercial point is that prices are still falling. Switch365's W-26 gas working reference is 218.000p/therm, down 3.15% since Tuesday, while modelled W-26 electricity is £169.43/MWh, down 2.84%. The latest complete supplier-season comparison, Tuesday 24 to Wednesday 25 November, shows all nine gas rows lower and six of seven power rows lower. Businesses should compare valid future-start contracts and full costs while prices remain attractive, without assuming that lower storage guarantees a price spike or that today's market level is the bottom.</p>
+    <p class="close-line">Lower forward prices can create an opportunity today, while cold weather, thin reserves and a future low-wind spell could change tomorrow's risk.</p>
+    <div class="pills">
+      <span class="pill red">STORAGE BUFFER: LOW</span>
+      <span class="pill amber">WEATHER RISK: COLD SPELL</span>
+      <span class="pill amber">WIND RISK: CONDITIONAL</span>
+      <span class="pill amber">ROUTE RISK: HIGH</span>
+      <span class="pill green">PRICE DIRECTION: FALLING</span>
     </div>
   </div>
+
+  <div class="sec-head"><span class="sec-num">SECTION 1</span><h2>Summary: Overnight in 30 Seconds</h2></div>
   <div class="card">
-    <h3>Overnight in 30 Seconds <span class="ev">Mon 23 PM &rarr; Tue 24 AM</span></h3>
-    <ul class="tight">
-      <li><b>Reuters, Tue 24 (00:18 UTC), via WSJ:</b> the US is investigating possible cyberattacks on as many as 50 ships carrying oil, LPG and chemical products, with Iran the primary suspect and Russia also seen as possible. Reuters could not independently verify the report. <span class="pill a">UNVERIFIED CLAIM</span></li>
-      <li><b>IRGC statement via IRNA, late Mon 23:</b> three oil tankers allegedly struck naval mines in the Strait of Hormuz, two in the east of the strait. Vessels unnamed, no independent confirmation, CENTCOM has not responded. The US disputed a similar IRGC mine claim in September. <span class="pill a">IRANIAN STATEMENT</span></li>
-      <li><b>UKMTO confirmed attacks (weekend, dated):</b> warnings 214-26 (Fri 20), 215-26 and 216-26 (Sat 21) record tankers struck by unknown projectiles near Khasab, no casualties; advisory 217-26 (Sun 22) covers a Gulf of Oman incident. November has seen at least 22 reported attacks, the highest monthly tempo since the war began (CNN/Jerusalem Post). <span class="pill r">UKMTO REPORT</span></li>
-      <li><b>Oil, Mon 23 settle:</b> Brent fell 3.46% to $89.37/bbl, a three-month low, as Libya's Sharara pipeline restarted after valve interference and Middle East flows increased; early Tuesday it held near $89. A crude supply story, not proof of extra UK gas. <span class="pill t">VERIFIED MARKET DATA</span></li>
-      <li><b>TTF, Mon 23:</b> month-ahead TTF spiked intraday towards &euro;96/MWh on cold-snap and low-storage fears (Guardian live coverage), then faded; the Yahoo front-month series settled Monday at &euro;89.74 versus &euro;88.45 on Friday, and Trading Economics' CFD read &euro;90.16 early Tuesday, +0.47%. Not a same-instrument crash, a spike that mostly unwound. <span class="pill t">VERIFIED MARKET DATA</span></li>
-      <li><b>GIE storage, status 23 Nov:</b> EU 68.9% full (780 TWh), Germany 56.5%, both in net withdrawal. Storage is a buffer, not immunity. <span class="pill t">VERIFIED FLOW DATA</span></li>
-      <li><b>Switch365 internal, Tue 24 AM:</b> W-26 gas 225.100p (-0.85%), modelled W-26 power &pound;174.38 (-0.77%), and the full offered-season sheet fell across every row. <span class="pill m">SWITCH365 INTERNAL DATA</span></li>
-      <li><b>Action:</b> use the softer offered range to test live, valid future-start quotes for each customer's contract end date today. Wholesale moved first; supplier books may still follow.</li>
+    <ul class="tick">
+      <li><strong>GIE official storage (23 Nov gas day, status 24 Nov 06:00 CEST):</strong> EU 68.41% full, 774.70 TWh stored; Germany 55.90%, 138.26 TWh. Third-party trackers put the level roughly 10 points below the same date in 2025 and about 18 points below the 2017-2025 average, with net withdrawals near 2.8 TWh a day around 22 November.</li>
+      <li><strong>Met Office national forecast (issued Wed 25 Nov 04:00 UTC):</strong> cold and generally cloudy, overnight frost where skies clear, wintry weather risk for northern hills on Friday, with potentially milder weather from the west later. A forecast driver, not a measured demand increase.</li>
+      <li><strong>Wind risk is conditional:</strong> early 25 November GB observations indicated substantial national wind output, so no low-wind claim is made today. If wind falls later this week, gas-fired generation could rise and compound storage withdrawals. NESO/Elexon same-timestamp verification required.</li>
+      <li><strong>New Switch365 Wednesday data (internal, direct user):</strong> W-26 gas working reference 218.000p/therm, down 7.100p (3.15%) from Tuesday's 225.100p. Modelled W-26 power £169.43/MWh, down £4.95 (2.84%).</li>
+      <li><strong>Complete supplier-season sheet (Tue 24 AM to Wed 25 Nov AM):</strong> all nine gas rows fell, led by S-27 down 8.00p/therm. Six of seven power rows fell, led by S-27 down £5.00/MWh; W-29 power rose £1.64, the only increase on the sheet.</li>
+      <li><strong>Oil context:</strong> Brent traded near three-month lows on Tuesday 24 November (around $88.71/bbl in morning trade) and remains below $90, down more than 20% in November as Gulf crude flows recover. Brent is not the customer's gas quote.</li>
+      <li><strong>Commercial endpoint:</strong> valid, customer-specific future-start supplier quotes, full bill costs and genuine rate-book updates remain the decision point. Waiting is not neutral.</li>
     </ul>
   </div>
 </section>
 
-<!-- ============ SECTION 2: CURRENT CONDITIONS ============ -->
 <section id="current">
-  <div class="sec-head"><span class="n">02</span><h2>Current Conditions</h2></div>
-  <p class="sec-sub">Snapshot tagged by date, instrument and evidence status</p>
+  <div class="sec-head"><span class="sec-num">SECTION 2</span><h2>Current Conditions</h2></div>
+  <p class="sec-sub">Executive cards with unit, instrument, observation time and evidence class. A model, a supplier-offer indicator, an exchange future and a binding customer quote are never equivalent.</p>
   <div class="grid3">
-    <div class="card"><h3>Tue 24 · W-26 Gas <span class="ev">Switch365 internal</span></h3>
-      <div style="font-size:30px;font-weight:900;">225.100p<span style="font-size:14px;color:var(--muted);">/therm</span></div>
-      <p class="note"><span class="down">-1.930p · -0.85%</span> vs Mon 23 (227.030p). Direct user working reference, not an exchange spot price, ICE settlement or executable tariff.</p></div>
-    <div class="card"><h3>Tue 24 · W-26 Power <span class="ev">Modelled</span></h3>
-      <div style="font-size:30px;font-weight:900;">&pound;174.38<span style="font-size:14px;color:var(--muted);">/MWh</span></div>
-      <p class="note"><span class="down">-&pound;1.34 · -0.77%</span> vs Mon 23 (&pound;175.72), 90% gas-relative model: 175.72 x [1 + 0.9 x (225.100/227.030 - 1)] = &pound;174.3756. Not a traded power quote.</p></div>
-    <div class="card"><h3>Tue 24 · Full Offered Seasons <span class="ev">Switch365 internal</span></h3>
-      <div style="font-size:30px;font-weight:900;" class="down">All rows lower</div>
-      <p class="note">New Tuesday supplier-season screenshot: 8/8 gas seasons and 6/6 power seasons down vs Monday. Supersedes the Fri 20 &rarr; Mon 23 sheet, on which every row had risen.</p></div>
-    <div class="card"><h3>TTF <span class="ev">Verified market data</span></h3>
-      <div style="font-size:30px;font-weight:900;">&euro;89.74<span style="font-size:14px;color:var(--muted);">/MWh Mon settle</span></div>
-      <p class="note">Yahoo front-month series: Mon 23 high &euro;91.82, close &euro;89.74 (Fri &euro;88.45). Guardian live blog recorded a month-ahead intraday spike towards &euro;96.08 before the fade. Trading Economics CFD: &euro;90.16 early Tue, +0.47%. Different instruments, different prints; none is an ICE settlement reused here.</p></div>
-    <div class="card"><h3>Oil <span class="ev">Reuters, 24 Nov</span></h3>
-      <div style="font-size:30px;font-weight:900;">$89.37<span style="font-size:14px;color:var(--muted);">/bbl Brent Mon settle</span></div>
-      <p class="note"><span class="down">-3.46% Monday</span>, a three-month low; held near $89 early Tuesday. Libya's Sharara pipeline restarted after a valve closure, flowing to storage near Zawiya; Middle East crude movements increased. Deutsche Bank estimates a 1.7m bpd global oversupply. Crude relief is not direct UK gas supply.</p></div>
-    <div class="card"><h3>Storage <span class="ev">GIE / AGSI+</span></h3>
-      <div style="font-size:30px;font-weight:900;" class="warn">EU 68.9% · DE 56.5%</div>
-      <p class="note">Status 23 Nov: EU 780 TWh stored, Germany 139.7 TWh, both drawing down; GB 35.5% (3.5 TWh). Roughly 17 points below the five-year seasonal norm. Low storage increases sensitivity to Qatar LNG, Norway and weather.</p></div>
-    <div class="card"><h3>Hormuz <span class="ev">Claims vs confirmed</span></h3>
-      <div style="font-size:30px;font-weight:900;" class="warn">Elevated</div>
-      <p class="note">IRGC mine-strike claim (3 tankers, Mon 23) and the reported 50-ship cyber probe are unverified. UKMTO did verify projectile strikes on three tankers near Khasab on Fri/Sat. At least 22 reported attacks so far in November.</p></div>
-    <div class="card"><h3>Qatar LNG <span class="ev">Operator confirmation</span></h3>
-      <div style="font-size:30px;font-weight:900;" class="up">Force majeure to end-Dec</div>
-      <p class="note">QatarEnergy extended force majeure on Edison cargoes to end-December (35+ cargoes, 4.6 bcm affected since April). Ras Laffan output described by its CEO as "very minute"; undamaged trains could restart within weeks once shipping normalises.</p></div>
-    <div class="card"><h3>NBP Same-Contract Quote <span class="ev">Not verified</span></h3>
-      <div style="font-size:30px;font-weight:900;">Not supplied</div>
-      <p class="note">No independently verified, timestamped same-tenor NBP exchange quote was confirmed in this research run. The internal 225.100p working reference is never presented as a public settlement.</p></div>
+    <div class="stat"><div class="k">W-26 Gas Working Ref <span class="tag int">INTERNAL</span></div><div class="v">218.000<span style="font-size:14px"> p/therm</span></div><div class="d down">-7.100p / -3.15% vs Tue 24</div><div class="s">Switch365 working reference, Wed 25 Nov AM. Not a public spot price, ICE settlement or customer tariff.</div></div>
+    <div class="stat"><div class="k">W-26 Power (Model) <span class="tag mod">MODELLED</span></div><div class="v">£169.43<span style="font-size:14px"> /MWh</span></div><div class="d down">-£4.95 / -2.84% vs Tue 24</div><div class="s">90% gas-relative-change model on the supplied power sheet. Not an observed electricity trade.</div></div>
+    <div class="stat"><div class="k">EU Gas Storage <span class="tag ver">GIE OFFICIAL</span></div><div class="v">68.41%</div><div class="d warn">774.70 TWh · Germany 55.90% / 138.26 TWh</div><div class="s">23 November gas day, GIE status 24 Nov 06:00 CEST. Latest verified gas day at publication.</div></div>
+    <div class="stat"><div class="k">UK Weather <span class="tag ver">MET OFFICE</span></div><div class="v" style="font-size:19px">Cold, frost risk</div><div class="d warn">Wintry northern hills possible Friday; milder later</div><div class="s">National forecast issued Wed 25 Nov 04:00 UTC. Forecast, not measured gas demand.</div></div>
+    <div class="stat"><div class="k">GB Wind <span class="tag ver">NESO/ELEXON</span></div><div class="v" style="font-size:19px">Substantial early Wed</div><div class="d flat">Low-wind gas burn is a conditional future risk</div><div class="s">Early-morning 25 Nov national readings were not low. Verify same-timestamp national metered and forecast output before any low-wind claim.</div></div>
+    <div class="stat"><div class="k">TTF Front Month <span class="tag ver">INDICATIVE</span></div><div class="v" style="font-size:19px">~€91.2/MWh</div><div class="d flat">Live indication Wed 25 Nov, not a settlement</div><div class="s">Dec-26 front-month screen indication (Investing.com). Monday's intraday spike peaked near €96.08. Named-instrument discipline applies.</div></div>
+    <div class="stat"><div class="k">Brent Crude <span class="tag ver">REUTERS/MARKET</span></div><div class="v" style="font-size:19px">Below $90/bbl</div><div class="d down">Three-month lows Tue 24; >20% lower in November</div><div class="s">Front-month Brent settled $90.81 on 24 Nov (+1.59%) after morning trade near $88.71. Oil reacts to Hormuz; UK gas reacts more to LNG, Norway, storage and weather.</div></div>
+    <div class="stat"><div class="k">Norway / LNG Supply <span class="tag ver">OPERATOR</span></div><div class="v" style="font-size:19px">Cushion, watch daily</div><div class="d flat">Gassco flows and US LNG arrivals are the bearish buffer</div><div class="s">QatarEnergy force majeure reportedly extended to end-2026; partial Hormuz transits continue below pre-war pace. Check Gassco UMM and cargo tracking each morning.</div></div>
+    <div class="stat"><div class="k">Shipping Risk <span class="tag ver">UKMTO</span></div><div class="v" style="font-size:19px">Elevated</div><div class="d warn">Incidents and claims remain dated, none new overnight</div><div class="s">UKMTO warnings near Khasab on 21 Nov; Monday's tanker-mine reports remain Iranian media claims under verification. A route can be open and still carry a war-risk premium.</div></div>
   </div>
 </section>
 
-<!-- ============ SECTION 3: GAS OFFERED RANGE ============ -->
 <section id="gas">
-  <div class="sec-head"><span class="n">03</span><h2>NBP Offered Gas Price Range</h2></div>
-  <p class="sec-sub">Latest complete offered-season comparison: Monday 23 Nov AM &rarr; Tuesday 24 Nov AM | p/therm</p>
-  <div class="pricing-section-stack">
-    <div class="card pricing-chart-card">
-      <h3>Offered Gas Seasons: Monday vs Tuesday vs 1 Year Ago <span class="ev">Switch365 internal data</span></h3>
-      <div class="chart-wrap"><canvas id="gasChart"></canvas></div>
-      <p class="note">Every offered season eased on the day. The 1 Year Ago line shows how far the market has re-rated since late 2025; the latest (Tuesday) line is the customer's decision point.</p>
-    </div>
-    <div class="card pricing-table-card">
-      <h3>Gas Pricing Table <span class="ev">Internal broker / supplier evidence</span></h3>
-      <div class="tbl-scroll"><table>
-        <thead><tr><th>Contract</th><th>Mon 23 Nov AM</th><th>Tue 24 Nov AM</th><th>Change</th><th>1 Year Ago</th><th>% vs W-26</th></tr></thead>
-        <tbody>
-<tr><td><b>W-26 working ref</b></td><td>227.030</td><td>225.100</td><td><span class="down">-1.93</span></td><td>Not supplied</td><td>front (baseline)</td></tr>
-<tr><td><b>S-27</b></td><td>165.00</td><td>161.00</td><td><span class="down">-4.00</span></td><td>65.25</td><td>28.5% below</td></tr>
-<tr><td><b>W-27</b></td><td>151.00</td><td>146.50</td><td><span class="down">-4.50</span></td><td>73.75</td><td>34.9% below</td></tr>
-<tr><td><b>S-28</b></td><td>90.00</td><td>83.50</td><td><span class="down">-6.50</span></td><td>61.05</td><td>62.9% below</td></tr>
-<tr><td><b>W-28</b></td><td>94.00</td><td>89.00</td><td><span class="down">-5.00</span></td><td>69.95</td><td>60.5% below</td></tr>
-<tr><td><b>S-29</b></td><td>70.50</td><td>69.00</td><td><span class="down">-1.50</span></td><td>60.18</td><td>69.3% below</td></tr>
-<tr><td><b>W-29</b></td><td>80.00</td><td>77.70</td><td><span class="down">-2.30</span></td><td>69.02</td><td>65.5% below</td></tr>
-<tr><td><b>S-30</b></td><td>69.33</td><td>67.83</td><td><span class="down">-1.50</span></td><td>61.17</td><td>69.9% below</td></tr>
-<tr><td><b>W-30</b></td><td>79.88</td><td>77.58</td><td><span class="down">-2.30</span></td><td>69.80</td><td>65.5% below</td></tr>
-        </tbody>
-      </table></div>
-      <p class="note">Source: Switch365 user screenshot, Tuesday 24 November AM. All change figures recompute exactly (Latest - Previous); 8/8 seasons plus the W-26 working reference fell. This Tuesday sheet supersedes the Friday 20 &rarr; Monday 23 comparison, which had shown 8/8 seasons rising. One-year-ago values are as printed on the Tuesday screenshot. The % vs W-26 column shows the current forward-value gap against Tuesday's 225.100p reference: comparisons of different delivery periods, not whole-bill savings.</p>
-    </div>
+  <div class="sec-head"><span class="sec-num">SECTION 3</span><h2>NBP Offered Gas Price Range</h2></div>
+  <p class="sec-sub">Latest complete supplier-season comparison: Tuesday 24 November AM to Wednesday 25 November AM | p/therm. Internal broker / supplier evidence.</p>
+  <div class="chartbox">
+    <div class="ctitle">Graph 1 · Gas Offered Range by Delivery Season</div>
+    <div class="cnote">Tuesday 24 Nov AM vs Wednesday 25 Nov AM vs 1 Year Ago (dashed). Internal Switch365 offered-price indicators, p/therm.</div>
+    <div class="chartwrap"><canvas id="gasChart"></canvas></div>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Contract</th><th>Tue 24 Nov AM</th><th>Wed 25 Nov AM</th><th>Change</th><th>1 Year Ago</th><th>% vs W-26</th></tr></thead>
+      <tbody>
+        <tr><td>W-26 working ref</td><td>225.100</td><td>218.000</td><td class="neg">-7.100</td><td>N/A</td><td>(front)</td></tr>
+        <tr><td>S-27</td><td>161.00</td><td>153.00</td><td class="neg">-8.00</td><td>65.00</td><td>-29.8%</td></tr>
+        <tr><td>W-27</td><td>146.50</td><td>141.00</td><td class="neg">-5.50</td><td>73.00</td><td>-35.3%</td></tr>
+        <tr><td>S-28</td><td>83.50</td><td>80.75</td><td class="neg">-2.75</td><td>60.75</td><td>-63.0%</td></tr>
+        <tr><td>W-28</td><td>89.00</td><td>85.00</td><td class="neg">-4.00</td><td>69.40</td><td>-61.0%</td></tr>
+        <tr><td>S-29</td><td>69.00</td><td>66.00</td><td class="neg">-3.00</td><td>59.77</td><td>-69.7%</td></tr>
+        <tr><td>W-29</td><td>77.70</td><td>76.00</td><td class="neg">-1.70</td><td>69.08</td><td>-65.1%</td></tr>
+        <tr><td>S-30</td><td>67.83</td><td>66.04</td><td class="neg">-1.79</td><td>61.03</td><td>-69.7%</td></tr>
+        <tr><td>W-30</td><td>77.58</td><td>75.91</td><td class="neg">-1.67</td><td>69.88</td><td>-65.2%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout teal"><strong>Wednesday readout:</strong> all nine gas rows fell from Tuesday morning to Wednesday morning, the second consecutive all-red seasonal session. Largest absolute move: S-27 down 8.00p/therm. The % vs W-26 column shows the current forward-value gap against the latest 218.000p working reference; it compares distinct delivery periods, not whole-bill savings. The 1 Year Ago line shows how far the market has re-rated, but the latest line is the customer's decision point.</div>
+  <div class="card">
+    <h3>How to read this table</h3>
+    <p>These are Switch365 internal offered-price indicators for future delivery seasons, not exchange settlements and not a signed customer tariff. Backwardation (later seasons priced below winter 2026) reflects today's forward curve; it does not mean cheaper later, and it does not mean a supplier book has already passed the fall through. Wholesale moved first. Supplier books may still follow. A customer-eligible quote depends on contract end date, credit, product and rate validity at the moment it is issued.</p>
   </div>
 </section>
 
-<!-- ============ SECTION 4: POWER OFFERED RANGE ============ -->
 <section id="power">
-  <div class="sec-head"><span class="n">04</span><h2>UK Power Offered Price Range</h2></div>
-  <p class="sec-sub">Latest complete offered-season comparison: Monday 23 Nov AM &rarr; Tuesday 24 Nov AM | &pound;/MWh</p>
-  <div class="pricing-section-stack">
-    <div class="card pricing-chart-card">
-      <h3>Offered Power Seasons: Monday vs Tuesday vs 1 Year Ago <span class="ev">Switch365 internal data</span></h3>
-      <div class="chart-wrap"><canvas id="powerChart"></canvas></div>
-      <p class="note">W-26 power is modelled from the gas working reference (90% relative-move rule), not a traded contract. S-30 and W-30 power were not supplied.</p>
-    </div>
-    <div class="card pricing-table-card">
-      <h3>Power Pricing Table <span class="ev">Internal broker / supplier evidence</span></h3>
-      <div class="tbl-scroll"><table>
-        <thead><tr><th>Contract</th><th>Mon 23 Nov AM</th><th>Tue 24 Nov AM</th><th>Change</th><th>1 Year Ago</th><th>% vs W-26</th></tr></thead>
-        <tbody>
-<tr><td><b>W-26 working ref (modelled)</b></td><td>&pound;175.72</td><td>&pound;174.38</td><td><span class="down">&pound;-1.34</span></td><td>Not supplied</td><td>front (baseline)</td></tr>
-<tr><td><b>S-27</b></td><td>&pound;128.00</td><td>&pound;126.50</td><td><span class="down">&pound;-1.50</span></td><td>&pound;64.20</td><td>27.5% below</td></tr>
-<tr><td><b>W-27</b></td><td>&pound;120.50</td><td>&pound;118.00</td><td><span class="down">&pound;-2.50</span></td><td>&pound;74.45</td><td>32.3% below</td></tr>
-<tr><td><b>S-28</b></td><td>&pound;75.50</td><td>&pound;73.00</td><td><span class="down">&pound;-2.50</span></td><td>&pound;62.85</td><td>58.1% below</td></tr>
-<tr><td><b>W-28</b></td><td>&pound;80.00</td><td>&pound;78.75</td><td><span class="down">&pound;-1.25</span></td><td>&pound;74.00</td><td>54.8% below</td></tr>
-<tr><td><b>S-29</b></td><td>&pound;67.00</td><td>&pound;64.45</td><td><span class="down">&pound;-2.55</span></td><td>&pound;63.65</td><td>63.0% below</td></tr>
-<tr><td><b>W-29</b></td><td>&pound;72.55</td><td>&pound;70.70</td><td><span class="down">&pound;-1.85</span></td><td>Not supplied</td><td>59.5% below</td></tr>
-        </tbody>
-      </table></div>
-      <p class="note">Source: Switch365 user screenshot, Tuesday 24 November AM. All six offered seasons fell, S-29 by the most (-&pound;2.55). The W-26 row is the modelled working reference; the Tuesday model matches the screenshot print of &pound;174.38. No S-30/W-30 power and no Tuesday 1-year-ago W-29 comparator were supplied, so those cells are marked honestly. % vs W-26 is measured against the modelled &pound;174.38.</p>
-    </div>
+  <div class="sec-head"><span class="sec-num">SECTION 4</span><h2>UK Power Offered Price Range</h2></div>
+  <p class="sec-sub">Latest complete supplier-season comparison: Tuesday 24 November AM to Wednesday 25 November AM | £/MWh. W-26 power is modelled on the same-date gas movement.</p>
+  <div class="chartbox">
+    <div class="ctitle">Graph 2 · Power Offered Range by Delivery Season</div>
+    <div class="cnote">Tuesday 24 Nov AM vs Wednesday 25 Nov AM vs 1 Year Ago (dashed). Internal Switch365 offered-price indicators, £/MWh. W-26 row modelled.</div>
+    <div class="chartwrap"><canvas id="powerChart"></canvas></div>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Contract</th><th>Tue 24 Nov AM</th><th>Wed 25 Nov AM</th><th>Change</th><th>1 Year Ago</th><th>% vs W-26</th></tr></thead>
+      <tbody>
+        <tr><td>W-26 working ref (modelled)</td><td>174.38</td><td>169.43</td><td class="neg">-4.95</td><td>N/A</td><td>(front)</td></tr>
+        <tr><td>S-27</td><td>126.50</td><td>121.50</td><td class="neg">-5.00</td><td>64.20</td><td>-28.3%</td></tr>
+        <tr><td>W-27</td><td>118.00</td><td>114.00</td><td class="neg">-4.00</td><td>74.45</td><td>-32.7%</td></tr>
+        <tr><td>S-28</td><td>73.00</td><td>70.50</td><td class="neg">-2.50</td><td>62.85</td><td>-58.4%</td></tr>
+        <tr><td>W-28</td><td>78.75</td><td>76.50</td><td class="neg">-2.25</td><td>74.00</td><td>-54.8%</td></tr>
+        <tr><td>S-29</td><td>64.45</td><td>62.52</td><td class="neg">-1.93</td><td>63.65</td><td>-63.1%</td></tr>
+        <tr><td>W-29</td><td>70.70</td><td>72.34</td><td class="pos">+1.64</td><td>N/A</td><td>-57.3%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout teal"><strong>Wednesday readout:</strong> six of seven power rows fell Tuesday to Wednesday, led by S-27 down £5.00/MWh. <strong>W-29 power rose £1.64/MWh, the only increase on either sheet</strong>; a reminder that the curve does not move in a straight line. The W-26 power figure is modelled: £174.38 x [1 + 0.9 x (218.000 / 225.100 - 1)] = £169.43/MWh, carrying precision until display. It is a modelled indicator, not an observed electricity trade, and no 2030 electricity values have ever been supplied.</div>
+  <div class="card">
+    <h3>Gas to power transmission</h3>
+    <p>Gas matters to UK power because gas-fired plants often set the marginal electricity price, but generation conditions determine how much: wind output, nuclear availability, interconnectors, solar, batteries and demand all mediate the link. Today's modelled power fall follows the gas reference; it is not a supplier book update. Compare real customer quote units, standing charges, load shape, credit and all fees separately.</p>
   </div>
 </section>
 
-<!-- ============ SECTION 5: FUTURES MARKET EXPLAINED ============ -->
 <section id="futures">
-  <div class="sec-head"><span class="n">05</span><h2>Futures Market Explained</h2></div>
-  <p class="sec-sub">What these numbers are, and what they are not</p>
+  <div class="sec-head"><span class="sec-num">SECTION 5</span><h2>Futures Market Explained</h2></div>
   <div class="grid2">
-    <div class="card"><h3>NBP versus TTF</h3><p style="font-size:14px;color:#efefff;">NBP is Britain's virtual gas trading point, priced in pence per therm; TTF is the Dutch hub, priced in euros per megawatt hour, and the continental benchmark. They usually move together because the UK is connected to Europe by pipelines and competes for the same LNG cargoes, but they are different instruments in different currencies and do not move tick for tick. Monday showed why instrument precision matters: month-ahead TTF spiked intraday towards &euro;96/MWh on cold-snap headlines, yet the front-month series settled at &euro;89.74, only modestly above Friday's &euro;88.45.</p></div>
-    <div class="card"><h3>Spot, front month, seasons</h3><p style="font-size:14px;color:#efefff;">A day-ahead price is gas for tomorrow. A front-month contract (December 2026) is the nearest traded month. W-26, S-27, W-27 and beyond are delivery seasons: winter 2026-27, summer 2027 and so on. A price for summer 2028 delivery is not a prediction of what gas will cost in 2028; it is what the market will sell that period for today. Historical settlements, live intraday quotes and closing indications are also different things, which is why this report labels every observation.</p></div>
-    <div class="card"><h3>Offered range versus executable rate</h3><p style="font-size:14px;color:#efefff;">The Switch365 tables are internal offered-season indicators: evidence of the direction and shape of supplier pricing, not a quote a supplier has committed to honour. An executable rate requires a named supplier, product, start date, full charges, credit check and validity window. A 0.85% fall in the W-26 working reference is real internal evidence; it is not a 0.85% discount on any customer's bill.</p></div>
-    <div class="card"><h3>Why prices can fall while threats rise</h3><p style="font-size:14px;color:#efefff;">Gas, oil, LNG and power have different supply curves. Oil softened because Libyan and Middle East barrels increased and a surplus is expected; gas is balanced against LNG availability, Norwegian flows, storage and weather. A risk premium can unwind on diplomacy or supply expectations even while physical threats, like this month's record tempo of tanker incidents, continue. Supplier rate books may lag wholesale screens in both directions, which is the opportunity and the danger of a falling day.</p></div>
+    <div class="card"><h3>NBP versus TTF</h3><p>NBP is the UK wholesale gas hub, priced in pence per therm; TTF is the Dutch hub that anchors continental Europe, priced in euros per MWh. They usually move together because the UK and continent share pipeline and LNG supply, but they are different instruments and do not move identically. TTF front-month indications were around €91/MWh on Wednesday morning after Monday's intraday spike towards €96; the Switch365 W-26 working reference is a separate internal indicator and is never substituted by an exchange quote.</p></div>
+    <div class="card"><h3>Spot, front month, seasons</h3><p>Day-ahead prices cover gas delivered tomorrow. Front-month contracts cover the nearest full month. Seasonal contracts (Summer 27, Winter 27 and so on) cover six-month delivery blocks. A live intraday quote is not a settlement, and a settlement is not a supplier rate. Prices for 2028 delivery differ from winter 2026 because storage, LNG expansion and demand expectations differ by period; that gap is backwardation, not a promised future spot price.</p></div>
+    <div class="card"><h3>Why oil and gas can diverge</h3><p>The same day can see Brent fall while gas forwards rally, or the reverse, because the balances differ. Oil is reacting to recovering Gulf crude exports and surplus forecasts; UK gas reacts more directly to Qatar LNG, TTF, Norwegian flows, storage and weather. Brent is not the customer's gas quote. LNG is the bridge between Hormuz and UK gas.</p></div>
+    <div class="card"><h3>From screen to supplier book</h3><p>A wholesale move is not an executable customer rate. Supplier books reprice with a lag, and a quoted rate carries a timestamp, validity window, product rules and credit conditions. No forward-curve value guarantees a future spot price, and no comparison of two delivery seasons produces a total-bill savings percentage.</p></div>
   </div>
 </section>
 
-<!-- ============ SECTION 6: FORWARD VALUE CHECK ============ -->
 <section id="forward">
-  <div class="sec-head"><span class="n">06</span><h2>2027 / 2028 / 2029 / 2030 Forward Value Check</h2></div>
-  <p class="sec-sub">Tuesday 24 November, latest complete same-date snapshot</p>
-  <div class="pricing-section-stack">
-    <div class="card pricing-chart-card">
-      <h3>Tuesday Forward Curve: Gas vs Modelled Power <span class="ev">Switch365 internal data</span></h3>
-      <div class="chart-wrap"><canvas id="forwardChart"></canvas></div>
-      <p class="note">Because a full Tuesday season sheet was supplied this morning, this is now a genuine same-date Tuesday curve: W-26 gas 225.100p and modelled W-26 power &pound;174.38 against all Tuesday seasons. It replaces Monday's cross-section, which remains dated history.</p>
-    </div>
-    <div class="card pricing-table-card">
-      <h3>Forward Value Table <span class="ev">Internal broker / supplier evidence</span></h3>
-      <div class="tbl-scroll"><table>
-        <thead><tr><th>Delivery</th><th>Tue 24 Gas (p/therm)</th><th>vs Tue W-26 225.100p</th><th>Tue 24 Power (&pound;/MWh)</th><th>vs modelled Tue W-26 &pound;174.38</th></tr></thead>
-        <tbody>
-<tr><td><b>S-27</b></td><td>161.00</td><td class='down'>28.5% below</td><td>&pound;126.50</td><td class='down'>27.5% below</td></tr>
-<tr><td><b>W-27</b></td><td>146.50</td><td class='down'>34.9% below</td><td>&pound;118.00</td><td class='down'>32.3% below</td></tr>
-<tr><td><b>S-28</b></td><td>83.50</td><td class='down'>62.9% below</td><td>&pound;73.00</td><td class='down'>58.1% below</td></tr>
-<tr><td><b>W-28</b></td><td>89.00</td><td class='down'>60.5% below</td><td>&pound;78.75</td><td class='down'>54.8% below</td></tr>
-<tr><td><b>S-29</b></td><td>69.00</td><td class='down'>69.3% below</td><td>&pound;64.45</td><td class='down'>63.0% below</td></tr>
-<tr><td><b>W-29</b></td><td>77.70</td><td class='down'>65.5% below</td><td>&pound;70.70</td><td class='down'>59.5% below</td></tr>
-<tr><td><b>S-30</b></td><td>67.83</td><td class='down'>69.9% below</td><td>N/A</td><td>N/A</td></tr>
-<tr><td><b>W-30</b></td><td>77.58</td><td class='down'>65.5% below</td><td>N/A</td><td>N/A</td></tr>
-        </tbody>
-      </table></div>
-      <p class="note">Summer 2028 gas at 83.50p sits 62.9% below the winter-2026 front, and summer 2028 power at &pound;73.00 sits 58.1% below the modelled front. These are comparisons of different delivery periods, not whole-bill discounts, retail quotes or forecasts. Customer bills also carry standing charges, non-commodity costs, levies, margins and credit terms. Cheaper further out does not mean cheaper later, and backwardation does not mean wait.</p>
-    </div>
+  <div class="sec-head"><span class="sec-num">SECTION 6</span><h2>2027 / 2028 / 2029 / 2030 Forward Value Check</h2></div>
+  <p class="sec-sub">Latest complete same-date cross-section: Wednesday 25 November AM. Gap formula: 100 x (1 - season value / same-date W-26 reference).</p>
+  <div class="chartbox">
+    <div class="ctitle">Graph 3 · Forward Value: Wednesday 25 November Same-Date Curve</div>
+    <div class="cnote">Gas (p/therm, left axis, magenta) and power (£/MWh, right axis, teal) offered seasons against the Wednesday 25 W-26 baselines of 218.000p and £169.43. Internal indicators and a model, not retail bill discounts.</div>
+    <div class="chartwrap"><canvas id="fwdChart"></canvas></div>
   </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Delivery</th><th>Wed 25 Gas p/therm</th><th>Below Wed Gas W-26 218.000p</th><th>Wed 25 Power £/MWh</th><th>Below Wed Power W-26 £169.43</th></tr></thead>
+      <tbody>
+        <tr><td>S-27</td><td>153.00</td><td>29.8%</td><td>121.50</td><td>28.3%</td></tr>
+        <tr><td>W-27</td><td>141.00</td><td>35.3%</td><td>114.00</td><td>32.7%</td></tr>
+        <tr><td>S-28</td><td>80.75</td><td>63.0%</td><td>70.50</td><td>58.4%</td></tr>
+        <tr><td>W-28</td><td>85.00</td><td>61.0%</td><td>76.50</td><td>54.8%</td></tr>
+        <tr><td>S-29</td><td>66.00</td><td>69.7%</td><td>62.52</td><td>63.1%</td></tr>
+        <tr><td>W-29</td><td>76.00</td><td>65.1%</td><td>72.34</td><td>57.3%</td></tr>
+        <tr><td>S-30</td><td>66.04</td><td>69.7%</td><td>Not supplied</td><td>Not supplied</td></tr>
+        <tr><td>W-30</td><td>75.91</td><td>65.2%</td><td>Not supplied</td><td>Not supplied</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout"><strong>Headline examples:</strong> Wednesday S-28 gas at 80.75p/therm sits 63.0% below the same-date W-26 working reference of 218.000p; Wednesday S-28 electricity at £70.50/MWh sits 58.4% below the modelled W-26 power baseline of £169.43. These compare distinct future delivery periods with today's winter-2026 reference. They are internal forward indicators and a model, not executable tariffs, whole-bill discounts, investment returns or guaranteed future spot prices. Unit rates, standing charges, fees and delivery-start eligibility must be qualified separately. Cheaper further out does not mean cheaper later, and backwardation does not mean wait.</div>
 </section>
 
-<!-- ============ SECTION 7: PROCUREMENT WINDOW ============ -->
 <section id="procurement">
-  <div class="sec-head"><span class="n">07</span><h2>Procurement Window</h2></div>
-  <p class="sec-sub">A two-sided scenario, not a universal sign-now or wait-now instruction</p>
+  <div class="sec-head"><span class="sec-num">SECTION 7</span><h2>Procurement Window</h2></div>
   <div class="card">
-    <p style="font-size:14.5px;color:#efefff;">Tuesday's full offered sheet fell across every row for the first time in over a week of this dataset, following Friday-to-Monday when all 8 gas and 6 power seasons had risen. Repricing reaches individual supplier books at different speeds, so the practical question is not "has the market fallen?" but "which suppliers have already passed it through, and is a valid quote available for this customer's start date?" Only a rate-locked, valid future-start quotation establishes what a customer can actually secure. This is a review-now window, not a wait-and-see market, and not a panic-fix market either.</p>
+    <p>The latest complete supplier-season sheet (Tuesday 24 to Wednesday 25 November) shows every gas row and six of seven power rows falling, with the W-26 gas working reference down 3.15% on the day and at 218.000p/therm. That is a legitimate reason to recheck customer-specific, valid future-start supplier rates now. It is not proof the market bottom has arrived, and it does not mean every supplier book has already updated.</p>
   </div>
   <div class="grid2">
-    <div class="card"><h3>Price-Up Risks <span class="pill r">BULLISH</span></h3>
-      <ul class="tight">
-        <li>UKMTO-verified tanker strikes keep coming (three near Khasab since Friday) and November's attack count is the highest of the war; a confirmed laden LNG carrier loss would reprice the market quickly.</li>
-        <li>QatarEnergy force majeure runs to end-December; Ras Laffan output is "very minute" and repairs could take years, keeping roughly a fifth of normal global LNG supply impaired.</li>
-        <li>EU storage at 68.9% and Germany at 56.5%, around 17 points below the seasonal norm, in active withdrawal as the heating season starts.</li>
-        <li>Cold-snap forecasting already drove Monday's intraday TTF spike towards &euro;96; a sustained cold, low-wind spell would lift gas-for-power demand.</li>
-        <li>Supplier price-book withdrawals: once a supplier pulls a rate, the customer cannot go back and secure yesterday's price.</li>
-      </ul></div>
-    <div class="card"><h3>Price-Down Counterweights <span class="pill t">BEARISH</span></h3>
-      <ul class="tight">
-        <li>Brent at a three-month low on rising Middle East flows, the Sharara restart and an expected 1.7m bpd surplus: risk premium is draining from the energy complex.</li>
-        <li>US LNG exports hit their second-highest month on record in October, with Europe's share recovering to about half of cargoes.</li>
-        <li>Diplomatic de-escalation and physical maritime security improvements can cut the war-risk premium before any infrastructure is repaired.</li>
-        <li>Monday's TTF spike largely unwound by the close, showing how quickly fear premium deflates when no physical loss is confirmed.</li>
-        <li>Today's supplier offered range is already lower across the board; genuinely available quotes may still be competitively priced for eligible customers.</li>
-      </ul></div>
+    <div class="card"><h3 class="up">Price-up risks</h3><ul class="tick">
+      <li>GIE 23 November gas day: EU 68.41%, Germany 55.90%. A limited winter storage cushion, with net withdrawals running near 2.8 TWh a day around 22 November on third-party tracking.</li>
+      <li>Met Office cold spell with frost risk and possible wintry conditions on northern hills Friday. If measurable heating demand rises, storage draw could accelerate.</li>
+      <li>Conditional: a weaker UK or continental wind period combined with high electricity demand would increase gas-fired power burn. Verify with timestamped NESO/Elexon output, not a generic dunkelflaute claim.</li>
+      <li>Actual loss of Qatari LNG, restricted insured Hormuz crossings, new Gassco outages, stronger Asian cargo competition or verified Saudi energy capacity loss could reprice markets.</li>
+      <li>Named supplier rate withdrawals or increases with confirmed timestamps and real customer applicability.</li>
+    </ul></div>
+    <div class="card"><h3 class="down">Price-down counterweights</h3><ul class="tick">
+      <li>Milder Atlantic weather later in the forecast window, stronger wind output, firm Norwegian deliveries and steady US LNG arrivals in Europe.</li>
+      <li>Stable or improving LNG and pipeline supply, safe repeatable Qatar shipments, easing war-risk insurance and diplomatic de-escalation.</li>
+      <li>Winter demand weaker than forecast, or gas-fired power less necessary because of imports, nuclear, storage and renewables.</li>
+      <li>Continued wholesale weakness passed through into valid supplier books and customer-specific future-start quotes, as this week's falling sheets suggest is beginning.</li>
+    </ul></div>
   </div>
-  <div class="card"><h3>Customer Checklist Before Any Recommendation</h3>
-    <p style="font-size:14px;color:#efefff;">Confirm contract end date (CED), supply start and renewal window, supplier and product, annual kWh, meter details (MPAN/MPRN), usage profile, credit position, unit rate, standing charge, pass-through charges, broker commission, tariff inclusions and exclusions, cancellation terms, price validity and the full lifetime expected bill. Check British Gas 18-month eligibility where appropriate. Make balanced, informed options available, with no artificial urgency.</p></div>
+  <div class="callout amber"><strong>Customer action:</strong> for each customer verify contract end date (CED), MPAN/MPRN, annual usage and load shape, future-start eligibility, credit, named supplier and product, quote timestamp and validity, unit and standing rates, broker fee, non-commodity, pass-through and reopener charges, VAT/CCL and the full expected bill. British Gas's up-to-18-month eligible renewal window may permit reviewing forward rates without supply starting today. No fabricated deadlines: this is a review-now window, not a wait-and-see market.</div>
 </section>
 
-<!-- ============ SECTION 8: BRITISH GAS 18-MONTH WINDOW ============ -->
 <section id="britishgas">
-  <div class="sec-head"><span class="n">08</span><h2>British Gas 18-Month Window</h2></div>
-  <p class="sec-sub">Switch365 internal commercial statement, user-confirmed</p>
+  <div class="sec-head"><span class="sec-num">SECTION 8</span><h2>British Gas 18-Month Window</h2></div>
   <div class="card">
-    <p style="font-size:14.5px;color:#efefff;">British Gas has extended its business energy renewal window from 12 months to 18 months, giving eligible customers an earlier opportunity to review future-start pricing. A future-start contract begins when the present supply agreement ends, not the day the quote is signed, and remains subject to supplier product, credit and eligibility rules. On a day when the whole offered curve has just repriced lower, the extended window lets eligible customers test whether that improvement is available to them before books move again. This is a commercial window, not proof that British Gas has the cheapest price or that any rate remains open. British Gas 18-month eligibility turns this market intelligence into a practical customer action.</p>
+    <p>British Gas has extended its business energy renewal window from 12 months to 18 months (Switch365 internal commercial statement, user-confirmed). Eligible customers can review future-start pricing earlier: a future-start contract begins when the present supply agreement ends, not the day the quote is signed, and remains subject to supplier product, credit and eligibility rules.</p>
+    <p>This is a commercial window, not proof that British Gas has the cheapest price or that any particular rate remains open. British Gas 18-month eligibility turns this market intelligence into a practical customer action: with Wednesday's sheet showing forward seasons 28% to 70% below the winter-2026 reference on a same-date basis, eligible customers can test today's future-start pricing rather than waiting for a renewal panic.</p>
   </div>
 </section>
 
-<!-- ============ SECTION 9: MARKET DRIVERS ============ -->
 <section id="drivers">
-  <div class="sec-head"><span class="n">09</span><h2>Market Drivers</h2></div>
-  <p class="sec-sub">Ranked for Tuesday 24 November, with evidence classification</p>
-  <div class="card"><div class="tbl-scroll"><table>
-    <thead><tr><th>#</th><th>Driver</th><th>Direction</th><th>Evidence</th><th>Why UK businesses should care</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td style="text-align:left">Full Tuesday Switch365 sheet: W-26 gas -0.85%, modelled W-26 power -0.77%, every offered season lower</td><td class="down">BEARISH (today)</td><td>Switch365 internal data</td><td style="text-align:left">First across-the-board daily decline on this dataset; may reach supplier books at different speeds, so test live quotes now</td></tr>
-      <tr><td>2</td><td style="text-align:left">Reuters/WSJ: US probing possible cyberattacks on up to 50 oil/LPG/chemical carriers; Iran primary suspect, unverified</td><td class="warn">MIXED</td><td>Unverified claim (Tier 1 report of a Tier 2 account)</td><td style="text-align:left">If corroborated, war-risk and freight costs rise; so far no confirmed cargo loss, and LPG is not LNG</td></tr>
-      <tr><td>3</td><td style="text-align:left">IRGC claims three tankers struck mines in Hormuz on Monday; vessels unnamed, unverified</td><td class="warn">MIXED</td><td>Iranian statement</td><td style="text-align:left">Claimed attacks still lift insurance friction; but no verified LNG tonnage is lost from this claim</td></tr>
-      <tr><td>4</td><td style="text-align:left">UKMTO-verified projectile strikes on three tankers near Khasab, Fri 20 to Sat 21; at least 22 attacks in November</td><td class="up">BULLISH RISK</td><td>UKMTO report</td><td style="text-align:left">Verified physical attacks are the kind of evidence that sustains war-risk premia on every Gulf cargo</td></tr>
-      <tr><td>5</td><td style="text-align:left">Brent -3.46% to $89.37, three-month low; Sharara restarted; surplus expected</td><td class="down">BEARISH</td><td>Verified market data (Reuters)</td><td style="text-align:left">Oil relief pulls the energy complex down, but crude barrels do not replace Qatari gas molecules</td></tr>
-      <tr><td>6</td><td style="text-align:left">TTF spiked towards &euro;96 intraday Monday, settled &euro;89.74; &euro;90.16 early Tuesday</td><td class="warn">MIXED</td><td>Verified market data, multiple instruments</td><td style="text-align:left">Shows fear premium inflating and deflating within hours; supplier books rarely move as fast as screens</td></tr>
-      <tr><td>7</td><td style="text-align:left">EU storage 68.9%, Germany 56.5%, net withdrawal; cold snap already biting</td><td class="up">BULLISH RISK</td><td>GIE/AGSI+ verified flow data</td><td style="text-align:left">A thin buffer magnifies every supply scare into winter; storage is a buffer, not immunity</td></tr>
-      <tr><td>8</td><td style="text-align:left">Qatar force majeure to end-December; US LNG near record; Norway the swing pipeline supplier</td><td class="warn">MIXED</td><td>Operator confirmation / DOE data</td><td style="text-align:left">LNG remains the bridge between Gulf security and UK gas; strong US and Norwegian flows cushion missing Qatari cargoes</td></tr>
-      <tr><td>9</td><td style="text-align:left">UK wind and gas-fired generation set how much gas prices matter to power</td><td>NEUTRAL</td><td>NESO/Elexon (qualitative today)</td><td style="text-align:left">Gas matters to UK power, but generation conditions determine how much; modelled W-26 power is illustrative</td></tr>
-      <tr><td>10</td><td style="text-align:left">Individual supplier price-book changes and customer-specific executable rates</td><td>DECISIVE</td><td>Supplier books (verify per customer)</td><td style="text-align:left">The only number that matters is the valid quote for the customer's own start date and full cost</td></tr>
-    </tbody>
-  </table></div>
-  <p class="note">Transmission chain for every driver: event &rarr; verified physical consequence or expectations &rarr; same-contract wholesale price &rarr; timestamped supplier book &rarr; customer-eligible future-start offer &rarr; full cost and action. Where a link is unverified, it is marked above rather than assumed.</p></div>
+  <div class="sec-head"><span class="sec-num">SECTION 9</span><h2>Market Drivers, Ranked</h2></div>
+  <p class="sec-sub">Event to physical consequence to NBP/TTF to supplier book to customer decision. Each link marked verified, modelled or speculative.</p>
+  <ol class="num">
+    <li><strong>European storage, objectively low</strong> · <span class="tag ver">VERIFIED</span> · BULLISH RISK. EU 68.41% (774.70 TWh) and Germany 55.90% (138.26 TWh) for the 23 November gas day, roughly 18 points below the 2017-2025 seasonal average on third-party tracking. A genuine price-up vulnerability, not a current UK shortage. Storage is a buffer, not immunity.</li>
+    <li><strong>Colder UK weather forecast</strong> · <span class="tag ver">FORECAST</span> · BULLISH RISK. Met Office 25 November 04:00 UTC: cold, frost risk, possible wintry northern hills Friday, milder potential later. Expected driver, not measured demand.</li>
+    <li><strong>Wind and gas-for-power, contingent</strong> · <span class="tag mod">CONDITIONAL</span> · MIXED. Early Wednesday GB wind was substantial, so low wind is a future scenario only unless measured output changes. Interconnectors, nuclear, batteries and dispatch all mediate.</li>
+    <li><strong>Observed market direction is DOWN</strong> · <span class="tag int">INTERNAL</span> · BEARISH NOW. W-26 gas 218.000p (-3.15% on the day); modelled power £169.43 (-2.84%). All nine gas rows and six of seven power rows fell on the complete Tuesday-to-Wednesday sheet. The weather and storage story is a risk of future reversal, not today's increase.</li>
+    <li><strong>Norwegian gas</strong> · <span class="tag ver">OPERATOR DATA</span> · BEARISH BUFFER. Strong Norway materially cushions missing LNG. Verify daily Gassco UMM outages, restarts and realised throughput.</li>
+    <li><strong>US LNG versus Qatar LNG</strong> · <span class="tag ver">MIXED EVIDENCE</span> · MIXED. US LNG is a major bearish buffer, but it cannot automatically replace all lost Qatari volume. QatarEnergy force majeure reportedly runs to end-2026, with partial Hormuz transits below pre-war pace. A signed 2030s supply contract is not a tanker delivered today.</li>
+    <li><strong>Shipping and diplomacy</strong> · <span class="tag ver">UKMTO / CLAIMS</span> · MIXED. Only physical cargo movements, route insurance and verified incidents move the mechanism. Actor statements stay attributed and dated.</li>
+    <li><strong>UK power fundamentals</strong> · <span class="tag mod">MODELLED W-26</span> · MIXED. Actual wind and gas generation, temperatures, demand and interconnectors set the real power price; the W-26 power number is a model, not an observed market quote.</li>
+    <li><strong>Supplier-book lag</strong> · <span class="tag int">INTERNAL</span> · NEUTRAL. Live, named, customer-valid quotes and whole-bill pricing are the test. No automatic pass-through from any proxy.</li>
+  </ol>
+  <div class="callout teal"><strong>Balance:</strong> prices could fall further despite storage risk, or rebound rapidly if winter demand intensifies and actual supply deteriorates. A risk-factor headline is not proof of causality.</div>
 </section>
 
-<!-- ============ SECTION 10: TOP FIVE WARNING SIGNS ============ -->
 <section id="warnings">
-  <div class="sec-head"><span class="n">10</span><h2>Top Five Warning Signs</h2></div>
-  <p class="sec-sub">Practical, verifiable signals that would reverse today's softer tone</p>
-  <div class="card"><ul class="tight">
-    <li><b>1. A new verified Gulf supply or export loss.</b> A confirmed laden Qatari LNG cargo lost, fresh physical damage at Ras Laffan, or a verified hit on Saudi East-West or Red Sea loading capacity. <i>Invalidated by:</i> sustained safe loadings and QatarEnergy easing force majeure. <span class="ev">Sources: QatarEnergy, UKMTO, Kpler</span></li>
-    <li><b>2. Shipping and insurance breakdown.</b> UKMTO confirming attacks on LNG carriers specifically, war-risk premiums jumping, or named vessels refusing Hormuz transits. November's count of at least 22 attacks is already the highest of the war. <i>Invalidated by:</i> repeated safe, insured LNG passages at normal premiums. <span class="ev">Sources: UKMTO, operators, insurers</span></li>
-    <li><b>3. Cold, calm and drawing storage.</b> EU below 69% and Germany near 56% in withdrawal; a prolonged cold, low-wind spell forces heavy gas burn for power, like the scare behind Monday's intraday TTF spike. <i>Invalidated by:</i> milder weather, strong wind, stabilising storage. <span class="ev">Sources: GIE/AGSI+, NESO, Elexon</span></li>
-    <li><b>4. Norwegian supply trouble.</b> New unplanned outages at Troll, Kollsnes, Nyhamna or processing plants, or falling measured pipeline deliveries to the UK and Europe. <i>Invalidated by:</i> strong Gassco nominations and restarts. <span class="ev">Source: Gassco UMM</span></li>
-    <li><b>5. Supplier price-book reversal.</b> A named supplier withdrawing products or republishing higher rates with a verified timestamp. Tuesday's offered range fell, but books can reverse before customers act. <i>Invalidated by:</i> multiple named suppliers holding or cutting valid future-start rates. <span class="ev">Source: supplier rate books</span></li>
+  <div class="sec-head"><span class="sec-num">SECTION 10</span><h2>Top Five Warning Signs</h2></div>
+  <ol class="num">
+    <li><strong>EU gas-storage withdrawals accelerating.</strong> Watch GIE gas-day withdrawals and national fill percentages versus recent days, last year and identical-date averages. Baseline: 23 November, EU 68.41%, Germany 55.90%. Counter-evidence: withdrawal pace easing or milder weather. Low level alone is not a countdown to shortage.</li>
+    <li><strong>Colder-than-expected heating demand.</strong> Compare observed and forecast temperatures and heating-degree-days with the prior forecast (Met Office and recognised continental sources). A shift warmer reduces the risk.</li>
+    <li><strong>Measured lower wind and higher gas-fired generation.</strong> Source: NESO/Elexon output, offshore and onshore split, forecast, gas share, demand and power price. Do not claim this has happened without measurements; early Wednesday readings were substantial.</li>
+    <li><strong>Real LNG or pipeline supply degradation.</strong> A Gassco export outage, Qatari liquefaction or ship-loading loss, repeatedly blocked insured passage, US LNG diversion to Asia or confirmed Saudi energy capacity loss, with physical quantities and an operator source.</li>
+    <li><strong>Actual supplier-book upward repricing or product withdrawal.</strong> Named supplier rate, dated evidence, exact start date and customer eligibility. A wholesale or modelled W-26 move does not by itself change an executable tariff.</li>
+  </ol>
+  <div class="card"><p>Each sign carries a bullish and a bearish scenario. None is a predetermined price-rise outcome.</p></div>
+</section>
+
+<section id="changed">
+  <div class="sec-head"><span class="sec-num">SECTION 11</span><h2>What Changed</h2></div>
+  <div class="grid2">
+    <div class="card"><h3>New Wednesday, verified or new observations</h3><ul class="tick">
+      <li>Switch365 W-26 gas working reference 218.000p/therm, down 7.100p (-3.15%) versus Tuesday (direct user, internal).</li>
+      <li>Modelled W-26 power £169.43/MWh, down £4.95 (-2.84%), 90% gas-relative-change model.</li>
+      <li>Complete Wednesday seasonal sheet supplied: all nine gas rows and six of seven power rows fell Tuesday to Wednesday; W-29 power rose £1.64.</li>
+      <li>GIE 23 November gas day (status 24 Nov 06:00 CEST): EU 68.41%, Germany 55.90%. Latest verified gas day, not a Wednesday gas-day reading.</li>
+      <li>Met Office forecast issued 25 Nov 04:00 UTC: continued cold, frost risk, wintry northern hills possible Friday, milder potential later.</li>
+    </ul></div>
+    <div class="card"><h3>Improved / possibly lower price pressure</h3><ul class="tick">
+      <li>Two consecutive all-falling complete gas sheets (Mon-to-Tue and Tue-to-Wed) and Wednesday's W-26 at its lowest since 19 November.</li>
+      <li>Brent below $90 and down more than 20% in November as Gulf crude flows recover; oil risk premium fading even as gas holds a winter premium.</li>
+      <li>Improved LNG/pipeline flows, milder weather later, high wind or insurance/diplomatic progress would add to the downside only where sourced.</li>
+    </ul></div>
+    <div class="card"><h3>Deteriorating / bullish risk</h3><ul class="tick">
+      <li>Low EU and especially German storage with net withdrawals under way as the heating season starts.</li>
+      <li>UK cold spell and a possible future low-wind episode; Qatari export and shipping vulnerabilities remain as dated context.</li>
+    </ul></div>
+    <div class="card"><h3>Unchanged / not established</h3><ul class="tick">
+      <li>No proven nationwide GB wind collapse today; no quantified unavoidable gas shortage; no proof all customer tariffs have fallen 3.15%.</li>
+      <li>Older tanker allegations remain attributed to their original dates; they are not new overnight physical losses unless independently verified.</li>
+      <li>W-29 power rose on the day: the curve is not moving uniformly.</li>
+    </ul></div>
+    <div class="card"><h3>Market response</h3><p>The Switch365 W-26 user indicator fell again while cold and storage risks are present. Named NBP/TTF settlements and supplier books must be independently checked; the internal reference is not an exchange settlement.</p></div>
+    <div class="card"><h3>Commercial change</h3><p>Test live future-start rates, compare actual validity, full costs, product and credit criteria and exposure to pass-throughs and reopeners. The commercial window is customer-specific.</p></div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="sec-head"><span class="sec-num">SECTION 12</span><h2>Timeline: Past 7 Days</h2></div>
+  <div class="card"><ul class="tick">
+    <li><strong>Sat 21 Nov:</strong> UKMTO issued two incident warnings near Khasab (warnings 215-26 and 216-26); separate events with cargo impact to verify. Weekend shipping concern.</li>
+    <li><strong>Sun 22 Nov:</strong> Houthi claim of an attack on the Rabigh refinery; no operator-confirmed capacity loss in cited evidence. Saudi-led coalition reported a drone interception.</li>
+    <li><strong>Mon 23 Nov:</strong> prior complete sheet (Fri 20 to Mon 23) had all seasons higher; W-26 gas 227.030p, modelled power £175.72. TTF front month spiked intraday towards €96/MWh on cold-snap and storage fears before easing.</li>
+    <li><strong>Tue 24 Nov:</strong> complete offered-season sheet (Mon-to-Tue) showed all 8 gas and 6 power seasons down; W-26 gas 225.100p, modelled power £174.38. Brent traded near three-month lows around $88.71 in the morning before front-month settled $90.81 (+1.59%). GIE published the 23 November gas day: EU 68.41%, Germany 55.90%. WSJ-reported US probe into possible Iran-linked cyberattacks on dozens of tankers; Monday tanker-mine reports remained Iranian media claims.</li>
+    <li><strong>Wed 25 Nov morning:</strong> new complete sheet (Tue-to-Wed): all nine gas rows and six of seven power rows down; W-26 gas 218.000p (-3.15%), modelled power £169.43 (-2.84%); W-29 power +£1.64 the only riser. Met Office 04:00 UTC update confirms cold and frost risk. Wind risk conditional pending same-timestamp NESO/Elexon confirmation.</li>
+    <li><strong>Earlier October/November:</strong> Qatar, G7, Saudi, Iran, UKMTO and market history remains in its original chronological context (Sections 13-15 and the source appendix), not automatically today's events.</li>
   </ul></div>
 </section>
 
-<!-- ============ SECTION 11: WHAT CHANGED ============ -->
-<section id="changed">
-  <div class="sec-head"><span class="n">11</span><h2>What Changed</h2></div>
-  <p class="sec-sub">Evidence scorecard for Tuesday 24 November</p>
-  <div class="grid2">
-    <div class="card"><h3>Overnight, New Tuesday <span class="pill m">NEW</span></h3><ul class="tight">
-      <li>Reuters (00:18 UTC) reports the WSJ account: possible cyberattacks on up to 50 ships; US examining an Iranian link; independently unverified.</li>
-      <li>IRGC claims three oil tankers hit mines in Hormuz on Monday; no named vessels, no independent confirmation.</li>
-      <li>Reuters: oil holds near three-month lows as rising supply offsets the Hormuz threat; Sharara pipeline restarted.</li>
-      <li><b>Switch365 supplied a full Tuesday season sheet:</b> W-26 gas 225.100p (-0.85%), modelled W-26 power &pound;174.38 (-0.77%), and every offered season lower.</li>
-    </ul></div>
-    <div class="card"><h3>Improved / Possibly Bearish <span class="pill t">DOWN</span></h3><ul class="tight">
-      <li>Brent settled at $89.37, -3.46%, a three-month low; Libyan and Middle East flows rising; 1.7m bpd surplus forecast.</li>
-      <li>Monday's TTF intraday spike mostly unwound by the close; Tuesday's internal offered curve fell across all rows.</li>
-      <li>US LNG exports near record levels continue to backstop European supply.</li>
-    </ul></div>
-    <div class="card"><h3>Deteriorated / Bullish Risk <span class="pill r">UP</span></h3><ul class="tight">
-      <li>November tanker-attack tempo (at least 22 reported) is the highest since the war began; three UKMTO-verified strikes since Friday.</li>
-      <li>EU storage 68.9%, Germany 56.5%, around 17 points below the seasonal norm, drawing down as cold arrives.</li>
-      <li>Qatar force majeure extended to end-December; Ras Laffan output remains "very minute".</li>
-    </ul></div>
-    <div class="card"><h3>Unchanged / Not Established <span class="pill a">UNVERIFIED</span></h3><ul class="tight">
-      <li>No independent corroboration of 50 disabled ships, named victims or cargo losses from the cyber report.</li>
-      <li>No vessel-level confirmation of the three alleged mine strikes; no verified new LNG train closure from either claim.</li>
-      <li>No verified same-tenor NBP exchange settlement obtained in this run; the internal W-26 reference is not a public price.</li>
-    </ul></div>
-    <div class="card"><h3>Market Response <span class="ev">Observed</span></h3><ul class="tight">
-      <li>Tuesday's internal W-26 reference eased 0.85% and the full offered curve fell, while Monday's TTF spike faded and Brent hit a three-month low. Consistent with a geopolitical risk premium deflating on supply expectations, not with physical supply suddenly improving.</li>
-    </ul></div>
-    <div class="card"><h3>Commercial Change <span class="ev">Action</span></h3><ul class="tight">
-      <li>Use the softer offered range to test live supplier books today. Check whether named suppliers have repriced since Monday, and secure valid quotes only with full cost, CED, eligibility and validity confirmed. No blanket claim of a tariff reduction: supplier books often follow wholesale, and lag cuts both ways.</li>
-    </ul></div>
-  </div>
-</section>
-
-<!-- ============ SECTION 12: TIMELINE ============ -->
-<section id="timeline">
-  <div class="sec-head"><span class="n">12</span><h2>Timeline</h2></div>
-  <p class="sec-sub">Seven-day priority window, then dated context; claims marked as claims</p>
-  <div class="card"><div class="tbl-scroll"><table>
-    <thead><tr><th>Date</th><th>Event</th><th>Status</th></tr></thead>
-    <tbody>
-      <tr><td><b>Tue 24 Nov</b></td><td style="text-align:left">Reuters (00:18 UTC) reports US probe of possible cyberattacks on up to 50 oil/LPG/chemical ships (WSJ account). Reuters: oil near three-month low, Sharara restarted. Switch365 full Tuesday sheet: all gas and power seasons down; W-26 gas 225.100p, modelled power &pound;174.38. TTF CFD &euro;90.16 (+0.47%).</td><td>Report / internal data</td></tr>
-      <tr><td><b>Mon 23 Nov</b></td><td style="text-align:left">Month-ahead TTF spikes intraday towards &euro;96.08 on cold-snap and storage fears, fades to &euro;89.74 settle. IRGC claims three tankers struck mines in Hormuz. Brent settles $89.37 (-3.46%). US sanctions 25+ Iranian exchange houses and front companies. Switch365 sheet: 8/8 gas, 6/6 power up vs Friday.</td><td>Verified market data / Iranian claim</td></tr>
-      <tr><td><b>Sun 22 Nov</b></td><td style="text-align:left">UKMTO advisory 217-26: incident involving a tanker and military forces in the Gulf of Oman, details unconfirmed. Houthis claim a strike on Saudi Arabia's Rabigh refinery; no operator-confirmed capacity loss. GIE 22 Nov gas day: EU about 68.9%, Germany 56.48% (provisional).</td><td>UKMTO advisory / Houthi claim</td></tr>
-      <tr><td><b>Sat 21 Nov</b></td><td style="text-align:left">UKMTO warnings 215-26 (05:00 UTC, 11nm north of Khasab, tanker hit on stern) and 216-26 (05:50 UTC, 17nm east of Khasab, engine-room hit). No casualties; environmental impact unconfirmed.</td><td>UKMTO verified attacks</td></tr>
-      <tr><td><b>Fri 20 Nov</b></td><td style="text-align:left">UKMTO warning 214-26: tanker struck on the port bow 8nm north of Khasab, fire reported, no casualties. TTF settles &euro;88.45. Switch365 Friday season sheet (all rows rise into Monday).</td><td>UKMTO verified attack</td></tr>
-      <tr><td><b>Thu 19 Nov</b></td><td style="text-align:left">Switch365 W-26 working gas reference 205.730p, the low point before Monday's 10.35% jump to 227.030p. Historical context for Monday's spike, not Tuesday's move.</td><td>Switch365 internal</td></tr>
-      <tr><td><b>Tue 17 to Wed 18 Nov</b></td><td style="text-align:left">UKMTO warnings 208-26, 211-26, 212-26: tankers struck by unknown projectiles near Khasab, one engine-room fire, one missing crew member searched for. Cold air plunges south across the UK on 17 Nov with Met Office and UKHSA warnings.</td><td>UKMTO verified attacks</td></tr>
-      <tr><td colspan="3" style="text-align:left;color:var(--muted);font-size:12px;padding-top:14px;"><b>Dated context (not overnight):</b> 28 Feb: US-Israel war on Iran begins. 2 to 19 Mar: strikes halt Ras Laffan; Trains 4 and 6 damaged (about 12.8 mtpa, 17% of capacity). 24 Mar: QatarEnergy declares force majeure. 12 Jul: Iran announces Hormuz closure. 18 Jun: US-Iran MOU signed, implementation stalls over navigation. 26 Oct: Egypt's parliament approves defensive authorisation. 27 Oct: QatarEnergy extends Edison force majeure to end-December (35+ cargoes, 4.6 bcm). October: over 30 reported Hormuz-area attacks, then the highest monthly count of the war. 14 Nov: season's first UK snow; Kinbrace -5.8&deg;C. US naval blockade of Iranian ports continues with three carriers.</td></tr>
-    </tbody>
-  </table></div></div>
-</section>
-
-<!-- ============ SECTION 13: RHETORIC TRACKER ============ -->
 <section id="rhetoric">
-  <div class="sec-head"><span class="n">13</span><h2>Rhetoric Tracker</h2></div>
-  <p class="sec-sub">Claims versus confirmed: physical action is the reality check</p>
-  <div class="card"><div class="tbl-scroll"><table>
-    <thead><tr><th>Actor</th><th>Latest claim / statement (date)</th><th>Evidence level</th><th>Verified physical effect</th><th>Next proof required</th></tr></thead>
-    <tbody>
-      <tr><td><b>Iran (IRGC)</b></td><td style="text-align:left">Three oil tankers struck mines in Hormuz, Mon 23; two in the east of the strait; claims US escort failed</td><td><span class="pill a">IRANIAN STATEMENT</span></td><td style="text-align:left">None established; vessels unnamed; US disputed a similar September claim</td><td style="text-align:left">Named vessels, UKMTO/operator/insurer confirmation, cargo and damage assessment</td></tr>
-      <tr><td><b>United States</b></td><td style="text-align:left">Investigating possible cyberattacks on up to 50 ships; Iran primary suspect, Russia possible (WSJ, 23 to 24 Nov); sanctions on 25+ Iranian exchange houses (Mon 23)</td><td><span class="pill a">GOVERNMENT STATEMENT (probe)</span></td><td style="text-align:left">Sanctions are verified policy; cyber incidents and attribution unverified</td><td style="text-align:left">Official attribution, named vessels, evidence of disablement or cargo impact</td></tr>
-      <tr><td><b>Houthis (Ansar Allah)</b></td><td style="text-align:left">Claimed strike on Rabigh refinery, Sun 22 Nov; earlier claims against Yanbu, Shaybah and East-West pumping</td><td><span class="pill a">HOUTHI CLAIM</span></td><td style="text-align:left">No operator-confirmed refinery capacity loss from the Rabigh claim</td><td style="text-align:left">Aramco statement, satellite evidence, throughput data</td></tr>
-      <tr><td><b>Saudi Arabia / coalition</b></td><td style="text-align:left">Drone interception reported Sun 22 Nov; earlier interception announcements separate from Houthi claims</td><td><span class="pill t">MILITARY STATEMENT</span></td><td style="text-align:left">Interceptions show threat and defensive activity, not damaged production</td><td style="text-align:left">Site-level confirmation of refinery and pipeline operations</td></tr>
-      <tr><td><b>QatarEnergy</b></td><td style="text-align:left">Force majeure extended to end-December; Ras Laffan output "very minute"; restart of undamaged trains possible within weeks once shipping normalises</td><td><span class="pill t">OPERATOR CONFIRMATION</span></td><td style="text-align:left">35+ cargoes and 4.6 bcm to Edison affected since April; two trains damaged since March</td><td style="text-align:left">Sustained loadings, rising tonnage, eased force majeure, safe repeated passage</td></tr>
-      <tr><td><b>United Kingdom</b></td><td style="text-align:left">RAF Typhoon defensive counter-air missions protecting Saudi cities and critical infrastructure</td><td><span class="pill t">UK GOVERNMENT CONFIRMATION</span></td><td style="text-align:left">Defensive role; not an offensive operation against Yemen</td><td style="text-align:left">Mission scope, interceptions, any expansion</td></tr>
-      <tr><td><b>France</b></td><td style="text-align:left">Strengthening protection of Saudi energy infrastructure, focused on Yanbu and the East-West corridor</td><td><span class="pill t">FRENCH GOVERNMENT CONFIRMATION</span></td><td style="text-align:left">Deployment details officially limited</td><td style="text-align:left">Operational status of systems actually deployed</td></tr>
-      <tr><td><b>Turkey</b></td><td style="text-align:left">Preparing a parliamentary mandate that could permit defensive deployment to Saudi Arabia; closer Red Sea cooperation</td><td><span class="pill a">GOVERNMENT STATEMENT</span></td><td style="text-align:left">Legal and military framework in preparation; Turkey has not entered the war</td><td style="text-align:left">Parliamentary vote, mandate, actual deployment</td></tr>
-      <tr><td><b>Egypt</b></td><td style="text-align:left">Parliament approved defensive authorisation on 26 Oct; mission framed as defence of Saudi territory</td><td><span class="pill t">GOVERNMENT STATEMENT</span></td><td style="text-align:left">Authorisation is not deployment, and deployment is not combat entry</td><td style="text-align:left">Formal Saudi request, systems deployed, first verified mission</td></tr>
-      <tr><td><b>US LNG suppliers</b></td><td style="text-align:left">Cheniere up to 4 mtpa (2031 to 2054) and Woodside 3 mtpa (from 2030) signed with QatarEnergy; Venture Global 3+ mtpa still negotiation at last verification</td><td><span class="pill t">OPERATOR CONFIRMATION</span></td><td style="text-align:left">A negotiated LNG contract does not deliver a cargo until its agreed start date; the proposed Venture Global volume is not already replaced supply</td><td style="text-align:left">FID, construction milestones, first cargo dates</td></tr>
-    </tbody>
-  </table></div></div>
-</section>
-
-<!-- ============ SECTION 14: CEASEFIRE REALITY CHECK ============ -->
-<section id="ceasefire">
-  <div class="sec-head"><span class="n">14</span><h2>Ceasefire Reality Check</h2></div>
-  <p class="sec-sub">Diplomacy versus physical passage</p>
-  <div class="card">
-    <p style="font-size:14.5px;color:#efefff;">The 18 June US-Iran memorandum of understanding stalled over freedom of navigation through Hormuz, and Iran's 12 July closure announcement formally still stands. Oman-mediated contacts continue, but no operative signed agreement, demonstrably reduced UKMTO incident risk or measurable recovery in shipped LNG tonnes has been verified. November's attack tempo is the highest of the war, moving in the opposite direction to a ceasefire.</p>
-    <ul class="tight" style="margin-top:10px;">
-      <li><b>"Diplomatic contact is not a ceasefire, and a ceasefire announcement is not verified safe passage."</b></li>
-      <li><b>"An intercepted missile is not a confirmed energy infrastructure hit, and a hit is not necessarily lost production."</b></li>
-      <li><b>"An improvement in security can reduce a risk premium before damaged infrastructure is repaired, but physical flows are the supply test."</b></li>
-    </ul>
-    <p style="font-size:14px;color:#efefff;margin-top:10px;">Open questions that define a real de-escalation: Are Ras Tanura, Abqaiq, the East-West pipeline, Yanbu and Rabigh operating with export evidence? Has Egypt's authorisation become a requested deployment? Do UKMTO and operators confirm repeatable safe LNG transits? Are Qatari loadings rising sustainably, or are US spot cargoes still compensating? Is falling Brent actually accompanied by lower TTF/NBP and softer supplier books, as today's internal sheet suggests, and does it last more than a session? Never assume price direction from the geopolitical narrative alone.</p>
-  </div>
-</section>
-
-<!-- ============ SECTION 15: SHIPPING RISK ============ -->
-<section id="shipping">
-  <div class="sec-head"><span class="n">15</span><h2>Shipping Risk</h2></div>
-  <p class="sec-sub">Route by route, claims versus confirmed, with the escalation ladder</p>
-  <div class="card">
-    <h3>Attack Escalation Ladder <span class="ev">Framework</span></h3>
-    <div class="ladder">
-      <div class="rung"><span class="tag">Level 1</span><b>Threat</b>IRGC route warnings; Houthi threats to Saudi energy sites</div>
-      <div class="rung hit"><span class="tag">Level 2 · HERE: Rabigh claim, IRGC mine claim, cyber report</span><b>Attack claimed</b>Rabigh (Sun 22), three-tanker mine claim (Mon 23), 50-ship cyber account (Tue 24): all unverified</div>
-      <div class="rung hit"><span class="tag">Level 3 · HERE: Khasab tankers</span><b>Attack independently verified</b>UKMTO 214/215/216-26: three tankers struck near Khasab, Fri to Sat; Shaybah remains a verified earlier attack</div>
-      <div class="rung"><span class="tag">Level 4</span><b>Physical infrastructure damaged</b>Ras Laffan Trains 4 and 6 (March, operator-confirmed); no new site this week</div>
-      <div class="rung"><span class="tag">Level 5</span><b>Capacity / production lost</b>About 12.8 mtpa Qatari LNG offline since March; no new capacity loss verified this week</div>
-      <div class="rung"><span class="tag">Level 6</span><b>Market flow materially reduced</b>Qatari LNG exports a fraction of normal; force majeure to end-December; oil finding partial workarounds</div>
-    </div>
-    <p class="note">Do not jump levels. The Rabigh claim sits at Level 2; the weekend Khasab strikes are verified at Level 3; no incident this week has newly reached Level 4 or 5.</p>
-  </div>
-  <div class="grid2">
-    <div class="card"><h3>HORMUZ</h3><p style="font-size:14px;color:#efefff;">The world's most important energy chokepoint is operating under an Iranian closure announcement, a US naval blockade and the war's highest monthly attack tempo. UKMTO verified three projectile strikes on outbound tankers near Khasab between Friday and Saturday; the IRGC's Monday mine claim is unverified. The commercial question is no longer "can a ship physically cross?" but "can commercial energy shipping cross repeatedly, safely and at an acceptable insurance cost?" A route can remain open and still carry a substantial war-risk premium. Friction gets priced.</p></div>
-    <div class="card"><h3>GULF OF OMAN</h3><p style="font-size:14px;color:#efefff;">UKMTO advisory 217-26 (Sunday) reported an incident involving a tanker and military forces; whether the vessel was attacked or damaged is not established. Earlier November incidents disabled at least one tanker with an engine-room fire. This is the alternative anchorage and waiting zone, so incidents here raise costs even when the strait itself is passable.</p></div>
-    <div class="card"><h3>PERSIAN GULF</h3><p style="font-size:14px;color:#efefff;">Iran says it has approved only the northern shipping lane and threatens vessels using routes near Oman, which puts Qatar's Ras Laffan loadings inside the contested zone. Every Qatari LNG cargo must cross Hormuz; there is no pipeline bypass, and QatarEnergy has ruled one out.</p></div>
-    <div class="card"><h3>GULF OF ADEN</h3><p style="font-size:14px;color:#efefff;">Houthi capability keeps this corridor live. Yemen's Balhaf LNG complex sits in Shabwa province alongside the Gulf of Aden; the earlier Shabwa attack increased its energy-security relevance without proving direct LNG infrastructure damage. Balhaf security risk is not Balhaf supply loss.</p></div>
-    <div class="card"><h3>BAB AL-MANDEB</h3><p style="font-size:14px;color:#efefff;">The gate between the Gulf of Aden and the Red Sea remains exposed to Houthi missile and drone launches. Turkey's closer cooperation on Red Sea navigation protection and Egypt's defensive authorisation are responses to exactly this exposure, but neither has yet changed verified transit economics.</p></div>
-    <div class="card"><h3>RED SEA</h3><p style="font-size:14px;color:#efefff;">As Hormuz becomes less reliable, the Red Sea route becomes more valuable and more strategic. Saudi crude can move from eastern oilfields through the East-West pipeline to Yanbu and out via the Red Sea, reducing reliance on Hormuz. A verified attack removing East-West or Yanbu capacity would materially alter the market; none is confirmed this week.</p></div>
-    <div class="card"><h3>YANBU / RED SEA CORRIDOR</h3><p style="font-size:14px;color:#efefff;">Yanbu matters because it helps Saudi crude bypass Hormuz. France's protective focus on Yanbu and the East-West corridor underlines its role. Oil has more rerouting options than LNG, but only current verified flows establish the net market effect.</p></div>
-    <div class="card"><h3>LNG CARRIERS</h3><p style="font-size:14px;color:#efefff;">No LNG carrier has been newly confirmed hit this week; the weekend UKMTO strikes involved tankers, and the cargo types in the cyber report are oil, LPG and chemicals. LPG is not LNG. An LNG security incident matters more to UK gas than an unrelated general-cargo incident, so vessel type is checked before any claim is amplified. The security risk zone is not confined to Hormuz.</p></div>
-  </div>
-  <div class="card">
-    <h3>Tanker War-Risk Insurance and Physical Flows vs Pre-War <span class="ev">Verified sources only</span></h3>
-    <div class="fbar"><div class="lbl"><span>Qatar LNG nameplate capacity (77 mtpa)</span><span>100%</span></div><div class="track"><div class="fill" style="width:100%;"></div></div></div>
-    <div class="fbar"><div class="lbl"><span>Capacity damaged since March, Trains 4 and 6 (12.8 mtpa)</span><span>17%</span></div><div class="track"><div class="fill" style="width:17%;background:linear-gradient(90deg,var(--red),var(--amber));"></div></div></div>
-    <div class="fbar"><div class="lbl"><span>Edison contract volume delivered since April force majeure (6.4 bcm/yr contracted)</span><span>About 0%</span></div><div class="track"><div class="fill" style="width:2%;background:var(--red);"></div></div></div>
-    <div class="fbar"><div class="lbl"><span>US LNG exports, October 2026 vs record month</span><span>Second highest on record</span></div><div class="track"><div class="fill" style="width:92%;"></div></div></div>
-    <p class="note">Bars use operator and DOE-described figures only: QatarEnergy/Edison disclosures, Ras Laffan damage reporting and EPRINC's reading of DOE and LSEG data. Older unreconciled Hormuz flow percentages (minus 18% versus minus 32% depending on baseline) are deliberately not charted until the denominators are reconciled. War-risk premia remain elevated even where routes are technically open.</p>
-  </div>
-</section>
-
-<!-- ============ SECTION 16: MARKET STATS ============ -->
-<section id="stats">
-  <div class="sec-head"><span class="n">16</span><h2>Market Stats</h2></div>
-  <p class="sec-sub">Every metric timestamped, instrument-identified and evidence-tagged</p>
-  <div class="card"><div class="tbl-scroll"><table>
-    <thead><tr><th>Metric</th><th>Observation</th><th>Value</th><th>Change</th><th>Source / status</th></tr></thead>
-    <tbody>
-      <tr><td style="text-align:left">W-26 gas, p/therm</td><td>Tue 24 AM vs Mon 23 AM</td><td>225.100</td><td class="down">-1.930p / -0.85%</td><td style="text-align:left">Switch365 user working reference; not spot or ICE</td></tr>
-      <tr><td style="text-align:left">W-26 power, &pound;/MWh</td><td>Tue 24 AM vs Mon 23 AM</td><td>174.38</td><td class="down">-&pound;1.34 / -0.77%</td><td style="text-align:left">Modelled, 90% gas-relative rule; not a traded quote</td></tr>
-      <tr><td style="text-align:left">Offered gas seasons</td><td>Mon 23 AM &rarr; Tue 24 AM</td><td>8 of 8 down</td><td class="down">S-28 largest, -6.50p</td><td style="text-align:left">Switch365 Tuesday screenshot (internal broker / supplier evidence)</td></tr>
-      <tr><td style="text-align:left">Offered power seasons</td><td>Mon 23 AM &rarr; Tue 24 AM</td><td>6 of 6 down</td><td class="down">S-29 largest, -&pound;2.55</td><td style="text-align:left">Switch365 Tuesday screenshot; no S-30/W-30 supplied</td></tr>
-      <tr><td style="text-align:left">TTF front month, &euro;/MWh</td><td>Mon 23 settle</td><td>89.74</td><td class="up">+1.46% vs Fri 88.45</td><td style="text-align:left">Yahoo Finance TTF=F daily series; intraday high 91.82</td></tr>
-      <tr><td style="text-align:left">TTF month-ahead intraday</td><td>Mon 23 session</td><td>~96.08 high</td><td class="warn">spike, faded</td><td style="text-align:left">Guardian live coverage; live session, not a settlement</td></tr>
-      <tr><td style="text-align:left">TTF CFD indication</td><td>Tue 24 early</td><td>90.16</td><td class="up">+0.47%</td><td style="text-align:left">Trading Economics CFD; reference only, not ICE settlement</td></tr>
-      <tr><td style="text-align:left">Brent crude, $/bbl</td><td>Mon 23 settle</td><td>89.37</td><td class="down">-3.46%</td><td style="text-align:left">Reuters-reported three-month low; held near $89 early Tue</td></tr>
-      <tr><td style="text-align:left">NBP same named contract</td><td>Tue 24</td><td>Not verified</td><td>n/a</td><td style="text-align:left">No same-tenor exchange quote confirmed this run; not substituted with W-26</td></tr>
-      <tr><td style="text-align:left">EU gas storage</td><td>Status 23 Nov</td><td>68.9% (780 TWh)</td><td class="warn">withdrawing</td><td style="text-align:left">GIE/AGSI+ verified flow data</td></tr>
-      <tr><td style="text-align:left">Germany storage</td><td>Status 23 Nov</td><td>56.5% (139.7 TWh)</td><td class="warn">withdrawing</td><td style="text-align:left">GIE/AGSI+; about 30 points below the 5-year norm</td></tr>
-      <tr><td style="text-align:left">GB storage</td><td>Status 23 Nov</td><td>35.5% (3.5 TWh)</td><td>n/a</td><td style="text-align:left">GIE/AGSI+</td></tr>
-      <tr><td style="text-align:left">Hormuz-area attacks</td><td>Nov to date</td><td>at least 22</td><td class="up">highest of war</td><td style="text-align:left">UKMTO figures via CNN/Jerusalem Post; over 30 in October</td></tr>
-      <tr><td style="text-align:left">Qatar LNG force majeure</td><td>Current</td><td>to end-Dec 2026</td><td class="up">35+ cargoes, 4.6 bcm</td><td style="text-align:left">QatarEnergy/Edison disclosures via Reuters (operator confirmation)</td></tr>
-      <tr><td style="text-align:left">US LNG exports</td><td>Oct 2026</td><td>2nd highest month</td><td class="down">bearish buffer</td><td style="text-align:left">DOE data via EPRINC; Europe took about half of cargoes</td></tr>
-      <tr><td style="text-align:left">Norwegian flows / UK wind</td><td>Tue 24</td><td>Not re-verified</td><td>n/a</td><td style="text-align:left">No fresher source-checked Gassco/NESO figure this run; marked honestly</td></tr>
-      <tr><td style="text-align:left">Customer executable tariffs</td><td>Tue 24</td><td>Quote-specific</td><td>n/a</td><td style="text-align:left">Named supplier, product, CED and validity required; never derived from W-26</td></tr>
-    </tbody>
-  </table></div></div>
-  <div class="card"><h3>W-26 Working Reference Series <span class="ev">Switch365 internal</span></h3>
-    <div class="tbl-scroll"><table>
-      <thead><tr><th>Business date</th><th>W-26 gas (p/therm)</th><th>W-26 power (&pound;/MWh)</th><th>Classification</th></tr></thead>
+  <div class="sec-head"><span class="sec-num">SECTION 13</span><h2>Rhetoric Tracker: Claims vs Confirmed</h2></div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Actor</th><th>Latest position (dated)</th><th>Evidence level</th><th>Physical effect</th><th>Next proof required</th></tr></thead>
       <tbody>
-        <tr><td>Fri 13 Nov</td><td>219.750</td><td>170.52</td><td style="text-align:left">User gas / modelled power</td></tr>
-        <tr><td>Mon 16 Nov</td><td>223.860</td><td>173.39</td><td style="text-align:left">User gas / modelled power</td></tr>
-        <tr><td>Tue 17 Nov</td><td>208.890</td><td>162.95</td><td style="text-align:left">User gas / modelled power</td></tr>
-        <tr><td>Wed 18 Nov</td><td>211.810</td><td>165.00</td><td style="text-align:left">User gas / modelled power</td></tr>
-        <tr><td>Thu 19 Nov</td><td>205.730</td><td>160.74</td><td style="text-align:left">User gas / modelled power</td></tr>
-        <tr><td>Fri 20 Nov</td><td>Not supplied</td><td>Not supplied</td><td style="text-align:left">No observation; not interpolated</td></tr>
-        <tr><td>Mon 23 Nov</td><td>227.030</td><td>175.72</td><td style="text-align:left">Direct user gas / modelled power</td></tr>
-        <tr><td><b>Tue 24 Nov</b></td><td><b>225.100</b></td><td><b>174.38</b></td><td style="text-align:left"><b>Newest direct gas / modelled power</b></td></tr>
+        <tr><td>Ansar Allah (the Houthis)</td><td>22 Nov claim of attack on Rabigh refinery; late-Oct claims on Yanbu, Shaybah, Ras Tanura remain claims</td><td>Houthi claim</td><td>No operator-confirmed capacity loss in cited evidence</td><td>Named-target operator confirmation, satellite or output evidence</td></tr>
+        <tr><td>Saudi Arabia</td><td>Coalition interception reports (incl. 22 Nov drone, 27 Oct missiles/drones)</td><td>Military statement</td><td>Interceptions reported; no verified lost refinery or pipeline output</td><td>Civil Defence updates, site operations data</td></tr>
+        <tr><td>Iran</td><td>Monday 23 Nov tanker-mine reports carried by Iranian media; earlier seven-vessel IRGC claim</td><td>Iranian statement / claim</td><td>Unverified; cross-check UKMTO, operators, trackers</td><td>Vessel-by-vessel confirmation (name, IMO, cargo, damage)</td></tr>
+        <tr><td>United Kingdom</td><td>RAF Typhoon defensive counter-air missions protecting Saudi cities and critical infrastructure</td><td>UK government confirmation</td><td>Defensive posture; not an offensive operation against Yemen</td><td>Missions flown, interceptions, any mission expansion</td></tr>
+        <tr><td>France</td><td>Strengthened protection of Saudi energy infrastructure, focus Yanbu and East-West corridor</td><td>French government confirmation</td><td>Defensive deployments; operational detail limited</td><td>Official confirmation of systems deployed</td></tr>
+        <tr><td>Turkey</td><td>Preparing parliamentary mandate for possible defensive deployment to Saudi Arabia</td><td>Government statement</td><td>Legal and military framework only</td><td>Parliamentary vote, actual deployment</td></tr>
+        <tr><td>Egypt</td><td>Parliament approved defensive authorisation 26 Oct</td><td>Government confirmation</td><td>Authority approved; not deployment or combat entry</td><td>Saudi formal request, verified operational mission</td></tr>
+        <tr><td>Qatar / US LNG suppliers</td><td>QatarEnergy force majeure reportedly extended to end-2026; Cheniere SPA (22 Oct, up to 4 mtpa, 2031-2054), Woodside SPA (29 Oct, 3 mtpa from 2030), Venture Global negotiations pending</td><td>Operator / signed contracts</td><td>Current exports constrained; SPAs are future deliveries</td><td>Loadings, tonnage, lifted force majeure</td></tr>
       </tbody>
-    </table></div>
-    <p class="note">Each supplied W-26 observation controls its own date. Thursday-to-Monday's +10.35% jump and Monday-to-Tuesday's -0.85% easing are separate moves; Friday was never observed and is not interpolated.</p></div>
+    </table>
+  </div>
+  <div class="callout amber">Physical action is the reality check. Threatened, claimed and verified attacks are separate categories, and verified capacity loss is a further, higher bar. Never combine them.</div>
 </section>
 
-<!-- ============ SECTION 17: SUPPLIER PRICE-BOOK LAG ============ -->
-<section id="lag">
-  <div class="sec-head"><span class="n">17</span><h2>Supplier Price-Book Lag</h2></div>
-  <p class="sec-sub">Wholesale markets move first; supplier books often follow</p>
+<section id="ceasefire">
+  <div class="sec-head"><span class="sec-num">SECTION 14</span><h2>Ceasefire Reality Check</h2></div>
   <div class="card">
-    <p style="font-size:14.5px;color:#efefff;">Today's full offered sheet fell across every row, following Friday-to-Monday when every row had risen. That whiplash is exactly how price-book lag works in both directions: suppliers reprice at different speeds, some books will still carry Monday's higher levels this morning, and some may hold lower quotes longer than expected. Supplier price-book lag is the opportunity and the danger. The market does not need to rise again tomorrow for customers to pay more tomorrow, because a book that has not yet fallen can still be repriced before a customer acts, and once a supplier withdraws a rate, the customer cannot go back and secure yesterday's price.</p>
-    <p style="font-size:14.5px;color:#efefff;margin-top:10px;">The practical test is per supplier and per customer: named supplier, exact unit and standing rates, full non-commodity pass-throughs and contract reopeners, broker margin and commission, CED, kWh and profile, credit, VAT and CCL, and expiry. A working-proxy percentage is not a full-bill customer saving. The British Gas 18-month eligible renewal window remains an additional route to compare real future-start products. No artificial "last chance", and no universal instruction to fix immediately or to wait.</p>
-  </div>
-</section>
-
-<!-- ============ SECTION 18: CUSTOMER ACTION ============ -->
-<section id="action">
-  <div class="sec-head"><span class="n">18</span><h2>Customer Action</h2></div>
-  <p class="sec-sub">Five action cards; the action everywhere is "review live pricing now"</p>
-  <div class="grid2">
-    <div class="card"><h3>1. Existing Valid Quote <span class="pill m">VERIFY</span></h3><p style="font-size:14px;color:#efefff;">Check whether any quote already issued remains executable: validate date and time, commission disclosure, customer-specific unit rate and standing charge, CED and consent. With the whole offered curve lower this morning, compare it against fresh Tuesday quotes where operationally possible before it lapses.</p></div>
-    <div class="card"><h3>2. Contract Ends in 2026 <span class="pill r">URGENT REVIEW</span></h3><p style="font-size:14px;color:#efefff;">Confirm the exact end date and that no overlapping supply obligation exists, and prevent out-of-contract exposure. Even after recent wholesale moves, near-term offers should be compared now; winter-2026 risk is concentrated in storage, LNG and shipping, none of which has improved physically today.</p></div>
-    <div class="card"><h3>3. Inside 12 Months <span class="pill a">DO NOT WAIT FOR RENEWAL PANIC</span></h3><p style="font-size:14px;color:#efefff;">Get current future-start quotes across available products and terms, review full forecast costs and the customer's risk appetite. Quote validity must be real, not a model. A softer Tuesday screen is the time to test books, because lag means some suppliers have not repriced yet in either direction.</p></div>
-    <div class="card"><h3>4. British Gas Inside 18 Months <span class="pill t">EXTENDED WINDOW</span></h3><p style="font-size:14px;color:#efefff;">Check British Gas up-to-18-month renewal eligibility where applicable. The future-start contract begins when the existing one expires; signing today does not mean paying the new tariff today. Subject to product, credit and eligibility rules.</p></div>
-    <div class="card"><h3>5. 2027 / 2028 / 2029 / 2030 Start Dates <span class="pill t">YOUR DELIVERY PERIOD MATTERS</span></h3><p style="font-size:14px;color:#efefff;">Tuesday's same-date curve shows S-28 gas at 83.50p, 62.9% below W-26, and S-28 power at &pound;73.00, 58.1% below the modelled front. These are different delivery periods, not whole-bill savings, but they are the genuine comparison for customers whose contracts start in those seasons. Verify term eligibility and full price; quoted indicative values can change.</p></div>
-    <div class="card"><h3>Waiting Is Not Neutral <span class="pill a">BOTH SIDES</span></h3><p style="font-size:14px;color:#efefff;">Waiting might help if US LNG and Norwegian supply stay strong, weather turns mild, winds rise, Gulf shipping normalises or suppliers cut rates further. Waiting might hurt if a verified LNG loss occurs, storage draws accelerate in the cold, or supplier books reverse. Waiting only works if the market moves in the customer's favour. Show both outcomes and let the customer choose the risk trade-off, with evidence-based quote comparison behind every recommendation.</p></div>
-  </div>
-  <div class="card"><p style="font-size:15px;color:var(--teal);font-weight:700;">Mandatory close: The headlines affect expectations, but the decision depends on the actual price a supplier will honour for this customer's future start date.</p></div>
-</section>
-
-<!-- ============ SECTION 19: SOURCE QUALITY ============ -->
-<section id="quality">
-  <div class="sec-head"><span class="n">19</span><h2>Source Quality</h2></div>
-  <p class="sec-sub">Confidence panel for today's key claims</p>
-  <div class="grid3">
-    <div class="card"><h3>Tier 1 <span class="pill t">HIGHEST</span></h3><ul class="tight">
-      <li>Switch365 internal data (Tuesday screenshots)</li>
-      <li>Reuters (oil, cyber probe, Qatar)</li>
-      <li>UKMTO (incident warnings 214 to 217-26)</li>
-      <li>GIE / AGSI+ (storage)</li>
-      <li>QatarEnergy / Edison disclosures</li>
-      <li>ICE, Gassco, NESO, Elexon, National Gas, EIA, IEA, GOV.UK, official operators</li>
-    </ul></div>
-    <div class="card"><h3>Tier 2 <span class="pill a">WITH CAVEATS</span></h3><ul class="tight">
-      <li>Wall Street Journal (cyber account, unverified by Reuters)</li>
-      <li>Kpler / LSEG / DOE-derived flow analysis (EPRINC)</li>
-      <li>Yahoo Finance and Trading Economics price series (instrument-checked, not settlements)</li>
-      <li>Guardian live markets coverage</li>
-      <li>CNN, Jerusalem Post, Anadolu, gCaptain, Safety4Sea</li>
-    </ul></div>
-    <div class="card"><h3>Claim-Only <span class="pill r">LABELLED</span></h3><ul class="tight">
-      <li>IRGC / Iranian state media (mine-strike claim)</li>
-      <li>Houthi claims (Rabigh and earlier)</li>
-      <li>Unattributed officials on attribution</li>
-      <li>Social media circulation of any of the above</li>
+    <p>Diplomatic contact is not a ceasefire, and a ceasefire announcement is not verified safe passage. An intercepted missile is not a confirmed energy-infrastructure hit, and a hit is not necessarily lost production. An improvement in security can reduce a risk premium before damaged infrastructure is repaired, but physical flows are the supply test.</p>
+    <ul class="tick">
+      <li>Has any signed, operative agreement replaced the November diplomatic signalling (G7 statements, Qatar's Paris briefing, Iran's conditional proposals)? No signed ceasefire is verified in this research run.</li>
+      <li>Do UKMTO and ship operators confirm repeatable, insured, safe LNG-carrier and tanker passage through Hormuz, the Gulf of Aden and Bab al-Mandeb? Partial transits continue below pre-war pace; incidents and claims persist.</li>
+      <li>Have Qatar's actual loadings and export tonnage risen sustainably, or do US spot cargoes continue to compensate? Force majeure reportedly stands to end-2026; one successful crossing is not recovery. Qatar needs predictable safe passage, not occasional successful crossings.</li>
+      <li>Is Norwegian gas running without new outages, are US LNG deliveries continuing, and is European storage in withdrawal mode? Storage is withdrawing (about 2.8 TWh a day around 22 November on third-party tracking); Norway and US LNG remain the bearish buffer to verify daily.</li>
+      <li>Is falling Brent accompanied by lower TTF/NBP and real supplier books, or only oil-market relief? This week's internal sheets show supplier-season indicators falling; wholesale screens and named supplier books still need same-day verification.</li>
     </ul>
-    <p class="note">Never silently convert a claim into a verified attack, or a verified attack into a capacity loss. That distinction is doing real work in today's report.</p></div>
+    <p class="mandate">Never assume price direction from the geopolitical narrative alone.</p>
   </div>
 </section>
 
-<!-- ============ SECTION 20: SOURCE LINKS ============ -->
+<section id="shipping">
+  <div class="sec-head"><span class="sec-num">SECTION 15</span><h2>Shipping Risk, Route by Route</h2></div>
+  <div class="grid2">
+    <div class="card"><h3>Hormuz</h3><p>Primary chokepoint: about 93% of Qatar's and 96% of the UAE's LNG exports transit the strait, roughly a fifth of global LNG trade (IEA). Partial Qatari transits have resumed below the pre-war pace of roughly three LNG shipments a day. Monday's tanker-mine reports remain Iranian media claims pending UKMTO, operator and tracker confirmation. Earlier Hormuz oil-flow figures conflict (about -32% on one Kpler total-clearance baseline versus about -18% on a different baseline); neither is republished as a verified current figure until denominators are reconciled.</p></div>
+    <div class="card"><h3>Gulf of Oman</h3><p>Staging area for shuttling tactics and the Fujairah bypass (Abu Dhabi Crude Oil Pipeline, about 1.8 mb/d current capacity). No new verified incident overnight; earlier tanker strike west of Bukha remains dated context with crew safe and fire extinguished.</p></div>
+    <div class="card"><h3>Persian Gulf</h3><p>Iranian claims of vessels catching fire in the northern Gulf remain claims. Vessel-by-vessel verification (name, IMO, cargo, laden or ballast, damage, flag state) is required before any count changes. Do not double-count strike, aftermath and sinking of the same ship.</p></div>
+    <div class="card"><h3>Gulf of Aden</h3><p>Shabwa province (site of the earlier security-camp missile attack) contains the Balhaf LNG complex and borders the Gulf of Aden. The attack occurred in a province containing Yemen's Balhaf LNG complex, increasing its energy-security relevance without proving direct LNG infrastructure damage. Balhaf security risk is not Balhaf supply loss.</p></div>
+    <div class="card"><h3>Bab al-Mandeb</h3><p>Houthi capability keeps this corridor under daily watch. The security risk zone is not confined to Hormuz. Egypt's Red Sea interests and Turkey's navigation-protection discussions raise the corridor's strategic weight.</p></div>
+    <div class="card"><h3>Red Sea</h3><p>As Hormuz becomes less reliable, the Red Sea route becomes more valuable and more strategic: Saudi crude can exit west via the East-West pipeline to Yanbu. Houthi attacks remain a live risk; Turkey and Egypt are moving closer to defensive roles.</p></div>
+    <div class="card"><h3>Yanbu / Red Sea Corridor</h3><p>Yanbu bypasses Hormuz for Saudi crude. A verified attack removing East-West pipeline, Yanbu loading, terminal or refinery capacity would materially alter the market; current status: claimed targets, no verified capacity loss in cited evidence.</p></div>
+    <div class="card"><h3>LNG Carriers</h3><p>An LNG security incident matters more to UK gas than an unrelated general-cargo incident. For every incident: vessel type, laden or ballast, origin, destination, cargo owner, damage and whether passage was interrupted. No LNG-carrier loss is verified in this research run.</p></div>
+    <div class="card"><h3>Tanker War-Risk Insurance</h3><p>A route can remain open and still carry a substantial war-risk premium. Friction gets priced. Even where oil cargo volume finds alternative paths, routing, insurance and freight can remain abnormal; differentiate reduced physical supply from elevated delivered cost.</p></div>
+  </div>
+</section>
+
+<section id="stats">
+  <div class="sec-head"><span class="sec-num">SECTION 16</span><h2>Market Stats</h2></div>
+  <div class="chartbox">
+    <div class="ctitle">Graph 4 · W-26 Working Reference Series, 13 to 25 November</div>
+    <div class="cnote">Direct user gas (p/therm, left axis, magenta) and modelled power (£/MWh, right axis, teal). Friday 20 November was never supplied and is shown as a gap, never interpolated.</div>
+    <div class="chartwrap"><canvas id="w26Chart"></canvas></div>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Metric</th><th>Instrument / Units</th><th>Previous (time)</th><th>Latest (time)</th><th>Change</th><th>Source</th><th>Evidence class</th></tr></thead>
+      <tbody>
+        <tr><td>W-26 gas working reference</td><td>p/therm, winter 2026 season indicator</td><td>225.100 (Tue 24 Nov AM)</td><td>218.000 (Wed 25 Nov AM)</td><td class="neg">-7.100 / -3.15%</td><td>Switch365 direct user</td><td>User-supplied, internal</td></tr>
+        <tr><td>W-26 power (model)</td><td>£/MWh, 90% gas-relative-change model</td><td>174.38 (Tue 24 Nov AM)</td><td>169.43 (Wed 25 Nov AM)</td><td class="neg">-4.95 / -2.84%</td><td>Switch365 model on user sheet</td><td>Modelled</td></tr>
+        <tr><td>Full gas seasons</td><td>p/therm, 9 rows incl. W-26</td><td>Tue 24 Nov AM</td><td>Wed 25 Nov AM</td><td class="neg">9 of 9 fell; largest S-27 -8.00</td><td>User screenshot</td><td>User-supplied, internal</td></tr>
+        <tr><td>Full power seasons</td><td>£/MWh, 7 rows incl. W-26 model</td><td>Tue 24 Nov AM</td><td>Wed 25 Nov AM</td><td class="neg">6 of 7 fell; W-29 +1.64</td><td>User screenshot</td><td>User-supplied, internal</td></tr>
+        <tr><td>EU gas storage</td><td>% full / TWh, GIE AGSI+</td><td>68.9% / 780.3 TWh (22 Nov gas day, ENGIE reading)</td><td>68.41% / 774.70 TWh (23 Nov gas day)</td><td class="neg">Withdrawing ~2.8 TWh/d</td><td>GIE, status 24 Nov 06:00 CEST</td><td>Verified official</td></tr>
+        <tr><td>Germany gas storage</td><td>% full / TWh, GIE AGSI+</td><td>~56.5% (22 Nov gas day, third-party)</td><td>55.90% / 138.26 TWh (23 Nov gas day)</td><td class="neg">Falling</td><td>GIE</td><td>Verified official</td></tr>
+        <tr><td>UK weather</td><td>National forecast</td><td>Cold snap ongoing (24 Nov)</td><td>Cold, frost risk, wintry northern hills Fri (25 Nov 04:00 UTC)</td><td class="flat">Cold persists</td><td>Met Office</td><td>Verified forecast</td></tr>
+        <tr><td>GB wind generation</td><td>GW, national metered + forecast</td><td>Substantial (early Wed, selected half-hours)</td><td>Not low at early readings</td><td class="flat">Conditional risk only</td><td>NESO / Elexon</td><td>Verified data portals; same-timestamp check required</td></tr>
+        <tr><td>TTF front month</td><td>€/MWh, Dec-26 indication</td><td>~88.9 (Tue 24 early, third-party history)</td><td>~91.2 (Wed 25, live indication)</td><td class="pos">Firmer intraday; not a settlement</td><td>Investing.com screen</td><td>Indicative market data</td></tr>
+        <tr><td>Brent crude</td><td>$/bbl, ICE front month</td><td>90.81 settle (Tue 24, +1.59%)</td><td>Below $90 region; >20% lower in Nov</td><td class="neg">Near three-month lows</td><td>Reuters / market reports</td><td>Verified market data</td></tr>
+        <tr><td>Qatar LNG exports</td><td>mt, monthly loadings</td><td>Partial transits below pre-war pace</td><td>Force majeure reportedly to end-2026</td><td class="flat">Constrained</td><td>QatarEnergy / tracking reports</td><td>Attributed; verify tonnage</td></tr>
+        <tr><td>Norwegian flows</td><td>mcm/d, Gassco UMM</td><td>Outage history Oct/Nov</td><td>Check UMM daily</td><td class="flat">Not re-verified at runtime</td><td>Gassco UMM</td><td>Operator portal; refresh required</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="lag">
+  <div class="sec-head"><span class="sec-num">SECTION 17</span><h2>Supplier Price-Book Lag</h2></div>
+  <div class="card">
+    <p>Wholesale markets move first. Supplier books often follow. This week's internal sheets show offered seasons falling twice in succession, yet a seasonal internal indicator and a customer's eligible, signed, executable quote are different things. Check CED, future start, supplier product, rate validity, whole-bill costs, kWh, standing charge, credit, broker fees and pass-through or reopener terms before treating any screen move as an available tariff.</p>
+    <p>Supplier price-book lag is the opportunity and the danger. Once a supplier withdraws a rate, the customer cannot go back and secure yesterday's price. Waiting is not neutral: waiting only works if the market moves in the customer's favour, and low storage plus cold weather is exactly the backdrop against which falling prices can reverse.</p>
+  </div>
+</section>
+
+<section id="action">
+  <div class="sec-head"><span class="sec-num">SECTION 18</span><h2>Customer Action</h2></div>
+  <div class="grid2">
+    <div class="card"><h3>1 · Inside 90 Days: Immediate Review</h3><p>Review live pricing now and secure where commercially appropriate. With W-26 gas at 218.000p and falling, test whether supplier books have caught up with the screen.</p></div>
+    <div class="card"><h3>2 · Inside 12 Months: Do Not Wait for Renewal Panic</h3><p>Check today's future-start pricing against the actual contract end date. Review today's valid future-start prices, without inventing a market bottom or a supplier deadline.</p></div>
+    <div class="card"><h3>3 · British Gas Inside 18 Months: Extended Renewal Window</h3><p>Check eligibility and live pricing. The window now runs to 18 months; the contract starts when the existing one ends; not every customer is automatically eligible.</p></div>
+    <div class="card"><h3>4 · High Usage Outside 12 Months: Look Further Forward</h3><p>Test forward-start and supplier options across 2027-2030 delivery periods, where offered seasons sit 28% to 70% below the winter-2026 reference on a same-date basis.</p></div>
+    <div class="card"><h3>5 · 2027/2028/2029/2030 CED: Your Delivery Period Matters</h3><p>Compare the actual delivery period against W-26 and 1 Year Ago. Backwardation does not mean wait; it means compare real, eligible quotes for the period you will actually consume.</p></div>
+  </div>
+  <div class="callout teal">The action everywhere is "review live pricing now", never "blindly contract immediately".</div>
+</section>
+
+<section id="quality">
+  <div class="sec-head"><span class="sec-num">SECTION 19</span><h2>Source Quality</h2></div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Key claim</th><th>Best source</th><th>Confidence</th><th>Caveat</th></tr></thead>
+      <tbody>
+        <tr><td>W-26 gas 218.000p (-3.15%), power model £169.43 (-2.84%)</td><td>Switch365 direct user data, Wed 25 Nov AM</td><td>High (internal)</td><td>Working reference and model; not ICE settlement or customer tariff</td></tr>
+        <tr><td>All nine gas rows, six of seven power rows fell Tue-to-Wed</td><td>User screenshot, complete seasonal sheet</td><td>High (internal)</td><td>Offered-price indicators; W-29 power rose £1.64</td></tr>
+        <tr><td>EU storage 68.41% / 774.70 TWh; Germany 55.90%</td><td>GIE AGSI+, 23 Nov gas day, status 24 Nov 06:00 CEST</td><td>High (official)</td><td>Gas day, not publication day; later gas days may revise</td></tr>
+        <tr><td>Storage ~18 points below 2017-2025 average</td><td>ENGIE EnergyScan / third-party GIE-derived</td><td>Medium (third-party derived)</td><td>Methodology and population to verify before headline use</td></tr>
+        <tr><td>UK cold spell, frost, wintry hills Friday</td><td>Met Office, 25 Nov 04:00 UTC</td><td>High (official forecast)</td><td>Forecast, not measured gas demand; milder later possible</td></tr>
+        <tr><td>GB wind substantial early Wednesday</td><td>NESO/Elexon-derived early observations</td><td>Medium</td><td>Selected half-hours; all-day pattern not established</td></tr>
+        <tr><td>Brent near three-month lows, below $90</td><td>Reuters and market reports, 24-25 Nov</td><td>High (market data)</td><td>Front-month settled $90.81 Tue (+1.59%); label live vs settle</td></tr>
+        <tr><td>Monday tanker-mine and seven-vessel reports</td><td>Iranian media / IRGC claims</td><td>Low (claim only)</td><td>UKMTO, operators, trackers and flag states to confirm vessel by vessel</td></tr>
+        <tr><td>QatarEnergy force majeure to end-2026</td><td>Third-party tracking reports</td><td>Medium</td><td>Operator confirmation preferred; recovery requires sustained loadings</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
 <section id="links">
-  <div class="sec-head"><span class="n">20</span><h2>Source Links</h2></div>
-  <p class="sec-sub">Sources actually consulted for this edition, freshest first</p>
-  <div class="card"><ul class="src-list">
-    <li><b>Reuters via Jerusalem Post, 24 Nov:</b> US eyes Iran as possible culprit in dozens of cyberattacks against ships (WSJ account; Reuters could not verify). <a href="https://www.jpost.com/middle-east/iran-news/article-915906">jpost.com/middle-east/iran-news/article-915906</a></li>
-    <li><b>Wall Street Journal, 24 Nov:</b> original account of the suspected cyberattacks on up to 50 energy tankers. <a href="https://www.wsj.com/politics/national-security/iran-us-cyberattack-suspect-fed78942">wsj.com/politics/national-security/iran-us-cyberattack-suspect-fed78942</a></li>
-    <li><b>Reuters via Investing.com, 24 Nov:</b> oil holds near three-month low as rising supply offsets Hormuz threat; Sharara restart. <a href="https://www.investing.com/news/commodities-news/oil-holds-near-threemonth-low-as-rising-supply-offsets-hormuz-threat-5046916">investing.com/news/commodities-news/oil-holds-near-threemonth-low-5046916</a></li>
-    <li><b>Reuters via Miami Herald, 24 Nov:</b> Tuesday session follow-up, oil easing near the three-month low. <a href="https://www.miamiherald.com/news/nation-world/national/article318225105.html">miamiherald.com/news/nation-world/national/article318225105.html</a></li>
-    <li><b>Anadolu Agency, 24 Nov:</b> IRGC Navy says mine blasts set three oil tankers ablaze in the Strait of Hormuz (claim). <a href="https://aa.com.tr/en/middle-east/iran-s-revolutionary-guard-corps-navy-says-mine-blasts-set-3-oil-tankers-ablaze-in-strait-of-hormuz/4135182">aa.com.tr/en/middle-east/4135182</a></li>
-    <li><b>Jerusalem Post, 24 Nov:</b> IRGC claim detail plus UKMTO attack-count verification (over 30 in October, at least 22 in November). <a href="https://www.jpost.com/middle-east/iran-news/article-915899">jpost.com/middle-east/iran-news/article-915899</a></li>
-    <li><b>UKMTO, 21 Nov:</b> Warning 215-26, tanker struck on stern 11nm north of Khasab. <a href="https://www.ukmto.org/-/media/ukmto/products/20261121-ukmto_warning_215-26.pdf">ukmto.org warning 215-26 (PDF)</a></li>
-    <li><b>UKMTO, 21 Nov:</b> Warning 216-26, tanker struck in engine room 17nm east of Khasab. <a href="https://www.ukmto.org/-/media/ukmto/products/20261121-ukmto_warning_216-26.pdf">ukmto.org warning 216-26 (PDF)</a></li>
-    <li><b>Safety4Sea, 23 Nov:</b> consolidated account of warnings 214 to 217-26, 20 to 22 November. <a href="https://safety4sea.com/three-tankers-struck-in-strait-of-hormuz-amid-further-gulf-of-oman-incident/">safety4sea.com/three-tankers-struck-in-strait-of-hormuz</a></li>
-    <li><b>GIE / AGSI+, status 23 Nov:</b> EU 68.9% (780 TWh), Germany 56.5%, GB 35.5% storage. <a href="https://www.gie.eu/">gie.eu</a></li>
-    <li><b>Yahoo Finance, series to 23 Nov:</b> TTF front-month daily series, Mon settle 89.74, high 91.82. <a href="https://finance.yahoo.com/quote/TTF%3DF/history/">finance.yahoo.com/quote/TTF=F/history</a></li>
-    <li><b>Trading Economics, 24 Nov:</b> EU natural gas CFD 90.16, +0.47%. <a href="https://tradingeconomics.com/commodity/eu-natural-gas">tradingeconomics.com/commodity/eu-natural-gas</a></li>
-    <li><b>Guardian, 23 Nov:</b> European gas intraday surge towards &euro;96.08 on cold-snap and storage fears (live session coverage). <a href="https://www.theguardian.com/business/2026/nov/23/gas-prices-in-europe-surge-as-forecast-cold-snap-feeds-supply-shortage-fears">theguardian.com/business/2026/nov/23</a></li>
-    <li><b>Gasworld / Reuters, 27 Oct:</b> QatarEnergy extends Edison LNG force majeure to end-December. <a href="https://www.gasworld.com/story/qatarenergy-extends-lng-force-majeure-on-edison-cargoes-to-end-december/2262726.article/">gasworld.com/story/2262726</a></li>
-    <li><b>EPRINC, 12 Nov:</b> US LNG exports and European imports revisited (DOE and LSEG data; October second-highest month). <a href="https://eprinc.org/u-s-lng-exports-and-european-natural-gas-imports-revisited/">eprinc.org/u-s-lng-exports-and-european-natural-gas-imports-revisited</a></li>
-    <li><b>Nation Thailand / Reuters, 24 Nov:</b> Brent settles $89.37, -3.46% on 23 November. <a href="https://www.nationthailand.com/news/world/40073845">nationthailand.com/news/world/40073845</a></li>
-  </ul>
-  <p class="note">The standing research archive (ICE contract pages, Gassco UMM, NESO, Elexon, UKMTO incident log, QatarEnergy and prior dated Reuters items from October and earlier November) remains part of the daily verification routine; older links are research history, not evidence of current events.</p></div>
+  <div class="sec-head"><span class="sec-num">SECTION 20</span><h2>Source Links</h2></div>
+  <div class="card">
+    <h3>Checked for this edition (24-25 November)</h3>
+    <ul class="tick">
+      <li><a href="https://www.gie.eu/">GIE</a> and <a href="https://agsi.gie.eu/">AGSI+</a> · official EU/Germany storage, 23 November gas day, status 24 Nov 06:00 CEST</li>
+      <li><a href="https://energyscan.engie.com/trackers/europe-gas-storage-levels-weekly-fullness-rate-tracker-and-analysis/">ENGIE EnergyScan storage tracker</a> · EU 68.9% on 22 Nov gas day, withdrawals ~2.8 TWh/d, about 18 points below the 2017-2025 average</li>
+      <li><a href="https://weather.metoffice.gov.uk/forecast/uk">Met Office UK national forecast</a> · issued Wed 25 Nov 04:00 UTC; cold, frost risk, wintry northern hills Friday</li>
+      <li><a href="https://www.neso.energy/">NESO</a>, <a href="https://www.neso.energy/data-portal/day-ahead-wind-forecast">NESO day-ahead wind forecast</a> and <a href="https://bmrs.elexon.co.uk/">Elexon BMRS</a> · GB wind, gas-fired output and demand; same-timestamp verification</li>
+      <li><a href="https://www.investing.com/commodities/dutch-ttf-gas-c1-futures">Investing.com TTF front month</a> · indicative ~€91.2/MWh Wednesday; not a settlement</li>
+      <li><a href="https://www.ice.com/products/910/UK-Natural-Gas-Futures/data">ICE UK NBP futures</a> and <a href="https://www.ice.com/products/27996665/Dutch-TTF-Gas-Futures/data">ICE Dutch TTF futures</a> · named-contract checks, live versus settlement</li>
+      <li><a href="https://oilprice.com/Energy/Energy-General/The-Diesel-Crunch-Isnt-Over-Yet.html">OilPrice, 25 Nov</a> · Brent below $90, down more than 20% in November on recovering Gulf exports</li>
+      <li><a href="https://energynow.com/2026/11/oil-prices-extend-losses-to-three-month-lows-as-wti-drops-below-80-and-global-supply-concerns-mount/">EnergyNow / Reuters, 24 Nov</a> · Brent ~$88.71 and WTI below $80 in Tuesday morning trade, three-month lows</li>
+      <li><a href="https://www.ukmto.org/recent-incidents">UKMTO recent incidents</a> · 21 Nov warnings near Khasab; claim verification route for Monday tanker reports</li>
+      <li><a href="https://www.iea.org/about/oil-security-and-emergency-response/strait-of-hormuz">IEA Strait of Hormuz facts</a> · ~20% of global LNG trade transits Hormuz; 93% of Qatar's LNG exports</li>
+      <li><a href="https://umm.gassco.no/">Gassco UMM</a> · Norwegian outages and restarts, daily check</li>
+      <li><a href="https://www.qatarenergy.qa/en/Pages/vHome.aspx">QatarEnergy</a> · operator status, force majeure and export updates</li>
+      <li><a href="https://www.nationalgas.com/">National Gas</a> · GB physical system and winter outlook</li>
+    </ul>
+    <h3 style="margin-top:18px">Dated research archive (historical, retained for audit)</h3>
+    <ul class="tick">
+      <li><a href="https://www.reuters.com/world/middle-east/us-eyes-iran-possible-culprit-dozens-new-cyberattacks-against-ships-wsj-reports-2026-11-24/">Reuters, 24 Nov</a> · US probe into possible Iran-linked cyberattacks on dozens of tankers (WSJ report)</li>
+      <li><a href="https://www.theguardian.com/business/2026/nov/23/gas-prices-in-europe-surge-as-forecast-cold-snap-feeds-supply-shortage-fears">Guardian, 23 Nov</a> · European gas intraday spike towards €96 on cold-snap and storage fears</li>
+      <li><a href="https://theprint.in/world/yemens-houthis-say-they-attacked-saudi-rabigh-oil-refinery/3106029/">22 Nov</a> · Houthi Rabigh refinery claim, attribution only</li>
+      <li><a href="https://gcaptain.com/qatar-boosts-lng-traffic-via-hormuz-as-global-shortage-bites/">Bloomberg via gCaptain, 24 Sep</a> · partial Qatar LNG transits resume below pre-war pace</li>
+      <li><a href="https://www.reuters.com/world/middle-east/hormuz-traffic-is-up-so-are-attacks-2026-11-11/">Reuters, 11 Nov</a> · October Hormuz LNG traffic and attack counts, historical</li>
+      <li><a href="https://www.gov.uk/government/news/joint-declaration-following-the-g7-foreign-ministers-meeting-in-paris">GOV.UK, 11 Nov</a> · G7 foreign ministers' joint declaration, Paris</li>
+      <li><a href="https://www.reuters.com/business/energy/qatarenergy-buys-us-other-lng-hedge-future-hormuz-disruptions-2026-10-29/">Reuters, 29 Oct</a> · QatarEnergy buys US and other LNG to hedge Hormuz disruption</li>
+      <li><a href="https://www.iea.org/reports/global-gas-security-review-2026/executive-summary">IEA Global Gas Security Review 2026</a> · supply-buffer background</li>
+      <li><a href="https://www.csis.org/analysis/battle-hormuz-will-reshape-global-lng-market">CSIS, 5 Aug</a> · Hormuz scenarios and Qatar LNG exposure, analysis</li>
+    </ul>
+    <p style="margin-top:14px;font-size:12.5px;color:#DADADA">Source retrieval date is not event time, gas day, forecast issue or futures settlement time. Historical archive links are not evidence of new events.</p>
+  </div>
 </section>
 
 <footer>
-  <p>Switch365 Energy Intelligence · Tuesday 24 November 2026 · Prepared for UK business energy customers.</p>
-  <p>Internal broker / supplier evidence takes priority for offered ranges; public market data is labelled by instrument and observation time. Nothing here is an executable tariff or a whole-bill savings promise.</p>
+  <img src="https://switch365.com/assets/img/logos/switch365-energy-comparison-website.svg" alt="Switch365" style="width:150px;margin-bottom:10px;opacity:.9"><br>
+  Switch365 Live Energy Intelligence · Wednesday 25 November 2026 · Internal indicators and a model inform review decisions; executable quotes are customer-specific and time-stamped.<br>
+  Gas figures p/therm · Power £/MWh · UK English · Internal broker / supplier evidence takes priority over public prices.
 </footer>
-</div><!-- /wrap -->
+</main>
 
 <script>
-// Drawer nav
-const drawer = document.getElementById('drawer');
-const backdrop = document.getElementById('backdrop');
-document.getElementById('navToggle').addEventListener('click', () => {
-  drawer.classList.toggle('open'); backdrop.classList.toggle('open');
-});
-backdrop.addEventListener('click', () => { drawer.classList.remove('open'); backdrop.classList.remove('open'); });
-drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-  drawer.classList.remove('open'); backdrop.classList.remove('open');
-}));
+const drawer=document.getElementById('drawer'),burger=document.getElementById('burger'),backdrop=document.getElementById('backdrop');
+function toggleNav(o){drawer.classList.toggle('open',o);burger.classList.toggle('open',o);backdrop.classList.toggle('show',o)}
+burger.addEventListener('click',()=>toggleNav(!drawer.classList.contains('open')));
+backdrop.addEventListener('click',()=>toggleNav(false));
+drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toggleNav(false)));
 
-const gridCol = 'rgba(255,255,255,0.09)';
-const tickCol = '#DADADA';
-function ctx(id){ return document.getElementById(id); }
-const baseOpts = {
-  responsive:true, maintainAspectRatio:false,
-  interaction:{mode:'index', intersect:false},
-  plugins:{ legend:{labels:{color:tickCol, font:{family:'Montserrat', size:11}, boxWidth:14}} },
-  scales:{ x:{ticks:{color:tickCol}, grid:{color:gridCol}}, y:{ticks:{color:tickCol}, grid:{color:gridCol}} }
-};
+Chart.defaults.color='#DADADA';Chart.defaults.font.family="'Montserrat',Arial,sans-serif";
+Chart.defaults.borderColor='rgba(255,255,255,.08)';
+const gridC='rgba(255,255,255,.07)';
+function baseOpts(unit){return{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+ plugins:{legend:{labels:{boxWidth:14,boxHeight:8,usePointStyle:true,font:{size:11,weight:'600'}}},
+ tooltip:{backgroundColor:'rgba(27,26,78,.95)',borderColor:'rgba(0,211,154,.4)',borderWidth:1,padding:12,titleFont:{weight:'700'}}},
+ scales:{x:{grid:{color:gridC},ticks:{font:{size:11}}},y:{grid:{color:gridC},ticks:{font:{size:11}},title:{display:true,text:unit,color:'#9C9AC8',font:{size:11}}}}};}
 
-// Gas chart: Mon, Tue, 1yr ago (p/therm)
-const gLabels = ['W-26','S-27','W-27','S-28','W-28','S-29','W-29','S-30','W-30'];
-if (window.Chart && ctx('gasChart')) new Chart(ctx('gasChart'), {
-  type:'line',
-  data:{ labels:gLabels, datasets:[
-    {label:'Mon 23 Nov AM', data:[227.030,165.00,151.00,90.00,94.00,70.50,80.00,69.33,79.88], borderColor:'#8a86c9', backgroundColor:'#8a86c9', tension:0.35, borderWidth:2, pointRadius:3},
-    {label:'Tue 24 Nov AM', data:[225.100,161.00,146.50,83.50,89.00,69.00,77.70,67.83,77.58], borderColor:'#DD40FF', backgroundColor:'#DD40FF', tension:0.35, borderWidth:3, pointRadius:4},
-    {label:'1 Year Ago', data:[null,65.25,73.75,61.05,69.95,60.18,69.02,61.17,69.80], borderColor:'#DADADA', backgroundColor:'#DADADA', borderDash:[6,5], tension:0.35, borderWidth:1.5, pointRadius:2, spanGaps:true}
-  ]},
-  options:{...baseOpts, plugins:{...baseOpts.plugins, title:{display:true, text:'NBP Offered Gas Price Range (p/therm)', color:'#fff', font:{family:'Montserrat', weight:'700'}}}}
-});
+const seasons=['W-26','S-27','W-27','S-28','W-28','S-29','W-29','S-30','W-30'];
+new Chart(document.getElementById('gasChart'),{type:'line',data:{labels:seasons,datasets:[
+ {label:'Tue 24 Nov AM',data:[225.10,161.00,146.50,83.50,89.00,69.00,77.70,67.83,77.58],borderColor:'#8F8CD8',backgroundColor:'rgba(143,140,216,.12)',tension:.3,pointRadius:4,borderWidth:2},
+ {label:'Wed 25 Nov AM',data:[218.00,153.00,141.00,80.75,85.00,66.00,76.00,66.04,75.91],borderColor:'#DD40FF',backgroundColor:'rgba(221,64,255,.14)',tension:.3,pointRadius:5,borderWidth:3},
+ {label:'1 Year Ago',data:[null,65.00,73.00,60.75,69.40,59.77,69.08,61.03,69.88],borderColor:'#00D39A',borderDash:[6,5],backgroundColor:'transparent',tension:.3,pointRadius:3,borderWidth:1.5,pointStyle:'rectRot'}]},options:baseOpts('p/therm')});
 
-// Power chart: Mon, Tue, 1yr ago (GBP/MWh)
-const pLabels = ['W-26','S-27','W-27','S-28','W-28','S-29','W-29'];
-if (window.Chart && ctx('powerChart')) new Chart(ctx('powerChart'), {
-  type:'line',
-  data:{ labels:pLabels, datasets:[
-    {label:'Mon 23 Nov AM', data:[175.72,128.00,120.50,75.50,80.00,67.00,72.55], borderColor:'#8a86c9', backgroundColor:'#8a86c9', tension:0.35, borderWidth:2, pointRadius:3},
-    {label:'Tue 24 Nov AM', data:[174.38,126.50,118.00,73.00,78.75,64.45,70.70], borderColor:'#00D39A', backgroundColor:'#00D39A', tension:0.35, borderWidth:3, pointRadius:4},
-    {label:'1 Year Ago', data:[null,64.20,74.45,62.85,74.00,63.65,null], borderColor:'#DADADA', backgroundColor:'#DADADA', borderDash:[6,5], tension:0.35, borderWidth:1.5, pointRadius:2, spanGaps:true}
-  ]},
-  options:{...baseOpts, plugins:{...baseOpts.plugins, title:{display:true, text:'UK Power Offered Price Range (GBP/MWh)', color:'#fff', font:{family:'Montserrat', weight:'700'}}}}
-});
+const pSeasons=['W-26','S-27','W-27','S-28','W-28','S-29','W-29'];
+new Chart(document.getElementById('powerChart'),{type:'line',data:{labels:pSeasons,datasets:[
+ {label:'Tue 24 Nov AM',data:[174.38,126.50,118.00,73.00,78.75,64.45,70.70],borderColor:'#8F8CD8',backgroundColor:'rgba(143,140,216,.12)',tension:.3,pointRadius:4,borderWidth:2},
+ {label:'Wed 25 Nov AM',data:[169.43,121.50,114.00,70.50,76.50,62.52,72.34],borderColor:'#00D39A',backgroundColor:'rgba(0,211,154,.14)',tension:.3,pointRadius:5,borderWidth:3},
+ {label:'1 Year Ago',data:[null,64.20,74.45,62.85,74.00,63.65,null],borderColor:'#DD40FF',borderDash:[6,5],backgroundColor:'transparent',tension:.3,pointRadius:3,borderWidth:1.5,pointStyle:'rectRot'}]},options:baseOpts('£/MWh')});
 
-// Forward value chart: Tuesday curve, dual axis
-const fLabels = ['W-26','S-27','W-27','S-28','W-28','S-29','W-29','S-30','W-30'];
-if (window.Chart && ctx('forwardChart')) new Chart(ctx('forwardChart'), {
-  type:'line',
-  data:{ labels:fLabels, datasets:[
-    {label:'Gas, Tue 24 (p/therm)', data:[225.100,161.00,146.50,83.50,89.00,69.00,77.70,67.83,77.58], borderColor:'#DD40FF', backgroundColor:'#DD40FF', tension:0.35, borderWidth:3, pointRadius:4, yAxisID:'y'},
-    {label:'Power, Tue 24 (GBP/MWh, W-26 modelled)', data:[174.38,126.50,118.00,73.00,78.75,64.45,70.70,null,null], borderColor:'#00D39A', backgroundColor:'#00D39A', tension:0.35, borderWidth:3, pointRadius:4, yAxisID:'y1', spanGaps:false}
-  ]},
-  options:{...baseOpts,
-    plugins:{...baseOpts.plugins, title:{display:true, text:'Tuesday 24 November Forward Curve: Same-Date Snapshot', color:'#fff', font:{family:'Montserrat', weight:'700'}}},
-    scales:{ x:{ticks:{color:tickCol}, grid:{color:gridCol}},
-      y:{position:'left', ticks:{color:'#DD40FF'}, grid:{color:gridCol}, title:{display:true, text:'p/therm', color:'#DD40FF'}},
-      y1:{position:'right', ticks:{color:'#00D39A'}, grid:{drawOnChartArea:false}, title:{display:true, text:'GBP/MWh', color:'#00D39A'}} }
-  }
-});
+const fSeasons=['S-27','W-27','S-28','W-28','S-29','W-29','S-30','W-30'];
+const fwdOpts=baseOpts('Gas p/therm');
+fwdOpts.scales.y2={position:'right',grid:{drawOnChartArea:false},ticks:{font:{size:11}},title:{display:true,text:'Power £/MWh',color:'#9C9AC8',font:{size:11}}};
+new Chart(document.getElementById('fwdChart'),{type:'line',data:{labels:fSeasons,datasets:[
+ {label:'Gas, Wed 25 (p/therm)',data:[153.00,141.00,80.75,85.00,66.00,76.00,66.04,75.91],borderColor:'#DD40FF',backgroundColor:'rgba(221,64,255,.12)',tension:.3,pointRadius:5,borderWidth:3,yAxisID:'y'},
+ {label:'Power, Wed 25 (£/MWh)',data:[121.50,114.00,70.50,76.50,62.52,72.34,null,null],borderColor:'#00D39A',backgroundColor:'rgba(0,211,154,.12)',tension:.3,pointRadius:5,borderWidth:3,yAxisID:'y2',spanGaps:false}]},options:fwdOpts});
+
+const w26labels=['Fri 13','Mon 16','Tue 17','Wed 18','Thu 19','Fri 20','Mon 23','Tue 24','Wed 25'];
+new Chart(document.getElementById('w26Chart'),{type:'line',data:{labels:w26labels,datasets:[
+ {label:'W-26 gas working ref (p/therm)',data:[219.750,223.860,208.890,211.810,205.730,null,227.030,225.100,218.000],borderColor:'#DD40FF',backgroundColor:'rgba(221,64,255,.12)',tension:.25,pointRadius:5,borderWidth:3,spanGaps:false},
+ {label:'W-26 power model (£/MWh)',data:[170.52,173.39,162.95,165.00,160.74,null,175.72,174.38,169.43],borderColor:'#00D39A',backgroundColor:'rgba(0,211,154,.10)',tension:.25,pointRadius:4,borderWidth:2.5,spanGaps:false,yAxisID:'y2'}]},options:fwdOpts});
 </script>
 </body>
 </html>
